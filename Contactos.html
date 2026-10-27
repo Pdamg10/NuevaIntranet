@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#003366">
+    <title>Administrador de Contactos - CVG ALCASA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        :root {
+            --alcoa-blue: #003366;
+            --alcoa-light-blue: #0056a3;
+            --accent-orange: #ff6b1a;
+            --whatsapp-green: #25d366;
+            --white: #ffffff;
+            --light-gray: #f5f7fa;
+            --medium-gray: #e1e5eb;
+            --text-dark: #1a1a1a;
+            --text-gray: #5a6c7d;
+            --danger: #e74c3c;
+            --success: #28a745;
+            --transition: all 0.25s ease;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* =========================================
+           PANTALLA DE LOGIN
+           ========================================= */
+        .login-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #003366 0%, #0056a3 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 99999;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .login-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .login-box {
+            background: var(--white);
+            border-radius: 18px;
+            padding: 40px 32px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+            text-align: center;
+            animation: fadeUp 0.5s ease;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--alcoa-blue), var(--alcoa-light-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 20px rgba(0,51,102,0.3);
+        }
+        .login-logo i { font-size: 2rem; color: var(--white); }
+        .login-box h2 { color: var(--alcoa-blue); font-size: 1.4rem; margin-bottom: 6px; }
+        .login-box p.subtitulo { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 28px; }
+
+        .login-field { text-align: left; margin-bottom: 18px; position: relative; }
+        .login-field label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--alcoa-blue);
+            margin-bottom: 6px;
+        }
+        .login-field .input-wrap { position: relative; }
+        .login-field i.field-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+        .login-field input {
+            width: 100%;
+            padding: 13px 44px 13px 42px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: var(--white);
+        }
+        .login-field input:focus {
+            outline: none;
+            border-color: var(--alcoa-blue);
+            box-shadow: 0 0 0 3px rgba(0,51,102,0.1);
+        }
+        .toggle-pass {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--text-gray);
+            cursor: pointer;
+            padding: 6px;
+            font-size: 0.95rem;
+        }
+        .toggle-pass:hover { color: var(--alcoa-blue); }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--alcoa-blue), var(--alcoa-light-blue));
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: inherit;
+            margin-top: 8px;
+        }
+        .btn-login:hover:not(:disabled) {
+            background: linear-gradient(135deg, var(--accent-orange), #e55a0f);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(255,107,26,0.4);
+        }
+        .btn-login:disabled { opacity: 0.7; cursor: wait; }
+
+        .login-error {
+            display: none;
+            margin-top: 14px;
+            padding: 10px 14px;
+            background: #f8d7da;
+            color: #721c24;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            border-left: 3px solid var(--danger);
+            text-align: left;
+        }
+        .login-error.show { display: block; animation: shake 0.4s; }
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .login-footer { margin-top: 22px; font-size: 0.75rem; color: var(--text-gray); }
+
+        /* =========================================
+           APP
+           ========================================= */
+        #appContainer { display: none; }
+        #appContainer.visible { display: block; }
+
+        .app-header {
+            background: linear-gradient(135deg, var(--alcoa-blue), var(--alcoa-light-blue));
+            color: var(--white);
+            padding: 20px 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .app-header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .app-header h1 {
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .app-header h1 i { color: var(--accent-orange); }
+        .app-header .header-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .app-header .stats {
+            display: flex;
+            gap: 10px;
+            font-size: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .app-header .stats span {
+            background: rgba(255,255,255,0.15);
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-logout {
+            background: rgba(255,255,255,0.15);
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+        }
+        .btn-logout:hover { background: var(--danger); border-color: var(--danger); }
+
+        .controls {
+            max-width: 1400px;
+            margin: 25px auto 0;
+            padding: 0 24px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .search-box {
+            flex: 1;
+            min-width: 220px;
+            position: relative;
+        }
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 42px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: var(--white);
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--alcoa-blue);
+            box-shadow: 0 0 0 3px rgba(0,51,102,0.1);
+        }
+        .controls select,
+        .controls button.primary {
+            padding: 12px 18px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            cursor: pointer;
+            background: var(--white);
+            font-weight: 600;
+            transition: var(--transition);
+            min-height: 46px;
+        }
+        .controls button.primary {
+            background: var(--alcoa-blue);
+            color: var(--white);
+            border-color: var(--alcoa-blue);
+        }
+        .controls button.primary:hover {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+
+        /* =========================================
+           BARRA DE EXPORTACIÓN
+           ========================================= */
+        .export-bar {
+            max-width: 1400px;
+            margin: 18px auto 0;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #fff8e6, #ffe9b8);
+            border-left: 4px solid var(--accent-orange);
+            border-radius: 10px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .export-bar.visible { display: flex; }
+        .export-bar .info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #7a5a00;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .export-bar .info i {
+            color: var(--accent-orange);
+            font-size: 1.2rem;
+        }
+        .export-bar .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .export-bar button {
+            padding: 9px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+        .btn-export {
+            background: var(--success);
+            color: var(--white);
+        }
+        .btn-export:hover {
+            background: #1e7e34;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(40,167,69,0.3);
+        }
+        .btn-cancel-export {
+            background: #6c757d;
+            color: var(--white);
+        }
+        .btn-cancel-export:hover {
+            background: #5a6268;
+        }
+
+        /* =========================================
+           LISTA DE CONTACTOS
+           ========================================= */
+        .contacts-list {
+            max-width: 1400px;
+            margin: 25px auto 60px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 18px;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border-top: 4px solid var(--alcoa-blue);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            position: relative;
+        }
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+            border-top-color: var(--accent-orange);
+        }
+        .contact-card.marcado-eliminar {
+            border-top-color: var(--danger);
+            background: #fff5f5;
+        }
+        .contact-card.marcado-eliminar::after {
+            content: 'Marcado para eliminar';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--danger);
+            color: var(--white);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .card-header {
+            padding: 16px 18px 12px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        .card-header .nombre {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--alcoa-blue);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .card-header .nombre .interes-tag {
+            font-size: 0.68rem;
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .card-header .fecha {
+            font-size: 0.73rem;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .card-header .fecha i { color: var(--accent-orange); }
+
+        .card-body {
+            padding: 12px 18px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+        .card-body .info-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-gray);
+            word-break: break-word;
+        }
+        .card-body .info-line i {
+            color: var(--alcoa-blue);
+            width: 16px;
+            flex-shrink: 0;
+        }
+        .card-body .info-line a {
+            color: var(--alcoa-light-blue);
+            text-decoration: none;
+        }
+        .card-body .info-line a:hover {
+            text-decoration: underline;
+            color: var(--accent-orange);
+        }
+        .card-body .comentario {
+            background: var(--light-gray);
+            padding: 10px 12px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-orange);
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            font-style: italic;
+            max-height: 84px;
+            overflow: hidden;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 6px;
+            padding: 12px 18px;
+            border-top: 1px solid var(--medium-gray);
+            background: var(--light-gray);
+        }
+        .card-actions button {
+            flex: 1;
+            padding: 10px 6px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            transition: var(--transition);
+            color: var(--white);
+            font-family: inherit;
+            min-height: 40px;
+        }
+        .btn-ver { background: var(--alcoa-blue); }
+        .btn-ver:hover { background: var(--alcoa-light-blue); }
+        .btn-wa { background: var(--whatsapp-green); }
+        .btn-wa:hover { background: #1da851; }
+        .btn-copy { background: #6c757d; }
+        .btn-copy:hover { background: #5a6268; }
+        .btn-marcar { background: var(--danger); }
+        .btn-marcar:hover { background: #c0392b; }
+        .btn-desmarcar { background: #6c757d; }
+        .btn-desmarcar:hover { background: #5a6268; }
+
+        /* =========================================
+           MODAL DE DETALLE
+           ========================================= */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,20,40,0.85);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: var(--white);
+            border-radius: 16px;
+            max-width: 720px;
+            width: 100%;
+            max-height: 92vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--alcoa-blue), var(--alcoa-light-blue));
+            color: var(--white);
+            padding: 16px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        .modal-header h3 {
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .modal-header h3 i { color: var(--accent-orange); }
+        .modal-close {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: var(--white);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .modal-close:hover { background: var(--accent-orange); transform: rotate(90deg); }
+
+        .modal-body { padding: 22px; overflow-y: auto; flex: 1; }
+        .modal-body .field { margin-bottom: 14px; }
+        .modal-body .field label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--alcoa-blue);
+            margin-bottom: 4px;
+        }
+        .modal-body .field .value {
+            color: var(--text-dark);
+            font-size: 0.92rem;
+            padding: 10px 14px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            border-left: 3px solid var(--alcoa-light-blue);
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+        .modal-body .field .value a { color: var(--alcoa-light-blue); }
+        .modal-body .field .value a:hover { color: var(--accent-orange); }
+
+        .modal-actions {
+            padding: 14px 22px;
+            border-top: 1px solid var(--medium-gray);
+            background: var(--light-gray);
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+        }
+        .modal-actions button {
+            flex: 1;
+            min-width: 130px;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: var(--transition);
+            color: var(--white);
+            font-family: inherit;
+        }
+        .modal-actions .btn-wa { background: var(--whatsapp-green); }
+        .modal-actions .btn-wa:hover { background: #1da851; transform: translateY(-2px); }
+        .modal-actions .btn-copy-email { background: var(--alcoa-blue); }
+        .modal-actions .btn-copy-email:hover { background: var(--alcoa-light-blue); transform: translateY(-2px); }
+        .modal-actions .btn-copy-raw { background: #6c757d; }
+        .modal-actions .btn-copy-raw:hover { background: #5a6268; transform: translateY(-2px); }
+
+        /* =========================================
+           TOAST
+           ========================================= */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--alcoa-blue);
+            color: var(--white);
+            padding: 14px 26px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            max-width: 90vw;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .toast.success { background: var(--success); }
+        .toast.error { background: var(--danger); }
+        .toast i { font-size: 1.05rem; }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-gray);
+        }
+        .empty-state i {
+            font-size: 3.5rem;
+            color: var(--medium-gray);
+            margin-bottom: 18px;
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 900px) {
+            .contacts-list { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+        }
+
+        @media (max-width: 640px) {
+            .login-box { padding: 32px 22px; border-radius: 16px; }
+            .login-logo { width: 68px; height: 68px; }
+            .login-logo i { font-size: 1.7rem; }
+            .login-box h2 { font-size: 1.2rem; }
+            .btn-login { padding: 15px; }
+
+            .app-header { padding: 14px 16px; }
+            .app-header-inner { gap: 10px; }
+            .app-header h1 { font-size: 1rem; gap: 8px; width: 100%; }
+            .app-header .header-right { width: 100%; justify-content: space-between; }
+            .app-header .stats { font-size: 0.72rem; gap: 6px; }
+            .app-header .stats span { padding: 4px 10px; }
+
+            .controls {
+                padding: 0 16px;
+                margin-top: 16px;
+                gap: 10px;
+            }
+            .search-box { min-width: 100%; }
+            .controls select,
+            .controls button.primary {
+                flex: 1;
+                min-width: calc(50% - 5px);
+                padding: 11px 12px;
+                font-size: 0.85rem;
+            }
+
+            .export-bar {
+                padding: 12px 16px;
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .export-bar .info { justify-content: center; }
+            .export-bar .actions { justify-content: center; }
+            .export-bar button { flex: 1; }
+
+            .contacts-list {
+                padding: 0 16px;
+                grid-template-columns: 1fr;
+                gap: 14px;
+                margin-top: 18px;
+                margin-bottom: 40px;
+            }
+
+            .card-actions button {
+                font-size: 0.7rem;
+                padding: 10px 4px;
+            }
+            .card-actions button .btn-texto { display: none; }
+
+            .modal-overlay { padding: 0; align-items: flex-end; }
+            .modal-content {
+                max-width: 100%;
+                max-height: 94vh;
+                border-radius: 20px 20px 0 0;
+                transform: translateY(100%);
+            }
+            .modal-overlay.active .modal-content { transform: translateY(0); }
+            .modal-header { padding: 14px 18px; }
+            .modal-header h3 { font-size: 1rem; }
+            .modal-body { padding: 18px; }
+            .modal-actions {
+                padding: 12px 18px 20px;
+                flex-direction: column;
+            }
+            .modal-actions button { min-width: 100%; padding: 14px; }
+        }
+
+        @media (max-width: 400px) {
+            .app-header h1 span.texto-titulo { display: none; }
+            .app-header h1::after {
+                content: "Contactos";
+                font-size: 1rem;
+            }
+            .app-header .stats span .stats-label { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =========================================
+         PANTALLA DE LOGIN
+         ========================================= -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-box">
+            <div class="login-logo">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h2>Acceso Restringido</h2>
+            <p class="subtitulo">Administrador de Contactos · CVG ALCASA</p>
+
+            <form id="loginForm" onsubmit="return validarLogin(event)">
+                <div class="login-field">
+                    <label for="loginUsuario">Usuario</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-user field-icon"></i>
+                        <input type="text" id="loginUsuario" autocomplete="username" required placeholder="Ingrese su usuario">
+                    </div>
+                </div>
+
+                <div class="login-field">
+                    <label for="loginPassword">Contraseña</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-key field-icon"></i>
+                        <input type="password" id="loginPassword" autocomplete="current-password" required placeholder="Ingrese su contraseña">
+                        <button type="button" class="toggle-pass" onclick="togglePassword()" aria-label="Mostrar contraseña">
+                            <i class="fas fa-eye" id="togglePassIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login" id="btnLogin">
+                    <i class="fas fa-sign-in-alt"></i> Ingresar
+                </button>
+
+                <div class="login-error" id="loginError"></div>
+            </form>
+
+            <div class="login-footer">
+                <i class="fas fa-shield-alt"></i> Acceso solo para personal autorizado
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         APP
+         ========================================= -->
+    <div id="appContainer">
+
+        <header class="app-header">
+            <div class="app-header-inner">
+                <h1>
+                    <i class="fas fa-address-book"></i>
+                    <span class="texto-titulo">Administrador de Contactos</span>
+                </h1>
+                <div class="header-right">
+                    <div class="stats">
+                        <span><i class="fas fa-users"></i> <b id="totalCount">0</b> <span class="stats-label">contactos</span></span>
+                        <span><i class="fas fa-filter"></i> <b id="filteredCount">0</b> <span class="stats-label">mostrados</span></span>
+                    </div>
+                    <button class="btn-logout" onclick="cerrarSesion()">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Buscar por nombre, correo, empresa o comentario...">
+            </div>
+            <select id="interesFilter">
+                <option value="">Todos los intereses</option>
+                <option value="Cotización">Cotización</option>
+                <option value="Fundición">Fundición</option>
+                <option value="Laminación">Laminación</option>
+                <option value="Extrusión">Extrusión</option>
+                <option value="Comercialización">Comercialización</option>
+                <option value="Catálogo de productos">Catálogo de productos</option>
+                <option value="Otro">Otro</option>
+            </select>
+            <button class="primary" onclick="recargarCSV()">
+                <i class="fas fa-sync-alt"></i> Recargar
+            </button>
+        </div>
+
+        <!-- BARRA DE EXPORTACIÓN (aparece al marcar contactos) -->
+        <div class="export-bar" id="exportBar">
+            <div class="info">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span><b id="marcadosCount">0</b> contacto(s) marcado(s) para eliminar</span>
+            </div>
+            <div class="actions">
+                <button class="btn-export" onclick="exportarCSVLimpio()">
+                    <i class="fas fa-file-csv"></i> Descargar CSV limpio
+                </button>
+                <button class="btn-cancel-export" onclick="cancelarMarcados()">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </div>
+
+        <div class="contacts-list" id="contactsList">
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Cargando contactos...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE DETALLE -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-circle"></i> <span id="modalNombre">Detalle</span></h3>
+                <button class="modal-close" onclick="cerrarDetalle()" aria-label="Cerrar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="field">
+                    <label><i class="fas fa-calendar-alt"></i> Fecha</label>
+                    <div class="value" id="modalFecha">—</div>
+                </div>
+                <div class="field">
+                    <label><i class="fas fa-user"></i> Nombre</label>
+                    <div class="value" id="modalNombreVal">—</div>
+                </div>
+                <div class="field">
+                    <label><i class="fas fa-envelope"></i> Correo</label>
+                    <div class="value"><a id="modalCorreo" href="#">—</a></div>
+                </div>
+                <div class="field">
+                    <label><i class="fas fa-building"></i> Empresa</label>
+                    <div class="value" id="modalEmpresa">—</div>
+                </div>
+                <div class="field">
+                    <label><i class="fas fa-tag"></i> Interés</label>
+                    <div class="value" id="modalInteres">—</div>
+                </div>
+                <div class="field">
+                    <label><i class="fas fa-comment-dots"></i> Comentario</label>
+                    <div class="value" id="modalComentario">—</div>
+                </div>
+                <div class="field">
+                    <label><i class="fas fa-globe"></i> IP</label>
+                    <div class="value" id="modalIP">—</div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-wa" onclick="copiarWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+                <button class="btn-copy-email" onclick="copiarCorreo()">
+                    <i class="fas fa-envelope"></i> Correo
+                </button>
+                <button class="btn-copy-raw" onclick="copiarTextoPlano()">
+                    <i class="fas fa-copy"></i> Todo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMsg">Copiado al portapapeles</span>
+    </div>
+
+    <!-- =========================================
+         LÓGICA
+         ========================================= -->
+    <script>
+        // =========================================
+        // CREDENCIALES (base64)
+        // Usuario:  admin
+        // Password: D10998$a*
+        //
+        // Para cambiar, abre la consola (F12) y ejecuta:
+        //   btoa("tu_usuario")     → reemplaza USUARIO_B64
+        //   btoa("tu_contraseña")  → reemplaza PASSWORD_B64
+        // =========================================
+        const USUARIO_B64 = "YWRtaW4=";
+        const PASSWORD_B64 = "RDEwOTk4JGEq";
+
+        let contactos = [];
+        let contactosFiltrados = [];
+        let contactoActual = null;
+        let marcadosParaEliminar = new Set(); // llaves: fecha|correo|nombre
+
+        // =========================================
+        // LOGIN
+        // =========================================
+        function validarLogin(event) {
+            event.preventDefault();
+            const usuario = document.getElementById('loginUsuario').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const btn = document.getElementById('btnLogin');
+            const errorEl = document.getElementById('loginError');
+
+            errorEl.classList.remove('show');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+
+            setTimeout(() => {
+                let correcto = false;
+                try {
+                    correcto = (btoa(usuario) === USUARIO_B64) &&
+                               (btoa(password) === PASSWORD_B64);
+                } catch (e) {
+                    correcto = false;
+                }
+
+                if (correcto) {
+                    sessionStorage.setItem('alcasa_contactos_auth', '1');
+                    entrarApp();
+                } else {
+                    errorEl.textContent = 'Usuario o contraseña incorrectos.';
+                    errorEl.classList.add('show');
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Ingresar';
+                    document.getElementById('loginPassword').value = '';
+                    document.getElementById('loginPassword').focus();
+                }
+            }, 300);
+
+            return false;
+        }
+
+        function togglePassword() {
+            const input = document.getElementById('loginPassword');
+            const icon = document.getElementById('togglePassIcon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        }
+
+        function entrarApp() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('appContainer').classList.add('visible');
+            cargarCSV();
+        }
+
+        function cerrarSesion() {
+            sessionStorage.removeItem('alcasa_contactos_auth');
+            location.reload();
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            if (sessionStorage.getItem('alcasa_contactos_auth') === '1') {
+                entrarApp();
+            } else {
+                setTimeout(() => document.getElementById('loginUsuario').focus(), 300);
+            }
+        });
+
+        // =========================================
+        // CARGA DE CONTACTOS
+        // =========================================
+        async function cargarCSV() {
+            try {
+                const response = await fetch('contactos.csv?v=' + Date.now());
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+
+                const buffer = await response.arrayBuffer();
+                const texto = new TextDecoder('utf-8').decode(buffer);
+
+                contactos = parsearCSV(texto);
+                contactos.sort((a, b) => (b.fecha || '').localeCompare(a.fecha || ''));
+
+                contactosFiltrados = [...contactos];
+                renderizar();
+                actualizarContadores();
+            } catch (err) {
+                console.error('Error cargando CSV:', err);
+                document.getElementById('contactsList').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i>
+                        <p><b>No se pudo cargar contactos.csv</b></p>
+                        <p style="font-size:0.85rem;margin-top:10px;">Verifica que el archivo exista en la misma carpeta.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function parsearCSV(texto) {
+            const filas = [];
+            let filaActual = [];
+            let campoActual = '';
+            let dentroComillas = false;
+
+            for (let i = 0; i < texto.length; i++) {
+                const char = texto[i];
+                const siguiente = texto[i + 1];
+
+                if (dentroComillas) {
+                    if (char === '"' && siguiente === '"') {
+                        campoActual += '"';
+                        i++;
+                    } else if (char === '"') {
+                        dentroComillas = false;
+                    } else {
+                        campoActual += char;
+                    }
+                } else {
+                    if (char === '"') {
+                        dentroComillas = true;
+                    } else if (char === ',') {
+                        filaActual.push(campoActual);
+                        campoActual = '';
+                    } else if (char === '\n' || (char === '\r' && siguiente === '\n')) {
+                        filaActual.push(campoActual);
+                        if (filaActual.length > 1 || filaActual[0] !== '') {
+                            filas.push(filaActual);
+                        }
+                        filaActual = [];
+                        campoActual = '';
+                        if (char === '\r') i++;
+                    } else if (char === '\r') {
+                        // ignorar
+                    } else {
+                        campoActual += char;
+                    }
+                }
+            }
+            if (campoActual !== '' || filaActual.length > 0) {
+                filaActual.push(campoActual);
+                filas.push(filaActual);
+            }
+
+            if (filas.length > 0 && filas[0][0]) {
+                filas[0][0] = filas[0][0].replace(/^\uFEFF/, '');
+            }
+
+            const encabezados = filas[0].map(h => h.trim());
+            const registros = [];
+
+            for (let i = 1; i < filas.length; i++) {
+                const fila = filas[i];
+                if (fila.length < 2 || !fila[1]?.trim()) continue;
+
+                const obj = {};
+                encabezados.forEach((h, idx) => {
+                    obj[h.toLowerCase()] = (fila[idx] || '').trim();
+                });
+
+                if (obj.nombre || obj.correo) {
+                    registros.push({
+                        fecha: obj.fecha || '',
+                        nombre: obj.nombre || '',
+                        correo: obj.correo || '',
+                        empresa: obj.empresa || '',
+                        interes: obj.interes || '',
+                        comentario: obj.comentario || '',
+                        ip: obj.ip || ''
+                    });
+                }
+            }
+
+            return registros;
+        }
+
+        function claveContacto(c) {
+            return `${c.fecha}|${c.correo}|${c.nombre}`;
+        }
+
+        function renderizar() {
+            const contenedor = document.getElementById('contactsList');
+
+            if (contactosFiltrados.length === 0) {
+                contenedor.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>No hay contactos que coincidan con la búsqueda.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            contenedor.innerHTML = contactosFiltrados.map((c, idx) => {
+                const marcado = marcadosParaEliminar.has(claveContacto(c));
+                return `
+                    <div class="contact-card ${marcado ? 'marcado-eliminar' : ''}">
+                        <div class="card-header">
+                            <div class="nombre">
+                                <span>${escapeHtml(c.nombre) || '(Sin nombre)'}</span>
+                                ${c.interes ? `<span class="interes-tag">${escapeHtml(c.interes)}</span>` : ''}
+                            </div>
+                            <div class="fecha">
+                                <i class="fas fa-clock"></i> ${escapeHtml(c.fecha)}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-line">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:${escapeHtml(c.correo)}">${escapeHtml(c.correo)}</a>
+                            </div>
+                            ${c.empresa ? `
+                                <div class="info-line">
+                                    <i class="fas fa-building"></i>
+                                    ${escapeHtml(c.empresa)}
+                                </div>
+                            ` : ''}
+                            ${c.comentario ? `
+                                <div class="comentario">${escapeHtml(c.comentario)}</div>
+                            ` : ''}
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-ver" onclick="verDetalle(${idx})" title="Ver detalle">
+                                <i class="fas fa-eye"></i> <span class="btn-texto">Ver</span>
+                            </button>
+                            <button class="btn-wa" onclick="copiarWAIndex(${idx})" title="Copiar para WhatsApp">
+                                <i class="fab fa-whatsapp"></i> <span class="btn-texto">WA</span>
+                            </button>
+                            <button class="btn-copy" onclick="copiarTextoIndex(${idx})" title="Copiar todo">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            ${marcado
+                                ? `<button class="btn-desmarcar" onclick="desmarcarContacto(${idx})" title="Desmarcar">
+                                       <i class="fas fa-undo"></i>
+                                   </button>`
+                                : `<button class="btn-marcar" onclick="marcarContacto(${idx})" title="Marcar para eliminar">
+                                       <i class="fas fa-trash"></i>
+                                   </button>`
+                            }
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // =========================================
+        // MARCAR / DESMARCAR PARA ELIMINAR
+        // =========================================
+        function marcarContacto(idx) {
+            const c = contactosFiltrados[idx];
+            if (!c) return;
+            marcadosParaEliminar.add(claveContacto(c));
+            renderizar();
+            actualizarBarraExport();
+            mostrarToast('Contacto marcado para eliminar', 'success');
+        }
+
+        function desmarcarContacto(idx) {
+            const c = contactosFiltrados[idx];
+            if (!c) return;
+            marcadosParaEliminar.delete(claveContacto(c));
+            renderizar();
+            actualizarBarraExport();
+            mostrarToast('Marca quitada', 'success');
+        }
+
+        function cancelarMarcados() {
+            if (marcadosParaEliminar.size === 0) return;
+            if (!confirm('¿Quitar todas las marcas de eliminación?')) return;
+            marcadosParaEliminar.clear();
+            renderizar();
+            actualizarBarraExport();
+        }
+
+        function actualizarBarraExport() {
+            const bar = document.getElementById('exportBar');
+            const count = document.getElementById('marcadosCount');
+            if (marcadosParaEliminar.size > 0) {
+                bar.classList.add('visible');
+                count.textContent = marcadosParaEliminar.size;
+            } else {
+                bar.classList.remove('visible');
+            }
+        }
+
+        // =========================================
+        // EXPORTAR CSV LIMPIO
+        // =========================================
+        function exportarCSVLimpio() {
+            if (marcadosParaEliminar.size === 0) return;
+
+            if (!confirm(`Vas a descargar un nuevo CSV SIN los ${marcadosParaEliminar.size} contacto(s) marcados.\n\nDespués deberás reemplazar manualmente el archivo "contactos.csv" en tu servidor por este nuevo archivo.\n\n¿Continuar?`)) {
+                return;
+            }
+
+            const restantes = contactos.filter(c => !marcadosParaEliminar.has(claveContacto(c)));
+
+            const encabezados = ['Fecha', 'Nombre', 'Correo', 'Empresa', 'Interes', 'Comentario', 'IP'];
+            const lineas = [encabezados.map(escaparCampoCSV).join(',')];
+
+            restantes.forEach(c => {
+                const fila = [
+                    c.fecha,
+                    c.nombre,
+                    c.correo,
+                    c.empresa,
+                    c.interes,
+                    c.comentario,
+                    c.ip
+                ];
+                lineas.push(fila.map(escaparCampoCSV).join(','));
+            });
+
+            const contenido = '\uFEFF' + lineas.join('\r\n');
+
+            const blob = new Blob([contenido], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            const hoy = new Date();
+            const fecha = `${hoy.getFullYear()}${String(hoy.getMonth()+1).padStart(2,'0')}${String(hoy.getDate()).padStart(2,'0')}-${String(hoy.getHours()).padStart(2,'0')}${String(hoy.getMinutes()).padStart(2,'0')}`;
+            link.download = `contactos_limpio_${fecha}.csv`;
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            mostrarToast(`CSV limpio descargado (${restantes.length} contactos)`, 'success');
+
+            marcadosParaEliminar.clear();
+            actualizarBarraExport();
+        }
+
+        function escaparCampoCSV(valor) {
+            if (valor === undefined || valor === null) valor = '';
+            valor = String(valor);
+            if (valor.includes('"') || valor.includes(',') || valor.includes('\n') || valor.includes('\r')) {
+                return '"' + valor.replace(/"/g, '""') + '"';
+            }
+            return valor;
+        }
+
+        // =========================================
+        // VER DETALLE
+        // =========================================
+        function verDetalle(idx) {
+            const c = contactosFiltrados[idx];
+            if (!c) return;
+            contactoActual = c;
+
+            document.getElementById('modalNombre').textContent = c.nombre || 'Detalle';
+            document.getElementById('modalFecha').textContent = c.fecha || '—';
+            document.getElementById('modalNombreVal').textContent = c.nombre || '—';
+
+            const correoEl = document.getElementById('modalCorreo');
+            correoEl.textContent = c.correo || '—';
+            correoEl.href = 'mailto:' + c.correo;
+
+            document.getElementById('modalEmpresa').textContent = c.empresa || '—';
+            document.getElementById('modalInteres').textContent = c.interes || '—';
+            document.getElementById('modalComentario').textContent = c.comentario || '—';
+            document.getElementById('modalIP').textContent = c.ip || '—';
+
+            document.getElementById('detailModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarDetalle() {
+            document.getElementById('detailModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('detailModal').addEventListener('click', function(e) {
+            if (e.target === this) cerrarDetalle();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') cerrarDetalle();
+        });
+
+        // =========================================
+        // COPIAR AL PORTAPAPELES
+        // =========================================
+        async function copiarAlPortapapeles(texto, mensaje) {
+            try {
+                await navigator.clipboard.writeText(texto);
+                mostrarToast(mensaje || 'Copiado al portapapeles', 'success');
+            } catch (err) {
+                const ta = document.createElement('textarea');
+                ta.value = texto;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                mostrarToast(mensaje || 'Copiado al portapapeles', 'success');
+            }
+        }
+
+        function textoWhatsApp(c) {
+            let t = '';
+            t += `*Nombre:* ${c.nombre}\n`;
+            if (c.empresa) t += `*Empresa:* ${c.empresa}\n`;
+            t += `*Correo:* ${c.correo}\n`;
+            t += `*Interés:* ${c.interes}\n`;
+            t += `*Fecha:* ${c.fecha}\n`;
+            if (c.comentario) t += `\n*Comentario:*\n${c.comentario}\n`;
+            return t;
+        }
+
+        function textoCorreo(c) {
+            let t = '';
+            t += `Asunto: ${c.interes || 'Contacto desde la web'}\n`;
+            t += `Para: ${c.correo}\n\n`;
+            t += `Estimado/a ${c.nombre}${c.empresa ? ` (${c.empresa})` : ''},\n\n`;
+            t += `Gracias por contactarnos a través de nuestra página web.\n\n`;
+            t += `Su mensaje fue:\n`;
+            t += `"${c.comentario}"\n\n`;
+            t += `Saludos cordiales,\n`;
+            t += `Equipo de CVG ALCASA`;
+            return t;
+        }
+
+        function textoPlano(c) {
+            let t = '';
+            t += `Fecha: ${c.fecha}\n`;
+            t += `Nombre: ${c.nombre}\n`;
+            t += `Correo: ${c.correo}\n`;
+            if (c.empresa) t += `Empresa: ${c.empresa}\n`;
+            t += `Interés: ${c.interes}\n`;
+            if (c.comentario) t += `Comentario: ${c.comentario}\n`;
+            t += `IP: ${c.ip}\n`;
+            return t;
+        }
+
+        function copiarWhatsApp() {
+            if (!contactoActual) return;
+            copiarAlPortapapeles(textoWhatsApp(contactoActual), 'Formato WhatsApp copiado');
+        }
+        function copiarCorreo() {
+            if (!contactoActual) return;
+            copiarAlPortapapeles(textoCorreo(contactoActual), 'Formato correo copiado');
+        }
+        function copiarTextoPlano() {
+            if (!contactoActual) return;
+            copiarAlPortapapeles(textoPlano(contactoActual), 'Contacto copiado');
+        }
+        function copiarWAIndex(idx) {
+            const c = contactosFiltrados[idx];
+            if (c) copiarAlPortapapeles(textoWhatsApp(c), 'Formato WhatsApp copiado');
+        }
+        function copiarTextoIndex(idx) {
+            const c = contactosFiltrados[idx];
+            if (c) copiarAlPortapapeles(textoPlano(c), 'Contacto copiado');
+        }
+
+        // =========================================
+        // FILTROS
+        // =========================================
+        function aplicarFiltros() {
+            const busqueda = document.getElementById('searchInput').value.toLowerCase().trim();
+            const interesFiltro = document.getElementById('interesFilter').value;
+
+            contactosFiltrados = contactos.filter(c => {
+                if (interesFiltro && c.interes !== interesFiltro) return false;
+                if (busqueda) {
+                    const blob = `${c.nombre} ${c.correo} ${c.empresa} ${c.comentario}`.toLowerCase();
+                    if (!blob.includes(busqueda)) return false;
+                }
+                return true;
+            });
+
+            renderizar();
+            actualizarContadores();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', aplicarFiltros);
+        document.getElementById('interesFilter').addEventListener('change', aplicarFiltros);
+
+        function recargarCSV() {
+            document.getElementById('contactsList').innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Cargando contactos...</p>
+                </div>
+            `;
+            cargarCSV();
+        }
+
+        function actualizarContadores() {
+            document.getElementById('totalCount').textContent = contactos.length;
+            document.getElementById('filteredCount').textContent = contactosFiltrados.length;
+        }
+
+        let toastTimer = null;
+        function mostrarToast(mensaje, tipo) {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toastMsg');
+            const icon = toast.querySelector('i');
+
+            msg.textContent = mensaje;
+            toast.className = 'toast show ' + (tipo || '');
+            icon.className = tipo === 'error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
+
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        function escapeHtml(texto) {
+            if (texto === undefined || texto === null) return '';
+            return String(texto)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+    </script>
+
+</body>
+</html>

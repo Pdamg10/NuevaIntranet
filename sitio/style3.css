@@ -1,0 +1,95 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style: none;
+}
+body{
+    font-family: "Apple Braille";
+    color: #14191e;
+}
+/ * Gran caja principal * /
+.main{
+    width: 780px;
+    height: 200px;
+    margin: 30px auto;
+    overflow: hidden;/ * Ocultar fuera de rango * /
+    position: relative;
+}
+
+.banner{
+    width: 780px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-slide{
+    width: 780px;
+    height: 200px;
+    position: absolute;
+    background-repeat: no-repeat;
+    display: none;
+    / * Relativo al posicionamiento del banner, no al cuerpo, por lo que el banner tiene relativo * /
+}
+.slide1{
+    background: url("http://172.16.251.26/sitio/BANNER%202023/Pantalla780x200%20LAMINACION.jpg");
+}
+.slide2{
+    background: url("http://172.16.251.26/sitio/BANNER%202023/Pantalla780x200%20FUNDICION.JPG");
+}
+.slide3{
+    background: url("http://172.16.251.26/sitio/BANNER%202023/Pantalla780x200 EXTRUSORA.JPG");
+}
+
+.slide-active{
+    display: block;
+}
+
+.button{
+    / * Aparece arriba de la imagen y debe colocarse * /
+    position: absolute;/ * Posición relativa al cuadro padre, el cuadro padre es principal, así que principal: relativo * /
+    width: 30px;
+    height: 60px;
+    left: 40px;
+    top: 50%;
+    margin-top: -80px;
+    background: url("http://172.16.251.26/sitio/arrow.png") no-repeat center;
+}
+/ * La flecha tiene un efecto translúcido al pasarla * /
+.button:hover{
+   / * background: #3333; / * El color de fondo cubre la imagen de fondo del botón * /
+    background-color: #3333;/ * Cambiar el color de fondo al deslizar, mostrar la imagen según el color de fondo * /
+    opacity: 0.8;
+    filter: alpha(opacity=80);/ * Para compatibilidad con otros navegadores * /
+}
+.prev{
+    transform: rotate(180deg);/ * Voltear horizontalmente * /
+}
+.next{
+    right:0;
+    left: auto;/ * Sin efecto a la izquierda, aparece a la derecha del botón * /
+}
+.dots{
+    position: absolute;
+    right: 20px;/ * A la derecha * /
+    bottom: 24px;
+    text-align: right;
+}
+.dots span{
+    display: inline-block;/ * Aparece en una línea * /
+    width: 12px;
+    height: 12px;
+    border-radius: 50px;
+    background-color: rgba(7,17,27,0.4);/ * Establecer transparencia al mismo tiempo * /
+    margin-right: 8px;
+    line-height: 12px;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.8) inset;/ * Agregar recuadro blanco: sombra interna * /
+    cursor: pointer;
+}
+
+.dots span.active{
+    box-shadow: 0 0 0 2px rgba(7,17,27,0.4) inset;/ * El color de fondo actual es blanco * /
+    background: #fff;
+}
