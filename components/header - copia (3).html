@@ -1,0 +1,165 @@
+﻿<header class="alcoa-header" id="mainHeader">
+    <div class="container">
+        <div class="header-top">
+            <div class="logo-section">
+                <a href="/">
+                    <img src="http://190.202.49.114:8070/wp-content/uploads/2025/10/Logotipo-CVG-Alcasa-blanco-2048x1413.png" alt="Logo CVG Alcasa" class="logo-alcasa">
+                </a>
+                <div class="logo-divider"></div>
+                <a href="/">
+                    <img src="http://190.202.49.114:8070/wp-content/uploads/2025/10/cropped-logo-CVG-y-Alcasa-transf-scaled-1-150x150.png" alt="Logo CVG y Alcasa" class="logo-segundo">
+                </a>
+                <a href="/">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-bB26v2vYohjGkP34_LDWDKaxplXqHYNz4dMyzzD-&s=10" alt="Logo Institucional" class="logo-institucional">
+                </a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-navigation" id="mainNav">
+                <a href="/">Inicio</a>
+                <a href="/#empresa">Empresa</a>
+                <a href="/#productos">Productos</a>
+                <a href="/#galeria">Galería</a>
+                <a href="/sitio/Empresa/noticias/Prensa.html">Sala de Prensa</a>
+                <!-- NUEVO: Extranet -->
+                <a href="/sitio/buscador_embedido.html" target="_blank">Extranet</a>
+                <a href="/#contacto">Contacto</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- BOTÓN FLOTANTE DE WHATSAPP -->
+<div id="whatsapp-float" class="whatsapp-float">
+    <a href="https://wa.me/584249110403?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20web%20de%20ALCASA%20y%20quisiera%20informaci%C3%B3n%20sobre%20sus%20productos." 
+       target="_blank" 
+       class="whatsapp-button" 
+       aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Contáctanos por WhatsApp</span>
+    </a>
+</div>
+
+<style>
+    /* Botón flotante de WhatsApp */
+    .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 9999;
+        animation: whatsappPulse 2s infinite ease-in-out;
+    }
+
+    .whatsapp-button {
+        display: block;
+        width: 65px;
+        height: 65px;
+        background: #25d366;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 2.5rem;
+        line-height: 70px;
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        position: relative;
+    }
+
+    .whatsapp-button:hover {
+        transform: scale(1.15);
+        box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6);
+        background: #20b85a;
+    }
+
+    .whatsapp-button i {
+        vertical-align: middle;
+        line-height: 65px;
+    }
+
+    /* Tooltip */
+    .whatsapp-tooltip {
+        position: absolute;
+        right: 80px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-family: 'Inter', Arial, sans-serif;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        pointer-events: none;
+    }
+
+    .whatsapp-tooltip::after {
+        content: '';
+        position: absolute;
+        right: -8px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-left: 8px solid rgba(0, 0, 0, 0.8);
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+    }
+
+    .whatsapp-button:hover .whatsapp-tooltip {
+        opacity: 1;
+        visibility: visible;
+        right: 90px;
+    }
+
+    /* Animación de pulso */
+    @keyframes whatsappPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .whatsapp-float {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .whatsapp-button {
+            width: 55px;
+            height: 55px;
+            font-size: 2rem;
+            line-height: 58px;
+        }
+
+        .whatsapp-button i {
+            line-height: 55px;
+        }
+
+        .whatsapp-tooltip {
+            display: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .whatsapp-float {
+            bottom: 15px;
+            right: 15px;
+        }
+
+        .whatsapp-button {
+            width: 50px;
+            height: 50px;
+            font-size: 1.8rem;
+            line-height: 52px;
+        }
+
+        .whatsapp-button i {
+            line-height: 50px;
+        }
+    }
+</style>

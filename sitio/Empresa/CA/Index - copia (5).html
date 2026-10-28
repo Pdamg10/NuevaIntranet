@@ -1,0 +1,1141 @@
+﻿﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Cumpleaños ALCASA</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #ff4757; --dark: #2f3542; --bg: #f1f2f6; --alcasa-blue: #0054a6; }
+        
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--bg); 
+            margin: 0; 
+            padding: 0;
+            color: var(--dark); 
+        }
+
+        /* =========================================
+           WRAPPER STICKY ÚNICO (header + filtros juntos)
+           ========================================= */
+        .top-sticky-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            background-color: var(--bg);
+        }
+
+        .alcoa-header .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            text-align: left;
+        }
+
+        .alcoa-header a,
+        .alcoa-header a:link,
+        .alcoa-header a:visited,
+        .alcoa-header a:hover,
+        .alcoa-header a:focus,
+        .alcoa-header a:active,
+        .alcoa-header .nav-list > li > a,
+        .alcoa-header .dropdown-menu li a,
+        .alcoa-header .logo-section a {
+            text-decoration: none !important;
+        }
+
+        /* =========================================
+           PANEL DE FILTROS
+           ========================================= */
+        .filter-sticky {
+            background-color: var(--bg);
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding: 12px 20px;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; text-align: center; }
+
+        .filter-panel { 
+            background: white; padding: 10px 25px; border-radius: 30px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: inline-flex; gap: 10px; align-items: center; justify-content: center; 
+        }
+
+        /* =========================================
+           MENSAJE INSTITUCIONAL
+           ========================================= */
+        .msg-institucional { 
+            display: none; 
+            background: white; 
+            padding: 25px; 
+            border-radius: 15px; 
+            margin-top: 15px;
+            border: 2px solid #e0e0e0;
+            border-bottom: 6px solid var(--alcasa-blue);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .titulo-gradiente { 
+            background: linear-gradient(45deg, var(--alcasa-blue), #00a8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .msg-institucional h2 { 
+            margin: 0; 
+            font-size: 1.8rem; 
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .emoji-torta {
+            -webkit-text-fill-color: initial;
+            background: none;
+        }
+
+        .msg-personalizado { 
+            margin: 15px 0 0 0; 
+            font-style: italic; 
+            color: #222; 
+            font-size: 1.2rem;
+            line-height: 1.6;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .msg-institucional .hint-card {
+            margin: 15px 0 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #57606f;
+        }
+        .msg-institucional .hint-card i {
+            color: var(--alcasa-blue);
+            margin-right: 5px;
+        }
+
+        /* =========================================
+           CUERPO
+           ========================================= */
+        .content-body { padding: 25px 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        
+        .card { 
+            background: white; border-radius: 15px; 
+            overflow: hidden; text-align: left; display: flex;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); animation: fadeIn 0.4s ease;
+            border-left: 6px solid var(--primary);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .photo-container {
+            width: 115px; min-width: 115px; background: #e9ecef;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .worker-photo { width: 100%; height: 100%; object-fit: cover; }
+        .card-content { padding: 12px; flex-grow: 1; }
+        
+        h3 { margin: 3px 0; color: var(--dark); text-transform: uppercase; font-size: 0.9rem; }
+        .ficha-text { font-size: 0.7rem; color: var(--primary); font-weight: bold; }
+        .info-label { font-size: 0.75rem; color: #57606f; margin-top: 4px; }
+        .info-label b { color: var(--dark); display: block; font-size: 0.6rem; text-transform: uppercase; }
+
+        select, button { padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; }
+        button { background: var(--primary); color: white; border: none; cursor: pointer; font-weight: bold; }
+
+        /* =========================================
+           MODAL DE TARJETA DE CUMPLEAÑOS
+           ========================================= */
+        .birthday-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 20px 60px;
+            overflow-y: auto;
+            backdrop-filter: blur(4px);
+        }
+        .birthday-modal.active { display: flex; }
+
+        .birthday-modal-content {
+            max-width: 560px;
+            width: 100%;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .btn-close-modal {
+            position: absolute;
+            top: -18px;
+            right: -18px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #ff4757;
+            color: #ffffff;
+            border: 3px solid #ffffff;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-close-modal:hover {
+            background: #e63946;
+            transform: rotate(90deg) scale(1.05);
+        }
+
+        /* =========================================
+           LA TARJETA (esto es lo que se exporta)
+           ========================================= */
+        .birthday-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            color: #1a1a1a;
+            width: 100%;
+        }
+
+        .card-header-deco {
+            background: linear-gradient(135deg, #003366 0%, #0056a3 100%);
+            padding: 50px 25px 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header-deco::before,
+        .card-header-deco::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .card-header-deco::before {
+            width: 260px; height: 260px;
+            top: -110px; left: -80px;
+        }
+        .card-header-deco::after {
+            width: 220px; height: 220px;
+            bottom: -90px; right: -70px;
+        }
+
+        .card-logo {
+            display: inline-block;
+            width: auto;
+            height: 200px;
+            max-width: 90%;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: brightness(0) invert(1) drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+            -webkit-filter: brightness(0) invert(1) drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+        }
+
+        .card-greeting-badge {
+            display: inline-block;
+            background: #ff6b1a;
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 9px 26px;
+            border-radius: 30px;
+            margin-top: 28px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(255, 107, 26, 0.5);
+        }
+
+        .card-photo-wrapper {
+            width: 165px;
+            height: 165px;
+            margin: -85px auto 0;
+            border-radius: 50%;
+            border: 6px solid #ffffff;
+            overflow: hidden;
+            background: #e9ecef;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .card-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-body {
+            padding: 22px 35px 30px;
+            text-align: center;
+        }
+
+        .card-name {
+            color: #003366;
+            font-size: 1.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 5px 0 8px;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .card-ficha {
+            display: inline-block;
+            background: #f5f7fa;
+            color: #0056a3;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 0 0 18px;
+            border: 1px solid #e1e5eb;
+        }
+
+        .card-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 15px 0 22px;
+            text-align: left;
+        }
+
+        .card-info-item {
+            background: #f5f7fa;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b1a;
+        }
+
+        .card-info-item b {
+            display: block;
+            color: #003366;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .card-info-item span {
+            color: #1a1a1a;
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.3;
+            display: block;
+            word-break: break-word;
+        }
+
+        .card-message {
+            margin: 0;
+            padding: 22px 20px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            border-radius: 12px;
+            position: relative;
+            border: 1px solid #e1e5eb;
+        }
+
+        .card-message::before {
+            content: '"';
+            position: absolute;
+            top: -8px;
+            left: 18px;
+            font-size: 4rem;
+            color: #ff6b1a;
+            opacity: 0.5;
+            font-family: Georgia, serif;
+            line-height: 1;
+            font-weight: 700;
+        }
+
+        .card-message p {
+            color: #2f3542;
+            font-style: italic;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-message p strong {
+            color: #003366;
+            font-style: normal;
+        }
+
+        /* ✅ Resaltado especial para la fecha en la tarjeta */
+        .card-message p #cardFecha {
+            color: #ff6b1a;
+            font-style: normal;
+            font-weight: 800;
+        }
+
+        .card-footer-deco {
+            background: linear-gradient(135deg, #003366 0%, #002244 100%);
+            color: #ffffff;
+            padding: 16px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .card-footer-brand {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-footer-brand i {
+            color: #ff6b1a;
+            font-size: 1rem;
+        }
+
+        .card-footer-year {
+            color: #ff6b1a;
+            font-weight: 800;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+        }
+
+        /* =========================================
+           ACCIONES DEL MODAL
+           ========================================= */
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 22px;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+
+        .modal-actions button {
+            padding: 13px 26px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.92rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            color: #ffffff;
+        }
+
+        .btn-download-img {
+            background: linear-gradient(135deg, #003366, #0056a3);
+            box-shadow: 0 4px 15px rgba(0, 51, 102, 0.35);
+        }
+        .btn-download-img:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(0, 51, 102, 0.5);
+        }
+
+        .btn-download-pdf {
+            background: linear-gradient(135deg, #ff6b1a, #e55a0f);
+            box-shadow: 0 4px 15px rgba(255, 107, 26, 0.35);
+        }
+        .btn-download-pdf:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(255, 107, 26, 0.5);
+        }
+
+        .modal-actions button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 600px) {
+            .msg-institucional h2 { font-size: 1.2rem; flex-direction: column; gap: 4px; }
+            .msg-personalizado { font-size: 1rem; }
+            .filter-panel { padding: 8px 12px; gap: 6px; flex-wrap: wrap; }
+            .filter-panel select,
+            .filter-panel button { font-size: 0.85rem; padding: 6px 8px; }
+            .alcoa-header .container { padding: 0 20px; }
+
+            .birthday-modal { padding: 20px 10px 40px; }
+            .birthday-modal-content { max-width: 100%; }
+            .card-header-deco { padding: 35px 15px 100px; }
+            .card-logo { height: 140px; max-width: 90%; }
+            .card-greeting-badge { font-size: 0.72rem; padding: 7px 18px; letter-spacing: 2px; margin-top: 22px; }
+            .card-photo-wrapper { width: 140px; height: 140px; margin-top: -70px; }
+            .card-name { font-size: 1.3rem; }
+            .card-body { padding: 18px 20px 25px; }
+            .card-info-grid { grid-template-columns: 1fr; }
+            .card-message p { font-size: 0.85rem; }
+            .btn-close-modal { top: -10px; right: -5px; width: 38px; height: 38px; }
+            .modal-actions button { padding: 11px 18px; font-size: 0.85rem; flex: 1; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- =========================================
+     WRAPPER STICKY: header + filtros pegados juntos
+     ========================================= -->
+<div class="top-sticky-wrapper">
+
+    <!-- HEADER DINÁMICO (cargado desde /components/header.html) -->
+    <div id="header-container"></div>
+
+    <!-- PANEL DE FILTROS -->
+    <div class="filter-sticky" id="filterSticky">
+        <div class="container">
+            <div class="filter-panel">
+                <select id="day-select"></select>
+                <select id="month-select">
+                    <option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option>
+                    <option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option>
+                    <option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option>
+                    <option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
+                </select>
+                <button onclick="buscar()">Consultar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- =========================================
+     CUERPO: MENSAJE + RESULTADOS
+     ========================================= -->
+<div class="container content-body">
+    <div id="mensaje-felicitacion" class="msg-institucional">
+        <h2>
+            <span class="emoji-torta">🎂</span>
+            <span class="titulo-gradiente">¡Feliz Cumpleaños te desea CVG Alcasa!</span>
+            <span class="emoji-torta">🎂</span>
+        </h2>
+        <p class="msg-personalizado">
+            "En tu día especial, te deseamos lo mejor. Tu positividad y compromiso hacen que trabajar contigo sea un placer. ¡Por otro año de grandes logros juntos!"
+        </p>
+        <p class="hint-card">
+            <i class="fas fa-hand-pointer"></i>
+            Haz clic en cualquier tarjeta para generar la felicitación personalizada y descargarla.
+        </p>
+    </div>
+
+    <div id="results-grid" class="grid" style="margin-top: 20px;"></div>
+</div>
+
+<!-- =========================================
+     MODAL: TARJETA DE CUMPLEAÑOS
+     ========================================= -->
+<div class="birthday-modal" id="birthdayModal">
+    <div class="birthday-modal-content">
+        <button class="btn-close-modal" onclick="cerrarTarjeta()" aria-label="Cerrar">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <!-- ESTA ES LA TARJETA QUE SE EXPORTA -->
+        <div class="birthday-card" id="birthdayCard">
+
+            <!-- Encabezado azul con logo grande en blanco -->
+            <div class="card-header-deco">
+                <img src="Alcasa.png"
+                     alt="CVG ALCASA"
+                     class="card-logo"
+                     crossorigin="anonymous">
+                <div>
+                    <span class="card-greeting-badge">¡Feliz Cumpleaños!</span>
+                </div>
+            </div>
+
+            <!-- Foto circular -->
+            <div class="card-photo-wrapper">
+                <img id="cardPhoto" class="card-photo" src="" alt="Foto del trabajador">
+            </div>
+
+            <!-- Cuerpo -->
+            <div class="card-body">
+                <h2 class="card-name" id="cardName">Nombre del Trabajador</h2>
+                <span class="card-ficha" id="cardFicha">FICHA: 00000</span>
+
+                <div class="card-info-grid">
+                    <div class="card-info-item">
+                        <b><i class="fas fa-building"></i> Departamento</b>
+                        <span id="cardDepto">—</span>
+                    </div>
+                    <div class="card-info-item">
+                        <b><i class="fas fa-sitemap"></i> Gerencia</b>
+                        <span id="cardGcia">—</span>
+                    </div>
+                </div>
+
+                <div class="card-message">
+                    <p>
+                        En este día tan especial <strong id="cardFecha">00/00/0000</strong>, <strong>CVG Aluminio del Caroní, S.A.</strong> se une a la celebración de tu cumpleaños y te desea un año lleno de salud, éxitos y bendiciones. <strong>¡Gracias por tu valiosa labor y compromiso!</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Footer azul -->
+            <div class="card-footer-deco">
+                <div class="card-footer-brand">
+                    <i class="fas fa-birthday-cake"></i> CVG ALCASA
+                </div>
+                <div class="card-footer-year" id="cardYear">2025</div>
+            </div>
+
+        </div>
+        <!-- FIN DE LA TARJETA -->
+
+        <!-- Botones de descarga -->
+        <div class="modal-actions">
+            <button class="btn-download-img" id="btnDescargarImg" onclick="descargarImagen()">
+                <i class="fas fa-image"></i> Descargar Imagen
+            </button>
+            <button class="btn-download-pdf" id="btnDescargarPDF" onclick="descargarPDF()">
+                <i class="fas fa-file-pdf"></i> Descargar PDF
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===========================================
+     SCRIPT 1: LÓGICA DEL PANEL DE CUMPLEAÑOS
+     =========================================== -->
+<script>
+    let globalData = [];
+    let resultadosActuales = [];
+    let trabajadorActual = null;
+
+    function obtenerSilueta(nombreCompleto) {
+        const primerNombre = nombreCompleto.split(' ')[0].toUpperCase();
+        const esFemenino = primerNombre.endsWith('A') || 
+                           primerNombre.endsWith('NA') || 
+                           ['BEATRIZ', 'CARMEN', 'ISABEL', 'RAQUEL', 'SHEYLA', 'GLADYS', 'MERCEDES', 'ESTHER'].includes(primerNombre);
+        
+        return esFemenino ? 'FotosAdabas/silueta_femenina.png' : 'FotosAdabas/silueta_masculina.png';
+    }
+
+    window.addEventListener('load', async function() {
+        const dSel = document.getElementById('day-select');
+        for(let i=1; i<=31; i++) {
+            let opt = document.createElement('option');
+            opt.value = i; opt.textContent = i;
+            dSel.appendChild(opt);
+        }
+        const hoy = new Date();
+        dSel.value = hoy.getDate();
+        document.getElementById('month-select').value = hoy.getMonth() + 1;
+        await cargarArchivo();
+    });
+
+    async function cargarArchivo() {
+        try {
+            const resp = await fetch('DATA.csv');
+            const buffer = await resp.arrayBuffer();
+            const text = new TextDecoder('windows-1252').decode(buffer);
+            
+            globalData = text.split(/\r?\n/).filter(l => l.trim() !== "" && !l.startsWith("FICHA")).map(l => {
+                const p = l.split(';');
+                return {
+                    ficha: p[0]?.trim(),
+                    nombre: (p[1] + " " + p[2]).trim().replace(/\s+/g, ' '),
+                    mes: parseInt(p[4]),
+                    dia: parseInt(p[5]),
+                    depto: p[6]?.trim().replace(/\s+/g, ' '),
+                    gcia: p[7]?.trim().replace(/\s+/g, ' ')
+                };
+            });
+            buscar();
+        } catch (e) { console.error("Error al cargar el CSV:", e); }
+    }
+
+    function buscar() {
+        const d = parseInt(document.getElementById('day-select').value);
+        const m = parseInt(document.getElementById('month-select').value);
+        const grid = document.getElementById('results-grid');
+        const banner = document.getElementById('mensaje-felicitacion');
+        
+        grid.innerHTML = "";
+        const encontrados = globalData.filter(p => p.mes === m && p.dia === d);
+        resultadosActuales = encontrados;
+
+        if (encontrados.length > 0) {
+            banner.style.display = 'block';
+            encontrados.forEach((p, idx) => {
+                const siluetaPath = obtenerSilueta(p.nombre);
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="photo-container">
+                        <img src="FotosAdabas/${p.ficha}.bmp" 
+                             class="worker-photo" 
+                             onerror="this.src='${siluetaPath}'" 
+                             alt="Foto">
+                    </div>
+                    <div class="card-content">
+                        <div class="ficha-text">FICHA: ${p.ficha}</div>
+                        <h3>${p.nombre}</h3>
+                        <div class="info-label"><b>Departamento</b>${p.depto}</div>
+                        <div class="info-label"><b>Gerencia</b>${p.gcia}</div>
+                    </div>
+                `;
+                card.addEventListener('click', () => abrirTarjeta(idx));
+                grid.appendChild(card);
+            });
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        } else {
+            banner.style.display = 'none';
+            grid.innerHTML = `<p style="grid-column:1/-1; color:#999; margin-top:20px;">No se encontraron cumpleañeros para esta fecha.</p>`;
+        }
+    }
+
+    // =========================================
+    // MODAL DE TARJETA DE CUMPLEAÑOS
+    // =========================================
+    function abrirTarjeta(idx) {
+        const p = resultadosActuales[idx];
+        if (!p) return;
+        trabajadorActual = p;
+
+        const siluetaPath = obtenerSilueta(p.nombre);
+        const photoEl = document.getElementById('cardPhoto');
+        photoEl.src = `FotosAdabas/${p.ficha}.bmp`;
+        photoEl.onerror = function() { this.onerror = null; this.src = siluetaPath; };
+
+        document.getElementById('cardName').textContent = p.nombre;
+        document.getElementById('cardFicha').textContent = 'FICHA: ' + p.ficha;
+        document.getElementById('cardDepto').textContent = p.depto || '—';
+        document.getElementById('cardGcia').textContent = p.gcia || '—';
+
+        // ✅ Fecha en formato DD/MM/AAAA (día/mes del trabajador + año actual)
+        const añoActual = new Date().getFullYear();
+        const dia = String(p.dia).padStart(2, '0');
+        const mes = String(p.mes).padStart(2, '0');
+        document.getElementById('cardFecha').textContent = `${dia}/${mes}/${añoActual}`;
+
+        document.getElementById('cardYear').textContent = añoActual;
+
+        document.getElementById('birthdayModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarTarjeta() {
+        document.getElementById('birthdayModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') cerrarTarjeta();
+    });
+
+    document.getElementById('birthdayModal').addEventListener('click', function(e) {
+        if (e.target === this) cerrarTarjeta();
+    });
+
+    // =========================================
+    // UTILIDAD: esperar carga de imágenes
+    // =========================================
+    function esperarImagenes(container) {
+        const images = container.querySelectorAll('img');
+        return Promise.all(Array.from(images).map(img => {
+            if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+            return new Promise(res => {
+                img.addEventListener('load', res, { once: true });
+                img.addEventListener('error', res, { once: true });
+            });
+        }));
+    }
+
+    // =========================================
+    // Procesar logo a BLANCO antes de capturar
+    // =========================================
+    async function procesarLogoBlanco() {
+        const logoEl = document.querySelector('.card-logo');
+        if (!logoEl) return;
+
+        if (!logoEl.dataset.originalSrc) {
+            logoEl.dataset.originalSrc = logoEl.src;
+        }
+
+        try {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.src = logoEl.dataset.originalSrc;
+            await new Promise((resolve, reject) => {
+                img.onload = resolve;
+                img.onerror = reject;
+            });
+
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                if (data[i + 3] > 0) {
+                    data[i]     = 255;
+                    data[i + 1] = 255;
+                    data[i + 2] = 255;
+                }
+            }
+            ctx.putImageData(imageData, 0, 0);
+
+            logoEl.src = canvas.toDataURL('image/png');
+            logoEl.style.filter = 'none';
+            logoEl.style.webkitFilter = 'none';
+        } catch (e) {
+            console.warn('No se pudo procesar el logo en blanco (posible CORS). Se usará el filtro CSS:', e);
+        }
+    }
+
+    // =========================================
+    // Capturar la tarjeta como canvas
+    // =========================================
+    async function capturarTarjeta() {
+        const card = document.getElementById('birthdayCard');
+
+        await procesarLogoBlanco();
+        await esperarImagenes(card);
+        await new Promise(r => setTimeout(r, 80));
+
+        return await html2canvas(card, {
+            scale: 2,
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff',
+            logging: false,
+            imageTimeout: 15000
+        });
+    }
+
+    function nombreArchivoBase() {
+        if (!trabajadorActual) return 'Feliz-Cumpleanos';
+        return 'Feliz-Cumpleanos-' + trabajadorActual.nombre
+            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-zA-Z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+    }
+
+    // =========================================
+    // DESCARGAR COMO IMAGEN (PNG)
+    // =========================================
+    async function descargarImagen() {
+        if (!trabajadorActual) return;
+        const btn = document.getElementById('btnDescargarImg');
+        const htmlOriginal = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando...';
+
+        try {
+            const canvas = await capturarTarjeta();
+            const link = document.createElement('a');
+            link.download = nombreArchivoBase() + '.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        } catch (err) {
+            console.error('Error generando imagen:', err);
+            alert('No se pudo generar la imagen. Revisa la consola para más detalles.');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = htmlOriginal;
+        }
+    }
+
+    // =========================================
+    // DESCARGAR COMO PDF (A4, centrado)
+    // =========================================
+    async function descargarPDF() {
+        if (!trabajadorActual) return;
+        const btn = document.getElementById('btnDescargarPDF');
+        const htmlOriginal = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando...';
+
+        try {
+            const canvas = await capturarTarjeta();
+            const imgData = canvas.toDataURL('image/png');
+
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+            const margin = 12;
+            const maxWidth = pageWidth - margin * 2;
+            const maxHeight = pageHeight - margin * 2;
+
+            let imgWidth = maxWidth;
+            let imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+            if (imgHeight > maxHeight) {
+                imgHeight = maxHeight;
+                imgWidth = (canvas.width * imgHeight) / canvas.height;
+            }
+
+            const x = (pageWidth - imgWidth) / 2;
+            const y = (pageHeight - imgHeight) / 2;
+
+            pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight, undefined, 'FAST');
+            pdf.save(nombreArchivoBase() + '.pdf');
+        } catch (err) {
+            console.error('Error generando PDF:', err);
+            alert('No se pudo generar el PDF. Revisa la consola para más detalles.');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = htmlOriginal;
+        }
+    }
+</script>
+
+<!-- ===========================================
+     SCRIPT 2: CARGAR HEADER, FORZAR FONDO Y MENÚ
+     =========================================== -->
+<script>
+    function loadComponent(id, url, callback) {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.text();
+            })
+            .then(data => {
+                const contenedor = document.getElementById(id);
+                contenedor.innerHTML = data;
+
+                // ✅ Ejecutar manualmente los <script> internos del componente
+                // (innerHTML NO ejecuta scripts por seguridad del navegador)
+                contenedor.querySelectorAll("script").forEach(function (scriptViejo) {
+                    var scriptNuevo = document.createElement("script");
+                    if (scriptViejo.src) {
+                        scriptNuevo.src = scriptViejo.src;
+                    } else {
+                        scriptNuevo.textContent = scriptViejo.textContent;
+                    }
+                    scriptViejo.parentNode.replaceChild(scriptNuevo, scriptViejo);
+                });
+
+                if (callback) callback();
+            })
+            .catch(error => {
+                console.warn('Error cargando componente:', error);
+                document.getElementById(id).innerHTML = '<p style="color:red;padding:20px;">No se pudo cargar el encabezado.</p>';
+            });
+    }
+
+    function initHeaderMenu() {
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('mobileCloseBtn');
+        const mainNav = document.getElementById('mainNav');
+        const overlay = document.getElementById('menuOverlay');
+
+        if (!menuBtn || !mainNav) {
+            console.warn('⚠️ Elementos del menú no encontrados.');
+            return;
+        }
+
+        function abrirMenu() {
+            mainNav.classList.add('active');
+            if (overlay) overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            const icon = menuBtn.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        }
+
+        function cerrarMenu() {
+            mainNav.classList.remove('active');
+            if (overlay) overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            const icon = menuBtn.querySelector('i');
+            if (icon) {
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            }
+            document.querySelectorAll('.nav-item-has-dropdown.open').forEach(li => li.classList.remove('open'));
+            document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
+        }
+
+        menuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (mainNav.classList.contains('active')) {
+                cerrarMenu();
+            } else {
+                abrirMenu();
+            }
+        });
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                cerrarMenu();
+            });
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', cerrarMenu);
+        }
+
+        mainNav.addEventListener('click', function(e) {
+            const dropdownToggle = e.target.closest('.nav-link-dropdown');
+            if (dropdownToggle && window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const parentLi = dropdownToggle.closest('.nav-item-has-dropdown');
+                const submenu = parentLi.querySelector('.dropdown-menu');
+                if (!submenu) return;
+
+                const estabaAbierto = submenu.classList.contains('open');
+
+                mainNav.querySelectorAll('.nav-item-has-dropdown.open').forEach(li => {
+                    if (li !== parentLi) {
+                        li.classList.remove('open');
+                        const m = li.querySelector('.dropdown-menu');
+                        if (m) m.classList.remove('open');
+                    }
+                });
+
+                submenu.classList.toggle('open', !estabaAbierto);
+                parentLi.classList.toggle('open', !estabaAbierto);
+                return;
+            }
+
+            const link = e.target.closest('a');
+            if (link && window.innerWidth <= 768 && !link.classList.contains('nav-link-dropdown')) {
+                cerrarMenu();
+            }
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && mainNav.classList.contains('active')) {
+                cerrarMenu();
+            }
+        });
+
+        console.log('✅ Menú inicializado correctamente.');
+    }
+
+    loadComponent('header-container', '/components/header.html', function() {
+        const headerEl = document.querySelector('.alcoa-header');
+        if (headerEl) {
+            headerEl.style.setProperty('background-color', '#003366', 'important');
+            headerEl.style.setProperty('box-shadow', '0 4px 12px rgba(0,0,0,0.2)', 'important');
+        } else {
+            console.warn('⚠️ No se encontró .alcoa-header.');
+        }
+
+        setTimeout(initHeaderMenu, 50);
+    });
+</script>
+
+<!-- ===========================================
+     SCRIPT 3: EFECTO DE SCROLL EN EL HEADER
+     =========================================== -->
+<script>
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.alcoa-header');
+        if (header) {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        }
+    });
+</script>
+
+<!-- ===========================================
+     SCRIPT 4: TRADUCTOR GLOBAL MULTI-IDIOMA
+     =========================================== -->
+<script src="/js/translator.js" defer></script>
+
+<!-- ===========================================
+     SCRIPT 5: RESPALDO DEL SELECTOR DE IDIOMAS
+     Conecta el <select id="alcoa-lang-select"> del header
+     con el traductor global, por si el listener original
+     del header no se registró a tiempo.
+     =========================================== -->
+<script>
+(function () {
+    function conectarSelect() {
+        var select = document.getElementById("alcoa-lang-select");
+        if (!select) {
+            setTimeout(conectarSelect, 200);
+            return;
+        }
+        if (select.dataset.respaldoListener === "1") return;
+        select.dataset.respaldoListener = "1";
+
+        // Sincronizar con la cookie actual
+        var match = document.cookie.match(/googtrans=\/es\/([^;]+)/);
+        var idiomaActual = match ? match[1] : "es";
+        select.value = idiomaActual;
+
+        select.addEventListener("change", function () {
+            var codigo = this.value;
+            console.log("[Respaldo] Cambio solicitado:", codigo);
+            if (typeof window.alcosaSetLanguage === "function") {
+                window.alcosaSetLanguage(codigo);
+            } else {
+                var intentos = 0;
+                var intervalo = setInterval(function () {
+                    intentos++;
+                    if (typeof window.alcosaSetLanguage === "function") {
+                        clearInterval(intervalo);
+                        window.alcosaSetLanguage(codigo);
+                    } else if (intentos > 20) {
+                        clearInterval(intervalo);
+                        console.warn("[Respaldo] alcosaSetLanguage no disponible.");
+                    }
+                }, 200);
+            }
+        });
+
+        console.log("[Respaldo] Selector de idioma conectado.");
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", conectarSelect);
+    } else {
+        conectarSelect();
+    }
+})();
+</script>
+
+</body>
+</html>

@@ -1,7 +1,0 @@
-# Datos generados en ejecución: NUNCA versionar (contienen datos personales)
-storage/*.csv
-storage/cv/
-# Temporales
-Thumbs.db
-.DS_Store
-*.suo

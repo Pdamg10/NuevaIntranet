@@ -1,0 +1,90 @@
+/* 
+
+$Id: cssFrm.css,v 1.1 2009-11-17 20:34:27 ad20006 Exp $
+$Date: 2009-11-17 20:34:27 $
+$Author: ad20006 $
+$Revision: 1.1 $
+
+Descripcion: Estos estilo son para la plantillas  
+
+*/
+
+
+.fondo
+{
+ background-color:#bcbec0
+}
+
+
+.normal {
+ font-size: 8.5pt;
+ font-family: Aria;
+  font-style:normal;
+  color:Black
+}
+
+.posiciontablahora
+{
+	background-position:130px 25px;
+}
+
+.fondoPlantilla
+{
+	margin-top: 1;
+	padding-top:40;
+	background-position:50px 25px;
+    width: 1000px;
+	background-image:  url(../../Imagenes/Fondo.png) ;
+	background-repeat:no-repeat;
+
+	
+}
+.fondoPlantilla1
+{
+	margin-top: 1;
+	padding-top:40;
+	background-position:40px 54px;
+    width: 1000px;
+	background-image:  url(../../Imagenes/Fondo.png) ;
+	background-repeat:no-repeat;
+
+	
+}
+
+
+.logoalcasa{
+    
+	
+	 background-image:url(../../Imagenes/Logoalcasa.png);
+	 background-repeat:no-repeat;
+	 
+	
+}
+.logocvg{
+    
+	  
+	  background-image:url(../../Imagenes/cvg.png) ;
+	  background-repeat:no-repeat;
+	
+}
+
+
+
+.cintillo{
+    
+	  background-position:1px 2px;
+	   background-image:url(../../Imagenes/cintillosup.png);
+	  background-repeat:no-repeat;
+	
+}
+
+.piePagina{
+	background: url(../../Imagenes/piepagina.png);
+	background-repeat:no-repeat;
+	background-position:center;
+	
+}
+
+
+
+

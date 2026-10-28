@@ -1,0 +1,1172 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos de Extrusión - CVG Aluminio del Caroní, S.A.</title>
+    <meta name="description" content="Productos de la Planta Extrusora de CVG Aluminios del Caroní, S.A. (ALCASA): Perfiles, tubos, ángulos, ventanas, puertas y más.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           VARIABLES Y RESET
+           ========================================= */
+        :root {
+            --alcoa-blue: #003366;
+            --alcoa-light-blue: #0056a3;
+            --accent-orange: #ff6b1a;
+            --white: #ffffff;
+            --light-gray: #f5f7fa;
+            --medium-gray: #e1e5eb;
+            --text-dark: #1a1a1a;
+            --text-gray: #5a6c7d;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            background-color: var(--light-gray);
+            overflow-x: clip;
+        }
+
+        h1, h2, h3, h4 { font-weight: 700; line-height: 1.3; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+
+        /* =========================================
+           CONTENEDOR DEL HEADER: FIJO AL HACER SCROLL
+           ========================================= */
+        #header-container {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        /* =========================================
+           CONTENIDO PRINCIPAL (sin sidebar)
+           ========================================= */
+        .content-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .page-header {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .page-banner {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--accent-orange);
+        }
+
+        .page-content { padding: 50px 40px; }
+        .page-content h1 { 
+            color: var(--alcoa-blue); 
+            font-size: 2.5rem; 
+            margin-bottom: 15px; 
+            text-align: center;
+        }
+        .page-intro {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        /* =========================================
+           CATEGORÍAS Y TARJETAS DE PRODUCTOS
+           ========================================= */
+        .category-section {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--alcoa-blue);
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--medium-gray);
+            position: relative;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: var(--accent-orange);
+        }
+
+        .category-title i {
+            color: var(--accent-orange);
+            font-size: 1.4rem;
+        }
+
+        .category-description {
+            color: var(--text-gray);
+            font-size: 1rem;
+            margin-bottom: 25px;
+            font-style: italic;
+            padding-left: 15px;
+            border-left: 3px solid var(--accent-orange);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .product-card-header {
+            background: linear-gradient(135deg, var(--alcoa-blue), var(--alcoa-light-blue));
+            padding: 30px 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 200px;
+            height: 200px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .product-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.8rem;
+            color: var(--white);
+            border: 3px solid var(--accent-orange);
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-card-header h3 {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-type {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-card-body {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card-body p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .btn-product {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: var(--alcoa-blue);
+            color: var(--white);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-product:hover {
+            background: var(--accent-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 26, 0.3);
+        }
+
+        /* =========================================
+           MODAL CON IFRAME
+           ========================================= */
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 20, 40, 0.85);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 20px;
+        }
+
+        .product-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 16px;
+            max-width: 1100px;
+            width: 100%;
+            height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--alcoa-blue), var(--alcoa-light-blue));
+            color: var(--white);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .modal-header h3 {
+            color: var(--white);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-header h3 i {
+            color: var(--accent-orange);
+        }
+
+        .modal-close {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--accent-orange);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            flex: 1;
+            overflow: hidden;
+            background: var(--light-gray);
+            position: relative;
+        }
+
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: var(--white);
+        }
+
+        .modal-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--alcoa-blue);
+            font-size: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .modal-loading i {
+            font-size: 2.5rem;
+            color: var(--accent-orange);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .modal-footer {
+            background: var(--white);
+            padding: 15px 30px;
+            border-top: 1px solid var(--medium-gray);
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .modal-footer p {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .modal-footer strong {
+            color: var(--alcoa-blue);
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer {
+            background: linear-gradient(135deg, var(--alcoa-blue), #002244);
+            color: var(--white);
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 50px; }
+        .footer-col h4 { color: var(--white); margin-bottom: 20px; font-size: 1.1rem; position: relative; padding-bottom: 10px; }
+        .footer-col h4::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: var(--accent-orange); }
+        .footer-col p, .footer-col a { color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.7; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul a:hover { color: var(--accent-orange); padding-left: 5px; }
+        .footer-col ul a i { font-size: 0.7rem; margin-right: 5px; }
+        .social-links { display: flex; gap: 12px; margin-top: 20px; }
+        .social-links a {
+            width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--white); transition: var(--transition);
+        }
+        .social-links a:hover { background: var(--accent-orange); transform: translateY(-3px); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; text-align: center; color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 1024px) {
+            .container { padding: 0 30px; }
+            .content-wrapper { padding: 40px 30px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .content-wrapper { padding: 30px 20px; }
+            .page-banner { height: 180px; }
+            .page-content { padding: 30px 20px; }
+            .page-content h1 { font-size: 2rem; }
+            .products-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            .modal-content { height: 95vh; max-width: 100%; }
+            .modal-header { padding: 15px 20px; }
+            .modal-header h3 { font-size: 1.1rem; }
+            .modal-footer { padding: 12px 20px; }
+            .category-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =========================================
+         HEADER (se carga dinámicamente desde /components/header.html)
+         ========================================= -->
+    <div id="header-container"></div>
+
+    <!-- =========================================
+         CONTENIDO PRINCIPAL (sin sidebar)
+         ========================================= -->
+    <div class="content-wrapper">
+        <div class="page-header">
+            <img src="/sitio/BANNER%202023/Pantalla%202%20780%20x%20200.png" alt="Productos de Extrusión ALCASA" class="page-banner">
+            
+            <div class="page-content">
+                <h1>Productos de Extrusión</h1>
+                <p class="page-intro">
+                    La Planta Extrusora de CVG Aluminios del Caroní, S.A. produce una amplia gama de perfiles de aluminio de alta calidad para aplicaciones arquitectónicas, industriales y residenciales, cumpliendo con los más altos estándares de calidad y diseño.
+                </p>
+
+                <!-- CATEGORÍA 1: TUBOS Y PERFILES ESTRUCTURALES -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <i class="fas fa-vector-square"></i> Tubos y Perfiles Estructurales
+                    </h2>
+                    <p class="category-description">Perfiles tubulares y angulares para estructuras, soportes y aplicaciones industriales.</p>
+                    
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-square"></i></div>
+                                <h3>Tubos Rectangulares</h3>
+                                <span class="product-type">ESTRUCTURAL</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Perfiles tubulares rectangulares de alta resistencia para estructuras, marcos y aplicaciones industriales.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Tubos_Rectangulares.htm', 'Tubos Rectangulares')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-border-all"></i></div>
+                                <h3>Tubos Cuadrados</h3>
+                                <span class="product-type">ESTRUCTURAL</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Perfiles tubulares cuadrados de gran resistencia, ideales para estructuras ligeras y medianas.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Tubos_Cuadrados.htm', 'Tubos Cuadrados')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-circle"></i></div>
+                                <h3>Tubos Redondos</h3>
+                                <span class="product-type">ESTRUCTURAL</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Perfiles tubulares redondos para aplicaciones que requieren resistencia uniforme en todas direcciones.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Tubos_Redondos.htm', 'Tubos Redondos')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-grip-lines"></i></div>
+                                <h3>Ángulos de lados iguales</h3>
+                                <span class="product-type">ESTRUCTURAL</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Perfiles angulares con lados iguales, ideales para refuerzos, soportes y estructuras ligeras.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Angulos_Iguales.htm', 'Ángulos de lados iguales')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-grip-lines-vertical"></i></div>
+                                <h3>Ángulos de lados desiguales</h3>
+                                <span class="product-type">ESTRUCTURAL</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Perfiles angulares con lados desiguales para aplicaciones específicas que requieren diferentes dimensiones.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Angulos_Desiguales.htm', 'Ángulos de lados desiguales')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORÍA 2: VENTANAS -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <i class="fas fa-door-open"></i> Ventanas
+                    </h2>
+                    <p class="category-description">Sistemas de ventanas correderas, panorámicas y proyectantes para todo tipo de proyectos.</p>
+                    
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-window-maximize"></i></div>
+                                <h3>Ventanas correderas Ecobel</h3>
+                                <span class="product-type">VENTANA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Sistema de ventana corredera tipo Ecobel, eficiente y moderna para viviendas y oficinas.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Ventana_Ecobel.htm', 'Ventanas correderas Ecobel')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-window-maximize"></i></div>
+                                <h3>Ventana panorámica 2 canales</h3>
+                                <span class="product-type">VENTANA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Ventana panorámica de dos canales, ideal para grandes aberturas y máxima visibilidad.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Ventana_doscanales.htm', 'Ventana panorámica 2 canales')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-window-maximize"></i></div>
+                                <h3>Ventana panorámica 3 canales</h3>
+                                <span class="product-type">VENTANA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Ventana panorámica de tres canales para espacios amplios que requieren luminosidad y diseño.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Ventana_trescanales.htm', 'Ventana panorámica 3 canales')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-window-maximize"></i></div>
+                                <h3>Ventana panorámica 4 canales</h3>
+                                <span class="product-type">VENTANA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Ventana panorámica de cuatro canales para proyectos de gran envergadura y diseño contemporáneo.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Ventana_cuatrocanales.htm', 'Ventana panorámica 4 canales')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-window-maximize"></i></div>
+                                <h3>Ventana corredera Caroní</h3>
+                                <span class="product-type">VENTANA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Ventana corredera Caroní, diseño robusto y funcional para todo tipo de edificaciones.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Ventana_caroni.htm', 'Ventana corredera Caroní')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-window-maximize"></i></div>
+                                <h3>Ventana Proyectante</h3>
+                                <span class="product-type">VENTANA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Ventana proyectante con apertura hacia el exterior, ideal para ventilación controlada.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Ventana_Proyectante.htm', 'Ventana Proyectante')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORÍA 3: PUERTAS -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <i class="fas fa-door-closed"></i> Puertas
+                    </h2>
+                    <p class="category-description">Puertas batientes, correderas y de baño con los más altos estándares de calidad.</p>
+                    
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-door-closed"></i></div>
+                                <h3>Puertas para baño Templex</h3>
+                                <span class="product-type">PUERTA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Puertas para baño Templex, diseño moderno y resistente a la humedad.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Puertas_templex.htm', 'Puertas para baño Templex')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-door-closed"></i></div>
+                                <h3>Puertas batientes y vaivén</h3>
+                                <span class="product-type">PUERTA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Puertas batientes y vaivén para uso interior, versátiles y funcionales.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/PuertaBatiente_vaiven.htm', 'Puertas batientes y vaivén')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-door-closed"></i></div>
+                                <h3>Puertas batientes Junior</h3>
+                                <span class="product-type">PUERTA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Puertas batientes Junior, diseño ligero y económico para interiores.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/PuertaBatiente_junior.htm', 'Puertas batientes Junior')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-door-closed"></i></div>
+                                <h3>Puertas de baños</h3>
+                                <span class="product-type">PUERTA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Puertas para baños, resistentes a la humedad y con acabado de alta calidad.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Puertas_Banos.htm', 'Puertas de baños')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORÍA 4: FACHADAS Y VIDRIERAS -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <i class="fas fa-building"></i> Fachadas y Vidrieras
+                    </h2>
+                    <p class="category-description">Sistemas de fachada y vidriera para proyectos comerciales y residenciales.</p>
+                    
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-store"></i></div>
+                                <h3>Fachada y vidriera 2 1/2 x 1 1/4"</h3>
+                                <span class="product-type">FACHADA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Fachada y vidriera serie 2 1/2 x 1 1/4", diseño clásico para locales comerciales.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Fachada_A.htm', 'Fachada y vidriera 2 1/2 x 1 1/4\"')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-store"></i></div>
+                                <h3>Fachada y vidriera 3 x 1 1/4"</h3>
+                                <span class="product-type">FACHADA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Fachada y vidriera serie 3 x 1 1/4", mayor robustez para fachadas de gran altura.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Fachada_B.htm', 'Fachada y vidriera 3 x 1 1/4\"')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-store"></i></div>
+                                <h3>Fachada y vidriera</h3>
+                                <span class="product-type">FACHADA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Fachada y vidriera estándar para proyectos de comercios y oficinas.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Fachada_vidriera.htm', 'Fachada y vidriera')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-store"></i></div>
+                                <h3>Puertas y fachadas canto redondo</h3>
+                                <span class="product-type">FACHADA</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Puertas y fachadas con canto redondo, diseño estético y seguridad.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/PuertaFachadaCanto_redondo.htm', 'Puertas y fachadas canto redondo')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORÍA 5: ACCESORIOS Y OTROS -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <i class="fas fa-tools"></i> Accesorios y Otros
+                    </h2>
+                    <p class="category-description">Complementos y perfiles especiales para diversas aplicaciones.</p>
+                    
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-arrows-alt-v"></i></div>
+                                <h3>Cielo Raso</h3>
+                                <span class="product-type">ACCESORIO</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Sistemas de cielo raso en aluminio para acabados interiores modernos.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Cielo_raso.htm', 'Cielo Raso')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-fence"></i></div>
+                                <h3>Barandas</h3>
+                                <span class="product-type">ACCESORIO</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Barandas de aluminio para balcones, terrazas y escaleras, con diseño y seguridad.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Barandas.htm', 'Barandas')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-ellipsis-h"></i></div>
+                                <h3>Cortineros</h3>
+                                <span class="product-type">ACCESORIO</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Perfiles para cortineros, ideales para instalación de cortinas en interiores.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Cortineros.htm', 'Cortineros')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-card-header">
+                                <div class="product-icon"><i class="fas fa-th-large"></i></div>
+                                <h3>Varios</h3>
+                                <span class="product-type">ACCESORIO</span>
+                            </div>
+                            <div class="product-card-body">
+                                <p>Otros perfiles y accesorios para aplicaciones diversas.</p>
+                                <button class="btn-product" onclick="abrirModalProducto('/sitio/NuestrosProductos/Varios.htm', 'Varios')">
+                                    Ver Detalles <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         MODAL CON IFRAME
+         ========================================= -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-info-circle"></i> <span id="modalTitle">Detalle del Producto</span></h3>
+                <button class="modal-close" onclick="cerrarModalProducto()" aria-label="Cerrar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-loading" id="modalLoading">
+                    <i class="fas fa-spinner"></i>
+                    <span>Cargando información del producto...</span>
+                </div>
+                <iframe id="modalIframe" title="Detalle del producto"></iframe>
+            </div>
+            <div class="modal-footer">
+                <p><strong>CVG Aluminios del Caroní, S.A.</strong> - RIF: G-20110929-0</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>CVG Aluminio del Caroní, S.A.</h4>
+                    <p>Aluminio del Caroní, S.A. (Alcasa)<br>Avenida Fuerzas Armadas, Zona Industrial Matanzas,<br>Ciudad Guayana, estado Bolívar, Venezuela.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/Alcasa.CVG/?locale=es_LA" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/alcasa_cvg/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@alcasaaluminiodelcaronis.a8220" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.tiktok.com/@cvg_alcasa" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="/sitio/Empresa/Quienessomos/QuienesSomos.htm"><i class="fas fa-chevron-right"></i> Quiénes somos</a></li>
+                        <li><a href="/sitio/Empresa/Mision/mision.htm"><i class="fas fa-chevron-right"></i> Misión</a></li>
+                        <li><a href="/sitio/Empresa/Vision/vision.htm"><i class="fas fa-chevron-right"></i> Visión</a></li>
+                        <li><a href="/sitio/Empresa/Directorio/JuntaDirectiva.htm"><i class="fas fa-chevron-right"></i> Junta Directiva</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="/sitio/NuestrosProductos/Productos_Fundicion.htm"><i class="fas fa-chevron-right"></i> Fundición</a></li>
+                        <li><a href="/sitio/NuestrosProductos/Productos_Laminacion.htm"><i class="fas fa-chevron-right"></i> Laminación</a></li>
+                        <li><a href="/sitio/NuestrosProductos/Productos_Extrusion.htm"><i class="fas fa-chevron-right"></i> Extrusión</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="color: var(--accent-orange);"></i> Zona Industrial Matanzas, Puerto Ordaz</li>
+                        <li><i class="fas fa-envelope" style="color: var(--accent-orange);"></i> webmaster@alcasa.com.ve</li>
+                        <li><i class="fas fa-id-card" style="color: var(--accent-orange);"></i> RIF: G-20110929-0</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 - CVG Aluminio del Caroní, S.A. Todos los derechos reservados. | RIF: G-20110929-0</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===========================================
+         SCRIPT 1: CARGAR HEADER, FORZAR FONDO Y MENÚ
+         =========================================== -->
+    <script>
+        function loadComponent(id, url, callback) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
+                    return response.text();
+                })
+                .then(data => {
+                    const contenedor = document.getElementById(id);
+                    contenedor.innerHTML = data;
+
+                    // ✅ Ejecutar manualmente los <script> internos del componente
+                    // (innerHTML NO ejecuta scripts por seguridad del navegador)
+                    contenedor.querySelectorAll("script").forEach(function (scriptViejo) {
+                        var scriptNuevo = document.createElement("script");
+                        if (scriptViejo.src) {
+                            scriptNuevo.src = scriptViejo.src;
+                        } else {
+                            scriptNuevo.textContent = scriptViejo.textContent;
+                        }
+                        scriptViejo.parentNode.replaceChild(scriptNuevo, scriptViejo);
+                    });
+
+                    if (callback) callback();
+                })
+                .catch(error => {
+                    console.warn('Error cargando componente:', error);
+                    document.getElementById(id).innerHTML = '<p style="color:red;padding:20px;">No se pudo cargar el encabezado.</p>';
+                });
+        }
+
+        function initHeaderMenu() {
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            const closeBtn = document.getElementById('mobileCloseBtn');
+            const mainNav = document.getElementById('mainNav');
+            const overlay = document.getElementById('menuOverlay');
+
+            if (!menuBtn || !mainNav) {
+                console.warn('⚠️ Elementos del menú no encontrados.');
+                return;
+            }
+
+            function abrirMenu() {
+                mainNav.classList.add('active');
+                if (overlay) overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                const icon = menuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            }
+
+            function cerrarMenu() {
+                mainNav.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                document.body.style.overflow = '';
+                const icon = menuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                }
+                document.querySelectorAll('.nav-item-has-dropdown.open').forEach(li => li.classList.remove('open'));
+                document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
+            }
+
+            menuBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (mainNav.classList.contains('active')) {
+                    cerrarMenu();
+                } else {
+                    abrirMenu();
+                }
+            });
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    cerrarMenu();
+                });
+            }
+
+            if (overlay) {
+                overlay.addEventListener('click', cerrarMenu);
+            }
+
+            mainNav.addEventListener('click', function(e) {
+                const dropdownToggle = e.target.closest('.nav-link-dropdown');
+                if (dropdownToggle && window.innerWidth <= 768) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const parentLi = dropdownToggle.closest('.nav-item-has-dropdown');
+                    const submenu = parentLi.querySelector('.dropdown-menu');
+                    if (!submenu) return;
+
+                    const estabaAbierto = submenu.classList.contains('open');
+
+                    mainNav.querySelectorAll('.nav-item-has-dropdown.open').forEach(li => {
+                        if (li !== parentLi) {
+                            li.classList.remove('open');
+                            const m = li.querySelector('.dropdown-menu');
+                            if (m) m.classList.remove('open');
+                        }
+                    });
+
+                    submenu.classList.toggle('open', !estabaAbierto);
+                    parentLi.classList.toggle('open', !estabaAbierto);
+                    return;
+                }
+
+                const link = e.target.closest('a');
+                if (link && window.innerWidth <= 768 && !link.classList.contains('nav-link-dropdown')) {
+                    cerrarMenu();
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && mainNav.classList.contains('active')) {
+                    cerrarMenu();
+                }
+            });
+
+            console.log('✅ Menú inicializado correctamente.');
+        }
+
+        // Cargar header, forzar fondo azul y luego inicializar el menú
+        loadComponent('header-container', '/components/header.html', function() {
+            const headerEl = document.querySelector('.alcoa-header');
+            if (headerEl) {
+                headerEl.style.setProperty('background-color', '#003366', 'important');
+                headerEl.style.setProperty('box-shadow', '0 4px 12px rgba(0,0,0,0.2)', 'important');
+                console.log('🎨 Fondo aplicado al header:', headerEl.style.backgroundColor);
+            } else {
+                console.warn('⚠️ No se encontró .alcoa-header.');
+            }
+
+            setTimeout(initHeaderMenu, 50);
+        });
+    </script>
+
+    <!-- ===========================================
+         SCRIPT 2: EFECTO DE SCROLL EN EL HEADER
+         =========================================== -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.alcoa-header');
+            if (header) {
+                header.classList.toggle('scrolled', window.scrollY > 50);
+            }
+        });
+    </script>
+
+    <!-- ===========================================
+         SCRIPT 3: MODAL DE PRODUCTOS
+         =========================================== -->
+    <script>
+        const modal = document.getElementById('productModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalIframe = document.getElementById('modalIframe');
+        const modalLoading = document.getElementById('modalLoading');
+
+        function abrirModalProducto(archivoHTML, titulo) {
+            modalTitle.textContent = titulo;
+            modalLoading.style.display = 'flex';
+            modalIframe.src = archivoHTML;
+            modalIframe.onload = function() {
+                modalLoading.style.display = 'none';
+            };
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarModalProducto() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                modalIframe.src = 'about:blank';
+            }, 300);
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                cerrarModalProducto();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                cerrarModalProducto();
+            }
+        });
+    </script>
+
+    <!-- ===========================================
+         SCRIPT 4: TRADUCTOR GLOBAL MULTI-IDIOMA
+         =========================================== -->
+    <script src="/js/translator.js" defer></script>
+
+    <!-- ===========================================
+         SCRIPT 5: RESPALDO DEL SELECTOR DE IDIOMAS
+         Conecta el <select id="alcoa-lang-select"> del header
+         con el traductor global, por si el listener original
+         del header no se registró a tiempo.
+         =========================================== -->
+    <script>
+    (function () {
+        function conectarSelect() {
+            var select = document.getElementById("alcoa-lang-select");
+            if (!select) {
+                setTimeout(conectarSelect, 200);
+                return;
+            }
+            if (select.dataset.respaldoListener === "1") return;
+            select.dataset.respaldoListener = "1";
+
+            // Sincronizar con la cookie actual
+            var match = document.cookie.match(/googtrans=\/es\/([^;]+)/);
+            var idiomaActual = match ? match[1] : "es";
+            select.value = idiomaActual;
+
+            select.addEventListener("change", function () {
+                var codigo = this.value;
+                console.log("[Respaldo] Cambio solicitado:", codigo);
+                if (typeof window.alcosaSetLanguage === "function") {
+                    window.alcosaSetLanguage(codigo);
+                } else {
+                    var intentos = 0;
+                    var intervalo = setInterval(function () {
+                        intentos++;
+                        if (typeof window.alcosaSetLanguage === "function") {
+                            clearInterval(intervalo);
+                            window.alcosaSetLanguage(codigo);
+                        } else if (intentos > 20) {
+                            clearInterval(intervalo);
+                            console.warn("[Respaldo] alcosaSetLanguage no disponible.");
+                        }
+                    }, 200);
+                }
+            });
+
+            console.log("[Respaldo] Selector de idioma conectado.");
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", conectarSelect);
+        } else {
+            conectarSelect();
+        }
+    })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!-- Sección de Servicios / Correo Interno en la Extranet -->
+<div class="card-extranet-service">
+    <div class="service-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+    </div>
+    <div class="service-info">
+        <h3>Correo Corporativo (OWA)</h3>
+        <p>Acceso al sistema de mensajería interna Exchange 2003.</p>
+    </div>
+    <!-- Enlace directo al servidor interno -->
+    <a href="http://alcasa03/exchange" target="_blank" class="btn-access">
+        Abrir Webmail
+    </a>
+</div>
+
+<style>
+.card-extranet-service {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 450px;
+    gap: 16px;
+    font-family: system-ui, -apple-system, sans-serif;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.service-icon {
+    background: #e2e8f0;
+    padding: 12px;
+    border-radius: 6px;
+    color: #0284c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.service-info {
+    flex-grow: 1;
+}
+.service-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    color: #1e293b;
+}
+.service-info p {
+    margin: 0;
+    font-size: 13px;
+    color: #64748b;
+}
+.btn-access {
+    background-color: #0284c7;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+.btn-access:hover {
+    background-color: #0369a1;
+}
+</style>

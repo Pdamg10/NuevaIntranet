@@ -1,0 +1,1118 @@
+<!-- =========================================
+     HEADER CORPORATIVO UNIFICADO MULTI-PANTALLA (CVG ALCASA)
+     Diseño en 3 Zonas + Botones Uniformes + Difuminado Dinámico en Scroll
+     ========================================= -->
+<div class="alcoa-langbar" translate="no">
+    <div class="container langbar-inner">
+        <span class="langbar-institucional-tag">
+            <i class="fas fa-industry"></i> CVG Aluminio del Caroní, S.A. — Portal Institucional e Intranet
+        </span>
+        <div class="langbar-controls">
+            <label for="alcoa-lang-select" class="alcoa-langbar-label">
+                <i class="fas fa-globe"></i> Idioma:
+            </label>
+            <select id="alcoa-lang-select" class="alcoa-langbar-select" aria-label="Seleccionar idioma">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+                <option value="pt">Português</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="it">Italiano</option>
+                <option value="ar">العربية</option>
+                <option value="zh-CN">中文</option>
+                <option value="ja">日本語</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<header class="alcoa-header" id="mainHeader">
+    <div class="container">
+        <div class="header-top">
+
+            <!-- BOTÓN HAMBURGUESA MÓVIL / TABLET -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú de navegación" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- ZONA 1 (IZQUIERDA): LOGO CVG ALCASA -->
+            <div class="header-logo-left">
+                <a href="/Index.htm#inicio" class="header-inicio-link" title="CVG Alcasa - Inicio">
+                    <img src="/logo_alcasa.png" onerror="this.onerror=null;this.src='/Imagenes/portal/logo-alcasa.png';" alt="Logo CVG Alcasa" class="logo-alcasa">
+                </a>
+            </div>
+
+            <!-- OVERLAY MÓVIL -->
+            <div class="menu-overlay" id="menuOverlay"></div>
+
+            <!-- ZONA 2 (CENTRO): BARRA DE MENÚ PRINCIPAL ADAPTATIVA -->
+            <nav class="main-navigation" id="mainNav" aria-label="Navegación principal">
+                <div class="mobile-drawer-header">
+                    <span class="mobile-drawer-title">Menú Institucional</span>
+                    <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Cerrar menú">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <ul class="jelly-menu nav-list">
+                    <!-- 1. Inicio -->
+                    <li class="active">
+                        <a href="/Index.htm#inicio" class="header-inicio-link">Inicio</a>
+                    </li>
+
+                    <!-- 2. Empresa (Submenú unificado Portal + Intranet) -->
+                    <li class="nav-item-has-dropdown">
+                        <a href="/Index.htm#empresa" class="nav-link-dropdown">
+                            <span>Empresa</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Index.htm#empresa" data-tab-target="tab-quienes-somos">¿Quiénes somos?</a></li>
+                            <li><a href="/Index.htm#empresa" data-tab-target="tab-mision-vision">Misión y Visión</a></li>
+                            <li><a href="/Index.htm#empresa" data-tab-target="tab-valores">Nuestros Valores</a></li>
+                            <li><a href="/Index.htm#empresa" data-tab-target="tab-pilares">Pilares de Gestión</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a href="/sitio/Empresa/Directorio/JuntaDirectiva.htm">Junta Directiva</a></li>
+                            <li><a href="/sitio/Empresa/PoliticadelaCalidad/politicadelacalidad.htm">Política de Calidad</a></li>
+                            <li><a href="/sitio/Empresa/Ubicacion/Ubicacion1.htm">Ubicación Geográfica</a></li>
+                            <li><a href="/sitio/Empresa/Otros/Principios.htm">Principios</a></li>
+                            <li><a href="http://190.202.49.114:5050/" target="_blank" rel="noopener noreferrer">Oficina de Atención al Ciudadano</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 3. Productos (Submenú con filtros interactivos + páginas técnicas + PDF) -->
+                    <li class="nav-item-has-dropdown">
+                        <a href="/Index.htm#productos" class="nav-link-dropdown">
+                            <span>Productos</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Index.htm#productos" class="menu-cat-link" data-cat="all">Catálogo Interactivo</a></li>
+                            <li><a href="/Index.htm#productos" class="menu-cat-link" data-cat="Fundición">Fundición</a></li>
+                            <li><a href="/Index.htm#productos" class="menu-cat-link" data-cat="Laminación">Laminación</a></li>
+                            <li><a href="/Index.htm#productos" class="menu-cat-link" data-cat="Extrusión">Extrusión</a></li>
+                            <li><a href="/Index.htm#productos" class="menu-cat-link" data-cat="Otros">Otros Perfiles</a></li>
+                            <li><a href="/Index.htm#faq">Preguntas Frecuentes (FAQ)</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a href="/sitio/BANNER%202023/Catalogo%20Productos%202023.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf" style="margin-right:6px;color:#ff6b1a;"></i>Catálogo PDF</a></li>
+                            <li><a href="/sitio/Comercializacion/Comercializacion.htm">Comercialización</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 4. Oportunidades Laborales -->
+                    <li>
+                        <a href="/Index.htm#oportunidades">Oportunidades</a>
+                    </li>
+
+                    <!-- 5. Sala de Prensa -->
+                    <li class="nav-item-has-dropdown">
+                        <a href="/Index.htm#prensa" class="nav-link-dropdown">
+                            <span>Prensa</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Index.htm#prensa">Comunicados Recientes</a></li>
+                            <li><a href="/sitio/Empresa/Noticias/Prensa.html">Archivo de Sala de Prensa</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 6. Galería de Procesos y Videos -->
+                    <li>
+                        <a href="/Index.htm#galeria">Galería</a>
+                    </li>
+
+                    <!-- 7. Extranet (Submenú exclusivo de Intranet) -->
+                    <li class="nav-item-has-dropdown">
+                        <a href="#" class="nav-link-dropdown">
+                            <span>Extranet</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="http://alcasa.com.ve/sitio/buscador_embedido.html" target="_blank" rel="noopener noreferrer">Consulta clave ARI</a></li>
+                            <li><a href="/sitio/Empresa/CA/index.html">Nuestros Cumpleañeros</a></li>
+                            <li><a href="http://alcasa.com.ve:5002" target="_blank" rel="noopener noreferrer">Acceso a la mensajería institucional</a></li>
+                            <li><a href="/Contactos.html" target="_blank" rel="noopener noreferrer">Panel de Contactos</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 9. Contacto -->
+                    <li class="nav-item-cta">
+                        <a href="/Index.htm#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- ZONA 3 (DERECHA): LOGOS CVG E INSTITUCIONAL -->
+            <div class="header-logo-right">
+                <a href="/Index.htm#inicio" class="header-inicio-link" title="Corporación Venezolana de Guayana">
+                    <img src="/logo_cvg.png" onerror="this.onerror=null;this.src='/Imagenes/portal/logo-cvg.png';" alt="Logo CVG y Alcasa" class="logo-segundo logo-cvg-blanco">
+                </a>
+                <div class="logo-divider"></div>
+                <a href="/Index.htm#inicio" class="header-inicio-link" title="Gobierno Bolivariano de Venezuela">
+                    <img src="/logo-institucional.png" onerror="this.onerror=null;this.src='/Imagenes/portal/logo-institucional.png';" alt="Logo Institucional" class="logo-institucional">
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- DIFUMINADO INFERIOR DEL MENÚ (SE DESVANECE SUTILMENTE AL HACER SCROLL) -->
+    <div class="header-scroll-fade" id="headerScrollFade" aria-hidden="true"></div>
+</header>
+
+<!-- =========================================
+     BOTÓN FLOTANTE DE WHATSAPP
+     ========================================= -->
+<a href="https://wa.me/584122522272?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20web%20de%20ALCASA%20y%20quisiera%20informaci%C3%B3n%20sobre%20sus%20productos." 
+   target="_blank" 
+   rel="noopener noreferrer"
+   class="whatsapp-float" 
+   aria-label="Contactar por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-tooltip">Contáctanos por WhatsApp</span>
+</a>
+
+<!-- =========================================
+     ESTILOS DEL HEADER, BOTONES DE MENÚ Y DIFUMINADO EN SCROLL
+     ========================================= -->
+<style>
+    /* Contenedor global sticky */
+    #header-container {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        width: 100%;
+        background: linear-gradient(180deg, #03172e 0%, #06284d 100%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        box-shadow: none;
+        font-size: 1rem;
+        line-height: 1.5;
+        transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    /* Cuando el usuario hace scroll y el difuminado desaparece, se activa sombra ejecutiva sutil
+       IMPORTANTE: No usar backdrop-filter ni transform aquí para no alterar el containing block
+       de elementos position: fixed (como el botón de WhatsApp o el drawer móvil). */
+    #header-container.header-scrolled {
+        background: linear-gradient(180deg, #03152a 0%, #052344 100%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 8px 26px rgba(0, 8, 20, 0.42);
+    }
+
+    /* =========================================
+       DIFUMINADO ACORDE DESDE LA BARRA DEL MENÚ
+       Se extiende hacia abajo fundiéndose con el contenido
+       y desaparece sutilmente al hacer scroll
+       ========================================= */
+    .header-scroll-fade {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: 68px;
+        pointer-events: none;
+        z-index: 995;
+        background: linear-gradient(
+            180deg,
+            rgba(6, 40, 77, 0.96) 0%,
+            rgba(4, 29, 56, 0.72) 28%,
+            rgba(2, 18, 36, 0.38) 60%,
+            rgba(2, 18, 36, 0.10) 84%,
+            rgba(2, 18, 36, 0) 100%
+        );
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+        will-change: opacity, transform;
+    }
+
+    /* Barra superior de idiomas */
+    .alcoa-langbar {
+        background: #021020;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 0.75rem;
+        letter-spacing: 0.3px;
+        width: 100%;
+    }
+    .alcoa-langbar .langbar-inner {
+        max-width: 1680px;
+        margin: 0 auto;
+        padding: 4px clamp(14px, 2vw, 32px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+    .langbar-institucional-tag {
+        color: #94a3b8;
+        font-size: 0.73rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .langbar-institucional-tag i {
+        color: #ff6b1a;
+    }
+    .langbar-controls {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+        flex-shrink: 0;
+    }
+    .alcoa-langbar-label {
+        color: #94a3b8;
+        font-weight: 600;
+        font-size: 0.74rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .alcoa-langbar-select {
+        background: rgba(255, 255, 255, 0.08);
+        color: #e2e8f0;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 4px;
+        padding: 2px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        font-family: inherit;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.2s ease;
+    }
+    .alcoa-langbar-select:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.45);
+        color: #ffffff;
+    }
+    .alcoa-langbar-select:focus {
+        border-color: #ff6b1a;
+    }
+    .alcoa-langbar-select option {
+        background: #041d38;
+        color: #ffffff;
+    }
+
+    /* Blindaje contra barra superior de Google Translate */
+    .goog-te-banner-frame,
+    iframe.goog-te-banner-frame,
+    .goog-te-banner-frame.skiptranslate {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+    }
+    body { top: 0 !important; }
+    #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+    .goog-text-highlight { background: none !important; box-shadow: none !important; }
+
+    /* Contenedor del Header */
+    .alcoa-header {
+        background: transparent !important;
+        width: 100%;
+        position: relative;
+    }
+    .alcoa-header .container {
+        max-width: 1680px;
+        margin: 0 auto;
+        padding: 0 clamp(14px, 1.8vw, 30px);
+    }
+
+    .alcoa-header .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: clamp(8px, 1vw, 16px);
+        min-height: 72px;
+        padding: 6px 0;
+        position: relative;
+    }
+
+    /* ZONA 1: Logo Izquierda (CVG Alcasa) */
+    .alcoa-header .header-logo-left {
+        display: flex;
+        align-items: center;
+        flex: 0 0 auto;
+        padding-right: clamp(8px, 1vw, 14px);
+        border-right: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .alcoa-header .logo-alcasa {
+        height: clamp(38px, 2.9vw, 48px);
+        width: auto;
+        object-fit: contain;
+        flex-shrink: 0;
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+        transition: opacity 0.2s ease;
+    }
+    .alcoa-header .logo-alcasa:hover { opacity: 0.92; }
+
+    /* ZONA 3: Logos Derecha (CVG + Gobierno Bolivariano) */
+    .alcoa-header .header-logo-right {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: clamp(6px, 0.7vw, 10px);
+        flex: 0 0 auto;
+        padding-left: clamp(8px, 1vw, 14px);
+        border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .alcoa-header .logo-segundo,
+    .alcoa-header .logo-cvg-blanco {
+        height: clamp(36px, 2.7vw, 45px);
+        width: auto;
+        object-fit: contain;
+        flex-shrink: 0;
+        filter: brightness(1.05) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+        transition: opacity 0.2s ease;
+    }
+    .alcoa-header .logo-institucional {
+        height: clamp(26px, 2vw, 34px);
+        max-width: clamp(100px, 8.2vw, 136px);
+        width: auto;
+        object-fit: contain;
+        flex-shrink: 0;
+        filter: brightness(1.05) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+        transition: opacity 0.2s ease;
+    }
+    .alcoa-header .logo-divider {
+        width: 1px;
+        height: 30px;
+        background: rgba(255, 255, 255, 0.25);
+        margin: 0 2px;
+        flex-shrink: 0;
+    }
+    .alcoa-header .logo-segundo:hover,
+    .alcoa-header .logo-institucional:hover { opacity: 0.92; }
+
+    /* =========================================
+       ZONA 2: BOTONES DEL MENÚ PRINCIPAL (UNIFORMES Y ALINEADOS)
+       ========================================= */
+    .alcoa-header .main-navigation {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+    .alcoa-header .mobile-drawer-header {
+        display: none;
+    }
+    .alcoa-header .jelly-menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: clamp(2px, 0.3vw, 5px);
+        list-style: none;
+        margin: 0;
+        padding: 4px 6px;
+        background: rgba(2, 16, 32, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+    }
+    .alcoa-header .jelly-menu > li {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        margin: 0;
+    }
+
+    /* Todos los botones comparten exactamente la misma altura, bordes y centrado */
+    .alcoa-header .jelly-menu > li > a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 38px;
+        gap: 5px;
+        padding: 0 clamp(8px, 0.75vw, 13px);
+        color: #dbeafe;
+        font-weight: 600;
+        font-size: clamp(0.76rem, 0.8vw, 0.86rem);
+        letter-spacing: 0.15px;
+        border-radius: 7px;
+        border: 1px solid transparent;
+        transition: all 0.22s ease;
+        white-space: nowrap;
+        text-decoration: none;
+        position: relative;
+        z-index: 1;
+        line-height: 1;
+    }
+
+    /* Indicador inferior dentro del botón */
+    .alcoa-header .jelly-menu > li > a::after {
+        content: '';
+        position: absolute;
+        bottom: 3px;
+        left: 10px;
+        right: 10px;
+        height: 2.5px;
+        background: #ff6b1a;
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.22s ease;
+        border-radius: 2px;
+    }
+
+    /* Estado activo y hover uniforme en todos los botones */
+    .alcoa-header .jelly-menu > li > a:hover,
+    .alcoa-header .jelly-menu > li.active > a {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.11);
+        border-color: rgba(255, 255, 255, 0.16);
+    }
+    .alcoa-header .jelly-menu > li > a:hover::after,
+    .alcoa-header .jelly-menu > li.active > a::after {
+        transform: scaleX(1);
+    }
+
+    /* Botón "Contacto" con la misma altura exacta (38px) pero acento naranja corporativo */
+    @media (min-width: 993px) {
+        .alcoa-header .jelly-menu > li.nav-item-cta {
+            margin-left: 2px;
+        }
+        .alcoa-header .jelly-menu > li.nav-item-cta > a {
+            height: 38px;
+            padding: 0 clamp(10px, 0.85vw, 15px);
+            border-radius: 7px;
+            background: linear-gradient(135deg, rgba(255, 107, 26, 0.24) 0%, rgba(229, 90, 15, 0.32) 100%);
+            border: 1px solid rgba(255, 107, 26, 0.75);
+            color: #ffffff;
+        }
+        .alcoa-header .jelly-menu > li.nav-item-cta > a::after {
+            display: none;
+        }
+        .alcoa-header .jelly-menu > li.nav-item-cta > a:hover,
+        .alcoa-header .jelly-menu > li.nav-item-cta.active > a {
+            background: linear-gradient(135deg, #ff6b1a 0%, #e55a0f 100%);
+            border-color: #ff6b1a;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(255, 107, 26, 0.4);
+        }
+    }
+
+    /* Submenús Desplegables (Dropdown) */
+    .alcoa-header .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        min-width: 240px;
+        background: #041d38;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-top: 2px solid #ff6b1a;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+        border-radius: 8px;
+        padding: 8px 0;
+        list-style: none;
+        z-index: 1005;
+    }
+    /* Puente invisible para que el cursor no pierda el hover al bajar al submenú */
+    .alcoa-header .dropdown-menu::before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        left: 0;
+        right: 0;
+        height: 8px;
+    }
+    .alcoa-header .dropdown-menu.dropdown-menu-right {
+        left: auto;
+        right: 0;
+    }
+    .alcoa-header .dropdown-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 6px 14px;
+    }
+    .alcoa-header .dropdown-menu li a {
+        display: block;
+        padding: 9px 18px;
+        color: #cbd5e1;
+        font-size: 0.84rem;
+        font-weight: 500;
+        text-transform: none;
+        letter-spacing: 0.15px;
+        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        border-left: 3px solid transparent;
+    }
+    .alcoa-header .dropdown-menu li a:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #ffffff;
+        border-left-color: #ff6b1a;
+    }
+    .alcoa-header .dropdown-icon {
+        font-size: 0.65rem;
+        opacity: 0.85;
+        transition: transform 0.25s ease;
+    }
+
+    @media (min-width: 993px) {
+        .alcoa-header .nav-item-has-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .alcoa-header .nav-item-has-dropdown:hover > .nav-link-dropdown .dropdown-icon {
+            transform: rotate(180deg);
+            opacity: 1;
+        }
+    }
+
+    /* Botones Móviles y Overlay */
+    .alcoa-header .mobile-menu-btn {
+        display: none;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        font-size: 1.3rem;
+        cursor: pointer;
+        padding: 8px 12px;
+        border-radius: 7px;
+        transition: all 0.2s ease;
+        z-index: 1002;
+    }
+    .alcoa-header .mobile-menu-btn:hover {
+        background: rgba(255, 107, 26, 0.25);
+        border-color: #ff6b1a;
+    }
+    .alcoa-header .mobile-close-btn {
+        display: none;
+    }
+    .menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1001;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .menu-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+
+    /* =========================================
+       ADAPTABILIDAD EN PANTALLAS INTERMEDIAS (993px a 1180px)
+       Doble nivel ejecutivo para que todos los botones tengan espacio holgado
+       ========================================= */
+    @media (min-width: 993px) and (max-width: 1180px) {
+        .alcoa-header .header-top {
+            flex-wrap: wrap;
+            min-height: auto;
+            padding: 8px 0;
+            gap: 8px 16px;
+        }
+        .alcoa-header .header-logo-left {
+            order: 1;
+            border-right: none;
+        }
+        .alcoa-header .header-logo-right {
+            order: 2;
+            margin-left: auto;
+            border-left: none;
+        }
+        .alcoa-header .main-navigation {
+            order: 3;
+            flex: 0 0 100%;
+            width: 100%;
+            padding-top: 6px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            justify-content: center;
+        }
+        .alcoa-header .jelly-menu {
+            width: 100%;
+            justify-content: center;
+            gap: 6px;
+        }
+        .alcoa-header .jelly-menu > li > a {
+            font-size: 0.82rem;
+            padding: 0 12px;
+        }
+    }
+
+    /* =========================================
+       ADAPTABILIDAD EN TABLETS Y MÓVILES (<= 992px)
+       ========================================= */
+    @media (max-width: 992px) {
+        .langbar-institucional-tag {
+            display: none;
+        }
+        .alcoa-langbar .langbar-inner {
+            justify-content: flex-end;
+            padding: 4px 16px;
+        }
+
+        .alcoa-header .header-top {
+            min-height: 64px;
+            padding: 8px 0;
+            gap: 8px;
+        }
+
+        .alcoa-header .mobile-menu-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            order: 1;
+            flex-shrink: 0;
+        }
+
+        .alcoa-header .header-logo-left {
+            order: 2;
+            padding-right: 0;
+            border-right: none;
+        }
+
+        .alcoa-header .header-logo-right {
+            order: 3;
+            padding-left: 0;
+            border-left: none;
+            margin-left: auto;
+            gap: 8px;
+        }
+
+        .alcoa-header .logo-alcasa {
+            height: clamp(32px, 6vw, 42px);
+        }
+        .alcoa-header .logo-segundo,
+        .alcoa-header .logo-cvg-blanco {
+            height: clamp(30px, 5.6vw, 40px);
+        }
+        .alcoa-header .logo-institucional {
+            height: clamp(22px, 4.4vw, 30px);
+            max-width: 115px;
+        }
+        .alcoa-header .logo-divider {
+            height: 24px;
+        }
+
+        .header-scroll-fade {
+            height: 44px;
+        }
+
+        /* Menú Drawer Deslizante Completo */
+        .alcoa-header .main-navigation {
+            position: fixed;
+            top: 0;
+            left: -340px;
+            width: 86%;
+            max-width: 320px;
+            height: 100vh;
+            background: #041d38;
+            box-shadow: 6px 0 30px rgba(0, 0, 0, 0.55);
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            padding: 0 0 30px 0;
+            transition: left 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1005;
+            overflow-y: auto;
+        }
+        .alcoa-header .main-navigation.active {
+            left: 0;
+        }
+
+        .alcoa-header .mobile-drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: #021020;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .alcoa-header .mobile-drawer-title {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.92rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+        .alcoa-header .mobile-close-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            width: 34px;
+            height: 34px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .alcoa-header .mobile-close-btn:hover {
+            background: #ff6b1a;
+            border-color: #ff6b1a;
+        }
+
+        .alcoa-header .jelly-menu {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            padding: 12px 14px;
+            gap: 6px;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+        }
+        .alcoa-header .jelly-menu > li {
+            width: 100%;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .alcoa-header .jelly-menu > li > a {
+            width: 100%;
+            height: 44px;
+            padding: 0 14px;
+            font-size: 0.92rem;
+            color: #e2e8f0;
+            border-radius: 7px;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .alcoa-header .jelly-menu > li > a::after {
+            display: none;
+        }
+        .alcoa-header .jelly-menu > li.active > a,
+        .alcoa-header .jelly-menu > li > a:hover {
+            background: rgba(255, 107, 26, 0.18);
+            border-color: rgba(255, 107, 26, 0.45);
+            color: #ffffff;
+        }
+        .alcoa-header .jelly-menu > li.nav-item-cta > a {
+            background: linear-gradient(135deg, #ff6b1a 0%, #e55a0f 100%);
+            border-color: #ff6b1a;
+            color: #ffffff;
+            justify-content: center;
+            margin-top: 6px;
+        }
+
+        .alcoa-header .dropdown-menu,
+        .alcoa-header .dropdown-menu.dropdown-menu-right {
+            position: static;
+            display: none;
+            width: 100%;
+            min-width: 0;
+            background: rgba(2, 16, 32, 0.65);
+            border: none;
+            border-left: 3px solid #ff6b1a;
+            box-shadow: none;
+            border-radius: 0 6px 6px 0;
+            padding: 6px 0;
+            margin: 4px 0 4px 0;
+        }
+        .alcoa-header .dropdown-menu::before {
+            display: none;
+        }
+        .alcoa-header .dropdown-menu.open {
+            display: block;
+        }
+        .alcoa-header .dropdown-menu li a {
+            padding: 10px 16px;
+            font-size: 0.86rem;
+            color: #cbd5e1;
+        }
+        .alcoa-header .dropdown-menu li a:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ff6b1a;
+        }
+        .alcoa-header .nav-item-has-dropdown.open > .nav-link-dropdown .dropdown-icon {
+            transform: rotate(180deg);
+            color: #ff6b1a;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .alcoa-header .logo-divider {
+            display: none;
+        }
+        .alcoa-header .header-logo-right {
+            gap: 5px;
+        }
+        .alcoa-header .logo-alcasa {
+            height: 29px;
+        }
+        .alcoa-header .logo-segundo,
+        .alcoa-header .logo-cvg-blanco {
+            height: 27px;
+        }
+        .alcoa-header .logo-institucional {
+            height: 21px;
+            max-width: 88px;
+        }
+    }
+
+    /* =========================================
+       BOTÓN FLOTANTE DE WHATSAPP (FIJO AL VIEWPORT)
+       ========================================= */
+    .whatsapp-float {
+        position: fixed !important;
+        bottom: 25px !important;
+        right: 25px !important;
+        top: auto !important;
+        left: auto !important;
+        width: 62px;
+        height: 62px;
+        background: #25d366;
+        color: #ffffff !important;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+        z-index: 9990;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+    }
+    .whatsapp-float::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #25d366;
+        opacity: 0.6;
+        animation: whatsappPulse 2s infinite;
+        z-index: -1;
+    }
+    @keyframes whatsappPulse {
+        0% { transform: scale(1); opacity: 0.6; }
+        70% { transform: scale(1.4); opacity: 0; }
+        100% { transform: scale(1.4); opacity: 0; }
+    }
+    .whatsapp-float:hover {
+        background: #20b85a;
+        transform: scale(1.1);
+        box-shadow: 0 8px 28px rgba(37, 211, 102, 0.7);
+        color: #ffffff !important;
+    }
+    .whatsapp-float i {
+        font-size: 2rem;
+        color: #ffffff;
+    }
+    .whatsapp-tooltip {
+        position: absolute;
+        right: 75px;
+        top: 50%;
+        transform: translateY(-50%) translateX(10px);
+        background: #003366;
+        color: #ffffff;
+        padding: 10px 16px;
+        border-radius: 22px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        pointer-events: none;
+    }
+    .whatsapp-tooltip::after {
+        content: '';
+        position: absolute;
+        right: -6px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 6px solid transparent;
+        border-left-color: #003366;
+    }
+    .whatsapp-float:hover .whatsapp-tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) translateX(0);
+    }
+
+    @media (max-width: 768px) {
+        .whatsapp-float {
+            width: 56px;
+            height: 56px;
+            bottom: 20px !important;
+            right: 20px !important;
+        }
+        .whatsapp-float i { font-size: 1.8rem; }
+        .whatsapp-tooltip { display: none; }
+    }
+</style>
+
+<!-- =========================================
+     SCRIPT DEL SELECTOR DE IDIOMAS, MENÚ Y DIFUMINADO EN SCROLL
+     ========================================= -->
+<script>
+(function () {
+    function anclarWhatsappAlBody() {
+        var waButtons = document.querySelectorAll(".whatsapp-float");
+        if (!waButtons.length || !document.body) return;
+        var primaryWa = waButtons[0];
+        // Eliminar duplicados si existieran
+        for (var i = 1; i < waButtons.length; i++) {
+            if (waButtons[i].parentNode) {
+                waButtons[i].parentNode.removeChild(waButtons[i]);
+            }
+        }
+        // Mover fuera de #header-container directamente al final de <body>
+        // para garantizar que quede 100% fijo respecto a la pantalla
+        if (primaryWa.parentNode !== document.body) {
+            document.body.appendChild(primaryWa);
+        }
+    }
+    function initSelectorIdioma() {
+        var select = document.getElementById("alcoa-lang-select");
+        if (!select) {
+            setTimeout(initSelectorIdioma, 100);
+            return;
+        }
+        if (select.dataset.yaInicializado === "1") return;
+        select.dataset.yaInicializado = "1";
+
+        var match = document.cookie.match(/googtrans=\/es\/([^;]+)/);
+        var idiomaActual = match ? match[1] : "es";
+        select.value = idiomaActual;
+
+        select.addEventListener("change", function () {
+            var codigo = this.value;
+            if (typeof window.alcosaSetLanguage === "function") {
+                window.alcosaSetLanguage(codigo);
+            } else {
+                (function reintentar() {
+                    if (typeof window.alcosaSetLanguage === "function") {
+                        window.alcosaSetLanguage(codigo);
+                    } else {
+                        setTimeout(reintentar, 100);
+                    }
+                })();
+            }
+        });
+    }
+
+    function initScrollFadeEffect() {
+        var fadeEl = document.getElementById("headerScrollFade");
+        var headerContainer = document.getElementById("header-container");
+        if (!fadeEl || fadeEl.dataset.fadeBound === "1") return;
+        fadeEl.dataset.fadeBound = "1";
+
+        function actualizarDifuminado() {
+            var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+            // Desvanece sutilmente el difuminado entre 0px y 220px de desplazamiento
+            var ratio = Math.max(0, Math.min(1, 1 - (scrollY / 220)));
+            fadeEl.style.opacity = ratio.toFixed(3);
+            fadeEl.style.transform = "translateY(" + (-Math.round((1 - ratio) * 10)) + "px)";
+
+            if (headerContainer) {
+                if (scrollY > 80) {
+                    headerContainer.classList.add("header-scrolled");
+                } else {
+                    headerContainer.classList.remove("header-scrolled");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", actualizarDifuminado, { passive: true });
+        actualizarDifuminado();
+    }
+
+    function initMenuAutonomo() {
+        var menuBtn = document.getElementById("mobileMenuBtn");
+        var closeBtn = document.getElementById("mobileCloseBtn");
+        var mainNav = document.getElementById("mainNav");
+        var overlay = document.getElementById("menuOverlay");
+        if (!menuBtn || !mainNav) return;
+        if (menuBtn.dataset.menuBound === "1") return;
+        menuBtn.dataset.menuBound = "1";
+
+        function abrirMenu() {
+            mainNav.classList.add("active");
+            if (overlay) overlay.classList.add("active");
+            document.body.style.overflow = "hidden";
+            menuBtn.setAttribute("aria-expanded", "true");
+            var icon = menuBtn.querySelector("i");
+            if (icon) {
+                icon.classList.remove("fa-bars");
+                icon.classList.add("fa-times");
+            }
+        }
+
+        function cerrarMenu() {
+            mainNav.classList.remove("active");
+            if (overlay) overlay.classList.remove("active");
+            document.body.style.overflow = "";
+            menuBtn.setAttribute("aria-expanded", "false");
+            var icon = menuBtn.querySelector("i");
+            if (icon) {
+                icon.classList.add("fa-bars");
+                icon.classList.remove("fa-times");
+            }
+            document.querySelectorAll(".nav-item-has-dropdown.open").forEach(function (li) { li.classList.remove("open"); });
+            document.querySelectorAll(".dropdown-menu.open").forEach(function (m) { m.classList.remove("open"); });
+        }
+
+        menuBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (mainNav.classList.contains("active")) cerrarMenu();
+            else abrirMenu();
+        });
+
+        if (closeBtn) {
+            closeBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                cerrarMenu();
+            });
+        }
+        if (overlay) {
+            overlay.addEventListener("click", cerrarMenu);
+        }
+
+        mainNav.addEventListener("click", function (e) {
+            var dropdownToggle = e.target.closest(".nav-link-dropdown");
+            if (dropdownToggle && window.innerWidth <= 992) {
+                e.preventDefault();
+                e.stopPropagation();
+                var parentLi = dropdownToggle.closest(".nav-item-has-dropdown");
+                var submenu = parentLi ? parentLi.querySelector(".dropdown-menu") : null;
+                if (!submenu) return;
+                var estabaAbierto = submenu.classList.contains("open");
+                mainNav.querySelectorAll(".nav-item-has-dropdown.open").forEach(function (li) {
+                    if (li !== parentLi) {
+                        li.classList.remove("open");
+                        var m = li.querySelector(".dropdown-menu");
+                        if (m) m.classList.remove("open");
+                    }
+                });
+                submenu.classList.toggle("open", !estabaAbierto);
+                parentLi.classList.toggle("open", !estabaAbierto);
+                return;
+            }
+            var link = e.target.closest("a");
+            if (link && window.innerWidth <= 992 && !link.classList.contains("nav-link-dropdown")) {
+                cerrarMenu();
+            }
+        });
+
+        window.addEventListener("resize", function () {
+            if (window.innerWidth > 992 && mainNav.classList.contains("active")) {
+                cerrarMenu();
+            }
+        });
+    }
+
+    anclarWhatsappAlBody();
+    initSelectorIdioma();
+    initScrollFadeEffect();
+    initMenuAutonomo();
+})();
+</script>

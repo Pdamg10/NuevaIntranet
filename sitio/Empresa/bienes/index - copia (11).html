@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Inventario QR - CVG ALCASA</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root { --primary: #0d47a1; }
+        body { background: #f5f7fa; font-family: 'Roboto', sans-serif; }
+        .header-cvg { background: var(--primary); color: white; padding: 20px; border-radius: 0 0 25px 25px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .main-card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .table-wrapper { overflow-x: auto; max-height: 550px; }
+        table thead th { position: sticky; top: 0; background: #eeeeee; z-index: 10; font-size: 0.75rem; text-transform: uppercase; padding: 5px; border: 1px solid #ddd; }
+        .filter-input { height: 25px !important; margin: 0 !important; font-size: 0.7rem !important; background: white !important; border: 1px solid #ccc !important; padding: 0 5px !important; box-sizing: border-box !important; }
+        #qrcode-temp { visibility: hidden; position: absolute; top: -1000px; }
+        .btn-alcasa { background-color: var(--primary) !important; font-weight: bold; border-radius: 8px; }
+        #status-toast { position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: #2e7d32; color: white; padding: 15px 25px; border-radius: 8px; display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div id="status-toast"></div>
+
+<div class="header-cvg center-align">
+    <img src="http://alcasahv10/empresa/plan/Logo-CVG-Alcasa1.gif" style="height: 50px; filter: brightness(0) invert(1);">
+    <h5>Sistema de Inventario QR - CVG ALCASA</h5>
+    <p>Gerencia de Bienes Públicos</p>
+</div>
+
+<div class="container-fluid" style="margin: 0 20px;">
+    <div class="main-card">
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="file-field input-field">
+                    <div class="btn btn-alcasa">
+                        <span><i class="material-icons left">attach_file</i>CARGAR CSV</span>
+                        <input type="file" id="csv-file" accept=".csv">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Seleccione el archivo de inventario">
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 right-align" id="global-actions" style="display:none;">
+                <button class="btn green darken-3" onclick="imprimirTodo()" style="margin-top:15px; border-radius:8px;">
+                    <i class="material-icons left">picture_as_pdf</i>IMPRIMIR FILTRADOS (CON QR)
+                </button>
+            </div>
+        </div>
+
+        <div id="display-area" style="display:none;">
+            <div class="table-wrapper">
+                <table id="main-table" class="highlight bordered">
+                    <thead>
+                        <tr id="header-labels"></tr>
+                        <tr id="header-filters"></tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="qrcode-temp"></div>
+
+<script>
+    let rawData = [];
+    let filtrados = [];
+    const camposRequeridos = ["COD. BIEN", "CODIGO ACTIVO", "DESCRIPCIÓN", "MARCA", "MODELO", "COLOR", "SERIAL", "UBICACIÓN FISICA", "CONDICION DEL BIEN", "ESTADO DEL BIEN", "RESPONSABLE DE USO", "OBSERVACIONES", "CENTRO DE COSTO"];
+
+// SUSTITUYE ESTE BLOQUE (Evento change del archivo) en tu index.html
+document.getElementById('csv-file').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const content = event.target.result;
+        
+        Papa.parse(content, {
+            header: false,
+            delimiter: ";",
+            skipEmptyLines: true,
+            complete: function(results) {
+                const rows = results.data.slice(1);
+                rawData = rows.map(r => {
+                    let obj = {};
+                    camposRequeridos.forEach((c, i) => obj[c] = (r[i] || '').trim());
+                    return obj;
+                });
+                filtrados = [...rawData];
+                initApp();
+            }
+        });
+    };
+
+    // CAMBIO CLAVE: Leemos con 'ISO-8859-1' que es el estándar de Excel 
+    // para que la Ñ y los acentos aparezcan bien en la tabla.
+    reader.readAsText(file, "ISO-8859-1"); 
+});
+
+    function initApp() {
+        document.getElementById('display-area').style.display = 'block';
+        document.getElementById('global-actions').style.display = 'block';
+        renderHeaders();
+        renderTable(filtrados);
+    }
+
+    function renderHeaders() {
+        const hLabel = document.getElementById('header-labels'), hFilter = document.getElementById('header-filters');
+        hLabel.innerHTML = ''; hFilter.innerHTML = '';
+        camposRequeridos.forEach(campo => {
+            hLabel.innerHTML += `<th>${campo}</th>`;
+            hFilter.innerHTML += `<th><input type="text" class="filter-input" onkeyup="aplicarFiltros()"></th>`;
+        });
+        hLabel.innerHTML += '<th>ACCIÓN</th>'; hFilter.innerHTML += '<th></th>';
+    }
+
+    function renderTable(data) {
+        const tbody = document.getElementById('table-body');
+        tbody.innerHTML = '';
+        data.forEach((item, index) => {
+            if(!item["COD. BIEN"]) return;
+            const tr = document.createElement('tr');
+            camposRequeridos.forEach(c => tr.innerHTML += `<td style="font-size:0.7rem">${item[c]}</td>`);
+            tr.innerHTML += `<td><button class="btn-small blue darken-4" onclick="generarTarjetaIndividual(${index})"><i class="material-icons">qr_code_2</i></button></td>`;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function aplicarFiltros() {
+        const inputs = document.querySelectorAll('.filter-input');
+        filtrados = rawData.filter(row => Array.from(inputs).every((input, i) => 
+            String(row[camposRequeridos[i]] || '').toLowerCase().includes(input.value.toLowerCase())
+        ));
+        renderTable(filtrados);
+    }
+
+async function generarQR(texto) {
+    const container = document.getElementById('qrcode-temp');
+    container.innerHTML = '';
+    
+    // FUNCIÓN PARA SUSTITUIR Ñ POR N Y QUITAR TILDES
+    function limpiarParaQR(str) {
+        return str
+            .normalize("NFD") // Descompone caracteres (ej: á -> a + ´)
+            .replace(/[\u0300-\u036f]/g, "") // Elimina el acento/tilde
+            .replace(/ñ/g, "n")
+            .replace(/Ñ/g, "N")
+            .replace(/[^a-zA-Z0-0\s\:\.\,\-\/]/g, ""); // Deja solo caracteres básicos seguros
+    }
+
+    const textoSeguro = limpiarParaQR(texto);
+
+    return new Promise((resolve) => {
+        try {
+            new QRCode(container, { 
+                text: textoSeguro, 
+                width: 128, 
+                height: 128,
+                correctLevel: QRCode.CorrectLevel.M
+            });
+
+            setTimeout(() => {
+                const canvas = container.querySelector('canvas');
+                if (canvas) {
+                    resolve(canvas.toDataURL("image/png"));
+                } else {
+                    const img = container.querySelector('img');
+                    resolve(img ? img.src : null);
+                }
+            }, 200); 
+        } catch (err) {
+            console.error("Error en QRCode:", err);
+            resolve(null);
+        }
+    });
+}
+
+async function construirTarjeta(doc, item) {
+    // 1. OBTENER FECHA ACTUAL PARA LA EMISIÓN
+    const hoy = new Date();
+    const fechaEmision = hoy.getDate().toString().padStart(2, '0') + '/' + 
+                         (hoy.getMonth() + 1).toString().padStart(2, '0') + '/' + 
+                         hoy.getFullYear();
+
+    // 2. CONTENIDO DEL QR (SE MANTIENE INTEGRO SEGÚN TU SOLICITUD)
+    const infoQR = [
+        `BIEN: ${item['COD. BIEN']}`,
+        `ACTIVO: ${item['CODIGO ACTIVO']}`,
+        `DESC: ${item['DESCRIPCIÓN']}`,
+        `MOD: ${item['MARCA']}/${item['MODELO']}`,
+        `SER: ${item['SERIAL']}`,
+        `UBIC: ${item['UBICACIÓN FISICA']}`,
+        `RESP: ${item['RESPONSABLE DE USO']}`
+    ].join('\n');
+
+    const qrImg = await generarQR(infoQR);
+
+    // 3. DISEÑO VISUAL (CENTRADO Y SIN BORDES)
+    doc.setTextColor(0); 
+    
+    // Línea 1: República (Centrada)
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(5);
+    doc.text("REPUBLICA BOLIVARIANA DE VENEZUELA", 25, 4, { align: "center" });
+
+    // Línea 2: Empresa (Centrada)
+    doc.text("CVG ALUMINIO DEL CARONI S.A.", 25, 6.5, { align: "center" });
+
+    // Código QR (Centrado en el medio)
+    // El QR mide 12mm, posicionado para que el centro de la tarjeta sea su centro
+    if (qrImg) {
+        doc.addImage(qrImg, 'PNG', 19, 7.5, 12, 12);
+    }
+
+    // Código del Bien (Debajo del QR)
+    doc.setFontSize(6);
+    doc.text(String(item['COD. BIEN'] || ''), 25, 21, { align: "center" });
+
+    // Unidad de Bienes Públicos y Fecha (Centrado al final)
+    doc.setFontSize(4.5);
+    doc.setFont("helvetica", "normal");
+    doc.text(`UNIDAD DE BIENES PUBLICOS - ${fechaEmision}`, 25, 23.5, { align: "center" });
+}
+
+// 3. ACTUALIZACIÓN DE TAMAÑOS DE PÁGINA (50x25)
+async function generarTarjetaIndividual(index) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('l', 'mm', [50, 25]);
+    await construirTarjeta(doc, filtrados[index]);
+    doc.save(`Tarjeta_${filtrados[index]['COD. BIEN']}.pdf`);
+}
+
+async function imprimirTodo() {
+    const items = filtrados.filter(r => r["COD. BIEN"]);
+    if (items.length === 0) return alert("No hay datos para imprimir");
+    const status = document.getElementById('status-toast');
+    status.style.display = 'block';
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('l', 'mm', [50, 25]);
+
+    for(let i = 0; i < items.length; i++) {
+        status.innerText = `Generando tarjeta ${i + 1} de ${items.length}...`;
+        if(i > 0) doc.addPage([50, 25], 'l');
+        await construirTarjeta(doc, items[i]);
+        if(i % 5 === 0) await new Promise(r => setTimeout(r, 10));
+    }
+    status.style.display = 'none';
+    doc.save("Inventario_Masivo_Alcasa.pdf");
+}
+</script>
+</body>
+</html>
