@@ -1,0 +1,28 @@
+<?php
+/**
+ * proxy_noticias.php
+ * Proxy con file_get_contents para evitar CORS
+ * Ubicar este archivo en la misma carpeta que Prensa.html
+ */
+
+// Permitir acceso desde cualquier origen
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+
+// URL de la API de noticias
+$url = 'http://alcasa.com.ve:5001/api/noticias';
+
+// Intentar obtener los datos con file_get_contents
+$response = @file_get_contents($url);
+
+if ($response === false) {
+    // Si falla, devolver un error en JSON
+    http_response_code(500);
+    echo json_encode([
+        'error' => 'No se pudo obtener las noticias. Verifica que el servidor de noticias esté accesible.'
+    ]);
+} else {
+    // Devolver la respuesta tal cual
+    echo $response;
+}
+?>

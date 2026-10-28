@@ -1,0 +1,522 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVG Aluminio del Caroní, S.A. - Alcasa</title>
+    <meta name="description" content="Sitio web oficial de CVG Aluminio del Caroní, S.A. (Alcasa). Productos de Fundición, Laminación y Extrusión.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           VARIABLES Y RESET
+           ========================================= */
+        :root {
+            --azul-cvg: #003366;
+            --azul-claro: #0056a3;
+            --naranja: #ff6b1a;
+            --gris-fondo: #f4f6f9;
+            --gris-texto: #4a5568;
+            --blanco: #ffffff;
+            --sombra: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --transicion: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: var(--gris-fondo);
+        }
+
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--azul-cvg); }
+        a { text-decoration: none; color: inherit; transition: var(--transicion); }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* =========================================
+           HEADER Y NAVEGACIÓN
+           ========================================= */
+        .top-bar {
+            background-color: var(--azul-cvg);
+            color: var(--blanco);
+            padding: 10px 0;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        header {
+            background: var(--blanco);
+            box-shadow: var(--sombra);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--azul-cvg);
+            line-height: 1.2;
+        }
+        .logo-text small {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gris-texto);
+            display: block;
+        }
+
+        /* Menú principal */
+        .main-nav ul { display: flex; gap: 5px; flex-wrap: wrap; }
+        .main-nav a {
+            display: block;
+            padding: 10px 15px;
+            color: var(--azul-cvg);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 5px;
+        }
+        .main-nav a:hover { background-color: var(--azul-cvg); color: var(--blanco); }
+
+        .menu-toggle { display: none; font-size: 1.5rem; color: var(--azul-cvg); background: none; border: none; cursor: pointer; }
+
+        /* =========================================
+           LAYOUT PRINCIPAL (Sidebar + Contenido)
+           ========================================= */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            padding: 40px 0;
+        }
+
+        /* Sidebar (Menú lateral original modernizado) */
+        .sidebar {
+            background: var(--blanco);
+            border-radius: 10px;
+            box-shadow: var(--sombra);
+            overflow: hidden;
+            height: fit-content;
+        }
+
+        .sidebar-section { padding: 20px; border-bottom: 1px solid #eee; }
+        .sidebar-section:last-child { border-bottom: none; }
+        .sidebar-title {
+            font-size: 1.1rem;
+            color: var(--azul-cvg);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--naranja);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar ul li { margin-bottom: 8px; }
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            color: var(--gris-texto);
+            font-size: 0.95rem;
+            border-radius: 5px;
+        }
+        .sidebar a:hover { background-color: var(--gris-fondo); color: var(--naranja); padding-left: 15px; }
+        .sidebar a i { width: 20px; text-align: center; color: var(--azul-claro); }
+
+        /* Contenido Principal */
+        .content-area { display: flex; flex-direction: column; gap: 40px; }
+
+        /* Banner Principal (Catálogo) */
+        .hero-banner {
+            background: var(--blanco);
+            border-radius: 10px;
+            box-shadow: var(--sombra);
+            overflow: hidden;
+            text-align: center;
+        }
+        .hero-banner a { display: block; }
+        .hero-banner img { width: 100%; max-height: 300px; object-fit: cover; }
+
+        /* Sección de Productos Destacados */
+        .products-highlight {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: var(--blanco);
+            border-radius: 10px;
+            box-shadow: var(--sombra);
+            overflow: hidden;
+            text-align: center;
+            transition: var(--transicion);
+        }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--naranja);
+        }
+
+        .product-card-body { padding: 20px; }
+        .product-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .product-card p { font-size: 0.9rem; color: var(--gris-texto); margin-bottom: 15px; }
+        .btn-acceder {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--azul-cvg);
+            color: var(--blanco);
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .btn-acceder:hover { background: var(--naranja); }
+
+        /* Galería de Videos / Noticias */
+        .gallery-section h2 { text-align: center; margin-bottom: 30px; font-size: 1.8rem; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item {
+            background: var(--blanco);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            transition: var(--transicion);
+        }
+        .gallery-item:hover { transform: scale(1.03); }
+        .gallery-item img { width: 100%; height: 130px; object-fit: cover; }
+        .gallery-item-title {
+            padding: 10px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--azul-cvg);
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer {
+            background: var(--azul-cvg);
+            color: var(--blanco);
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 { color: var(--blanco); margin-bottom: 20px; font-size: 1.1rem; position: relative; padding-bottom: 10px; }
+        .footer-col h4::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: var(--naranja); }
+        
+        .footer-col p, .footer-col a { color: rgba(255,255,255,0.8); font-size: 0.95rem; }
+        .footer-col a:hover { color: var(--naranja); }
+        .footer-col ul li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .footer-col ul li i { color: var(--naranja); width: 20px; }
+
+        .social-links { display: flex; gap: 15px; margin-top: 15px; }
+        .social-links a {
+            width: 40px; height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            color: var(--blanco);
+        }
+        .social-links a:hover { background: var(--naranja); transform: translateY(-3px); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* =========================================
+           RESPONSIVE (Celulares)
+           ========================================= */
+        @media (max-width: 900px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
+            .content-area { order: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .main-nav {
+                position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px);
+                background: var(--blanco); flex-direction: column; padding: 20px;
+                transition: var(--transicion); box-shadow: var(--sombra); z-index: 999;
+            }
+            .main-nav.active { left: 0; }
+            .main-nav ul { flex-direction: column; }
+            .main-nav a { padding: 15px; border-bottom: 1px solid #eee; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra Superior -->
+    <div class="top-bar">
+        <div class="container">
+            © 2023 - CVG Aluminio del Caroní, S.A.
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo-text">
+                CVG ALCASA
+                <small>Aluminio del Caroní, S.A.</small>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="sitio/Empresa/Quienessomos/QuienesSomos.htm">Empresa</a></li>
+                    <li><a href="sitio/NuestrosProductos/Productos_Fundicion.htm">Productos</a></li>
+                    <li><a href="sitio/AtencionaProveedores/OP/OPINTER.pdf" target="_blank">Proveedores</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Layout Principal: Sidebar + Contenido -->
+    <div class="container main-layout">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title"><i class="fas fa-building"></i> Empresa</h3>
+                <ul>
+                    <li><a href="sitio/Empresa/Quienessomos/QuienesSomos.htm"><i class="fas fa-users"></i> Quiénes somos</a></li>
+                    <li><a href="sitio/Empresa/Mision/mision.htm"><i class="fas fa-bullseye"></i> Misión</a></li>
+                    <li><a href="sitio/Empresa/Vision/vision.htm"><i class="fas fa-eye"></i> Visión</a></li>
+                    <li><a href="sitio/Empresa/PoliticadelaCalidad/politicadelacalidad.htm"><i class="fas fa-certificate"></i> Política de la calidad</a></li>
+                    <li><a href="sitio/Empresa/Directorio/JuntaDirectiva.htm"><i class="fas fa-user-tie"></i> Junta Directiva</a></li>
+                    <li><a href="sitio/Empresa/Ubicacion/Ubicacion1.htm"><i class="fas fa-map-marker-alt"></i> Ubicación</a></li>
+                    <li><a href="sitio/Empresa/Otros/Principios.htm"><i class="fas fa-handshake"></i> Principios</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title"><i class="fas fa-boxes"></i> Nuestros Productos</h3>
+                <ul>
+                    <li><a href="sitio/NuestrosProductos/Productos_Fundicion.htm"><i class="fas fa-cubes"></i> Productos de Fundición</a></li>
+                    <li><a href="sitio/NuestrosProductos/Productos_Laminacion.htm"><i class="fas fa-layer-group"></i> Productos de Laminación</a></li>
+                    <li><a href="sitio/NuestrosProductos/Productos_Extrusion.htm"><i class="fas fa-shapes"></i> Productos de Extrusión</a></li>
+                    <li><a href="sitio/BANNER%202023/Catalogo%20Productos%202023.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Catálogo en PDF</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title"><i class="fas fa-briefcase"></i> Comercialización</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-truck-loading"></i> Atención a Proveedores</a></li>
+                    <li><a href="#"><i class="fas fa-clipboard-list"></i> Registro de proveedores</a></li>
+                    <li><a href="#"><i class="fas fa-file-contract"></i> Contrataciones</a></li>
+                    <li><a href="sitio/AtencionaProveedores/OP/OPINTER.pdf" target="_blank"><i class="fas fa-globe"></i> Oferta Internacional</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title"><i class="fas fa-link"></i> Enlaces</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-external-link-alt"></i> Enlaces de interés</a></li>
+                    <li><a href="#"><i class="fas fa-hands-helping"></i> Gestión social</a></li>
+                    <li><a href="#"><i class="fas fa-search"></i> Consulta de Clave ARI</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section" style="text-align: center; background: var(--gris-fondo);">
+                <p style="font-weight: 600; color: var(--azul-cvg); margin-bottom: 10px;">Deja tu mensaje aquí</p>
+                <a href="#contacto" class="btn-acceder" style="width: 100%;">Contactar</a>
+            </div>
+        </aside>
+
+        <!-- ÁREA DE CONTENIDO PRINCIPAL -->
+        <main class="content-area">
+            
+            <!-- Banner Principal (Catálogo) -->
+            <div class="hero-banner">
+                <a href="sitio/BANNER%202023/Catalogo%20Productos%202023.pdf" target="_blank">
+                    <img src="sitio/BANNER%202023/Catalogo%20Web%20504%20x%20127.png" alt="Catálogo de Productos 2023">
+                </a>
+            </div>
+
+            <!-- Sección de Productos Destacados -->
+            <section>
+                <h2 style="text-align: center; margin-bottom: 25px;">Nuestras Líneas de Producción</h2>
+                <div class="products-highlight">
+                    <!-- Laminación -->
+                    <div class="product-card">
+                        <a href="sitio/NuestrosProductos/Productos_Laminacion.htm">
+                            <img src="sitio/BANNER%202023/Videos%20web%20257%20x%20128%20Lami.jpg" alt="Laminación">
+                        </a>
+                        <div class="product-card-body">
+                            <h3>Laminación</h3>
+                            <p>Bobinas lisas, embozadas y láminas estriadas de la más alta calidad.</p>
+                            <a href="sitio/NuestrosProductos/Productos_Laminacion.htm" class="btn-acceder">Acceder</a>
+                        </div>
+                    </div>
+
+                    <!-- Fundición -->
+                    <div class="product-card">
+                        <a href="sitio/NuestrosProductos/Productos_Fundicion.htm">
+                            <img src="sitio/BANNER%202023/Videos%20web%20257%20x%20128%20Fund.jpg" alt="Fundición">
+                        </a>
+                        <div class="product-card-body">
+                            <h3>Fundición</h3>
+                            <p>Lingotes de 22.5 Kg, 454 Kg, 680 Kg y cilindros para extrusión.</p>
+                            <a href="sitio/NuestrosProductos/Productos_Fundicion.htm" class="btn-acceder">Acceder</a>
+                        </div>
+                    </div>
+
+                    <!-- Extrusión -->
+                    <div class="product-card">
+                        <a href="sitio/NuestrosProductos/Productos_Extrusion.htm">
+                            <img src="sitio/BANNER%202023/Videos%20web%20257%20x%20128%20Ext.jpg" alt="Extrusión">
+                        </a>
+                        <div class="product-card-body">
+                            <h3>Extrusión</h3>
+                            <p>Perfiles, tubos, ángulos, ventanas y puertas de aluminio.</p>
+                            <a href="sitio/NuestrosProductos/Productos_Extrusion.htm" class="btn-acceder">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Galería de Videos / Noticias -->
+            <section class="gallery-section">
+                <h2><i class="fas fa-video" style="color: var(--naranja);"></i> Galería y Noticias</h2>
+                <div class="gallery-grid">
+                    <a href="sitio/Laminacion.htm" class="gallery-item">
+                        <img src="sitio/BANNER%202023/Videos%20web%20257%20x%20128%20Lami.jpg" alt="Laminación">
+                        <div class="gallery-item-title">Laminación</div>
+                    </a>
+                    <a href="sitio/Fundicion.htm" class="gallery-item">
+                        <img src="sitio/BANNER%202023/Videos%20web%20257%20x%20128%20Fund.jpg" alt="Fundición">
+                        <div class="gallery-item-title">Fundición</div>
+                    </a>
+                    <a href="sitio/Extrusora.htm" class="gallery-item">
+                        <img src="sitio/BANNER%202023/Videos%20web%20257%20x%20128%20Ext.jpg" alt="Extrusora">
+                        <div class="gallery-item-title">Extrusora</div>
+                    </a>
+                    <a href="sitio/Ayudas_Tecnicas.htm" class="gallery-item">
+                        <img src="sitio/BANNER%202023/Videos%20web%20257%20x%20128%20at.jpg" alt="Ayudas Técnicas">
+                        <div class="gallery-item-title">Ayudas Técnicas</div>
+                    </a>
+                    <a href="sitio/Alcasa_Hoy.htm" class="gallery-item">
+                        <img src="sitio/BANNER%202023/Videos%20web%20257%20x%20128.png" alt="Alcasa Hoy">
+                        <div class="gallery-item-title">Alcasa Hoy</div>
+                    </a>
+                    <a href="sitio/Empresas_Tuteladas.htm" class="gallery-item">
+                        <img src="sitio/BANNER%202023/Videos%20web%20257%20x%20128%20SN.jpg" alt="Empresas Tuteladas">
+                        <div class="gallery-item-title">Empresas Tuteladas</div>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>CVG Aluminio del Caroní, S.A.</h4>
+                    <p>Aluminio del Caroní, S.A. (Alcasa)<br>
+                    Avenida Fuerzas Armadas, Zona Industrial Matanzas,<br>
+                    Ciudad Guayana, estado Bolívar, Venezuela.</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/Alcasa.CVG/?locale=es_LA" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/alcasa_cvg/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@alcasaaluminiodelcaronis.a8220" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.tiktok.com/@cvg_alcasa" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Acceso Rápido</h4>
+                    <ul>
+                        <li><i class="fas fa-chevron-right"></i> <a href="sitio/Empresa/Quienessomos/QuienesSomos.htm">Quiénes somos</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="sitio/NuestrosProductos/Productos_Fundicion.htm">Productos de Fundición</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="sitio/NuestrosProductos/Productos_Laminacion.htm">Productos de Laminación</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="sitio/NuestrosProductos/Productos_Extrusion.htm">Productos de Extrusión</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Proveedores</h4>
+                    <ul>
+                        <li><i class="fas fa-file-alt"></i> <a href="sitio/AtencionaProveedores/OP/OPINTER.pdf" target="_blank">Oferta Internacional (PDF)</a></li>
+                        <li><i class="fas fa-clipboard-check"></i> <a href="#">Registro de proveedores</a></li>
+                        <li><i class="fas fa-gavel"></i> <a href="#">Contrataciones</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 - CVG Aluminio del Caroní, S.A. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript para el menú móvil -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        document.querySelectorAll('.main-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                menuToggle.querySelector('i').classList.add('fa-bars');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+            });
+        });
+    </script>
+</body>
+</html>

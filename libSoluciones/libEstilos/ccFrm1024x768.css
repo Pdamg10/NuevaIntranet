@@ -1,0 +1,902 @@
+
+/*
+//
+// $Id: ccFrm1024x768.css,v 1.2 2009-11-24 13:04:23 ad20006 Exp $
+// $Date: 2009-11-24 13:04:23 $
+// $Author: ad20006 $
+// $Revision: 1.2 $
+
+*/
+
+
+        
+         .general {
+                 
+				/*margin-left: auto;
+
+                  margin-right: auto;*/
+                  width:1024px;
+                   height:768px;
+
+                   
+
+         }
+         .Cintillo
+         {
+			background-position:-5px -6px;
+		    background-image: url(../../Imagenes/Cintillo1024x768.png);
+	        background-repeat:no-repeat;
+			position:absolute;
+			width:800px;
+			height:600px;
+			z-index:1000;
+			visibility:visible;
+		    -moz-user-select: none;
+	        -khtml-user-select: none
+         }
+          .logocvg
+         {
+			background-image: url(../../Imagenes/cvg.png);
+	        background-repeat:no-repeat;
+			
+			width:800px;
+			height:10px;
+			z-index:100;
+			visibility:visible;
+			top:25px;
+			left:8px;
+			
+		   
+         }
+         .logoalcasa
+         {
+			
+			background-image: url(../../Imagenes/Logoalcasa.png);
+			background-repeat:no-repeat;
+			width:1000px;
+			top:32px;
+			left:-140px;
+		
+		
+         }
+
+
+
+ .fondoPlantilla1
+			{
+				margin:0 0 5 0;
+				padding-top:40;
+				background-position:7.5px 45px;
+				width: 10px;
+				background-image:   url(../../Imagenes/Fondo1024x768.png);
+				background-repeat:no-repeat;
+
+				
+			}
+			
+			 .tablaCintillo
+		 { 
+		Z-INDEX: 102;
+ 		LEFT: 0px;
+ 		WIDTH: 776px;
+ 		POSITION: absolute;
+ 		TOP: 0px; 
+		HEIGHT: 64px;	 
+		 }
+		 
+		 .tablaLogo
+		 {
+		 	
+		Z-INDEX: 101; 
+		LEFT: 680px;
+ 		WIDTH: 96px;
+ 		POSITION: absolute;
+ 		TOP: 59px; 
+		HEIGHT: 64px; 
+		 }
+		 
+		 .tablaCvg
+		 { 
+		 Z-INDEX: 103; 
+		LEFT: 12px; 
+		WIDTH: 104px; 
+		POSITION: absolute;
+ 		TOP: 49px;
+ 		HEIGHT: 64px;
+		 
+		 }
+			
+         .cuadro
+         {
+		  position:absolute;
+		  border:double 4 #000999;
+		  left:45px;
+		  top:48px;
+		  width:342px;
+		  height:188px;
+		  margin:-19  10 10 200;
+		  
+		  
+		 
+		    
+         }
+         
+         
+         .fuente
+         {
+			font-size: 12pt;
+	        font-family: Arial;
+            font-style:normal;
+            color:navy;
+            font-weight:bold;
+            display:inline;
+            left:250px;
+            top:55px;
+            width:336px;
+            height:24px;
+            position:absolute;
+            z-index:102;
+            
+            
+            
+         }
+         .fuenteinferior
+         {
+			font-size: 12pt;
+	        font-family: Arial;
+            font-style:normal;
+            color:navy;
+            font-weight:bold;
+            left:320px;
+            top:75px;
+            width:336px;
+            height:24px;
+            position:absolute;
+            z-index:102;
+            
+            
+            
+         }
+         
+         .label
+         {
+			font-size: 12pt;
+	        font-family: Aria;
+            font-style:normal;
+            color:navy;
+            font-weight:bold;
+         }
+         
+         .labelsup
+         {  
+			position:absolute;
+			top:-2px;
+            left:390px;
+			font-size: 12pt;
+	        font-family: Aria;
+            font-style:normal;
+            text-align:center;
+            color:navy;
+            font-weight:bold;
+            border-bottom:double 1 navy;
+            
+            
+         }
+         .boton
+         {
+			position:relative;
+			top:10px;
+            left:30px;
+			font-size: 10pt;
+	        font-family: Aria;
+             
+            color:navy;
+            font-weight:bold;
+         }
+         .textBox
+         {
+			width:132px;
+			position:relative;
+			top:10px;
+            left:10px;
+			font-size: 8pt;
+	        font-family: Arial;
+            color:black;
+            font-weight:bold;
+         }
+         
+         .campos
+         {
+			position:relative;
+			top:-23px;
+			left:-24px;
+			font-size: 9pt;
+	        font-family: Arial;
+            font-style:normal;
+            color:navy;
+            font-weight:bold;
+         }
+         .camposSup
+         {
+			position:relative;
+			top:-23px;
+			left:-45px;
+			font-size: 9pt;
+	        font-family: Arial;
+            font-style:normal;
+            color:navy;
+            font-weight:bold;
+         }
+         .camposficha
+         {
+			position:relative;
+			top:-38px;
+			left:655px;
+			font-size: 9pt;
+	        font-family: Arial;
+            font-style:normal;
+            color:navy;
+            font-weight:bold;
+         }
+         .camposDesc
+         {
+			position:relative;
+			top:-65px;
+			left:-20px;
+			font-size: 9pt;
+	        font-family: Arial;
+            font-style:normal;
+            color:navy;
+            font-weight:bold;
+         }
+         .textBoxDesc
+         {
+			width:710px;
+			height:100px;
+			position:relative;
+			top:-78px;
+            left:-15px;
+			font-size: 10pt;
+	        font-family: Arial;
+            color:navy;
+            font-weight:bold;
+         }
+         .camposResp
+         {
+			position:relative;
+			top:-23px;
+			left:-60px;
+			font-size: 9pt;
+	        font-family: Arial;
+            font-style:normal;
+            color:navy;
+            font-weight:bold;
+         }
+         
+         .campoFecha
+         {
+			position:absolute;
+			top:10px;
+			left:648px;
+			font-size: 9pt;
+	        font-family: Arial;
+            font-style:normal;
+            color:navy;
+            font-weight:bold;
+         }
+         
+         .campoNum
+         {
+			position:absolute;
+			top:28px;
+			left:648px;
+			font-size: 9pt;
+	        font-family: Arial;
+            font-style:normal;
+            color:navy;
+            font-weight:bold;
+            
+         }
+         
+         .camposalineado
+         {
+			position:relative;
+			top:-15px;
+			left:9px;
+			font-size: 9pt;
+	        font-family: Arial;
+            font-style:normal;
+            color:navy;
+            font-weight:bold;
+         }
+         .campoTexto
+         {
+			width:148px;
+			position:relative;
+			top:-49px;
+			height:18px;
+            left:-18px;
+			font-size: 8pt;
+	        font-family: Arial;
+            color:navy;
+            font-weight:bold;
+         }
+         .campoTextofecha
+         {
+			width:102px;
+			position: absolute;
+			top:10px;
+			height:17px;
+            left:688px;
+			font-size: 8pt;
+	        font-family: Arial;
+            color:navy;
+            font-weight:bold;
+            border:None 0px white;
+         }
+         .campoTextoNum
+         {
+			width:58px;
+			position: absolute;
+			top:28px;
+			height:17px;
+            left:688px;
+			font-size:8pt;
+	        font-family: Arial;
+            color:navy;
+            font-weight:bold;
+            border:None 0px white;
+         }
+         .campoTextficha
+         {
+			width:80px;
+			height:18px;
+			position:relative;
+			top:-33px;
+            left:-115px;
+			font-size: 8pt;
+	        font-family: Arial;
+            color: Black;
+            font-weight:bold;
+         }
+         
+         .Drolist
+         {
+			width:238px;
+			position:relative;
+			top:-49px;
+            left:-20px;
+			font-size: 8pt;
+	        font-family:Arial;
+	        font-style: normal;
+            color: Black;
+             font-variant: normal;
+            font-weight: bold;
+         }
+         
+         .Drolistalineado
+         {
+			width:238px;
+			position:relative;
+			top:-49px;
+            left:-19px;
+			font-size: 8pt;
+	        font-family: Arial;
+	        font-style:normal;
+            color: Black;
+            font-weight:bold;
+         }
+         
+          .DroValor
+         {
+			z-index:115;
+			width:48px;
+			position: absolute;
+			top:-115px;
+            left:-28px;
+			font-size: 8pt;
+	        font-family: Arial;
+	        font-style:normal;
+            color: Black;
+            font-weight:bold;
+         }
+          .textDroValor
+         {
+			Width:550px;
+			Z-INDEX: 114;
+			LEFT: 21px; 
+			POSITION: absolute; 
+			TOP: -115px;
+			font-size: 8pt;
+	        font-family: Arial;
+	        font-style:normal;
+            color: Black;
+            font-weight:bold;
+         }
+         .contenedorcampo
+         {
+		 border:double 4 #000999;
+		  Z-INDEX: 104;
+		  left:10px;
+		  position:absolute;
+		  top:48px;
+		  width:750px;
+		  height:1250px;
+		  /*margin:40 10 10 100;*/
+		  visibility:visible;
+		
+         }
+         
+         .contenedorcampo2
+         {
+		  border:Double 0 white;
+		  Z-INDEX: 111;
+		  left:5px;
+		  position:absolute;
+		  top:205px;
+		  width:100px;
+		  height:580px;
+		  /*margin:40 10 10 100;*/
+		  visibility:visible;
+		  
+         }
+         
+         .campoValor
+         {
+			width:300px;
+			Height:14px;
+			font-family:Arial;
+			font-size:9pt;
+			font-weight:bold;
+			color:Navy;
+			top:125px;
+			
+         }
+         divlbError.
+         {
+		  Z-INDEX: 105; 
+		  LEFT: 70px; 
+		  WIDTH: 364px; 
+		  POSITION: relative; 
+		  TOP: -16px; 
+		  HEIGHT: 10px;
+         }
+         .lbError1
+         {
+		   Width:300px;
+		   Height:10px;
+		   Font-Size:8pt;
+		   font-weight:bold;
+		   TOP: -16px;
+		   LEFT: 70px;
+		   font-family:Arial;
+		  
+		   POSITION:relative;
+         }
+         .campoImagen
+         {
+			Height:14px;
+			font-family:Arial;
+			font-size:9pt;
+			font-weight:bold;
+			color:Navy;
+			top:95px;
+			
+         }
+         
+         .abrirImagen
+         {
+			z-index:auto;
+			width:310px;
+			HEIGHT: 22px;
+			font-family:Arial;
+			font-size:9pt;
+			font-weight:bold;
+			color: Black;
+			top:-140px;
+			position:absolute;
+			left:-28px;
+			 
+			
+         }
+         
+         .botonagregarImagen
+         {
+			
+			z-index:auto;
+			width:104px;
+			HEIGHT: 22px;
+			font-family:Arial;
+			font-size:9pt;
+			color: Black;
+			top:-140px;
+			position:absolute;
+			left:290px;
+			 
+			
+         }
+         
+         .botoneliminarImagen
+         {
+			
+			z-index:auto;
+			width:102px;
+			HEIGHT: 22px;
+			font-family:Arial;
+			font-size:9pt;
+			color: Black;
+			top:-140px;
+			position:absolute;
+			left:403px;
+			 
+			
+         }
+         
+         .botonValoracion
+         {
+			
+			z-index:113;
+			width:96px;
+			HEIGHT: 22px;
+			font-family:Arial;
+			font-size:9pt;
+			color: Black;
+			top:-116px;
+			position:absolute;
+			left:580px;
+			 
+			
+         }
+         datagrid4.
+         {
+			Height:617px;
+			Width:821px;
+			color:Navy;
+			font-weight:bold;
+			font-size:4pt;
+			font-family:Arial;
+			border:None 4 #3366CC; 
+			 
+			
+			
+         }
+         
+         datagrid6.
+         {
+			Height:191px;
+			Width:814px;
+			color:Navy;
+			font-weight:bold;
+			font-size:4pt;
+			font-family:Arial;
+			border:None 4 #3366CC; 
+			position:absolute;
+			 
+			
+			
+         }
+         .campoCritBasic
+         {
+			position:relative;
+			Height:100px ;
+			Width:298px;
+			Color:Navy; 
+			font-family:Arial;
+			font-weight:bold;
+			font-size:9pt;
+			top:180px;
+			left:-24px;
+         }
+         .textCritBasic
+         {
+			width:710px;
+			height:100px;
+			font-size:9pt;
+			color:Black;
+		    font-family:Arial;
+		    position:relative;
+		    top:85px;
+			left:-24px;
+         }
+
+		 .labelTitulosupinsp
+         {  
+			position: relative;
+			top:-10px;
+            left:310px;
+			font-size: 12pt;
+	        font-family: Aria;
+            font-style:normal;
+            text-align:center;
+            color:navy;
+            font-weight:bold;
+            border-bottom:double 1 navy;
+            
+            
+         }
+         .labelTituloinfinsp
+         {  
+			position: relative;
+			top:10px;
+            left:166px;
+			font-size: 12pt;
+	        font-family: Aria;
+            font-style:normal;
+            text-align:center;
+            color:navy;
+            font-weight:bold;
+            border-bottom:double 1 navy;
+            
+            
+         }
+         .labelInsp
+         {
+			position: absolute;
+			color:Navy;
+			font-size:9pt;
+			font-family:Arial;
+			font-weight:bold;
+			top:1090px;
+			left:8px;
+			height:24px;
+			width:180px;
+         }
+         .labelFicha
+         { 
+			position:absolute;
+			color:Navy;
+			font-size:9pt;
+			font-family:Arial;
+			font-weight:bold;
+			top:1090px;
+			left:260px;
+			height:24px;
+			width:180px;
+         }
+         
+         .labelFechaInsp
+         {
+			position:absolute;
+			color:Navy;
+			font-size:9pt;
+			font-family:Arial;
+			font-weight:bold;
+			top:1090px;
+			left:434px;
+			height:24px;
+			width:180px;
+         }
+         .txtInspector
+         {
+			position:absolute;
+			color:Navy;
+			font-size:9pt;
+			font-family:Arial;
+			font-weight:bold;
+			top:1110px;
+			left:8px;
+			width:160px;
+			height:18px;
+			
+         }
+         .txtFichaIsnp
+         {
+			position:absolute;
+			color:Navy;
+			font-size:8pt;
+			font-family:Arial;
+			font-weight:bold;
+			top:1110px;
+			left:260px;
+			width:100px;
+			height:18px;
+         }
+         .txtFechaInsp
+         {
+			position:absolute;
+			color:Navy;
+			font-size:8pt;
+			font-family:Arial;
+			font-weight:bold;
+			top:1110px;
+			left:433px;
+			width:120px;
+			height:18px;
+         }
+         
+         .botonNuevo
+         {
+			Width:80px;
+			font-family:Arial;
+			font-size:9pt;
+			color:Black;
+			position:absolute;
+			top:1170px;
+			left:95px;
+			height:22px;
+			
+         }
+         .botonGuardar
+         {
+			Width:80px;
+			font-family:Arial;
+			font-size:9pt;
+			color:Black;
+			position:absolute;
+			top:1170px;
+			left:195px;
+			height:22px;
+         }
+         .botonVerif
+         {
+			Width:80px;
+			font-family:Arial;
+			font-size:9pt;
+			color:Black;
+			position:absolute;
+			top:1170px;
+			left:295px;
+			height:22px;
+         }
+         .botonElim
+         {
+			Width:80px;
+			font-family:Arial;
+			font-size:9pt;
+			color:Black;
+			position:absolute;
+			top:1170px;
+			left:395px;
+			height:22px;
+         }
+         
+         .almanaque
+         {
+			Z-INDEX: 102; 
+			LEFT: 570px; 
+			POSITION: absolute; 
+			TOP: 1109px;
+			Height:122px;
+			Width:134px;
+			font-size:8pt;
+			font-family:Arial;
+
+			
+         }
+		 
+		 #imagenInicial
+		 {
+		 
+		    background-position:-2px 5px;
+			
+		    background-image: url(../../imagenes/Trafico1.jpg);
+	        background-repeat:no-repeat;
+			position:relative;
+			width:400px;
+			height:300px;
+			z-index:1000;
+			visibility:visible;
+			position:absolute;
+			top:-14px;
+			left:200px;
+			Z-INDEX: 101;
+			 /*margin:0px 100px 100px 0px;*/
+			
+		 
+		 }
+		 
+		 .tituloSuperior
+{
+	
+	 
+	font-size:12pt;
+	font-weight:bold;
+	
+	Z-INDEX: 104;
+	 LEFT: 268px; 
+	 POSITION: absolute; 
+	 TOP: 125px; 
+	 font-family:Arial;
+
+	 
+}
+.hora
+{
+font-size:8pt;
+	
+	
+	Z-INDEX: 104;
+	 LEFT:690px; 
+	 POSITION: absolute; 
+	 TOP: 130px; 
+	 font-family:Arial;
+
+}
+.fecha
+{
+
+font-size:8pt;
+	
+	
+	Z-INDEX: 104;
+	 LEFT: 690px; 
+	 POSITION: absolute; 
+	 TOP: 116px; 
+	 font-family:Arial;
+
+}
+
+.tablaTexto
+{
+     font-size:12pt;
+	 Z-INDEX: 104;
+	 font-family:Arial;
+	 text-align:justify;
+     font-weight:normal;
+	 list-style-type:none;
+
+}
+.vineta
+{
+  list-style-type:circle;
+}		 
+.tabla
+{
+	 width:730px;
+	 height:100px;
+	 text-align:justify;
+    font-weight:normal;
+	Z-INDEX: 101;
+    LEFT: 8px;
+    TOP: 4px; 
+	POSITION: absolute;
+
+}
+.tituloTabla
+{
+   font-size:12pt;
+	 Z-INDEX: 104;
+	 font-family:Arial;
+	 text-align:justify;
+    font-weight:normal;
+	font-weight:bold;
+	
+
+}
+
+.oculto 
+{ 
+	DISPLAY: none;
+	font-size:12pt;
+    Z-INDEX: 104;
+	font-family:Arial;
+	text-align:justify;
+    font-weight:normal;
+	list-style-type:none; 
+	
+}
+		
+.vineta
+
+ {
+
+   font-family:Wingdings;
+
+   FONT-SIZE: 12pt;
+
+   mso-list: Ignore;
+
+   }
+
+.tituloProve
+{
+font-size:12pt;
+	font-weight:bold;
+	color:#C00000;
+	Z-INDEX: 104;
+	 LEFT: 238px; 
+	 POSITION: absolute; 
+	 TOP: 10px; 
+	 font-family:Arial;
+
+}

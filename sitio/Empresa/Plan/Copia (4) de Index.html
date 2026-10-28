@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTEMA ALCASA - CONTROL DE CONTINGENCIA</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root { --primary: #0d47a1; --accent: #1565c0; --danger: #ff5252; --success: #69f0ae; }
+        body { background: #eceff1; font-family: 'Roboto', sans-serif; margin: 0; overflow-x: hidden; }
+        
+        .main-header {
+            background: white; padding: 10px 30px; display: flex; align-items: center;
+            justify-content: flex-start; gap: 20px; border-bottom: 3px solid var(--primary);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header-title { color: var(--primary); font-weight: 900; font-size: 1.8rem; margin: 0; text-transform: uppercase; }
+        .header-logo img { height: 60px; width: auto; }
+
+        .tabs { background: transparent; margin-top: 10px; }
+        .tabs .tab a { color: #555; font-weight: bold; }
+        .tabs .tab a.active { color: var(--primary) !important; }
+        .tabs .indicator { background-color: var(--primary) !important; }
+
+        /* ESTILOS DEL TABLERO DE MANDO */
+        .dashboard-container { padding: 20px; background: #f4f7f9; min-height: 80vh; }
+        .general-status { padding: 25px; border-radius: 12px; margin: 0 15px 25px 15px; color: white; text-align: center; transition: 0.5s; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .kpi-container { display: flex; gap: 15px; margin: 0 15px 25px 15px; flex-wrap: wrap; }
+        .kpi-card { flex: 1; min-width: 180px; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; border-bottom: 4px solid #ddd; }
+        
+        .card-registro-dash { background: white; border-radius: 8px; padding: 15px; margin-bottom: 20px; border-left: 8px solid #ccc; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .card-registro-dash.rojo { border-left-color: var(--danger); }
+        .card-registro-dash.amarillo { border-left-color: #ffd740; }
+        .card-registro-dash.verde { border-left-color: var(--success); }
+
+        .card-data-row { display: flex; justify-content: space-between; margin-top: 10px; border-top: 1px dashed #eee; padding-top: 8px; }
+        .card-data-item { text-align: center; flex: 1; }
+        .card-data-item label { display: block; font-size: 0.6rem; color: #999; font-weight: bold; }
+        .card-data-item span { font-size: 0.85rem; font-weight: bold; color: #333; }
+        .card-justification { margin-top: 12px; background: #f5f5f5; padding: 8px; border-radius: 4px; font-size: 0.75rem; color: #444; border-left: 3px solid var(--primary); min-height: 40px; }
+
+        /* ESTILOS GESTIÓN DE DATOS (RESTRICCIÓN: SIN CAMBIOS) */
+        .form-horizontal { background: white; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin: 15px; }
+        .table-card { background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 0 15px 15px 15px; display: flex; flex-direction: column; border: 1px solid #cfd8dc; height: calc(100vh - 360px); min-height: 400px; }
+        .table-scroll { flex-grow: 1; overflow: auto; width: 100%; }
+        table { border-collapse: collapse; width: 100%; }
+        thead th { position: sticky; top: 0; z-index: 10; background: #f1f4f9 !important; color: var(--primary); font-size: 0.75rem; text-transform: uppercase; padding: 12px 5px !important; border-bottom: 2px solid #d1d9e2; }
+        .filter-bar { background: #f8f9fa; padding: 10px 15px; border-bottom: 1px solid #e0e0e0; display: flex; gap: 20px; align-items: center; }
+        .input-group { background: #f5f7f9; padding: 5px 8px; border-radius: 4px; border: 1px solid #d1d9e2; min-height: 52px; }
+        .input-group label { font-size: 0.65rem; color: var(--primary); font-weight: bold; }
+        .smart-input, .input-group select { border: none !important; height: 1.6rem !important; width: 100%; background: transparent !important; display: block; font-size: 0.85rem; }
+        .led { height: 12px; width: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; vertical-align: middle; }
+        .bg-rojo { background: var(--danger); }
+        .bg-amarillo { background: #ffd740; }
+        .bg-verde { background: var(--success); }
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="header-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Logo_Alcasa.svg/1200px-Logo_Alcasa.svg.png"></div>
+    <h1 class="header-title">Sistema de Control de Contingencia</h1>
+</header>
+
+<div class="row" style="margin-bottom: 0;">
+    <div class="col s12">
+        <ul class="tabs">
+            <li class="tab col s6"><a class="active" href="#tab-gestion">GESTIÓN DE DATOS</a></li>
+            <li class="tab col s6"><a href="#tab-tablero">TABLERO DE MANDO</a></li>
+        </ul>
+    </div>
+
+    <div id="tab-gestion" class="col s12">
+        <div class="form-horizontal z-depth-1">
+            <input type="hidden" id="edit-idx" value="-1">
+            <div class="row" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+                <div style="flex: 1.2; min-width: 140px;"><div class="input-group"><label>Gerencia</label><select id="f-ger" class="browser-default"></select></div></div>
+                <div style="flex: 1.2; min-width: 140px;"><div class="input-group"><label>Área</label><select id="f-are" class="browser-default"></select></div></div>
+                <div style="flex: 1.2; min-width: 140px;"><div class="input-group"><label>Alcance</label><select id="f-alc" class="browser-default"></select></div></div>
+                <div style="flex: 0.4; min-width: 70px;"><div class="input-group"><label>UPDI #</label><select id="f-upd" class="browser-default"></select></div></div>
+                <div style="flex: 0.4; min-width: 70px;"><div class="input-group"><label>F.L.T.</label><input type="number" id="f-fue" class="smart-input"></div></div>
+                <div style="flex: 0.4; min-width: 70px;"><div class="input-group"><label>% Real</label><input type="number" id="f-rea" class="smart-input"></div></div>
+                <div style="flex: 0.4; min-width: 70px;"><div class="input-group"><label>% Plan</label><input type="number" id="f-pla" class="smart-input"></div></div>
+                <div style="flex: 1.5; min-width: 180px;"><div class="input-group"><label>Justificación</label><input type="text" id="f-jus" class="smart-input"></div></div>
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <button class="btn blue darken-4" onclick="guardarCambios()"><i class="material-icons">save</i></button>
+                    <button class="btn-flat grey lighten-3" onclick="limpiarForm()"><i class="material-icons">refresh</i></button>
+                </div>
+            </div>
+            <div class="center">
+                <input type="file" id="file-in" style="display:none" onchange="cargarArchivo(this)">
+                <button class="btn-small green darken-2" onclick="document.getElementById('file-in').click()">CARGAR EXCEL</button>
+                <button class="btn-small orange darken-3" onclick="descargarExcel()">DESCARGAR</button>
+            </div>
+        </div>
+        <div class="table-card">
+            <div class="filter-bar">
+                <div style="flex:1"><label>Gerencia</label><select id="filter-ger" class="browser-default" onchange="filtrar()"></select></div>
+                <div style="flex:1"><label>Área</label><select id="filter-are" class="browser-default" onchange="filtrar()"></select></div>
+                <div style="flex:1"><label>Alcance</label><select id="filter-alc" class="browser-default" onchange="filtrar()"></select></div>
+            </div>
+            <div class="table-scroll"><table class="centered highlight"><thead id="t-head"></thead><tbody id="t-body"></tbody></table></div>
+        </div>
+    </div>
+
+    <div id="tab-tablero" class="col s12 dashboard-container">
+        <div id="general-semaforo" class="general-status grey">
+            <div>
+                <span style="text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">Promedio Disponibilidad General (Columna DISP)</span>
+                <div id="general-pct" style="font-size: 3.5rem; font-weight: 900; line-height: 1.2;">0%</div>
+                <div id="general-msg" style="font-weight: bold; font-size: 1.2rem;">SIN DATOS</div>
+            </div>
+        </div>
+        
+        <div class="kpi-container">
+            <div class="kpi-card" style="border-bottom-color:var(--danger)"><div><div style="font-size:0.7rem; color:#777">CRÍTICOS</div><div id="kpi-rojo" style="color:var(--danger); font-size:1.8rem; font-weight:bold">0</div></div><i class="material-icons red-text">error_outline</i></div>
+            <div class="kpi-card" style="border-bottom-color:#fbc02d"><div><div style="font-size:0.7rem; color:#777">PREVENTIVOS</div><div id="kpi-ama" style="color:#fbc02d; font-size:1.8rem; font-weight:bold">0</div></div><i class="material-icons orange-text">warning</i></div>
+            <div class="kpi-card" style="border-bottom-color:var(--success)"><div><div style="font-size:0.7rem; color:#777">ESTABLES</div><div id="kpi-ver" style="color:var(--success); font-size:1.8rem; font-weight:bold">0</div></div><i class="material-icons green-text">check_circle_outline</i></div>
+        </div>
+
+        <div class="row" style="padding: 0 15px;">
+            <div class="col s4"><label>Gerencia</label><select id="d-f-ger" class="browser-default" onchange="renderTablero()"></select></div>
+            <div class="col s4"><label>Área</label><select id="d-f-are" class="browser-default" onchange="renderTablero()"></select></div>
+            <div class="col s4"><label>Alcance</label><select id="d-f-alc" class="browser-default" onchange="renderTablero()"></select></div>
+        </div>
+        <div id="tablero-grid" class="row" style="padding: 15px;"></div>
+    </div>
+</div>
+
+<script>
+    let excelData = [], idx = {};
+
+    function cargarArchivo(input) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const wb = XLSX.read(e.target.result, {type: 'array'});
+            excelData = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header: 1});
+            mapearColumnas();
+            poblarTodosLosDesplegables();
+            renderizar();
+            renderTablero();
+            M.toast({html: 'Datos Cargados'});
+        };
+        reader.readAsArrayBuffer(input.files[0]);
+    }
+
+    function mapearColumnas() {
+        if(!excelData.length) return;
+        const h = excelData[0].map(v => String(v).toUpperCase().trim());
+        idx = {
+            ger: h.indexOf("GERENCIA"), are: h.indexOf("AREA"),
+            alc: h.findIndex(v => v.includes("ALCANCE")), upd: h.findIndex(v => v.includes("UPDI")),
+            fue: h.findIndex(v => v.includes("FUERZA")), rea: h.indexOf("REAL"),
+            pla: h.indexOf("PLAN"), dis: h.findIndex(v => v.includes("DISP")),
+            jus: h.indexOf("JUSTIFICACION")
+        };
+    }
+
+    function poblarTodosLosDesplegables() {
+        const poblar = (colIdx, ids) => {
+            if (colIdx === -1) return;
+            const valores = [...new Set(excelData.slice(1).map(r => r[colIdx]).filter(v => v))].sort();
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if(!el) return;
+                let opt = (id.includes('f-') && !id.startsWith('d-f-')) ? `<option value="" disabled selected>Elegir...</option>` : `<option value="">--- TODOS ---</option>`;
+                opt += valores.map(v => `<option value="${v}">${v}</option>`).join('');
+                el.innerHTML = opt;
+            });
+        };
+        poblar(idx.ger, ['f-ger', 'filter-ger', 'd-f-ger']);
+        poblar(idx.are, ['f-are', 'filter-are', 'd-f-are']);
+        poblar(idx.alc, ['f-alc', 'filter-alc', 'd-f-alc']);
+        poblar(idx.upd, ['f-upd']);
+    }
+
+    function renderizar() {
+        const head = document.getElementById('t-head'), body = document.getElementById('t-body');
+        if (!excelData.length) return;
+        head.innerHTML = `<tr>${excelData[0].map(c => `<th>${c}</th>`).join('')}<th>ACCIONES</th></tr>`;
+        let rows = "";
+        excelData.slice(1).forEach((row, i) => {
+            if(!row[idx.ger]) return;
+            const d = parseFloat(row[idx.dis]) || 0;
+            const color = d < 0.5 ? 'rojo' : d < 0.8 ? 'amarillo' : 'verde';
+            let celdas = "";
+            for(let j=0; j < excelData[0].length; j++) {
+                if(j === idx.dis) celdas += `<td><span class="led bg-${color}"></span>${(d*100).toFixed(0)}%</td>`;
+                else celdas += `<td>${row[j] || ''}</td>`;
+            }
+            rows += `<tr>${celdas}<td>
+                <i class="material-icons blue-text" style="cursor:pointer" onclick="editar(${i+1})">edit</i>
+                <i class="material-icons red-text" style="cursor:pointer; margin-left:8px;" onclick="eliminar(${i+1})">delete</i>
+            </td></tr>`;
+        });
+        body.innerHTML = rows;
+        filtrar();
+    }
+
+    function renderTablero() {
+        const grid = document.getElementById('tablero-grid');
+        const fGer = document.getElementById('d-f-ger').value;
+        const fAre = document.getElementById('d-f-are').value;
+        const fAlc = document.getElementById('d-f-alc').value;
+        if (!excelData.length) return;
+
+        let totalDisp = 0, countRegistros = 0, html = "";
+        let cRojo = 0, cAma = 0, cVer = 0;
+
+        excelData.slice(1).forEach(row => {
+            if (!row[idx.ger]) return;
+            if ((!fGer || row[idx.ger] === fGer) && (!fAre || row[idx.are] === fAre) && (!fAlc || row[idx.alc] === fAlc)) {
+                
+                const d = parseFloat(row[idx.dis]) || 0;
+                const flt = parseFloat(row[idx.fue]) || 0;
+                const realPct = parseFloat(row[idx.rea]) || 0;
+                const planPct = parseFloat(row[idx.pla]) || 0;
+                
+                // CÁLCULOS REDONDEADOS A ENTEROS
+                const flr = Math.round((realPct / 100) * flt);
+                const flp = Math.round((planPct / 100) * flt);
+                
+                const jus = row[idx.jus] || "Sin observaciones registradas";
+                const pct = (d * 100).toFixed(1);
+                const col = d < 0.5 ? 'rojo' : d < 0.8 ? 'amarillo' : 'verde';
+                const barCol = d < 0.5 ? 'red' : d < 0.8 ? 'yellow darken-2' : 'green';
+
+                if(d < 0.5) cRojo++; else if(d < 0.8) cAma++; else cVer++;
+                totalDisp += d; countRegistros++;
+
+                html += `
+                <div class="col s12 m6 l4">
+                    <div class="card-registro-dash ${col}">
+                        <span style="font-weight:bold; color:var(--primary); font-size:1rem; display:block;">${row[idx.are]}</span>
+                        <span style="font-size:0.75rem; color:#777;">${row[idx.ger]} | ${row[idx.alc]}</span>
+                        
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin:10px 0;">
+                            <div style="font-size:1.8rem; font-weight:900;">${pct}%</div>
+                            <div style="width:60%"><div class="progress grey lighten-4" style="height:10px; border-radius:5px"><div class="determinate ${barCol}" style="width:${pct}%"></div></div></div>
+                        </div>
+
+                        <div class="card-data-row">
+                            <div class="card-data-item"><label>F.L.T.</label><span>${flt}</span></div>
+                            <div class="card-data-item"><label>F.L.R.</label><span>${flr}</span></div>
+                            <div class="card-data-item"><label>F.L.P.</label><span>${flp}</span></div>
+                        </div>
+
+                        <div class="card-justification"><b>Justificación:</b> ${jus}</div>
+                    </div>
+                </div>`;
+            }
+        });
+
+        grid.innerHTML = html || '<div class="col s12 center grey-text">No hay registros coincidentes</div>';
+        document.getElementById('kpi-rojo').innerText = cRojo;
+        document.getElementById('kpi-ama').innerText = cAma;
+        document.getElementById('kpi-ver').innerText = cVer;
+
+        const promedioFinal = countRegistros > 0 ? (totalDisp / countRegistros) * 100 : 0;
+        const sem = document.getElementById('general-semaforo');
+        document.getElementById('general-pct').innerText = promedioFinal.toFixed(1) + "%";
+        sem.className = "general-status " + (promedioFinal < 50 ? "red darken-2" : promedioFinal < 80 ? "orange darken-2" : "green darken-2");
+        document.getElementById('general-msg').innerText = promedioFinal < 50 ? "RIESGO CRÍTICO" : promedioFinal < 80 ? "ALERTA PREVENTIVA" : "ESTADO ÓPTIMO";
+    }
+
+    function filtrar() {
+        const fG = document.getElementById('filter-ger').value.toUpperCase();
+        const fA = document.getElementById('filter-are').value.toUpperCase();
+        const fL = document.getElementById('filter-alc').value.toUpperCase();
+        document.querySelectorAll("#t-body tr").forEach(fila => {
+            const tG = fila.children[idx.ger]?.innerText.toUpperCase() || "";
+            const tA = fila.children[idx.are]?.innerText.toUpperCase() || "";
+            const tL = fila.children[idx.alc]?.innerText.toUpperCase() || "";
+            fila.style.display = ((!fG || tG === fG) && (!fA || tA === fA) && (!fL || tL === fL)) ? "" : "none";
+        });
+    }
+
+    function editar(i) {
+        const r = excelData[i];
+        document.getElementById('edit-idx').value = i;
+        document.getElementById('f-ger').value = r[idx.ger] || "";
+        document.getElementById('f-are').value = r[idx.are] || "";
+        document.getElementById('f-alc').value = r[idx.alc] || "";
+        document.getElementById('f-upd').value = r[idx.upd] || "";
+        document.getElementById('f-fue').value = r[idx.fue] || "";
+        document.getElementById('f-rea').value = r[idx.rea] || "";
+        document.getElementById('f-pla').value = r[idx.pla] || "";
+        document.getElementById('f-jus').value = r[idx.jus] || "";
+        M.toast({html: 'Registro cargado'});
+        document.querySelector('a[href="#tab-gestion"]').click();
+    }
+
+    function eliminar(i) {
+        if(confirm("¿Eliminar registro?")) { excelData.splice(i, 1); renderizar(); renderTablero(); }
+    }
+
+    function guardarCambios() {
+        const i = document.getElementById('edit-idx').value;
+        if(i === "-1") return;
+        const rea = parseFloat(document.getElementById('f-rea').value) || 0;
+        const pla = parseFloat(document.getElementById('f-pla').value) || 1;
+        excelData[i][idx.ger] = document.getElementById('f-ger').value;
+        excelData[i][idx.are] = document.getElementById('f-are').value;
+        excelData[i][idx.alc] = document.getElementById('f-alc').value;
+        excelData[i][idx.upd] = document.getElementById('f-upd').value;
+        excelData[i][idx.fue] = document.getElementById('f-fue').value;
+        excelData[i][idx.rea] = rea;
+        excelData[i][idx.pla] = pla;
+        excelData[i][idx.dis] = (rea / pla).toFixed(4);
+        excelData[i][idx.jus] = document.getElementById('f-jus').value;
+        renderizar(); renderTablero(); limpiarForm();
+        M.toast({html: 'Registro Actualizado'});
+    }
+
+    function descargarExcel() {
+        const ws = XLSX.utils.aoa_to_sheet(excelData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Contingencia");
+        XLSX.writeFile(wb, "Reporte_Contingencia.xlsx");
+    }
+
+    function limpiarForm() {
+        document.getElementById('edit-idx').value = "-1";
+        document.querySelectorAll('.form-horizontal input, .form-horizontal select').forEach(el => el.value = "");
+    }
+    window.onload = () => { M.AutoInit(); };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

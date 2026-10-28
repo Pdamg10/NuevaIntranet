@@ -1,0 +1,610 @@
+﻿<!-- =========================================
+     HEADER CON MENÚ UNIFICADO
+     ========================================= -->
+<header class="alcoa-header" id="mainHeader" style="background-color: #003366;">
+    <div class="container">
+
+        <!-- =========================================
+             BARRA DE IDIOMAS (dentro del header, arriba del menú)
+             ========================================= -->
+        <div class="alcoa-langbar" translate="no">
+            <label for="alcoa-lang-select" class="alcoa-langbar-label">🌐 Idioma:</label>
+            <select id="alcoa-lang-select" class="alcoa-langbar-select" aria-label="Seleccionar idioma">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+                <option value="pt">Português</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="it">Italiano</option>
+                <option value="ar">العربية</option>
+                <option value="zh-CN">中文</option>
+                <option value="ja">日本語</option>
+            </select>
+        </div>
+
+        <div class="header-top">
+
+            <!-- BOTÓN HAMBURGUESA (solo móvil, izquierda) -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- LOGOS -->
+            <div class="logo-section">
+                <a href="/">
+                    <img src="http://190.202.49.114:8070/wp-content/uploads/2025/10/Logotipo-CVG-Alcasa-blanco-2048x1413.png" alt="Logo CVG Alcasa" class="logo-alcasa">
+                </a>
+                <div class="logo-divider"></div>
+                <a href="/">
+                    <img src="http://190.202.49.114:8070/wp-content/uploads/2025/10/cropped-logo-CVG-y-Alcasa-transf-scaled-1-150x150.png" alt="Logo CVG y Alcasa" class="logo-segundo">
+                </a>
+                <a href="/">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-bB26v2vYohjGkP34_LDWDKaxplXqHYNz4dMyzzD-&s=10" alt="Logo Institucional" class="logo-institucional">
+                </a>
+            </div>
+
+            <!-- OVERLAY PARA CERRAR MENÚ -->
+            <div class="menu-overlay" id="menuOverlay"></div>
+
+            <!-- MENÚ PRINCIPAL -->
+            <nav class="main-navigation" id="mainNav">
+                <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Cerrar menú">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <ul class="nav-list">
+                    <!-- Inicio -->
+                    <li><a href="/">Inicio</a></li>
+
+                    <!-- Empresa (con submenú) -->
+                    <li class="nav-item-has-dropdown">
+                        <a href="#" class="nav-link-dropdown">
+                            <span>Empresa</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/sitio/Empresa/Quienessomos/QuienesSomos.htm">Quiénes somos</a></li>
+                            <li><a href="/sitio/Empresa/Mision/mision.htm">Misión</a></li>
+                            <li><a href="/sitio/Empresa/Vision/vision.htm">Visión</a></li>
+                            <li><a href="/sitio/Empresa/PoliticadelaCalidad/politicadelacalidad.htm">Política de calidad</a></li>
+                            <li><a href="/sitio/Empresa/Directorio/JuntaDirectiva.htm">Junta Directiva</a></li>
+                            <li><a href="/sitio/Empresa/Ubicacion/Ubicacion1.htm">Ubicación</a></li>
+                            <li><a href="/sitio/Empresa/Otros/Principios.htm">Principios</a></li>
+                            <li><a href="/#responsabilidad-social">Responsabilidad Social</a></li>
+                            <li><a href="http://190.202.49.114:5050/" target="_blank" rel="noopener noreferrer">Oficina de Atención al Ciudadano</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Productos (con submenú) -->
+                    <li class="nav-item-has-dropdown">
+                        <a href="#" class="nav-link-dropdown">
+                            <span>Productos</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/sitio/NuestrosProductos/Productos_Fundicion.htm">Fundición</a></li>
+                            <li><a href="/sitio/NuestrosProductos/Productos_Laminacion.htm">Laminación</a></li>
+                            <li><a href="/sitio/NuestrosProductos/Productos_Extrusion.htm">Extrusión</a></li>
+                            <li><a href="/sitio/BANNER%202023/Catalogo%20Productos%202023.pdf" target="_blank">Catálogo PDF</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Comercialización -->
+                    <li><a href="/sitio/Comercializacion/Comercializacion.htm">Comercialización</a></li>
+
+                    <!-- Prensa -->
+                    <li><a href="/sitio/Empresa/noticias/Prensa.html">Sala de Prensa</a></li>
+
+                    <!-- Extranet (con submenú) -->
+                    <li class="nav-item-has-dropdown">
+    		    <a href="#" class="nav-link-dropdown">
+		        <span>Extranet</span>
+		        <i class="fas fa-chevron-down dropdown-icon"></i>
+		    </a>
+		    <ul class="dropdown-menu">
+		        <li><a href="http://alcasa.com.ve/sitio/buscador_embedido.html" target="_blank">Consulta clave ARI</a></li>
+		        <li><a href="/sitio/Empresa/CA/index.html">Nuestros Cumpleañeros</a></li>
+                        <li><a href="http://alcasa.com.ve:5002" target="_blank" rel="noopener noreferrer">Acceso a la mensajería institucional</a></li>
+                        <li><a href="http://alcasa.com.ve/contactos.html" target="_blank" rel="noopener noreferrer">Panel de Contactos</a></li>
+		    </ul>
+		    </li>
+
+                    <!-- Contacto -->
+                    <li><a href="/#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- =========================================
+     BOTÓN FLOTANTE DE WHATSAPP
+     ========================================= -->
+<a href="https://wa.me/584122522272?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20web%20de%20ALCASA%20y%20quisiera%20informaci%C3%B3n%20sobre%20sus%20productos." 
+   target="_blank" 
+   rel="noopener noreferrer"
+   class="whatsapp-float" 
+   aria-label="Contactar por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-tooltip">Contáctanos por WhatsApp</span>
+</a>
+
+<!-- =========================================
+     ESTILOS DEL HEADER Y BOTÓN FLOTANTE
+     ========================================= -->
+<style>
+    /* =========================================
+       HEADER: fondo azul garantizado
+       ========================================= */
+    .alcoa-header {
+        background-color: #003366 !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* =========================================
+       BARRA DE IDIOMAS (dentro del header, arriba del menú)
+       ========================================= */
+    .alcoa-langbar {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        background: #003366;
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.12);
+        font-size: 0.8rem;
+    }
+    .alcoa-langbar-label {
+        color: #c9d3e0;
+        font-weight: 600;
+        font-size: 0.8rem;
+    }
+    .alcoa-langbar-select {
+        background: rgba(255,255,255,0.1);
+        color: #ffffff;
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 4px;
+        padding: 3px 8px;
+        font-size: 0.8rem;
+        font-family: inherit;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.2s ease;
+    }
+    .alcoa-langbar-select:hover {
+        background: rgba(255,255,255,0.2);
+        border-color: rgba(255,255,255,0.5);
+    }
+    .alcoa-langbar-select:focus {
+        border-color: #ff6b1a;
+    }
+    .alcoa-langbar-select option {
+        background: #003366;
+        color: #ffffff;
+    }
+
+    /* Blindaje mínimo: solo ocultar la barra de Google cuando aparece */
+    .goog-te-banner-frame,
+    iframe.goog-te-banner-frame,
+    .goog-te-banner-frame.skiptranslate {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+    }
+    body {
+        top: 0 !important;
+    }
+    #goog-gt-tt,
+    .goog-te-balloon-frame {
+        display: none !important;
+    }
+    .goog-text-highlight {
+        background: none !important;
+        box-shadow: none !important;
+    }
+
+    .alcoa-header .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 0;
+        position: relative;
+        min-height: 80px;
+    }
+
+    /* ---------- LOGOS ---------- */
+    .alcoa-header .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex: 1;
+    }
+    .alcoa-header .logo-alcasa { height: 75px; width: auto; object-fit: contain; }
+    .alcoa-header .logo-segundo { height: 75px; width: auto; object-fit: contain; }
+    .alcoa-header .logo-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.3); margin: 0 10px; }
+    .alcoa-header .logo-institucional { height: 50px; width: auto; object-fit: contain; transition: all 0.3s ease; }
+    .alcoa-header .logo-segundo:hover,
+    .alcoa-header .logo-institucional:hover { transform: scale(1.05); }
+
+    /* ---------- BOTÓN HAMBURGUESA ---------- */
+    .alcoa-header .mobile-menu-btn {
+        display: none;
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        font-size: 1.6rem;
+        cursor: pointer;
+        padding: 8px 12px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        z-index: 1002;
+    }
+    .alcoa-header .mobile-menu-btn:hover { background: rgba(255,255,255,0.1); }
+
+    /* ---------- MENÚ PRINCIPAL ---------- */
+    .alcoa-header .main-navigation {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+    }
+    .alcoa-header .nav-list {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .alcoa-header .nav-list > li { position: relative; }
+    .alcoa-header .nav-list > li > a {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 12px 20px;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+    .alcoa-header .nav-list > li > a:hover {
+        color: #ff6b1a;
+        background: rgba(255,255,255,0.05);
+    }
+
+    /* ---------- SUBMENÚS (desktop) ---------- */
+    .alcoa-header .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 230px;
+        background: #ffffff;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        border-radius: 0 0 8px 8px;
+        padding: 8px 0;
+        list-style: none;
+        z-index: 999;
+    }
+    .alcoa-header .dropdown-menu li a {
+        display: block;
+        padding: 10px 20px;
+        color: #1a1a1a;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+    }
+    .alcoa-header .dropdown-menu li a:hover {
+        background: #f5f7fa;
+        color: #003366;
+        border-left-color: #ff6b1a;
+        padding-left: 25px;
+    }
+    .alcoa-header .dropdown-icon {
+        font-size: 0.7rem;
+        transition: transform 0.3s ease;
+    }
+
+    @media (min-width: 769px) {
+        .alcoa-header .nav-item-has-dropdown:hover .dropdown-menu { display: block; }
+        .alcoa-header .nav-item-has-dropdown:hover > .nav-link-dropdown .dropdown-icon { transform: rotate(180deg); }
+    }
+
+    /* ---------- BOTÓN CERRAR (oculto en desktop) ---------- */
+    .alcoa-header .mobile-close-btn { display: none; }
+
+    /* ---------- OVERLAY ---------- */
+    .menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .menu-overlay.active { display: block; opacity: 1; }
+
+    /* =========================================
+       BOTÓN FLOTANTE DE WHATSAPP
+       ========================================= */
+    .whatsapp-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        width: 62px;
+        height: 62px;
+        background: #25d366;
+        color: #ffffff !important;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+        z-index: 997;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+    }
+
+    .whatsapp-float::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #25d366;
+        opacity: 0.6;
+        animation: whatsappPulse 2s infinite;
+        z-index: -1;
+    }
+
+    @keyframes whatsappPulse {
+        0% { transform: scale(1); opacity: 0.6; }
+        70% { transform: scale(1.4); opacity: 0; }
+        100% { transform: scale(1.4); opacity: 0; }
+    }
+
+    .whatsapp-float:hover {
+        background: #20b85a;
+        transform: scale(1.1);
+        box-shadow: 0 8px 28px rgba(37, 211, 102, 0.7);
+        color: #ffffff !important;
+    }
+
+    .whatsapp-float i {
+        font-size: 2rem;
+        color: #ffffff;
+    }
+
+    /* Tooltip al pasar el mouse (solo escritorio) */
+    .whatsapp-tooltip {
+        position: absolute;
+        right: 75px;
+        top: 50%;
+        transform: translateY(-50%) translateX(10px);
+        background: #003366;
+        color: #ffffff;
+        padding: 10px 16px;
+        border-radius: 22px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        pointer-events: none;
+    }
+
+    .whatsapp-tooltip::after {
+        content: '';
+        position: absolute;
+        right: -6px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 6px solid transparent;
+        border-left-color: #003366;
+    }
+
+    .whatsapp-float:hover .whatsapp-tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) translateX(0);
+    }
+
+    /* =========================================
+       RESPONSIVE - MENÚ MÓVIL DESDE LA IZQUIERDA
+       ========================================= */
+    @media (max-width: 768px) {
+        .alcoa-langbar {
+            justify-content: center;
+            padding: 5px 0;
+            flex-wrap: wrap;
+        }
+        .alcoa-langbar-label { font-size: 0.75rem; }
+        .alcoa-langbar-select { font-size: 0.75rem; }
+
+        .alcoa-header .header-top {
+            padding: 12px 0;
+            min-height: 70px;
+        }
+
+        /* Botón hamburguesa a la izquierda */
+        .alcoa-header .mobile-menu-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Logos centrados */
+        .alcoa-header .logo-section {
+            justify-content: center;
+            padding: 0 50px;
+            gap: 10px;
+        }
+        .alcoa-header .logo-alcasa,
+        .alcoa-header .logo-segundo { height: 50px; }
+        .alcoa-header .logo-institucional { height: 35px; }
+        .alcoa-header .logo-divider { display: none; }
+
+        /* Menú deslizante desde la izquierda */
+        .alcoa-header .main-navigation {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 320px;
+            height: 100vh;
+            background: #ffffff;
+            flex-direction: column;
+            align-items: stretch;
+            padding: 20px;
+            margin-left: 0;
+            transition: left 0.3s ease;
+            box-shadow: 4px 0 25px rgba(0,0,0,0.2);
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        .alcoa-header .main-navigation.active { left: 0; }
+
+        /* Botón cerrar (X) dentro del menú */
+        .alcoa-header .mobile-close-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            background: transparent;
+            border: none;
+            color: #003366;
+            font-size: 1.6rem;
+            cursor: pointer;
+            padding: 8px;
+            margin-bottom: 15px;
+            align-self: flex-end;
+        }
+        .alcoa-header .mobile-close-btn:hover { color: #ff6b1a; }
+
+        /* Lista vertical */
+        .alcoa-header .nav-list {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0;
+            width: 100%;
+        }
+        .alcoa-header .nav-list > li { width: 100%; }
+        .alcoa-header .nav-list > li > a {
+            width: 100%;
+            padding: 15px 10px;
+            color: #1a1a1a;
+            border-bottom: 1px solid #e1e5eb;
+            border-radius: 0;
+            justify-content: space-between;
+            font-size: 1rem;
+        }
+        .alcoa-header .nav-list > li > a:hover {
+            color: #003366;
+            background: #f5f7fa;
+        }
+
+        /* Submenús colapsables en móvil */
+        .alcoa-header .dropdown-menu {
+            position: static;
+            display: none;
+            width: 100%;
+            background: #f5f7fa;
+            box-shadow: none;
+            border-radius: 0;
+            padding: 0;
+            margin: 0;
+            border-left: 3px solid #ff6b1a;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+        .alcoa-header .dropdown-menu.open {
+            display: block;
+            max-height: 500px;
+        }
+        .alcoa-header .dropdown-menu li a {
+            padding: 12px 20px 12px 30px;
+            border-left: none;
+            font-size: 0.9rem;
+            color: #5a6c7d;
+            border-bottom: 1px solid #e1e5eb;
+        }
+        .alcoa-header .dropdown-menu li:last-child a { border-bottom: none; }
+        .alcoa-header .dropdown-menu li a:hover {
+            background: #e1e5eb;
+            color: #003366;
+            padding-left: 35px;
+        }
+
+        /* Rotación del chevron cuando el submenú está abierto */
+        .alcoa-header .nav-item-has-dropdown.open > .nav-link-dropdown .dropdown-icon { transform: rotate(180deg); }
+        .alcoa-header .nav-item-has-dropdown.open > .nav-link-dropdown {
+            background: #f5f7fa;
+            color: #003366;
+        }
+
+        /* Botón flotante ajustado para móvil */
+        .whatsapp-float {
+            width: 56px;
+            height: 56px;
+            bottom: 20px;
+            right: 20px;
+        }
+        .whatsapp-float i { font-size: 1.8rem; }
+        .whatsapp-tooltip { display: none; }
+    }
+</style>
+
+<!-- =========================================
+     SCRIPT DEL SELECTOR DE IDIOMAS
+     Comunica el <select> con el traductor global (/js/translator.js)
+     ========================================= -->
+<script>
+(function () {
+    function initSelectorIdioma() {
+        var select = document.getElementById("alcoa-lang-select");
+        if (!select) {
+            setTimeout(initSelectorIdioma, 100);
+            return;
+        }
+        if (select.dataset.yaInicializado === "1") return;
+        select.dataset.yaInicializado = "1";
+
+        // Sincronizar el select con el idioma actual (cookie googtrans)
+        var match = document.cookie.match(/googtrans=\/es\/([^;]+)/);
+        var idiomaActual = match ? match[1] : "es";
+        select.value = idiomaActual;
+
+        // Al cambiar, llamar al traductor global
+        select.addEventListener("change", function () {
+            var codigo = this.value;
+            if (typeof window.alcosaSetLanguage === "function") {
+                window.alcosaSetLanguage(codigo);
+            } else {
+                // Reintentar si translator.js aún no ha cargado
+                (function reintentar() {
+                    if (typeof window.alcosaSetLanguage === "function") {
+                        window.alcosaSetLanguage(codigo);
+                    } else {
+                        setTimeout(reintentar, 100);
+                    }
+                })();
+            }
+        });
+
+        console.log("✅ Selector de idioma listo.");
+    }
+    initSelectorIdioma();
+})();
+</script>

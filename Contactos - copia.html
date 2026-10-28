@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador de Contactos - CVG ALCASA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --alcoa-blue: #003366;
+            --alcoa-light-blue: #0056a3;
+            --accent-orange: #ff6b1a;
+            --whatsapp-green: #25d366;
+            --white: #ffffff;
+            --light-gray: #f5f7fa;
+            --medium-gray: #e1e5eb;
+            --text-dark: #1a1a1a;
+            --text-gray: #5a6c7d;
+            --danger: #e74c3c;
+            --success: #28a745;
+            --transition: all 0.25s ease;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           HEADER
+           ========================================= */
+        .app-header {
+            background: linear-gradient(135deg, var(--alcoa-blue), var(--alcoa-light-blue));
+            color: var(--white);
+            padding: 24px 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .app-header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .app-header h1 {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .app-header h1 i { color: var(--accent-orange); }
+        .app-header .stats {
+            display: flex;
+            gap: 20px;
+            font-size: 0.85rem;
+        }
+        .app-header .stats span {
+            background: rgba(255,255,255,0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* =========================================
+           CONTROLES
+           ========================================= */
+        .controls {
+            max-width: 1400px;
+            margin: 25px auto 0;
+            padding: 0 30px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .search-box {
+            flex: 1;
+            min-width: 260px;
+            position: relative;
+        }
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 42px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: var(--white);
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--alcoa-blue);
+            box-shadow: 0 0 0 3px rgba(0,51,102,0.1);
+        }
+        .controls select,
+        .controls button {
+            padding: 12px 18px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            cursor: pointer;
+            background: var(--white);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .controls button.primary {
+            background: var(--alcoa-blue);
+            color: var(--white);
+            border-color: var(--alcoa-blue);
+        }
+        .controls button.primary:hover {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+
+        /* =========================================
+           LISTA DE CONTACTOS
+           ========================================= */
+        .contacts-list {
+            max-width: 1400px;
+            margin: 25px auto 60px;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border-top: 4px solid var(--alcoa-blue);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+            border-top-color: var(--accent-orange);
+        }
+
+        .card-header {
+            padding: 18px 20px 12px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        .card-header .nombre {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--alcoa-blue);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .card-header .nombre .interes-tag {
+            font-size: 0.7rem;
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .card-header .fecha {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .card-header .fecha i { color: var(--accent-orange); }
+
+        .card-body {
+            padding: 14px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+        .card-body .info-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-gray);
+            word-break: break-word;
+        }
+        .card-body .info-line i {
+            color: var(--alcoa-blue);
+            width: 16px;
+            flex-shrink: 0;
+        }
+        .card-body .info-line a {
+            color: var(--alcoa-light-blue);
+            text-decoration: none;
+        }
+        .card-body .info-line a:hover {
+            text-decoration: underline;
+            color: var(--accent-orange);
+        }
+        .card-body .comentario {
+            background: var(--light-gray);
+            padding: 10px 12px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-orange);
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            font-style: italic;
+            max-height: 90px;
+            overflow: hidden;
+            position: relative;
+        }
+        .card-body .comentario.expandido {
+            max-height: none;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 6px;
+            padding: 12px 20px;
+            border-top: 1px solid var(--medium-gray);
+            background: var(--light-gray);
+        }
+        .card-actions button {
+            flex: 1;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: var(--transition);
+            color: var(--white);
+            font-family: inherit;
+        }
+        .btn-ver { background: var(--alcoa-blue); }
+        .btn-ver:hover { background: var(--alcoa-light-blue); }
+        .btn-wa { background: var(--whatsapp-green); }
+        .btn-wa:hover { background: #1da851; }
+        .btn-copy { background: #6c757d; }
+        .btn-copy:hover { background: #5a6268; }
+        .btn-del { background: var(--danger); }
+        .btn-del:hover { background: #c0392b; }
+
+        /* =========================================
+           MODAL DE DETALLE
+           ========================================= */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,20,40,0.85);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: var(--white);
+            border-radius: 16px;
+            max-width: 720px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--alcoa-blue), var(--alcoa-light-blue));
+            color: var(--white);
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .modal-header h3 {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .modal-header h3 i { color: var(--accent-orange); }
+        .modal-close {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: var(--white);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .modal-close:hover {
+            background: var(--accent-orange);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .modal-body .field {
+            margin-bottom: 16px;
+        }
+        .modal-body .field label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--alcoa-blue);
+            margin-bottom: 4px;
+        }
+        .modal-body .field .value {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            padding: 10px 14px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            border-left: 3px solid var(--alcoa-light-blue);
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+        .modal-body .field .value a {
+            color: var(--alcoa-light-blue);
+        }
+        .modal-body .field .value a:hover {
+            color: var(--accent-orange);
+        }
+
+        .modal-actions {
+            padding: 16px 24px;
+            border-top: 1px solid var(--medium-gray);
+            background: var(--light-gray);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .modal-actions button {
+            flex: 1;
+            min-width: 140px;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition);
+            color: var(--white);
+            font-family: inherit;
+        }
+        .modal-actions .btn-wa { background: var(--whatsapp-green); }
+        .modal-actions .btn-wa:hover { background: #1da851; transform: translateY(-2px); }
+        .modal-actions .btn-copy-email { background: var(--alcoa-blue); }
+        .modal-actions .btn-copy-email:hover { background: var(--alcoa-light-blue); transform: translateY(-2px); }
+        .modal-actions .btn-copy-raw { background: #6c757d; }
+        .modal-actions .btn-copy-raw:hover { background: #5a6268; transform: translateY(-2px); }
+
+        /* =========================================
+           TOAST DE NOTIFICACIÓN
+           ========================================= */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--alcoa-blue);
+            color: var(--white);
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        .toast.success { background: var(--success); }
+        .toast.error { background: var(--danger); }
+        .toast i { font-size: 1.1rem; }
+
+        /* =========================================
+           ESTADO VACÍO
+           ========================================= */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-gray);
+        }
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 768px) {
+            .app-header { padding: 18px 20px; }
+            .app-header h1 { font-size: 1.1rem; }
+            .app-header .stats { font-size: 0.75rem; gap: 10px; }
+            .app-header .stats span { padding: 4px 10px; }
+            .controls { padding: 0 20px; margin-top: 18px; }
+            .contacts-list { padding: 0 20px; grid-template-columns: 1fr; }
+            .modal-body { padding: 18px; }
+            .modal-actions { padding: 12px 18px; }
+            .modal-actions button { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="app-header">
+        <div class="app-header-inner">
+            <h1><i class="fas fa-address-book"></i> Administrador de Contactos</h1>
+            <div class="stats">
+                <span><i class="fas fa-users"></i> <b id="totalCount">0</b> contactos</span>
+                <span><i class="fas fa-filter"></i> <b id="filteredCount">0</b> mostrados</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTROLES -->
+    <div class="controls">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Buscar por nombre, correo, empresa o comentario...">
+        </div>
+        <select id="interesFilter">
+            <option value="">Todos los intereses</option>
+            <option value="Cotización">Cotización</option>
+            <option value="Fundición">Fundición</option>
+            <option value="Laminación">Laminación</option>
+            <option value="Extrusión">Extrusión</option>
+            <option value="Comercialización">Comercialización</option>
+            <option value="Catálogo de productos">Catálogo de productos</option>
+            <option value="Otro">Otro</option>
+        </select>
+        <button class="primary" onclick="recargarCSV()">
+            <i class="fas fa-sync-alt"></i> Recargar
+        </button>
+    </div>
+
+    <!-- LISTA DE CONTACTOS -->
+    <div class="contacts-list" id="contactsList">
+        <div class="empty-state">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Cargando contactos...</p>
+        </div>
+    </div>
+
+    <!-- MODAL DE DETALLE -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-circle"></i> <span id="modalNombre">Detalle</span></h3>
+                <button class="modal-close" onclick="cerrarDetalle()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="field">
+                    <label><i class="fas fa-calendar-alt"></i> Fecha</label>
+                    <div class="value" id="modalFecha">—</div>
+                </div>
+                <div class="field">
+                    <label><i class="fas fa-user"></i> Nombre</label>
+                    <div class="value" id="modalNombreVal">—</div>
+                </div>
+                <div class="field">
+                    <label><i class="fas fa-envelope"></i> Correo</label>
+                    <div class="value"><a id="modalCorreo" href="#">—</a></div>
+                </div>
+                <div class="field">
+                    <label><i class="fas fa-building"></i> Empresa</label>
+                    <div class="value" id="modalEmpresa">—</div>
+                </div>
+                <div class="field">
+                    <label><i class="fas fa-tag"></i> Interés</label>
+                    <div class="value" id="modalInteres">—</div>
+                </div>
+                <div class="field">
+                    <label><i class="fas fa-comment-dots"></i> Comentario</label>
+                    <div class="value" id="modalComentario">—</div>
+                </div>
+                <div class="field">
+                    <label><i class="fas fa-globe"></i> IP</label>
+                    <div class="value" id="modalIP">—</div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-wa" onclick="copiarWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> Copiar para WhatsApp
+                </button>
+                <button class="btn-copy-email" onclick="copiarCorreo()">
+                    <i class="fas fa-envelope"></i> Copiar para Correo
+                </button>
+                <button class="btn-copy-raw" onclick="copiarTextoPlano()">
+                    <i class="fas fa-copy"></i> Copiar todo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMsg">Copiado al portapapeles</span>
+    </div>
+
+    <!-- =========================================
+         LÓGICA
+         ========================================= -->
+    <script>
+        let contactos = [];
+        let contactosFiltrados = [];
+        let contactoActual = null;
+
+        // =========================================
+        // Cargar el CSV
+        // =========================================
+        async function cargarCSV() {
+            try {
+                const response = await fetch('contactos.csv?v=' + Date.now());
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+
+                const buffer = await response.arrayBuffer();
+                // El CSV viene en UTF-8
+                const texto = new TextDecoder('utf-8').decode(buffer);
+
+                contactos = parsearCSV(texto);
+                // Ordenar por fecha descendente (más recientes primero)
+                contactos.sort((a, b) => (b.fecha || '').localeCompare(a.fecha || ''));
+
+                contactosFiltrados = [...contactos];
+                renderizar();
+                actualizarContadores();
+            } catch (err) {
+                console.error('Error cargando CSV:', err);
+                document.getElementById('contactsList').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i>
+                        <p><b>No se pudo cargar contactos.csv</b></p>
+                        <p style="font-size:0.85rem;margin-top:10px;">Verifica que el archivo exista en la misma carpeta.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // =========================================
+        // Parsear el CSV (soporta comillas, comas y saltos de línea)
+        // =========================================
+        function parsearCSV(texto) {
+            const filas = [];
+            let filaActual = [];
+            let campoActual = '';
+            let dentroComillas = false;
+
+            for (let i = 0; i < texto.length; i++) {
+                const char = texto[i];
+                const siguiente = texto[i + 1];
+
+                if (dentroComillas) {
+                    if (char === '"' && siguiente === '"') {
+                        // Comilla escapada
+                        campoActual += '"';
+                        i++;
+                    } else if (char === '"') {
+                        // Fin de comillas
+                        dentroComillas = false;
+                    } else {
+                        campoActual += char;
+                    }
+                } else {
+                    if (char === '"') {
+                        dentroComillas = true;
+                    } else if (char === ',') {
+                        filaActual.push(campoActual);
+                        campoActual = '';
+                    } else if (char === '\n' || (char === '\r' && siguiente === '\n')) {
+                        filaActual.push(campoActual);
+                        if (filaActual.length > 1 || filaActual[0] !== '') {
+                            filas.push(filaActual);
+                        }
+                        filaActual = [];
+                        campoActual = '';
+                        if (char === '\r') i++; // Salta el \n
+                    } else if (char === '\r') {
+                        // Ignorar \r solo
+                    } else {
+                        campoActual += char;
+                    }
+                }
+            }
+            // Última fila
+            if (campoActual !== '' || filaActual.length > 0) {
+                filaActual.push(campoActual);
+                filas.push(filaActual);
+            }
+
+            // Quitar BOM del primer campo
+            if (filas.length > 0 && filas[0][0]) {
+                filas[0][0] = filas[0][0].replace(/^\uFEFF/, '');
+            }
+
+            // Convertir a objetos
+            const encabezados = filas[0].map(h => h.trim());
+            const registros = [];
+
+            for (let i = 1; i < filas.length; i++) {
+                const fila = filas[i];
+                if (fila.length < 2 || !fila[1]?.trim()) continue;
+
+                const obj = {};
+                encabezados.forEach((h, idx) => {
+                    obj[h.toLowerCase()] = (fila[idx] || '').trim();
+                });
+
+                if (obj.nombre || obj.correo) {
+                    registros.push({
+                        fecha: obj.fecha || '',
+                        nombre: obj.nombre || '',
+                        correo: obj.correo || '',
+                        empresa: obj.empresa || '',
+                        interes: obj.interes || '',
+                        comentario: obj.comentario || '',
+                        ip: obj.ip || ''
+                    });
+                }
+            }
+
+            return registros;
+        }
+
+        // =========================================
+        // Renderizar la lista
+        // =========================================
+        function renderizar() {
+            const contenedor = document.getElementById('contactsList');
+
+            if (contactosFiltrados.length === 0) {
+                contenedor.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>No hay contactos que coincidan con la búsqueda.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            contenedor.innerHTML = contactosFiltrados.map((c, idx) => `
+                <div class="contact-card">
+                    <div class="card-header">
+                        <div class="nombre">
+                            <span>${escapeHtml(c.nombre) || '(Sin nombre)'}</span>
+                            ${c.interes ? `<span class="interes-tag">${escapeHtml(c.interes)}</span>` : ''}
+                        </div>
+                        <div class="fecha">
+                            <i class="fas fa-clock"></i> ${escapeHtml(c.fecha)}
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-line">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:${escapeHtml(c.correo)}">${escapeHtml(c.correo)}</a>
+                        </div>
+                        ${c.empresa ? `
+                            <div class="info-line">
+                                <i class="fas fa-building"></i>
+                                ${escapeHtml(c.empresa)}
+                            </div>
+                        ` : ''}
+                        ${c.comentario ? `
+                            <div class="comentario">${escapeHtml(c.comentario)}</div>
+                        ` : ''}
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-ver" onclick="verDetalle(${idx})">
+                            <i class="fas fa-eye"></i> Ver
+                        </button>
+                        <button class="btn-wa" onclick="copiarWAIndex(${idx})">
+                            <i class="fab fa-whatsapp"></i> WA
+                        </button>
+                        <button class="btn-copy" onclick="copiarTextoIndex(${idx})">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="btn-del" onclick="eliminarContacto(${idx})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // =========================================
+        // Ver detalle
+        // =========================================
+        function verDetalle(idx) {
+            const c = contactosFiltrados[idx];
+            if (!c) return;
+            contactoActual = c;
+
+            document.getElementById('modalNombre').textContent = c.nombre || 'Detalle';
+            document.getElementById('modalFecha').textContent = c.fecha || '—';
+            document.getElementById('modalNombreVal').textContent = c.nombre || '—';
+
+            const correoEl = document.getElementById('modalCorreo');
+            correoEl.textContent = c.correo || '—';
+            correoEl.href = 'mailto:' + c.correo;
+
+            document.getElementById('modalEmpresa').textContent = c.empresa || '—';
+            document.getElementById('modalInteres').textContent = c.interes || '—';
+            document.getElementById('modalComentario').textContent = c.comentario || '—';
+            document.getElementById('modalIP').textContent = c.ip || '—';
+
+            document.getElementById('detailModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarDetalle() {
+            document.getElementById('detailModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('detailModal').addEventListener('click', function(e) {
+            if (e.target === this) cerrarDetalle();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') cerrarDetalle();
+        });
+
+        // =========================================
+        // Copiar al portapapeles
+        // =========================================
+        async function copiarAlPortapapeles(texto, mensaje) {
+            try {
+                await navigator.clipboard.writeText(texto);
+                mostrarToast(mensaje || 'Copiado al portapapeles', 'success');
+            } catch (err) {
+                // Fallback para navegadores viejos
+                const ta = document.createElement('textarea');
+                ta.value = texto;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                mostrarToast(mensaje || 'Copiado al portapapeles', 'success');
+            }
+        }
+
+        // Formato WhatsApp
+        function textoWhatsApp(c) {
+            let t = '';
+            t += `*Nombre:* ${c.nombre}\n`;
+            if (c.empresa) t += `*Empresa:* ${c.empresa}\n`;
+            t += `*Correo:* ${c.correo}\n`;
+            t += `*Interés:* ${c.interes}\n`;
+            t += `*Fecha:* ${c.fecha}\n`;
+            if (c.comentario) t += `\n*Comentario:*\n${c.comentario}\n`;
+            return t;
+        }
+
+        // Formato correo
+        function textoCorreo(c) {
+            let t = '';
+            t += `Asunto: ${c.interes || 'Contacto desde la web'}\n`;
+            t += `Para: ${c.correo}\n\n`;
+            t += `Estimado/a ${c.nombre}${c.empresa ? ` (${c.empresa})` : ''},\n\n`;
+            t += `Gracias por contactarnos a través de nuestra página web.\n\n`;
+            t += `Su mensaje fue:\n`;
+            t += `"${c.comentario}"\n\n`;
+            t += `Saludos cordiales,\n`;
+            t += `Equipo de CVG ALCASA`;
+            return t;
+        }
+
+        // Texto plano (todo el registro)
+        function textoPlano(c) {
+            let t = '';
+            t += `Fecha: ${c.fecha}\n`;
+            t += `Nombre: ${c.nombre}\n`;
+            t += `Correo: ${c.correo}\n`;
+            if (c.empresa) t += `Empresa: ${c.empresa}\n`;
+            t += `Interés: ${c.interes}\n`;
+            if (c.comentario) t += `Comentario: ${c.comentario}\n`;
+            t += `IP: ${c.ip}\n`;
+            return t;
+        }
+
+        function copiarWhatsApp() {
+            if (!contactoActual) return;
+            copiarAlPortapapeles(textoWhatsApp(contactoActual), 'Formato WhatsApp copiado');
+        }
+        function copiarCorreo() {
+            if (!contactoActual) return;
+            copiarAlPortapapeles(textoCorreo(contactoActual), 'Formato correo copiado');
+        }
+        function copiarTextoPlano() {
+            if (!contactoActual) return;
+            copiarAlPortapapeles(textoPlano(contactoActual), 'Contacto copiado');
+        }
+
+        function copiarWAIndex(idx) {
+            const c = contactosFiltrados[idx];
+            if (c) copiarAlPortapapeles(textoWhatsApp(c), 'Formato WhatsApp copiado');
+        }
+        function copiarTextoIndex(idx) {
+            const c = contactosFiltrados[idx];
+            if (c) copiarAlPortapapeles(textoPlano(c), 'Contacto copiado');
+        }
+
+        // =========================================
+        // Eliminar contacto (solo del lado del cliente)
+        // =========================================
+        function eliminarContacto(idx) {
+            const c = contactosFiltrados[idx];
+            if (!c) return;
+
+            if (!confirm(`¿Ocultar el contacto "${c.nombre}"?\n\nNota: esta acción solo lo oculta en esta sesión. Para eliminarlo del archivo CSV necesitas un backend.`)) {
+                return;
+            }
+
+            // Lo quitamos de la lista filtrada y de la lista completa
+            contactosFiltrados.splice(idx, 1);
+            const posReal = contactos.indexOf(c);
+            if (posReal > -1) contactos.splice(posReal, 1);
+
+            renderizar();
+            actualizarContadores();
+            mostrarToast('Contacto ocultado de la vista', 'success');
+        }
+
+        // =========================================
+        // Filtros y búsqueda
+        // =========================================
+        function aplicarFiltros() {
+            const busqueda = document.getElementById('searchInput').value.toLowerCase().trim();
+            const interesFiltro = document.getElementById('interesFilter').value;
+
+            contactosFiltrados = contactos.filter(c => {
+                if (interesFiltro && c.interes !== interesFiltro) return false;
+                if (busqueda) {
+                    const blob = `${c.nombre} ${c.correo} ${c.empresa} ${c.comentario}`.toLowerCase();
+                    if (!blob.includes(busqueda)) return false;
+                }
+                return true;
+            });
+
+            renderizar();
+            actualizarContadores();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', aplicarFiltros);
+        document.getElementById('interesFilter').addEventListener('change', aplicarFiltros);
+
+        // =========================================
+        // Recargar
+        // =========================================
+        function recargarCSV() {
+            document.getElementById('contactsList').innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Cargando contactos...</p>
+                </div>
+            `;
+            cargarCSV();
+        }
+
+        // =========================================
+        // Contadores
+        // =========================================
+        function actualizarContadores() {
+            document.getElementById('totalCount').textContent = contactos.length;
+            document.getElementById('filteredCount').textContent = contactosFiltrados.length;
+        }
+
+        // =========================================
+        // Toast
+        // =========================================
+        let toastTimer = null;
+        function mostrarToast(mensaje, tipo) {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toastMsg');
+            const icon = toast.querySelector('i');
+
+            msg.textContent = mensaje;
+            toast.className = 'toast show ' + (tipo || '');
+            icon.className = tipo === 'error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
+
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // =========================================
+        // Utilidad: escape HTML
+        // =========================================
+        function escapeHtml(texto) {
+            if (texto === undefined || texto === null) return '';
+            return String(texto)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        // =========================================
+        // Iniciar
+        // =========================================
+        cargarCSV();
+    </script>
+
+</body>
+</html>

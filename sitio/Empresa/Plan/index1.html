@@ -1,0 +1,693 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CVG ALCASA - Control de Contingencia</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root { --primary: #0d47a1; --secondary: #1565c0; --bg: #eceff1; --surface: #ffffff; --danger: #ff5252; --warning: #ffd740; --success: #69f0ae; }
+        body { background: var(--bg); padding: 15px; font-family: 'Roboto', sans-serif; color: #37474f; }
+        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--primary); z-index: 10000; display: flex; align-items: center; justify-content: center; }
+        .login-box { background: white; padding: 40px; border-radius: 15px; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .header-container { background: var(--surface); padding: 15px 30px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; }
+        .logo-box { display: flex; align-items: center; gap: 20px; }
+        .logo-box img { height: 65px; width: auto; }
+        .title-box h5 { margin: 0; font-weight: 800; color: var(--primary); font-size: 1.3rem; text-transform: uppercase; }
+        .main-card { background: var(--surface); padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .contingencia-container { background: #263238; border-radius: 12px; border: 4px solid #90a4ae; overflow: hidden; position: relative; }
+        .map-wrapper { position: relative; width: 100%; height: 500px; background: white; overflow: hidden; }
+        .planta-img-bg { width: 100%; height: 100%; object-fit: contain; display: block; }
+        .updi-marker { position: absolute; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.7rem; box-shadow: 0 0 12px rgba(0,0,0,0.5); border: 2px solid white; z-index: 5; text-align: center; transform: translate(-50%, -50%); cursor: pointer; transition: 0.2s; }
+        .updi-marker:hover { transform: translate(-50%, -50%) scale(1.1); }
+        .updi-detail-card { margin-top: 20px; background: white; border-radius: 12px; border-left: 8px solid var(--primary); padding: 20px; display: none; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
+        .detail-item { background: #f8f9fb; padding: 10px; border-radius: 8px; border: 1px solid #e3e8ee; }
+        .industrial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 25px; background: #eceff1; }
+        .galpon-block { background: white; border: 2px solid #546e7a; border-radius: 4px; padding: 15px; position: relative; min-height: 160px; }
+        .galpon-header { font-weight: 900; border-bottom: 2px solid #eee; margin-bottom: 10px; padding-bottom: 5px; color: var(--primary); font-size: 0.9rem; text-transform: uppercase; }
+        .stats-box { font-size: 1.2rem; font-weight: 800; margin: 10px 0; }
+        .roof-line { position: absolute; top: 0; left: 0; width: 100%; height: 6px; }
+        .form-section { background: #f8f9fb; padding: 20px; border-radius: 12px; border: 1px solid #e3e8ee; margin-bottom: 25px; }
+        .input-group { background: white; padding: 5px 15px; border-radius: 8px; border: 1px solid #d1d9e2; margin-bottom: 10px; }
+        .input-group label { font-size: 0.7rem; color: var(--primary); font-weight: 700; text-transform: uppercase; }
+        .smart-input { border: none !important; margin: 0 !important; font-weight: 600; height: 1.8rem !important; outline: none; width: 100%; }
+        .smart-area { border: none !important; margin: 0 !important; font-weight: 500; min-height: 40px; outline: none; width: 100%; resize: none; padding-top: 5px; }
+        .records-container { border: 1px solid #e0e6ed; border-radius: 12px; overflow: hidden; background: white; }
+        .table-scroll { max-height: 450px; overflow-y: auto; }
+        thead th { position: sticky; top: 0; background: #fff !important; z-index: 10; border-bottom: 2px solid #e0e6ed !important; }
+        .led { height: 12px; width: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; vertical-align: middle; }
+        .bg-rojo { background-color: var(--danger); box-shadow: 0 0 8px var(--danger); }
+        .bg-amarillo { background-color: var(--warning); box-shadow: 0 0 8px var(--warning); }
+        .bg-verde { background-color: var(--success); box-shadow: 0 0 8px var(--success); }
+        .btn-main { background: var(--primary); color: white; border-radius: 8px; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; width: 100%; height: 45px; }
+        .btn-main.disabled { background: #b0bec5 !important; cursor: not-allowed; }
+        .action-btn { cursor: pointer; margin: 0 5px; }
+        .kpi-card { background: white; padding: 20px; border-radius: 12px; border: 1px solid #e0e6ed; height: 100%; }
+        .semaforo-global { width: 45px; height: 45px; border-radius: 50%; margin: 0 auto 10px; border: 2px solid #eee; }
+        .filter-panel-dash { background: #f1f4f9; padding: 15px; border-radius: 12px; margin: 20px 0; border: 1px solid #e0e6ed; }
+        .justificacion-text { background: #f5f7f9; padding: 8px; border-radius: 5px; font-size: 0.8rem; margin-top: 10px; border-left: 3px solid var(--primary); color: #455a64; font-style: italic; }
+        .tabs .tab a { color: var(--primary) !important; font-weight: 700; }
+        .tabs .indicator { background-color: var(--primary) !important; }
+        .header-filter { height: 30px !important; display: block !important; border: 1px solid #ddd; border-radius: 4px; font-size: 0.8rem; }
+        .oee-container { display: none; background: #e3f2fd; padding: 15px; border-radius: 10px; border: 1px dashed #1565c0; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+<div id="login-screen">
+    <div class="login-box">
+        <div class="center">
+            <img src="http://alcasa.com.ve/sitio/Imagenes/Logo-CVG-Alcasa1.gif" style="height:80px;">
+            <h5 style="font-weight:800; color:var(--primary); margin-top:20px;">ACCESO RESTRINGIDO</h5>
+        </div>
+        <div class="input-field">
+            <i class="material-icons prefix">person</i>
+            <input type="text" id="user-login">
+            <label for="user-login">Usuario</label>
+        </div>
+        <div class="input-field">
+            <i class="material-icons prefix">lock</i>
+            <input type="password" id="pass-login">
+            <label for="pass-login">Contraseña</label>
+        </div>
+        <button class="btn-main" onclick="validarAcceso()">ENTRAR AL SISTEMA</button>
+    </div>
+</div>
+
+<div id="main-content" style="display:none;">
+    <div class="header-container">
+        <div class="logo-box">
+            <img src="http://alcasa.com.ve/sitio/Imagenes/Logo-CVG-Alcasa1.gif" alt="Logo">
+            <div class="title-box">
+                <h5>SISTEMA DE CONTROL DE CONTINGENCIA Y GESTION DE OPERATIVIDAD (OEE)</h5>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span id="display-user-name" class="grey-text text-darken-2" style="font-weight: 800; font-size: 0.8rem; border-right: 2px solid #ddd; padding-right: 10px; text-transform: uppercase;">USUARIO</span>
+                    <span id="sync-status" class="blue-text" style="font-size: 0.7rem; font-weight: bold;">ESPERANDO VINCULACIÓN...</span>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <a href="https://t.me/sm25946" target="_blank" class="btn-flat blue-text text-darken-2" style="font-weight: 700; border: 1px solid #26a8e1; border-radius: 8px;">
+                  <i class="material-icons left">help_outline</i> SOPORTE TÉCNICO
+            </a>
+            <button class="btn-flat red-text text-darken-4" onclick="generarPDF()" style="font-weight: 700; border: 1px solid #d32f2f; border-radius: 8px;">
+                <i class="material-icons left">picture_as_pdf</i> INFORME PDF
+            </button>
+            <button class="btn-flat blue-text text-darken-4" onclick="vincularArchivo()" style="font-weight: 700; border: 1px solid #0d47a1; border-radius: 8px;">
+                <i class="material-icons left">cloud_upload</i> VINCULAR EXCEL
+            </button>
+        </div>
+    </div>
+
+    <div class="main-card">
+        <div id="ui" style="display:none;">
+            <ul class="tabs transparent">
+                <li class="tab col s4"><a class="active" href="#edicion">GESTIÓN DE DATOS</a></li>
+                <li class="tab col s4"><a href="#dashboard" onclick="renderDashboard()">TABLERO DE MANDO</a></li>
+                <li class="tab col s4"><a href="#integral" onclick="renderIntegral()">TABLERO DE CONTINGENCIA</a></li>
+            </ul>
+
+            <div id="edicion" class="col s12">
+                <div class="form-section" style="margin-top:20px;">
+                    <input type="hidden" id="edit-index" value="-1">
+                    <div class="row" style="margin-bottom:0;">
+                        <div class="col s12 m3"><div class="input-group"><label>Gerencia</label><input type="text" id="f-gerencia" list="list-gerencia" class="smart-input"></div></div>
+                        <div class="col s12 m3"><div class="input-group"><label>Área</label><input type="text" id="f-area" list="list-area" class="smart-input"></div></div>
+                        <div class="col s12 m3"><div class="input-group"><label>Alcance</label><input type="text" id="f-alcance" list="list-alcance" class="smart-input"></div></div>
+                        <div class="col s12 m3"><div class="input-group"><label>UPDI #</label><input type="text" id="f-updi" list="list-updi" class="smart-input"></div></div>
+                    </div>
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col s12 m2"><div class="input-group"><label>F.L. Total</label><input type="number" id="f-fuerza" class="smart-input"></div></div>
+                        <div class="col s12 m2"><div class="input-group"><label>% Real <i class="material-icons tiny blue-text" style="cursor:pointer" onclick="toggleOEE()">settings_suggest</i></label><input type="number" id="f-real" class="smart-input"></div></div>
+                        <div class="col s12 m2"><div class="input-group"><label>% Plan Meta</label><input type="number" id="f-plan" class="smart-input"></div></div>
+                        <div class="col s12 m6"><div class="input-group"><label>Justificación</label><textarea id="f-justificacion" class="smart-area"></textarea></div></div>
+                    </div>
+                    <div id="oee-panel" class="oee-container">
+                        <div class="row" style="margin-bottom:0;">
+                            <div class="col s12 m3"><div class="input-group"><label>T. OPERACIÓN REAL</label><input type="number" id="f-t-real" class="smart-input" oninput="calcularOEE()"></div></div>
+                            <div class="col s12 m3"><div class="input-group"><label>TIEMPO PLANIFICADO</label><input type="number" id="f-t-plan" class="smart-input" oninput="calcularOEE()"></div></div>
+                            <div class="col s12 m3"><div class="input-group"><label>DISPONIBILIDAD (%)</label><input type="number" id="f-oee-disp" class="smart-input" style="background:#f1f8e9!important" readonly></div></div>
+                            <div class="col s12 m3"><div class="input-group"><label>UNID. PRODUCIDAS</label><input type="number" id="f-u-prod" class="smart-input" oninput="calcularOEE()"></div></div>
+                        </div>
+                        <div class="row" style="margin-bottom:0;">
+                            <div class="col s12 m3"><div class="input-group"><label>UNID. TEÓRICAS MÁX.</label><input type="number" id="f-u-teor" class="smart-input" oninput="calcularOEE()"></div></div>
+                            <div class="col s12 m3"><div class="input-group"><label>RENDIMIENTO (%)</label><input type="number" id="f-rend" class="smart-input" style="background:#f1f8e9!important" readonly></div></div>
+                            <div class="col s12 m3"><div class="input-group"><label>UNIDADES BUENAS</label><input type="number" id="f-u-buenas" class="smart-input" oninput="calcularOEE()"></div></div>
+                            <div class="col s12 m3"><div class="input-group"><label>UNID. PROD. TOTAL</label><input type="number" id="f-u-total" class="smart-input" oninput="calcularOEE()"></div></div>
+                        </div>
+                        <div class="row" style="margin-bottom:0;">
+                            <div class="col s12 m6"><div class="input-group"><label>CALIDAD (%)</label><input type="number" id="f-calidad" class="smart-input" style="background:#f1f8e9!important" readonly></div></div>
+                            <div class="col s12 m6"><div class="input-group"><label>OPERATIVIDAD OEE (%)</label><input type="number" id="f-oee-final" class="smart-input" style="background:#f1f8e9!important; color:red!important; font-weight:bold" readonly></div></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m6 offset-m3"><button id="btn-save" class="btn-main" onclick="procesarFormulario()">ACTUALIZAR Y GUARDAR EN EXCEL</button></div>
+                        <div class="col s12 m3"><button class="btn-flat grey lighten-3" onclick="cancelarEdicion()" style="width:100%; border-radius:8px; height:45px;">LIMPIAR</button></div>
+                    </div>
+                </div>
+                <div class="records-container">
+                    <div class="table-scroll"><table class="centered highlight"><thead id="h-table-edicion"></thead><tbody id="b-table-edicion"></tbody></table></div>
+                </div>
+            </div>
+
+            <div id="dashboard" class="col s12">
+                <div class="filter-panel-dash"><div class="row" id="dash-filters-container" style="margin-bottom:0;"></div></div>
+                <div id="kpi-dashboard" class="row"></div>
+                <div class="row" id="grid-cards"></div>
+            </div>
+
+            <div id="integral" class="col s12" style="margin-top:20px;">
+                <div class="contingencia-container">
+                    <div class="map-wrapper" id="updi-map-area">
+                        <img src="http://alcasa.com.ve/sitio/empresa/plan/VI Linea.jpg" class="planta-img-bg" alt="Planta">
+                    </div>
+                    <div id="updi-info-panel" class="updi-detail-card"></div>
+                    <div class="industrial-grid" id="industrial-map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<datalist id="list-gerencia"></datalist><datalist id="list-area"></datalist><datalist id="list-alcance"></datalist><datalist id="list-updi"></datalist>
+
+<script>
+    // --- LÓGICA DE NEGOCIO ---
+    function calcularOEE() {
+        const getValue = (id) => parseFloat(document.getElementById(id).value) || 0;
+        const tReal = getValue('f-t-real'), tPlan = getValue('f-t-plan'), uProd = getValue('f-u-prod'), uTeor = getValue('f-u-teor'), uBuenas = getValue('f-u-buenas'), uTotal = getValue('f-u-total');
+        const disp = tPlan > 0 ? (tReal / tPlan) : 0, rend = uTeor > 0 ? (uProd / uTeor) : 0, calidad = uTotal > 0 ? (uBuenas / uTotal) : 0;
+        let factores = []; if (disp > 0) factores.push(disp); if (rend > 0) factores.push(rend); if (calidad > 0) factores.push(calidad);
+        const oee = factores.length > 0 ? factores.reduce((a, b) => a * b) : 0;
+        document.getElementById('f-oee-disp').value = (disp * 100).toFixed(2);
+        document.getElementById('f-rend').value = (rend * 100).toFixed(2);
+        document.getElementById('f-calidad').value = (calidad * 100).toFixed(2);
+        document.getElementById('f-oee-final').value = (oee * 100).toFixed(2);
+        if(oee > 0) document.getElementById('f-real').value = (oee * 100).toFixed(2);
+    }
+    function toggleOEE() { const p = document.getElementById('oee-panel'); p.style.display = (p.style.display === 'none') ? 'block' : 'none'; }
+
+    const USUARIOS_AUTORIZADOS = [
+        { user: "admin", pass: "wygkqhrcj4", nivel: "admin", nombreLargo: "ADMINISTRADOR DEL SISTEMA" },
+        { user: "alcasa", pass: "2026", nivel: "visor", nombreLargo: "USUARIO DE PRUEBA" },
+        { user: "sm25946", pass: "aa122525", nivel: "admin", nombreLargo: "SEBASTIAN MARCANO" },
+        { user: "mv12810", pass: "mauro52", nivel: "admin", nombreLargo: "MAURO VITALI" },
+        { user: "am26678", pass: "0123456789", nivel: "admin", nombreLargo: "MATSON RUIZ ALEXANDER ALBERTO" },
+        { user: "lz17290", pass: "0123456789", nivel: "admin", nombreLargo: "ZAPATA LUIS" },
+        { user: "am26670", pass: "0123456789", nivel: "admin", nombreLargo: "MILLAN FERMIN ALMIRCA JOSE" },
+        { user: "oc12072", pass: "0123456789", nivel: "admin", nombreLargo: "CASTELLIN COVA ORLANDO JOSE" },
+        { user: "eg16562", pass: "0123456789", nivel: "admin", nombreLargo: "GAZCON SIMOZA EDUARDO ANTONIO" },
+        { user: "bg20499", pass: "0123456789", nivel: "admin", nombreLargo: "GUILIANI JIMENEZ BRUNO EMILIO" },
+        { user: "fr16131", pass: "0123456789", nivel: "admin", nombreLargo: "REINA BELLO FRANK REINALDO" },
+        { user: "mp26669", pass: "0123456789", nivel: "admin", nombreLargo: "PRIMERA LANOY MARIA AUXILIADORA" },
+        { user: "ec26686", pass: "0123456789", nivel: "admin", nombreLargo: "CONTRERAS ESCALONA ENDY GABRIEL" },
+        { user: "am26668", pass: "0123456789", nivel: "admin", nombreLargo: "MALAVE ROJAS ALEXANDER JOSE" },
+        { user: "rc26689", pass: "0123456789", nivel: "admin", nombreLargo: "CASTILLO PAZ RICARDO MARCELO" },
+        { user: "yc12529", pass: "0123456789", nivel: "admin", nombreLargo: "CARRIÓN LAVERDE YASAIRA JOSEFINA" },
+        { user: "mb26671", pass: "0123456789", nivel: "admin", nombreLargo: "MARIANA DEL VALLE BENZALI MATA" },
+        { user: "ei19603", pass: "0123456789", nivel: "admin", nombreLargo: "INZUNZA  FIGUEROA EVELYN" },
+        { user: "wb16658", pass: "0123456789", nivel: "admin", nombreLargo: "BLANCO QUIJADA WILLIAM ALFREDO" },
+        { user: "jg12118", pass: "0123456789", nivel: "admin", nombreLargo: "GONZALEZ ZAPATA JESÚS MARÍA" },
+        { user: "gc26665", pass: "familiacaldera", nivel: "admin", nombreLargo: "CALDERA CAÑA GUSTAVO RAFAEL" }
+    ];
+
+    // --- GLOSARIO DE DESCRIPCIONES DE UPDI ---
+    const DESCRIPCIONES_UPDI = {
+        "1": "Portón Principal. Entrada y Salida de materiales, materias primas y control de acceso de personal.",
+        "2": "Edificios Administrativos 1 y 2. Gerencias Administrativas.",
+        "3": "Estación de servicio. Estación de Servicio de combustible. Almacén Central. Transporte de Personal.",
+        "4": "Planta Laminación. Laminación en Caliente. Laminación Frío. Empaque.",
+        "5": "S/E Eléctricas y Plantas de Agua. Subestaciones Eléctricas. Planta de Agua Industrial.",
+        "6": "Planta Extrusión. Planta de Extrusión.",
+        "7": "Estación de Gas Natural y Portón Av FFAA. Estación de distribución de gas. Portón de salida conducente a la Av Fzas Armadas diagonal a Planta Carbón.",
+        "8": "Taller Central. Taller máquinas. Taller Soldadura. Taller Nuevo.",
+        "9": "Taller Automotriz y Punto 5. Taller automotriz. Almacén de estructuras punto 5.",
+        "10": "Laboratorio Químico.",
+        "11": "Edificio Ingeniería. Edificio Ingeniería (gerencias técnicas). Sala de Cultura.",
+        "12": "Portón Laboratorio. Portón de salida alterno laboratorio. Celdas III.",
+        "13": "Planta Fundición. Planta Fundición. Patio de almacenamiento de productos terminados.",
+        "14": "Cocina Central. Cocina Central. Comedores.",
+        "15": "Servicios Médicos y Control de Emergencias. Sala de Enfermería. Control de Emergencias. Servicio de Ambulancias.",
+        "16": "Sala de Servidores y Telecomunicaciones. Sala de Servidores. Red y Servicio de Telecomunicaciones.",
+        "17": "Punto 6. Límite con CVG CARBONORCA.",
+        "18": "Sala de Compresores y Servicios Reducción. Sala de compresores. Sistema de Grúas Celdas II. Recuperación de Cátodos."
+    };
+
+    let nivelUsuarioActivo = "";
+    let archivoCSVHandle = null; 
+
+    function validarAcceso() {
+        const u = document.getElementById('user-login').value, p = document.getElementById('pass-login').value;
+        const check = USUARIOS_AUTORIZADOS.find(usr => usr.user === u && usr.pass === p);
+        if(check) {
+            nivelUsuarioActivo = check.nivel;
+            document.getElementById('display-user-name').innerText = check.nombreLargo;
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            M.Tabs.init(document.querySelectorAll('.tabs'));
+            if(nivelUsuarioActivo === "visor") {
+                const btnSave = document.getElementById('btn-save'); btnSave.classList.add('disabled'); btnSave.innerText = "ACCESO DE SOLO LECTURA";
+                document.querySelectorAll('.smart-input, .smart-area').forEach(i => i.disabled = true);
+            }
+            M.toast({html: `Bienvenido: ${check.nombreLargo}`, classes: 'blue rounded'});
+        } else { M.toast({html: 'Usuario o Clave Incorrecta', classes: 'red rounded'}); }
+    }
+
+    let handle, excelData = [], idx = {}, filtersEdicion = { ger: '', are: '', alc: '' }, modoEdicionActivo = false;
+    const updiCoords = { 
+        "1": { top: "60%", left: "49%" }, "2": { top: "37%", left: "47%" }, "3": { top: "30%", left: "49%" }, 
+        "4": { top: "47%", left: "49%" }, "5": { top: "43%", left: "62%" }, "6": { top: "43%", left: "52%" }, 
+        "7": { top: "32%", left: "52%" }, "8": { top: "60%", left: "39%" }, "9": { top: "53%", left: "52%" },
+        "10": { top: "25%", left: "40%" }, "11": { top: "20%", left: "45%" }, "12": { top: "15%", left: "50%" },
+        "13": { top: "70%", left: "60%" }, "14": { top: "75%", left: "55%" }, "15": { top: "80%", left: "45%" },
+        "16": { top: "60%", left: "46%" }, "17": { top: "85%", left: "70%" }, "18": { top: "50%", left: "70%" }
+    };
+
+async function consultarIntegrantesCSV(numeroUPDI) {
+        const listaContenedor = document.getElementById(`lista-integrantes-${numeroUPDI}`);
+        if (listaContenedor && listaContenedor.style.display === 'block') {
+            listaContenedor.style.display = 'none';
+            return;
+        }
+
+        try {
+            if (!archivoCSVHandle) {
+                M.toast({html: 'Seleccione el archivo UPDIS.CSV', classes: 'blue'});
+                [archivoCSVHandle] = await window.showOpenFilePicker({
+                    types: [{ description: 'CSV de Integrantes', accept: {'text/csv': ['.csv']} }],
+                    multiple: false
+                });
+            }
+
+            const file = await archivoCSVHandle.getFile();
+            const buffer = await file.arrayBuffer();
+            
+            let contenido = "";
+            const decoderUTF8 = new TextDecoder('utf-8', { fatal: true });
+            const decoderWin = new TextDecoder('windows-1252', { fatal: false });
+
+            try {
+                contenido = decoderUTF8.decode(buffer);
+            } catch (e) {
+                contenido = decoderWin.decode(buffer);
+            }
+            
+            const lineas = contenido.split(/\r?\n/);
+            const filas = lineas.slice(1);
+            const updiBuscada = `UPDI ${numeroUPDI}`.trim().toUpperCase();
+            
+            let htmlIntegrantes = `
+                <div style="background: #e3f2fd; padding: 10px; border-radius: 8px; margin-top: 10px; border: 1px solid #bbdefb; animation: fadeIn 0.3s; overflow-x: auto;">
+                    <h6 style="font-size: 0.8rem; font-weight: 800; color: #0d47a1; margin: 0 0 8px 0; border-bottom: 1px solid #90caf9;">TRABAJADORES ASIGNADOS (EDICIÓN HABILITADA):</h6>
+                    <table id="tabla-edit-csv-${numeroUPDI}" style="font-size: 0.75rem; width: 100%;">
+                        <thead>
+                            <tr style="color: #1565c0;">
+                                <th>FICHA</th>
+                                <th>NOMBRE Y APELLIDO</th>
+                                <th>TELÉFONO</th>
+                                <th>ROL CTD</th>
+                                <th>CARGO</th>
+                                <th>STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+            let hayDatos = false;
+            filas.forEach((f, idx) => {
+                const c = f.split(';');
+                if (c[0] && c[0].trim().toUpperCase() === updiBuscada) {
+                    hayDatos = true;
+                    const currentStatus = (c[6] || "").trim().toUpperCase();
+                    
+                    htmlIntegrantes += `
+                        <tr data-original-index="${idx + 1}" style="border-bottom: 1px solid #e0e0e0;">
+                            <td contenteditable="true">${c[1] || ''}</td>
+                            <td contenteditable="true"><b>${c[2] || ''}</b></td>
+                            <td contenteditable="true">${c[3] || ''}</td>
+                            <td contenteditable="true">${c[4] || ''}</td>
+                            <td contenteditable="true">${c[5] || ''}</td>
+                            <td>
+                                <select class="browser-default" style="height: 25px; font-size: 0.7rem; padding: 0;">
+                                    <option value="ACTIVO" ${currentStatus === 'ACTIVO' ? 'selected' : ''}>ACTIVO</option>
+                                    <option value="VACACIONES" ${currentStatus === 'VACACIONES' ? 'selected' : ''}>VACACIONES</option>
+                                    <option value="REPOSO" ${currentStatus === 'REPOSO' ? 'selected' : ''}>REPOSO</option>
+                                    <option value="PERMISO" ${currentStatus === 'PERMISO' ? 'selected' : ''}>PERMISO</option>
+                                    <option value="SUSPENDIDO" ${currentStatus === 'SUSPENDIDO' ? 'selected' : ''}>SUSPENDIDO</option>
+                                </select>
+                            </td>
+                        </tr>`;
+                }
+            });
+
+            if (!hayDatos) {
+                M.toast({html: `No hay integrantes para la ${updiBuscada}`, classes: 'orange'});
+                return;
+            }
+
+            htmlIntegrantes += `
+                        </tbody>
+                    </table>
+                    <div style="margin-top:10px; text-align:right;">
+                        <button class="btn-small blue darken-3" onclick="guardarCambiosCSV('${numeroUPDI}')">
+                            <i class="material-icons left">save_alt</i>GUARDAR EN CSV
+                        </button>
+                    </div>
+                </div>`;
+            
+            listaContenedor.innerHTML = htmlIntegrantes;
+            listaContenedor.style.display = 'block';
+
+        } catch (error) {
+            console.error(error);
+            archivoCSVHandle = null; 
+            M.toast({html: 'Error al acceder al archivo CSV', classes: 'red'});
+        }
+    }
+
+    async function guardarCambiosCSV(numeroUPDI) {
+        try {
+            const file = await archivoCSVHandle.getFile();
+            const textoOriginal = await file.text();
+            let lineas = textoOriginal.split(/\r?\n/);
+            const tabla = document.getElementById(`tabla-edit-csv-${numeroUPDI}`);
+            const filasEditadas = tabla.querySelectorAll('tbody tr');
+            const updiEtiqueta = `UPDI ${numeroUPDI}`;
+
+            filasEditadas.forEach(tr => {
+                const idxOriginal = tr.getAttribute('data-original-index');
+                const c = tr.querySelectorAll('td');
+                const statusSelect = tr.querySelector('select').value;
+                
+                // Reconstruimos la línea: UPDI#;FICHA;NOMBRE;TEL;ROL;CARGO;STATUS
+                lineas[idxOriginal] = `${updiEtiqueta};${c[0].innerText.trim()};${c[1].innerText.trim()};${c[2].innerText.trim()};${c[3].innerText.trim()};${c[4].innerText.trim()};${statusSelect}`;
+            });
+
+            const nuevoContenido = lineas.join('\n');
+            const writable = await archivoCSVHandle.createWritable();
+            await writable.write(nuevoContenido);
+            await writable.close();
+
+            M.toast({html: '✅ ARCHIVO CSV ACTUALIZADO CON STATUS', classes: 'green'});
+        } catch (error) {
+            console.error(error);
+            M.toast({html: '❌ ERROR AL GUARDAR EL CSV', classes: 'red'});
+        }
+    }
+
+    async function vincularArchivo() {
+        try {
+            [handle] = await window.showOpenFilePicker({ mode: 'readwrite', types: [{ description: 'Excel Files', accept: {'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx']} }] });
+            await cargarYRenderizar();
+            document.getElementById('ui').style.display = 'block';
+            setInterval(async () => { if (!modoEdicionActivo && handle) await cargarYRenderizar(); }, 15000);
+        } catch (e) { console.log("Vinculación denegada"); }
+    }
+
+    async function cargarYRenderizar() {
+        try {
+            const file = await handle.getFile(), data = await file.arrayBuffer(), wb = XLSX.read(data, {type: 'array'});
+            excelData = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header: 1});
+            mapear(); actualizarCatalogos(); renderTablas();
+            document.getElementById('sync-status').innerText = "VINCULADO: " + new Date().toLocaleTimeString();
+        } catch (e) { console.error(e); }
+    }
+
+    function mapear() {
+        const h = excelData[0].map(c => String(c).toUpperCase().trim());
+        idx = { updi: h.findIndex(x => x.includes("UPDI")), gerencia: h.indexOf("GERENCIA"), alcance: h.findIndex(x => x.includes("ALCANCE")), fuerza: h.indexOf("FUERZA LABORAL"), area: h.indexOf("AREA"), real: h.indexOf("REAL"), plan: h.indexOf("PLAN"), disp: h.indexOf("DISP"), justificacion: h.indexOf("JUSTIFICACION"), tReal: h.indexOf("TIEMPO DE OPERACIÓN REAL"), tPlan: h.indexOf("TIEMPO PLANIFICADO"), oeeDisp: h.indexOf("DISPONIBILIDAD"), uProd: h.indexOf("UNIDADES PRODUCIDAS"), uTeor: h.indexOf("UNIDADES TEÓRICAS MÁXIMAS"), rend: h.indexOf("RENDIMIENTO"), uBuenas: h.indexOf("UNIDADES BUENAS"), uTotal: h.indexOf("UNIDADES PRODUCIDAS TOTAL"), calidad: h.indexOf("CALIDAD"), oeeFinal: h.indexOf("OPERATIVIDAD (OEE)") };
+    }
+
+    function renderTablaEdicion() {
+        const h = document.getElementById('h-table-edicion'), b = document.getElementById('b-table-edicion'); if(!h || !b || excelData.length === 0) return;
+        const unique = (c) => [...new Set(excelData.slice(1).map(r => r[c]))].filter(Boolean).sort();
+        h.innerHTML = `<tr><th>GERENCIA <select class="browser-default header-filter" onchange="filtersEdicion.ger=this.value; renderTablaEdicion()"><option value="">TODAS</option>${unique(idx.gerencia).map(v => `<option value="${v}" ${filtersEdicion.ger===v?'selected':''}>${v}</option>`).join('')}</select></th><th>ALCANCE <select class="browser-default header-filter" onchange="filtersEdicion.alc=this.value; renderTablaEdicion()"><option value="">TODOS</option>${unique(idx.alcance).map(v => `<option value="${v}" ${filtersEdicion.alc===v?'selected':''}>${v}</option>`).join('')}</select></th><th>ÁREA <select class="browser-default header-filter" onchange="filtersEdicion.are=this.value; renderTablaEdicion()"><option value="">TODAS</option>${unique(idx.area).map(v => `<option value="${v}" ${filtersEdicion.are===v?'selected':''}>${v}</option>`).join('')}</select></th><th>REAL</th><th>PLAN</th><th>DISP</th><th>FUERZA LABORAL</th><th>UPDI #</th>${nivelUsuarioActivo === "admin" ? '<th>ACCIONES</th>' : ''}</tr>`;
+        let body = "";
+        excelData.slice(1).forEach((row, realIdx) => {
+            if((filtersEdicion.ger && row[idx.gerencia] !== filtersEdicion.ger) || (filtersEdicion.are && row[idx.area] !== filtersEdicion.are) || (filtersEdicion.alc && row[idx.alcance] !== filtersEdicion.alc)) return;
+            const rPct = parseFloat(row[idx.real]) || 0, pPct = parseFloat(row[idx.plan]) || 0, d = pPct > 0 ? (rPct / pPct) : 0, colorSemaforo = d < 0.5 ? 'rojo' : d < 0.8 ? 'amarillo' : 'verde';
+            body += `<tr><td>${row[idx.gerencia] || ""}</td><td>${row[idx.alcance] || ""}</td><td>${row[idx.area] || ""}</td><td>${rPct}%</td><td>${pPct}%</td><td><span class="led bg-${colorSemaforo}"></span> ${(d * 100).toFixed(0)}%</td><td>${row[idx.fuerza] || 0}</td><td>${row[idx.updi] || ""}</td>${nivelUsuarioActivo === "admin" ? `<td><i class="material-icons blue-text action-btn" onclick="cargarParaEditar(${realIdx+1})">edit</i><i class="material-icons red-text action-btn" onclick="eliminarFila(${realIdx+1})">delete</i></td>` : ''}</tr>`;
+        });
+        b.innerHTML = body;
+    }
+
+    async function eliminarFila(i) {
+        if(nivelUsuarioActivo !== "admin") return;
+        if(confirm("¿Está seguro de que desea eliminar este registro?")) {
+            excelData.splice(i, 1);
+            try {
+                const ws = XLSX.utils.aoa_to_sheet(excelData), wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "DATOS");
+                const wbout = XLSX.write(wb, {bookType:'xlsx', type:'array'}), writable = await handle.createWritable();
+                await writable.write(wbout); await writable.close();
+                M.toast({html: '✅ REGISTRO ELIMINADO'}); cargarYRenderizar();
+            } catch (e) { M.toast({html: '❌ ERROR AL GUARDAR'}); }
+        }
+    }
+
+async function procesarFormulario() {
+    if(nivelUsuarioActivo === "visor") return;
+    let i = parseInt(document.getElementById('edit-index').value);
+    const p = parseFloat(document.getElementById('f-plan').value) || 0;
+    const r = parseFloat(document.getElementById('f-real').value) || 0;
+    let fila;
+    if (i === -1) {
+        fila = new Array(excelData[0].length).fill("");
+        excelData.push(fila);
+        i = excelData.length - 1;
+    } else {
+        fila = excelData[i];
+    }
+    fila[idx.gerencia] = document.getElementById('f-gerencia').value.trim();
+    fila[idx.area] = document.getElementById('f-area').value.trim();
+    fila[idx.alcance] = document.getElementById('f-alcance').value.trim();
+    fila[idx.updi] = document.getElementById('f-updi').value.trim();
+    fila[idx.fuerza] = parseFloat(document.getElementById('f-fuerza').value) || 0;
+    fila[idx.real] = r;
+    fila[idx.plan] = p;
+    fila[idx.disp] = p > 0 ? (r / p).toFixed(4) : 0;
+    fila[idx.justificacion] = document.getElementById('f-justificacion').value.trim();
+    fila[idx.tReal] = parseFloat(document.getElementById('f-t-real').value) || 0;
+    fila[idx.tPlan] = parseFloat(document.getElementById('f-t-plan').value) || 0;
+    fila[idx.oeeDisp] = parseFloat(document.getElementById('f-oee-disp').value) || 0;
+    fila[idx.uProd] = parseFloat(document.getElementById('f-u-prod').value) || 0;
+    fila[idx.uTeor] = parseFloat(document.getElementById('f-u-teor').value) || 0;
+    fila[idx.rend] = parseFloat(document.getElementById('f-rend').value) || 0;
+    fila[idx.uBuenas] = parseFloat(document.getElementById('f-u-buenas').value) || 0;
+    fila[idx.uTotal] = parseFloat(document.getElementById('f-u-total').value) || 0;
+    fila[idx.calidad] = parseFloat(document.getElementById('f-calidad').value) || 0;
+    fila[idx.oeeFinal] = parseFloat(document.getElementById('f-oee-final').value) || 0;
+    try {
+        const ws = XLSX.utils.aoa_to_sheet(excelData), wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "DATOS");
+        const wbout = XLSX.write(wb, {bookType: 'xlsx', type: 'array'}), writable = await handle.createWritable();
+        await writable.write(wbout);
+        await writable.close();
+        M.toast({html: i === -1 ? '✅ REGISTRO CREADO' : '✅ REGISTRO ACTUALIZADO'});
+        cancelarEdicion();
+        cargarYRenderizar();
+    } catch (e) {
+        M.toast({html: '❌ ERROR AL GUARDAR'});
+        console.error(e);
+    }
+}
+
+    function renderDashboard() {
+        const unique = (c) => [...new Set(excelData.slice(1).map(r => r[c]))].filter(Boolean).sort();
+        const container = document.getElementById('dash-filters-container'); if(!container) return;
+        container.innerHTML = `<div class="col s12 m4"><label>GERENCIA</label><select class="browser-default" onchange="filtersEdicion.ger=this.value; renderDashboard()"><option value="">TODAS</option>${unique(idx.gerencia).map(v => `<option value="${v}" ${filtersEdicion.ger===v?'selected':''}>${v}</option>`).join('')}</select></div><div class="col s12 m4"><label>ÁREA</label><select class="browser-default" onchange="filtersEdicion.are=this.value; renderDashboard()"><option value="">TODAS</option>${unique(idx.area).map(v => `<option value="${v}" ${filtersEdicion.are===v?'selected':''}>${v}</option>`).join('')}</select></div><div class="col s12 m4"><label>ALCANCE</label><select class="browser-default" onchange="filtersEdicion.alc=this.value; renderDashboard()"><option value="">TODOS</option>${unique(idx.alcance).map(v => `<option value="${v}" ${filtersEdicion.alc===v?'selected':''}>${v}</option>`).join('')}</select></div>`;
+        let sumD = 0, sFLT = 0, sFLR = 0, sFLP = 0, count = 0, cards = "";
+        excelData.slice(1).forEach(row => {
+            if((filtersEdicion.ger && row[idx.gerencia] !== filtersEdicion.ger) || (filtersEdicion.are && row[idx.area] !== filtersEdicion.are) || (filtersEdicion.alc && row[idx.alcance] !== filtersEdicion.alc)) return;
+            const flt = parseFloat(row[idx.fuerza]) || 0, rPct = parseFloat(row[idx.real])||0, pPct = parseFloat(row[idx.plan])||0, d = pPct > 0 ? (rPct / pPct) : 0, flr = Math.round((rPct/100)*flt), flp = Math.round((pPct/100)*flt), s = d < 0.5 ? 'rojo' : d < 0.8 ? 'amarillo' : 'verde';
+            sumD += d; sFLT += flt; sFLR += flr; sFLP += flp; count++;
+            cards += `<div class="col s12 m4"><div class="kpi-card" style="text-align:left; border-left:5px solid var(--${s==='rojo'?'danger':s==='amarillo'?'warning':'success'}); padding:15px;"><span class="grey-text tiny" style="font-weight:700">${row[idx.gerencia]}</span><h6 style="font-weight:700; margin:5px 0; color:var(--primary);">${row[idx.area]}</h6><div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;"><span>Disp: <b>${(d*100).toFixed(0)}%</b></span><span class="led bg-${s}"></span></div><div style="font-size:0.8rem; color:#78909c; margin-bottom:5px;">Plan: <b>${pPct}%</b> | Real: <b>${rPct}%</b></div><div style="color:#546e7a; font-size:0.8rem; border-top:1px solid #eee; padding-top:5px;">F.L.T: <b>${flt}</b> | F.L.R: <b>${flr}</b> | F.L.P: <b>${flp}</b></div>${row[idx.justificacion] ? `<div class="justificacion-text">"${row[idx.justificacion]}"</div>` : ''}</div></div>`;
+        });
+        document.getElementById('grid-cards').innerHTML = cards;
+        const promDisp = count > 0 ? (sumD / count) : 0;
+        document.getElementById('kpi-dashboard').innerHTML = `<div class="col s12 m4 l2"><div class="kpi-card"><div class="semaforo-global bg-${promDisp < 0.5 ? 'rojo' : promDisp < 0.8 ? 'amarillo' : 'verde'}"></div><small>ESTADO</small></div></div><div class="col s12 m4 l2"><div class="kpi-card"><h4>${(promDisp*100).toFixed(1)}%</h4><small>PROM. DISP.</small></div></div><div class="col s12 m4 l2"><div class="kpi-card"><h4>${sFLT}</h4><small>TOTAL F.L.T.</small></div></div><div class="col s12 m4 l3"><div class="kpi-card"><h4>${sFLR}</h4><small>TOTAL F.L.R.</small></div></div><div class="col s12 m4 l3"><div class="kpi-card"><h4>${sFLP}</h4><small>TOTAL F.L.P.</small></div></div>`;
+    }
+
+    function renderIntegral() {
+        const updies = {}, mapArea = document.getElementById('updi-map-area'); if(!mapArea) return;
+        mapArea.querySelectorAll('.updi-marker').forEach(m => m.remove());
+        excelData.slice(1).forEach(row => {
+            const uRaw = String(row[idx.updi]).toUpperCase().replace("UPDI", "").trim();
+            const ger = row[idx.gerencia]; if(!uRaw || !ger) return;
+            const flt = parseFloat(row[idx.fuerza]) || 0, rPct = parseFloat(row[idx.real]) || 0, pPct = parseFloat(row[idx.plan]) || 0, flr = Math.round((rPct / 100) * flt), flp = Math.round((pPct / 100) * flt);
+            if(!updies[uRaw]) { updies[uRaw] = { gerencias: new Set(), areas: [], totalFLR: 0, totalFLP: 0, totalFLT: 0 }; }
+            updies[uRaw].gerencias.add(ger);
+            updies[uRaw].totalFLT += flt;
+            updies[uRaw].totalFLR += flr;
+            updies[uRaw].totalFLP += flp;
+            updies[uRaw].areas.push({ area: row[idx.area], r: rPct, p: pPct, flr, flp, flt, ger, just: row[idx.justificacion] });
+        });
+        let html = "";
+        Object.keys(updies).forEach(uNum => {
+            const data = updies[uNum], dAvg = data.totalFLP > 0 ? (data.totalFLR / data.totalFLP) : 0, statusClass = dAvg < 0.5 ? 'rojo' : dAvg < 0.8 ? 'amarillo' : 'verde';
+            const listaGerencias = Array.from(data.gerencias).join(", ");
+            html += `<div class="galpon-block"><div class="roof-line bg-${statusClass}"></div><div class="galpon-header" style="color:#78909c; font-size:0.7rem; min-height:25px;">${listaGerencias}</div><div style="font-size:1.1rem; color:var(--primary); font-weight:900; margin:5px 0;">UPDI ${uNum}</div><div class="stats-box">F.L. ${data.totalFLR} / ${data.totalFLP}</div><div style="font-size:0.75rem; font-weight:bold;"><span class="led bg-${statusClass}"></span> DISP: ${(dAvg*100).toFixed(1)}%</div></div>`;
+            if(updiCoords[uNum]) {
+                const pos = updiCoords[uNum], dot = document.createElement('div');
+                dot.className = `updi-marker bg-${statusClass}`; dot.style.top = pos.top; dot.style.left = pos.left; dot.innerHTML = `UPDI<br>${uNum}`;
+                dot.onclick = () => mostrarDetalleUPDI(uNum, dAvg, data.areas, listaGerencias);
+                mapArea.appendChild(dot);
+            }
+        });
+        document.getElementById('industrial-map').innerHTML = html;
+    }
+
+function mostrarDetalleUPDI(numero, promedio, lista, nombresGerencias) {
+    const panel = document.getElementById('updi-info-panel'), 
+          s = promedio < 0.5 ? 'rojo' : promedio < 0.8 ? 'amarillo' : 'verde';
+    
+    // Obtener la descripción técnica del glosario
+    const descripcionTecnica = DESCRIPCIONES_UPDI[numero] || "Sin descripción técnica registrada.";
+
+    let detHtml = `
+        <div style="border-bottom:2px solid #eee; padding-bottom:10px; margin-bottom:15px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h5 style="margin:0; font-weight:800; color:var(--primary);">UPDI ${numero}</h5>
+                <i class="material-icons" style="cursor:pointer;" onclick="document.getElementById('updi-info-panel').style.display='none'">close</i>
+            </div>
+
+            <div style="background: #f1f4f9; padding: 10px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #0d47a1;">
+                <p style="margin:0; font-size:0.9rem; color:#37474f; line-height:1.4;">
+                    <i class="material-icons tiny" style="vertical-align: middle;">info</i> 
+                    <b>Alcance Operativo:</b> ${descripcionTecnica}
+                </p>
+            </div>
+            
+            <div style="display:flex; align-items:center; gap:12px; margin-top:12px; flex-wrap: wrap;">
+                <small style="color:#d32f2f; font-weight:bold; text-transform:uppercase;">GERENCIAS: ${nombresGerencias}</small>
+                
+                <i class="material-icons blue-text text-darken-2" 
+                   style="cursor:pointer; font-size: 1.5rem;" 
+                   title="Mostrar/Ocultar integrantes"
+                   onclick="consultarIntegrantesCSV('${numero}')">group</i>
+                
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <span class="led bg-${s}" style="margin:0;"></span>
+                    <b style="color:#546e7a; font-size: 0.9rem;">DISP: ${(promedio*100).toFixed(1)}%</b>
+                </div>
+            </div>
+
+            <div id="lista-integrantes-${numero}" style="display:none; transition: all 0.3s ease; width: 100%;"></div>
+        </div>
+        <div class="detail-grid">`;
+    
+    lista.forEach(i => { 
+        const dArea = i.flp > 0 ? (i.flr / i.flp) : 0, 
+              statusArea = dArea < 0.5 ? 'rojo' : dArea < 0.8 ? 'amarillo' : 'verde';
+        detHtml += `
+            <div class="detail-item">
+                <div style="font-weight:700;"><span class="led bg-${statusArea}"></span> ${i.area}</div>
+                <div style="font-size:0.8rem; color:#90a4ae; margin-bottom:4px;">${i.ger}</div>
+                <div style="font-size:0.85rem;">Disp: <b>${(dArea*100).toFixed(0)}%</b></div>
+                <div style="font-size:0.8rem; color:#546e7a; border-top:1px solid #ddd; margin-top:5px; padding-top:3px;">F.L.R: <b>${i.flr}</b> / F.L.P: <b>${i.flp}</b></div>
+            </div>`; 
+    });
+    panel.innerHTML = detHtml + `</div>`; 
+    panel.style.display = 'block';
+}
+
+    function cargarParaEditar(i) { 
+        if(nivelUsuarioActivo !== "admin") return;
+        modoEdicionActivo = true; const row = excelData[i]; document.getElementById('edit-index').value = i; 
+        document.getElementById('f-gerencia').value = row[idx.gerencia] || ""; document.getElementById('f-area').value = row[idx.area] || ""; 
+        document.getElementById('f-alcance').value = row[idx.alcance] || ""; document.getElementById('f-updi').value = row[idx.updi] || ""; 
+        document.getElementById('f-fuerza').value = row[idx.fuerza] || ""; document.getElementById('f-real').value = row[idx.real] || ""; 
+        document.getElementById('f-plan').value = row[idx.plan] || ""; document.getElementById('f-justificacion').value = row[idx.justificacion] || ""; 
+        document.getElementById('f-t-real').value = row[idx.tReal] || ""; document.getElementById('f-t-plan').value = row[idx.tPlan] || "";
+        document.getElementById('f-oee-disp').value = row[idx.oeeDisp] || ""; document.getElementById('f-u-prod').value = row[idx.uProd] || "";
+        document.getElementById('f-u-teor').value = row[idx.uTeor] || ""; document.getElementById('f-rend').value = row[idx.rend] || "";
+        document.getElementById('f-u-buenas').value = row[idx.uBuenas] || ""; document.getElementById('f-u-total').value = row[idx.uTotal] || "";
+        document.getElementById('f-calidad').value = row[idx.calidad] || ""; document.getElementById('f-oee-final').value = row[idx.oeeFinal] || "";
+        M.updateTextFields(); window.scrollTo({top:0, behavior:'smooth'}); 
+    }
+
+    function cancelarEdicion() { modoEdicionActivo = false; document.getElementById('edit-index').value = "-1"; ["f-gerencia","f-area","f-alcance","f-updi","f-fuerza","f-real","f-plan","f-justificacion","f-t-real","f-t-plan","f-oee-disp","f-u-prod","f-u-teor","f-rend","f-u-buenas","f-u-total","f-calidad","f-oee-final"].forEach(id => { const el = document.getElementById(id); if(el) el.value = ""; }); }
+    function actualizarCatalogos() { const getU = (c) => [...new Set(excelData.slice(1).map(r => r[c]))].filter(Boolean).sort(); const fill = (id, vals) => { const el = document.getElementById(id); if(el) el.innerHTML = vals.map(v => `<option value="${v}">`).join(''); }; fill('list-gerencia', getU(idx.gerencia)); fill('list-area', getU(idx.area)); fill('list-alcance', getU(idx.alcance)); fill('list-updi', getU(idx.updi)); }
+    function renderTablas() { renderTablaEdicion(); renderDashboard(); renderIntegral(); }
+
+    async function generarPDF() {
+        if(!excelData || excelData.length === 0) { M.toast({html: 'Primero vincule un Excel', classes: 'orange'}); return; }
+        const { jsPDF } = window.jspdf, activeTab = document.querySelector('.tabs .active').getAttribute('href'), usuario = document.getElementById('display-user-name').innerText;
+        if (activeTab === '#edicion') {
+            const doc = new jsPDF('p', 'mm', 'a4');
+            doc.setFontSize(14); doc.setTextColor(13, 71, 161); doc.setFont("helvetica", "bold");
+            doc.text("CVG ALCASA - ANÁLISIS TÉCNICO DE CONTINGENCIA", 10, 15);
+            doc.setFontSize(9); doc.setTextColor(80); doc.setFont("helvetica", "normal");
+            doc.text(`Responsable: ${usuario}`, 10, 22);
+            doc.text(`Archivo de origen: ${handle.name} | Fecha: ${new Date().toLocaleString()}`, 10, 27);
+            let sFLT=0, sFLR=0, sFLP=0, criticas=0;
+            excelData.slice(1).forEach(r => {
+                const ft = parseFloat(r[idx.fuerza])||0, real=parseFloat(r[idx.real])||0, plan=parseFloat(r[idx.plan])||0;
+                sFLT += ft; sFLR += Math.round((real/100)*ft); sFLP += Math.round((plan/100)*ft);
+                if(plan > 0 && (real/plan) < 0.5) criticas++;
+            });
+            doc.setFont("helvetica", "bold"); doc.text("1. RESUMEN EJECUTIVO", 10, 35);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Fuerza Laboral Total: ${sFLT} | Real: ${sFLR} | Meta Plan: ${sFLP}`, 10, 40);
+            doc.text(`Áreas en Estado Crítico: ${criticas} | Disponibilidad Global: ${(sFLP > 0 ? (sFLR/sFLP)*100 : 0).toFixed(1)}%`, 10, 45);
+            doc.setFont("helvetica", "bold"); doc.text("2. DETALLE TÉCNICO POR ÁREA", 10, 55);
+            doc.setDrawColor(200); doc.line(10, 58, 200, 58);
+            let y = 65; doc.setFontSize(7);
+            doc.text("GERENCIA", 10, y); doc.text("ÁREA", 50, y); doc.text("FLT", 100, y); doc.text("REAL%", 120, y); doc.text("PLAN%", 140, y); doc.text("DISP%", 160, y);
+            y += 5;
+            excelData.slice(1).forEach(row => {
+                if(y > 275) { doc.addPage(); y = 20; }
+                doc.setFont("helvetica", "normal");
+                doc.text(String(row[idx.gerencia]||"").substring(0,25), 10, y);
+                doc.text(String(row[idx.area]||"").substring(0,30), 50, y);
+                doc.text(String(row[idx.fuerza]||"0"), 100, y);
+                doc.text(String(row[idx.real]||"0")+"%", 120, y);
+                doc.text(String(row[idx.plan]||"0")+"%", 140, y);
+                const d = (parseFloat(row[idx.plan]) > 0 ? (parseFloat(row[idx.real])/parseFloat(row[idx.plan])*100).toFixed(0) : "0") + "%";
+                doc.text(d, 160, y);
+                y += 6; 
+            });
+            doc.save(`Analisis_Tecnico_ALCASA_${new Date().getTime()}.pdf`);
+        } else if (activeTab === '#dashboard') {
+            const doc = new jsPDF('l', 'mm', 'a4'); 
+            doc.setFontSize(16); doc.setFont("helvetica", "bold"); doc.setTextColor(0);
+            doc.text("CVG ALCASA - INFORME VISUAL DE CONTINGENCIA", 15, 15);
+            doc.setFontSize(10); doc.text(`Responsable: ${usuario} | Fuente: ${handle.name} | Fecha: ${new Date().toLocaleString()}`, 15, 22);
+            const toast = M.toast({html: 'Generando Informe Nítido...', displayLength: 0});
+            try {
+                const kpi = await html2canvas(document.getElementById('kpi-dashboard'), { scale: 2 });
+                const cards = await html2canvas(document.getElementById('grid-cards'), { scale: 2 });
+                doc.addImage(kpi.toDataURL('image/jpeg', 1.0), 'JPEG', 15, 30, 265, 35);
+                doc.text("Tablero de Mando por Gerencia/Área", 15, 75);
+                const cardsH = (cards.height * 265) / cards.width;
+                doc.addImage(cards.toDataURL('image/jpeg', 1.0), 'JPEG', 15, 80, 265, cardsH > 120 ? 120 : cardsH);
+                doc.save(`Informe_Visual_ALCASA_${new Date().getTime()}.pdf`);
+                toast.dismiss();
+            } catch(e) { toast.dismiss(); }
+        } else {
+            const doc = new jsPDF('l', 'mm', 'a4'); 
+            doc.setFontSize(16); doc.setFont("helvetica", "bold");
+            doc.text("CVG ALCASA - TABLERO INTEGRAL DE CONTINGENCIA", 15, 15);
+            doc.setFontSize(10); doc.text(`Responsable: ${usuario} | Fecha: ${new Date().toLocaleString()}`, 15, 22);
+            const toast = M.toast({html: 'Generando Mapa de Alta Resolución...', displayLength: 0});
+            try {
+                const mapa = await html2canvas(document.getElementById('updi-map-area'), { scale: 2 });
+                const industrial = await html2canvas(document.getElementById('industrial-map'), { scale: 2 });
+                doc.text("Localización de Contingencia (UPDIs)", 15, 30);
+                doc.addImage(mapa.toDataURL('image/jpeg', 1.0), 'JPEG', 15, 35, 265, 90);
+                doc.text("Estado de Áreas Industriales", 15, 135);
+                const indH = (industrial.height * 265) / industrial.width;
+                doc.addImage(industrial.toDataURL('image/jpeg', 1.0), 'JPEG', 15, 140, 265, indH > 60 ? 60 : indH);
+                doc.save(`Tablero_Contingencia_ALCASA_${new Date().getTime()}.pdf`);
+                toast.dismiss();
+            } catch(e) { toast.dismiss(); }
+        }
+    }
+    window.onload = () => { M.AutoInit(); };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
