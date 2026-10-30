@@ -1,0 +1,44 @@
+[
+    {
+        "usuario": "admin",
+        "password": "D10998$a*",
+        "nombre": "Administrador General CVG Alcasa",
+        "nivel": "Nivel 1 — Super Administrador (Prensa, Contactos y CV)",
+        "rol": "admin",
+        "permisos": [
+            "prensa",
+            "contactos",
+            "cv"
+        ]
+    },
+    {
+        "usuario": "comunicacion",
+        "password": "periodico2024",
+        "nombre": "Gerencia de Comunicación Estratégica",
+        "nivel": "Nivel 2 — Editor de Sala de Prensa (Publicar \/ Editar Noticias)",
+        "rol": "prensa",
+        "permisos": [
+            "prensa"
+        ]
+    },
+    {
+        "usuario": "talento",
+        "password": "AlcasaCV2026*",
+        "nombre": "Gerencia de Personal \/ Talento Humano",
+        "nivel": "Nivel 2 — Gestor de Postulaciones y CV",
+        "rol": "cv",
+        "permisos": [
+            "cv"
+        ]
+    },
+    {
+        "usuario": "comercializacion",
+        "password": "AlcasaCom2026*",
+        "nombre": "Gerencia de Comercialización",
+        "nivel": "Nivel 2 — Gestor de Contactos y Cotizaciones",
+        "rol": "contactos",
+        "permisos": [
+            "contactos"
+        ]
+    }
+]

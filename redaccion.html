@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redacción / Editar Noticia — Sala de Prensa CVG Alcasa</title>
+    <meta name="description" content="Panel editorial de tres zonas para redacción, edición, carrusel de hasta 20 imágenes, borradores e historial de versiones de CVG Alcasa.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026k">
+    <style>
+        :root {
+            --ed-bg: #f6f5f0;
+            --ed-surface: #ffffff;
+            --ed-border: #dcdad0;
+            --ed-border-strong: #c4c1b4;
+            --ed-text: #1c1b18;
+            --ed-muted: #6e6c64;
+            --ed-purple: #463acb;
+            --ed-blue-bg: #e8f3ff;
+            --ed-blue-border: #3b82f6;
+            --ed-green-bg: #dcfce7;
+            --ed-green-text: #166534;
+            --ed-amber-bg: #fef3c7;
+            --ed-amber-text: #92400e;
+            --ed-gray-bg: #f1f0ea;
+            --ed-gray-text: #57554d;
+        }
+
+        body.redaccion-body {
+            background: var(--ed-bg);
+            color: var(--ed-text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .redaccion-shell {
+            max-width: 1540px;
+            margin: 0 auto;
+            padding: 20px 24px 48px;
+        }
+
+        .redaccion-CaptionTop {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.88rem;
+            color: var(--ed-muted);
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .redaccion-CaptionTop a {
+            color: var(--alcasa-blue);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .redaccion-CaptionTop a:hover {
+            color: var(--alcasa-accent);
+        }
+
+        /* BARRA SUPERIOR */
+        .redaccion-topbar {
+            background: var(--ed-surface);
+            border: 1px solid var(--ed-border);
+            border-radius: 14px;
+            padding: 14px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+        }
+
+        .redaccion-topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .redaccion-brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--ed-text);
+            letter-spacing: -0.02em;
+        }
+
+        .redaccion-brand-sub {
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--ed-muted);
+        }
+
+        .redaccion-topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .redaccion-autosave {
+            font-size: 0.86rem;
+            color: var(--ed-muted);
+            margin-right: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-ed {
+            appearance: none;
+            background: #ffffff;
+            border: 1px solid var(--ed-border-strong);
+            color: var(--ed-text);
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 9px 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.15s ease;
+        }
+
+        .btn-ed:hover {
+            background: #f3f2ec;
+            border-color: #9e9b8f;
+        }
+
+        .btn-ed-primary {
+            background: #1c1b18;
+            border-color: #1c1b18;
+            color: #ffffff;
+            font-weight: 700;
+            padding: 9px 20px;
+        }
+
+        .btn-ed-primary:hover {
+            background: #003366;
+            border-color: #003366;
+            color: #ffffff;
+        }
+
+        .btn-ed-danger {
+            color: #b91c1c;
+            border-color: #fecaca;
+            background: #fef2f2;
+        }
+
+        .btn-ed-danger:hover {
+            background: #fee2e2;
+        }
+
+        /* TRES ZONAS (GRID PRINCIPAL) */
+        .redaccion-grid {
+            display: grid;
+            grid-template-columns: 310px minmax(0, 1fr) 320px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .redaccion-zone {
+            background: var(--ed-surface);
+            border: 1px solid var(--ed-border);
+            border-radius: 16px;
+            padding: 22px 18px 20px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.025);
+        }
+
+        .zone-pill {
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            background: var(--ed-purple);
+            color: #ffffff;
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 8px;
+            letter-spacing: 0.01em;
+            box-shadow: 0 2px 6px rgba(70, 58, 203, 0.25);
+        }
+
+        /* ZONA 1: LISTA DE NOTICIAS */
+        .ed-search-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 13px;
+            border: 1px solid var(--ed-border-strong);
+            border-radius: 10px;
+            font-size: 0.92rem;
+            background: #ffffff;
+            color: var(--ed-text);
+            margin-top: 4px;
+            margin-bottom: 12px;
+        }
+
+        .ed-search-input:focus {
+            outline: none;
+            border-color: var(--ed-blue-border);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .ed-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .ed-filter-chip {
+            border: 1px solid transparent;
+            border-radius: 6px;
+            padding: 4px 9px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .ed-filter-chip.chip-all {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .ed-filter-chip.chip-pub {
+            background: var(--ed-green-bg);
+            color: var(--ed-green-text);
+        }
+
+        .ed-filter-chip.chip-draft {
+            background: var(--ed-amber-bg);
+            color: var(--ed-amber-text);
+        }
+
+        .ed-filter-chip.chip-arch {
+            background: var(--ed-gray-bg);
+            color: var(--ed-gray-text);
+        }
+
+        .ed-filter-chip.active {
+            outline: 2px solid #1c1b18;
+            outline-offset: 1px;
+        }
+
+        .ed-group-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--ed-muted);
+            margin: 12px 0 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ed-news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            max-height: 680px;
+            overflow-y: auto;
+            padding-right: 3px;
+        }
+
+        .ed-news-item {
+            border: 1px solid var(--ed-border);
+            border-radius: 11px;
+            padding: 11px 13px;
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .ed-news-item:hover {
+            border-color: #93c5fd;
+            background: #f8fbff;
+        }
+
+        .ed-news-item.active {
+            background: var(--ed-blue-bg);
+            border: 1.5px solid var(--ed-blue-border);
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.12);
+        }
+
+        .ed-news-item-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--ed-text);
+            margin: 0 0 7px 0;
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .ed-news-item-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            font-size: 0.76rem;
+            color: var(--ed-muted);
+        }
+
+        .ed-status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .ed-status-badge.st-publicada {
+            background: var(--ed-green-bg);
+            color: var(--ed-green-text);
+        }
+
+        .ed-status-badge.st-borrador,
+        .ed-status-badge.st-revision {
+            background: var(--ed-amber-bg);
+            color: var(--ed-amber-text);
+        }
+
+        .ed-status-badge.st-archivada {
+            background: var(--ed-gray-bg);
+            color: var(--ed-gray-text);
+        }
+
+        /* ZONA 2: EDITOR CENTRAL */
+        .ed-field-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--ed-muted);
+            margin-bottom: 6px;
+            margin-top: 12px;
+        }
+
+        .ed-field-label:first-of-type {
+            margin-top: 4px;
+        }
+
+        .ed-title-input {
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1.35rem;
+            font-weight: 800;
+            padding: 13px 16px;
+            border: 1px solid var(--ed-border-strong);
+            border-radius: 10px;
+            color: var(--ed-text);
+            background: #ffffff;
+        }
+
+        .ed-bajada-input {
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 0.96rem;
+            padding: 11px 14px;
+            border: 1px solid var(--ed-border-strong);
+            border-radius: 10px;
+            color: var(--ed-text);
+            background: #ffffff;
+        }
+
+        .ed-toolbar {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 8px 10px;
+            border: 1px solid var(--ed-border);
+            border-radius: 10px;
+            background: #faf9f5;
+            margin: 14px 0;
+        }
+
+        .ed-tool-btn {
+            background: #eeece4;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            padding: 5px 11px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--ed-text);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .ed-tool-btn:hover {
+            background: #e0ddd1;
+            border-color: #b8b4a6;
+        }
+
+        .ed-canvas-box {
+            border: 1px solid var(--ed-border);
+            border-radius: 12px;
+            padding: 16px;
+            background: #ffffff;
+        }
+
+        .ed-body-textarea {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 0.98rem;
+            line-height: 1.7;
+            color: var(--ed-text);
+            resize: vertical;
+            min-height: 150px;
+            font-family: inherit;
+        }
+
+        .ed-body-textarea:focus {
+            outline: none;
+            border-color: var(--ed-border);
+            background: #fcfcfa;
+        }
+
+        /* BLOQUE INTEGRADO DE IMAGEN CON PIE DE FOTO + CARRUSEL (MÁX 20 IMÁGENES) */
+        .ed-figure-box {
+            border: 1.5px dashed var(--ed-border-strong);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 14px 0;
+            background: #faf9f5;
+        }
+
+        .ed-figure-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .ed-figure-stage {
+            position: relative;
+            width: 100%;
+            height: 290px;
+            background: #0f172a;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ed-figure-stage img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #0f172a;
+        }
+
+        .ed-figure-caption-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            align-items: center;
+        }
+
+        .ed-figure-caption-input {
+            flex: 1;
+            padding: 9px 12px;
+            border: 1px solid var(--ed-border-strong);
+            border-radius: 8px;
+            font-size: 0.86rem;
+            background: #ffffff;
+        }
+
+        .ed-thumbs-strip {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 10px 2px 4px;
+            margin-top: 8px;
+        }
+
+        .ed-thumb-item {
+            position: relative;
+            width: 68px;
+            height: 52px;
+            border-radius: 7px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            flex-shrink: 0;
+            background: #000;
+        }
+
+        .ed-thumb-item.active {
+            border-color: var(--ed-blue-border);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+        }
+
+        .ed-thumb-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ed-thumb-del {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(220, 38, 38, 0.9);
+            color: #fff;
+            border: none;
+            font-size: 0.65rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .ed-thumb-num {
+            position: absolute;
+            bottom: 2px;
+            left: 3px;
+            background: rgba(0, 0, 0, 0.72);
+            color: #fff;
+            font-size: 0.62rem;
+            font-weight: 700;
+            padding: 1px 4px;
+            border-radius: 4px;
+        }
+
+        .ed-word-counter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--ed-border);
+            font-size: 0.8rem;
+            color: var(--ed-muted);
+        }
+
+        /* ZONA 3: METADATOS */
+        .ed-meta-select,
+        .ed-meta-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 9px 12px;
+            border: 1px solid var(--ed-border-strong);
+            border-radius: 9px;
+            font-size: 0.88rem;
+            background: #ffffff;
+            color: var(--ed-text);
+            font-weight: 500;
+        }
+
+        .ed-tags-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .ed-tag-pill {
+            background: #eeece4;
+            color: var(--ed-text);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 4px 9px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ed-tag-pill button {
+            border: none;
+            background: none;
+            color: var(--ed-muted);
+            cursor: pointer;
+            padding: 0;
+            font-size: 0.75rem;
+        }
+
+        .ed-cover-dropzone {
+            border: 1.5px dashed var(--ed-border-strong);
+            border-radius: 11px;
+            padding: 18px 12px;
+            text-align: center;
+            cursor: pointer;
+            background: #faf9f5;
+            transition: all 0.15s ease;
+        }
+
+        .ed-cover-dropzone:hover {
+            border-color: var(--ed-blue-border);
+            background: #f0f7ff;
+        }
+
+        .ed-history-box {
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid var(--ed-border);
+        }
+
+        .ed-history-link {
+            font-size: 0.86rem;
+            color: var(--ed-text);
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .ed-history-link:hover {
+            color: var(--ed-purple);
+            text-decoration: underline;
+        }
+
+        /* MODAL DE VISTA PREVIA E HISTORIAL */
+        .ed-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.65);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(3px);
+        }
+
+        .ed-modal-card {
+            background: #ffffff;
+            border-radius: 16px;
+            max-width: 980px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 24px 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        @media (max-width: 1180px) {
+            .redaccion-grid {
+                grid-template-columns: 270px minmax(0, 1fr);
+            }
+            .redaccion-zone.zone-meta {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 820px) {
+            .redaccion-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="redaccion-body">
+    <div id="site-header"></div>
+
+    <!-- VISTA 1: LOGIN EDITORIAL (SI NO HA INICIADO SESIÓN) -->
+    <section id="redaccionLoginView" style="max-width: 520px; margin: 48px auto; padding: 0 20px; display: none;">
+        <div class="redaccion-zone" style="padding: 28px 26px;">
+            <span class="zone-pill">Acceso Editorial</span>
+            <h2 style="margin: 6px 0 6px; color: var(--alcasa-blue); font-size: 1.45rem;">
+                <i class="fas fa-newspaper" style="color: var(--alcasa-accent);"></i> Redacción — Sala de Prensa
+            </h2>
+            <p style="margin: 0 0 18px; font-size: 0.9rem; color: var(--ed-muted);">
+                Inicia sesión para crear o editar noticias nuevas y anteriores, gestionar el carrusel de hasta 20 imágenes y controlar borradores o publicaciones.
+            </p>
+            <form id="formRedaccionLogin" autocomplete="off">
+                <label class="ed-field-label" for="redUser">Usuario *</label>
+                <input type="text" id="redUser" name="usuario" class="ed-bajada-input" required placeholder="comunicacion / admin">
+
+                <label class="ed-field-label" for="redPass">Contraseña *</label>
+                <input type="password" id="redPass" name="password" class="ed-bajada-input" required placeholder="••••••••">
+
+                <div style="margin-top: 16px; display: flex; align-items: center; gap: 12px;">
+                    <button type="submit" class="btn-ed btn-ed-primary" style="width: 100%; justify-content: center; padding: 11px;">
+                        <i class="fas fa-right-to-bracket"></i> Entrar a Redacción
+                    </button>
+                </div>
+                <div id="redLoginMsg" class="contacto-mensaje" style="margin-top: 10px; text-align: center;"></div>
+
+                <div style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--ed-border-strong); font-size: 0.82rem;">
+                    <div style="font-weight: 700; margin-bottom: 8px; color: var(--ed-text);">
+                        <i class="fas fa-key" style="color: var(--alcasa-accent);"></i> Cuentas disponibles (clic para autocompletar):
+                    </div>
+                    <div id="redQuickAccounts" style="display: flex; flex-direction: column; gap: 6px;"></div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- VISTA 2: PANEL DE EDICIÓN DE 3 ZONAS (WIREFRAME DE REDACCIÓN) -->
+    <main class="redaccion-shell" id="redaccionWorkspace" style="display: none;">
+        <div class="redaccion-CaptionTop">
+            <span>Estructura del panel de edición de noticias · <strong>CVG Aluminio del Caroní, S.A. (CVG Alcasa)</strong></span>
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <a href="/prensa.html"><i class="fas fa-arrow-left"></i> Volver a Sala de Prensa</a>
+                <a href="/contactos.html"><i class="fas fa-address-book"></i> Panel Contactos y CV</a>
+                <span id="redUserActiveBadge" style="font-weight: 600; color: #0f172a;"></span>
+                <button type="button" id="btnRedLogout" class="btn-ed btn-ed-danger" style="padding: 4px 10px; font-size: 0.78rem;">
+                    <i class="fas fa-power-off"></i> Salir
+                </button>
+            </div>
+        </div>
+
+        <!-- BARRA SUPERIOR: ACCIONES GLOBALES -->
+        <header class="redaccion-topbar">
+            <div class="redaccion-topbar-left">
+                <div>
+                    <span class="redaccion-brand-title">Redacción</span>
+                    <span class="redaccion-brand-sub">/ <span id="topModeLabel">Editar noticia</span></span>
+                </div>
+                <button type="button" class="btn-ed" id="btnNuevaNoticiaTop" title="Crear una noticia desde cero">
+                    <i class="fas fa-plus"></i> Nueva noticia
+                </button>
+            </div>
+
+            <div class="redaccion-topbar-right">
+                <span class="redaccion-autosave" id="autosaveStatus">
+                    <i class="fas fa-check-circle" style="color: #16a34a;"></i> Guardado hace 1 min
+                </span>
+                <button type="button" class="btn-ed" id="btnVistaPrevia">
+                    Vista previa
+                </button>
+                <button type="button" class="btn-ed" id="btnGuardarBorrador">
+                    Guardar borrador
+                </button>
+                <button type="button" class="btn-ed btn-ed-primary" id="btnPublicarNoticia">
+                    Publicar
+                </button>
+            </div>
+        </header>
+
+        <!-- ESQUEMA ESTRUCTURAL EN TRES ZONAS -->
+        <div class="redaccion-grid">
+
+            <!-- ZONA 1 · IZQUIERDA: LISTA DE NOTICIAS -->
+            <aside class="redaccion-zone zone-list">
+                <span class="zone-pill">1 · Lista de noticias</span>
+
+                <input type="search" id="edSearchInput" class="ed-search-input" placeholder="Buscar noticia">
+
+                <div class="ed-filter-bar" id="edFilterBar">
+                    <button type="button" class="ed-filter-chip chip-all active" data-filter="todas">Todas</button>
+                    <button type="button" class="ed-filter-chip chip-pub" data-filter="publicada">Publicadas</button>
+                    <button type="button" class="ed-filter-chip chip-draft" data-filter="borrador">Borradores</button>
+                    <button type="button" class="ed-filter-chip chip-arch" data-filter="archivada">Archivo</button>
+                </div>
+
+                <div class="ed-news-list" id="edNewsListContainer">
+                    <!-- Se llena dinámicamente con los grupos "Nuevas" y "Anteriores" -->
+                </div>
+            </aside>
+
+            <!-- ZONA 2 · CENTRO: EL EDITOR -->
+            <section class="redaccion-zone zone-editor">
+                <span class="zone-pill">2 · Editor</span>
+
+                <input type="hidden" id="edNoticiaId" value="">
+
+                <label class="ed-field-label" for="edTitular">Titular</label>
+                <input type="text" id="edTitular" class="ed-title-input" placeholder="Título de la noticia en edición" maxlength="260">
+
+                <label class="ed-field-label" for="edBajada">Bajada o resumen</label>
+                <input type="text" id="edBajada" class="ed-bajada-input" placeholder="Una o dos líneas que resumen la nota" maxlength="420">
+
+                <!-- Barra de formato -->
+                <div class="ed-toolbar" role="toolbar" aria-label="Barra de formato">
+                    <button type="button" class="ed-tool-btn" data-fmt="bold" title="Negrita"><strong>N</strong></button>
+                    <button type="button" class="ed-tool-btn" data-fmt="italic" title="Cursiva"><em>K</em></button>
+                    <button type="button" class="ed-tool-btn" data-fmt="h2" title="Subtítulo H2">H2</button>
+                    <button type="button" class="ed-tool-btn" data-fmt="quote" title="Cita destacada">“ ”</button>
+                    <button type="button" class="ed-tool-btn" data-fmt="list" title="Lista de viñetas">Lista</button>
+                    <button type="button" class="ed-tool-btn" data-fmt="link" title="Insertar enlace">Enlace</button>
+                    <button type="button" class="ed-tool-btn" id="btnToolbarAddImgs" title="Subir imágenes al carrusel (máx. 20)">
+                        <i class="fas fa-images" style="color: var(--alcasa-accent);"></i> Imagen
+                    </button>
+                    <button type="button" class="ed-tool-btn" data-fmt="video" title="Insertar referencia de video">Video</button>
+                </div>
+
+                <!-- Lienzo de cuerpo + Imagen con pie de foto (Carrusel de hasta 20 imágenes) -->
+                <div class="ed-canvas-box">
+                    <textarea id="edCuerpoTop" class="ed-body-textarea" rows="5" placeholder="Escribe aquí el desarrollo principal de la noticia..."></textarea>
+
+                    <!-- Bloque central de Imagen con pie de foto y Carrusel (hasta 20 imágenes) -->
+                    <div class="ed-figure-box">
+                        <div class="ed-figure-header">
+                            <span style="font-size: 0.84rem; font-weight: 700; color: var(--ed-text);">
+                                <i class="fas fa-images" style="color: var(--alcasa-accent);"></i>
+                                Imagen con pie de foto · Carrusel en miniatura (<span id="edImgCounterLabel">1 / 20</span> imágenes)
+                            </span>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                                <button type="button" class="btn-ed" id="btnAddMoreImagesCenter" style="padding: 5px 11px; font-size: 0.78rem;">
+                                    <i class="fas fa-cloud-arrow-up"></i> Añadir imágenes (máx. 20)
+                                </button>
+                                <button type="button" class="btn-ed" id="btnMakeCurrentCover" style="padding: 5px 11px; font-size: 0.78rem;" title="Usar esta imagen como primera del carrusel">
+                                    <i class="fas fa-star" style="color: #eab308;"></i> Fijar como principal
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ed-figure-stage" id="edFigureStage">
+                            <button type="button" class="prensa-carousel-nav prev" id="edCarouselPrev" title="Imagen anterior"><i class="fas fa-chevron-left"></i></button>
+                            <img id="edCarouselActiveImg" src="/assets/img/noticias/noticia-761.jpg" alt="Vista previa del carrusel">
+                            <button type="button" class="prensa-carousel-nav next" id="edCarouselNext" title="Siguiente imagen"><i class="fas fa-chevron-right"></i></button>
+                            <span class="prensa-carousel-counter" id="edStageBadge" style="position: absolute; top: 10px; right: 10px;">
+                                <i class="fas fa-images"></i> 1 / 1
+                            </span>
+                        </div>
+
+                        <div class="ed-figure-caption-row">
+                            <input type="text" id="edPieFotoActual" class="ed-figure-caption-input" placeholder="Imagen con pie de foto (describe la fotografía actual del carrusel)...">
+                        </div>
+
+                        <!-- Tira de miniaturas (1 a 20) -->
+                        <div class="ed-thumbs-strip" id="edThumbsStrip"></div>
+                    </div>
+
+                    <textarea id="edCuerpoBottom" class="ed-body-textarea" rows="4" placeholder="Párrafos complementarios o cierre del comunicado (opcional)..."></textarea>
+
+                    <div class="ed-word-counter">
+                        <span id="edWordCountText">0 palabras · 0 caracteres</span>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <button type="button" class="btn-ed btn-ed-danger" id="btnDeleteNoticiaEditor" style="padding: 4px 10px; font-size: 0.76rem; display: none;">
+                                <i class="fas fa-trash"></i> Eliminar noticia
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ZONA 3 · DERECHA: METADATOS -->
+            <aside class="redaccion-zone zone-meta">
+                <span class="zone-pill">3 · Metadatos</span>
+
+                <label class="ed-field-label" for="edEstado">Estado</label>
+                <select id="edEstado" class="ed-meta-select">
+                    <option value="borrador">Borrador</option>
+                    <option value="revision">Revisión</option>
+                    <option value="publicada">Publicada</option>
+                    <option value="archivada">Archivada</option>
+                </select>
+
+                <label class="ed-field-label" for="edSeccion">Sección</label>
+                <select id="edSeccion" class="ed-meta-select">
+                    <option value="Gestión Industrial">Gestión Industrial</option>
+                    <option value="Invitación Cultural">Invitación Cultural</option>
+                    <option value="Información de Interés">Información de Interés</option>
+                    <option value="Fechas Importantes">Fechas Importantes</option>
+                    <option value="Institucional y Deportes">Institucional y Deportes</option>
+                    <option value="Procedimientos Administrativos">Procedimientos Administrativos</option>
+                    <option value="Responsabilidad Social">Responsabilidad Social</option>
+                    <option value="Aniversario Institucional">Aniversario Institucional</option>
+                    <option value="Ámbito Nacional e Institucional">Ámbito Nacional e Institucional</option>
+                    <option value="Cultura y Recreación">Cultura y Recreación</option>
+                    <option value="Economía y Comercialización">Economía y Comercialización</option>
+                </select>
+
+                <label class="ed-field-label" for="edAutor">Autor</label>
+                <select id="edAutor" class="ed-meta-select">
+                    <option value="Gerencia de Comunicación Estratégica">Gerencia de Comunicación Estratégica</option>
+                    <option value="Redactor 1 — Prensa CVG Alcasa">Redactor 1 — Prensa CVG Alcasa</option>
+                    <option value="Administrador General CVG Alcasa">Administrador General CVG Alcasa</option>
+                    <option value="Dirección de Relaciones Institucionales">Dirección de Relaciones Institucionales</option>
+                </select>
+
+                <label class="ed-field-label" for="edProgramacion">Programar publicación</label>
+                <input type="text" id="edProgramacion" class="ed-meta-input" placeholder="Ej. 30 oct, 18:00">
+
+                <label class="ed-field-label">Etiquetas</label>
+                <div class="ed-tags-wrap" id="edTagsContainer"></div>
+                <div style="display: flex; gap: 6px;">
+                    <input type="text" id="edTagNewInput" class="ed-meta-input" placeholder="Añadir etiqueta + Enter" style="padding: 6px 10px; font-size: 0.82rem;">
+                    <button type="button" class="btn-ed" id="btnAddTag" style="padding: 6px 10px; font-size: 0.8rem;">+</button>
+                </div>
+
+                <label class="ed-field-label">Imagen de portada y galería (máx. 20)</label>
+                <input type="file" id="edFilesInput" multiple accept=".jpg,.jpeg,.png,.webp" style="display: none;">
+                <div class="ed-cover-dropzone" id="edDropzoneBox">
+                    <i class="fas fa-cloud-arrow-up" style="font-size: 1.45rem; color: var(--alcasa-blue); margin-bottom: 6px;"></i>
+                    <div style="font-size: 0.86rem; font-weight: 700; color: var(--ed-text);">Subir imagen(es)</div>
+                    <div style="font-size: 0.75rem; color: var(--ed-muted); margin-top: 2px;">
+                        Selecciona de 1 a 20 fotos (JPG, PNG, WEBP) para el carrusel
+                    </div>
+                </div>
+
+                <div class="ed-history-box">
+                    <div style="font-size: 0.78rem; font-weight: 600; color: var(--ed-muted); margin-bottom: 4px;">Historial</div>
+                    <button type="button" class="ed-history-link" id="btnOpenHistoryModal">
+                        <span id="edVersionCountText">1 versión</span> · <span style="color: var(--ed-purple);">Restaurar</span>
+                    </button>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- MODAL DE VISTA PREVIA (TARJETA EN CARRUSEL + ARTÍCULO COMPLETO) -->
+    <div class="ed-modal-backdrop" id="modalVistaPrevia">
+        <div class="ed-modal-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--ed-border); padding-bottom: 12px;">
+                <h3 style="margin: 0; color: var(--alcasa-blue);">
+                    <i class="fas fa-eye" style="color: var(--alcasa-accent);"></i> Vista previa en vivo (Miniatura con Carrusel + Nota completa)
+                </h3>
+                <button type="button" class="btn-ed" id="btnClosePreviewModal"><i class="fas fa-times"></i> Cerrar</button>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--ed-muted); margin: 0 0 10px;">
+                Así se verá la tarjeta horizontal con su carrusel de imágenes en el Portal Principal (<code>index.html</code>) y en la Sala de Prensa (<code>prensa.html</code>):
+            </p>
+            <div id="previewCardContainer" class="prensa-list-horizontal" style="margin-bottom: 22px;"></div>
+            <div style="border-top: 1px solid var(--ed-border); padding-top: 16px;">
+                <h4 style="margin: 0 0 8px; color: var(--alcasa-blue);">Cuerpo completo del artículo:</h4>
+                <div id="previewFullBody" style="font-size: 0.96rem; line-height: 1.75; color: #334155; white-space: pre-line;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE HISTORIAL DE VERSIONES Y RESTAURACIÓN -->
+    <div class="ed-modal-backdrop" id="modalHistorialVersiones">
+        <div class="ed-modal-card" style="max-width: 680px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--ed-border); padding-bottom: 12px;">
+                <h3 style="margin: 0; color: var(--alcasa-blue);">
+                    <i class="fas fa-clock-rotate-left" style="color: var(--ed-purple);"></i> Historial de versiones de la noticia
+                </h3>
+                <button type="button" class="btn-ed" id="btnCloseHistoryModal"><i class="fas fa-times"></i> Cerrar</button>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--ed-muted); margin-top: 0;">
+                Cada vez que guardas un borrador o publicas un cambio en una noticia nueva o anterior, se conserva una versión restaurable:
+            </p>
+            <div id="historyVersionsList" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+    </div>
+
+    <div id="site-footer"></div>
+
+    <script src="/assets/js/app.js?v=2026k"></script>
+    <script>
+    (function () {
+        var MAX_IMGS = 20;
+        var loginView = document.getElementById('redaccionLoginView');
+        var workspace = document.getElementById('redaccionWorkspace');
+        var formLogin = document.getElementById('formRedaccionLogin');
+        var loginMsg = document.getElementById('redLoginMsg');
+        var userActiveBadge = document.getElementById('redUserActiveBadge');
+
+        // Controles de la lista izquierda
+        var searchInput = document.getElementById('edSearchInput');
+        var filterBar = document.getElementById('edFilterBar');
+        var listContainer = document.getElementById('edNewsListContainer');
+
+        // Controles del editor central
+        var inputId = document.getElementById('edNoticiaId');
+        var inputTitular = document.getElementById('edTitular');
+        var inputBajada = document.getElementById('edBajada');
+        var inputCuerpoTop = document.getElementById('edCuerpoTop');
+        var inputCuerpoBottom = document.getElementById('edCuerpoBottom');
+        var inputPieActual = document.getElementById('edPieFotoActual');
+        var imgStageActive = document.getElementById('edCarouselActiveImg');
+        var imgCounterLabel = document.getElementById('edImgCounterLabel');
+        var stageBadge = document.getElementById('edStageBadge');
+        var thumbsStrip = document.getElementById('edThumbsStrip');
+        var wordCountText = document.getElementById('edWordCountText');
+        var topModeLabel = document.getElementById('topModeLabel');
+        var autosaveStatus = document.getElementById('autosaveStatus');
+        var btnDeleteNoticia = document.getElementById('btnDeleteNoticiaEditor');
+
+        // Controles de metadatos derecha
+        var selectEstado = document.getElementById('edEstado');
+        var selectSeccion = document.getElementById('edSeccion');
+        var selectAutor = document.getElementById('edAutor');
+        var inputProgramacion = document.getElementById('edProgramacion');
+        var tagsContainer = document.getElementById('edTagsContainer');
+        var inputNewTag = document.getElementById('edTagNewInput');
+        var filesInput = document.getElementById('edFilesInput');
+        var dropzoneBox = document.getElementById('edDropzoneBox');
+        var versionCountText = document.getElementById('edVersionCountText');
+
+        // Estado en memoria
+        var todasNoticias = [];
+        var filtroEstado = 'todas';
+        var busquedaTexto = '';
+        var noticiaActualId = '';
+        var galeriaActual = [{ url: '/assets/img/noticias/noticia-761.jpg', pie: '' }];
+        var slideIndexActual = 0;
+        var etiquetasActuales = ['CVG Alcasa', 'Prensa'];
+        var historialActual = [];
+        var ultimoGuardadoTs = Date.now();
+
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+            });
+        }
+
+        function formatearFechaCorta(fechaStr) {
+            if (!fechaStr) return 'Hoy';
+            var f = String(fechaStr).trim().split(/\s+/)[0];
+            var partes = f.split('/');
+            if (partes.length === 3) {
+                var meses = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+                var d = parseInt(partes[0], 10);
+                var m = parseInt(partes[1], 10) - 1;
+                if (d === 30 && m === 9) return 'Hoy';
+                if (d === 29 && m === 9) return 'Ayer';
+                return d + ' ' + (meses[m] || partes[1]);
+            }
+            return f;
+        }
+
+        function labelEstado(st) {
+            var map = {
+                publicada: 'Publicada',
+                borrador: 'Borrador',
+                revision: 'Revisión',
+                archivada: 'Archivada'
+            };
+            return map[st] || 'Publicada';
+        }
+
+        function actualizarContadorPalabras() {
+            var texto = ((inputTitular.value || '') + ' ' + (inputBajada.value || '') + ' ' + (inputCuerpoTop.value || '') + ' ' + (inputCuerpoBottom.value || '')).trim();
+            var palabras = texto ? texto.split(/\s+/).filter(Boolean).length : 0;
+            var chars = ((inputCuerpoTop.value || '') + (inputCuerpoBottom.value || '')).length;
+            wordCountText.textContent = palabras + ' palabras · ' + chars + ' caracteres';
+        }
+
+        function renderEtiquetas() {
+            tagsContainer.innerHTML = etiquetasActuales.map(function (t, idx) {
+                return '<span class="ed-tag-pill">' + esc(t) +
+                    '<button type="button" data-tag-idx="' + idx + '" title="Quitar etiqueta">&times;</button>' +
+                '</span>';
+            }).join('');
+            Array.prototype.forEach.call(tagsContainer.querySelectorAll('button[data-tag-idx]'), function (btn) {
+                btn.addEventListener('click', function () {
+                    var i = parseInt(this.getAttribute('data-tag-idx') || '0', 10);
+                    etiquetasActuales.splice(i, 1);
+                    renderEtiquetas();
+                });
+            });
+        }
+
+        function renderCarruselEditor() {
+            if (!galeriaActual.length) {
+                galeriaActual = [{ url: '/assets/img/noticias/noticia-773.jpg', pie: '' }];
+            }
+            if (galeriaActual.length > MAX_IMGS) {
+                galeriaActual = galeriaActual.slice(0, MAX_IMGS);
+            }
+            if (slideIndexActual < 0) slideIndexActual = galeriaActual.length - 1;
+            if (slideIndexActual >= galeriaActual.length) slideIndexActual = 0;
+
+            var item = galeriaActual[slideIndexActual];
+            imgStageActive.src = item.url || '/assets/img/placeholder.svg';
+            inputPieActual.value = item.pie || '';
+            imgCounterLabel.textContent = galeriaActual.length + ' / ' + MAX_IMGS;
+            stageBadge.innerHTML = '<i class="fas fa-images"></i> ' + (slideIndexActual + 1) + ' / ' + galeriaActual.length + (slideIndexActual === 0 ? ' · Portada' : '');
+
+            thumbsStrip.innerHTML = galeriaActual.map(function (im, idx) {
+                return '<div class="ed-thumb-item' + (idx === slideIndexActual ? ' active' : '') + '" data-idx="' + idx + '" title="Imagen #' + (idx + 1) + (im.pie ? ': ' + esc(im.pie) : '') + '">' +
+                    '<img src="' + esc(im.url) + '" alt="Miniatura ' + (idx + 1) + '">' +
+                    '<span class="ed-thumb-num">' + (idx === 0 ? '★ 1' : (idx + 1)) + '</span>' +
+                    (galeriaActual.length > 1 ? '<button type="button" class="ed-thumb-del" data-del-idx="' + idx + '" title="Quitar imagen">&times;</button>' : '') +
+                '</div>';
+            }).join('');
+
+            Array.prototype.forEach.call(thumbsStrip.querySelectorAll('.ed-thumb-item'), function (el) {
+                el.addEventListener('click', function (e) {
+                    if (e.target.closest('.ed-thumb-del')) return;
+                    slideIndexActual = parseInt(this.getAttribute('data-idx') || '0', 10);
+                    renderCarruselEditor();
+                });
+            });
+
+            Array.prototype.forEach.call(thumbsStrip.querySelectorAll('.ed-thumb-del'), function (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    var dIdx = parseInt(this.getAttribute('data-del-idx') || '0', 10);
+                    galeriaActual.splice(dIdx, 1);
+                    if (slideIndexActual >= galeriaActual.length) slideIndexActual = Math.max(0, galeriaActual.length - 1);
+                    renderCarruselEditor();
+                });
+            });
+        }
+
+        inputPieActual.addEventListener('input', function () {
+            if (galeriaActual[slideIndexActual]) {
+                galeriaActual[slideIndexActual].pie = this.value;
+            }
+        });
+
+        document.getElementById('edCarouselPrev').addEventListener('click', function () {
+            slideIndexActual--;
+            renderCarruselEditor();
+        });
+
+        document.getElementById('edCarouselNext').addEventListener('click', function () {
+            slideIndexActual++;
+            renderCarruselEditor();
+        });
+
+        document.getElementById('btnMakeCurrentCover').addEventListener('click', function () {
+            if (slideIndexActual <= 0 || !galeriaActual[slideIndexActual]) return;
+            var elegida = galeriaActual.splice(slideIndexActual, 1)[0];
+            galeriaActual.unshift(elegida);
+            slideIndexActual = 0;
+            renderCarruselEditor();
+        });
+
+        function renderListaIzquierda() {
+            var q = busquedaTexto.toLowerCase();
+            var filtradas = todasNoticias.filter(function (n) {
+                var st = (n.estado || 'publicada').toLowerCase();
+                if (filtroEstado !== 'todas') {
+                    if (filtroEstado === 'borrador' && st !== 'borrador' && st !== 'revision') return false;
+                    if (filtroEstado === 'publicada' && st !== 'publicada') return false;
+                    if (filtroEstado === 'archivada' && st !== 'archivada') return false;
+                }
+                if (q) {
+                    var hay = ((n.titulo || '') + ' ' + (n.categoria || '') + ' ' + (n.resumen || '') + ' ' + (n.id || '')).toLowerCase();
+                    if (hay.indexOf(q) === -1) return false;
+                }
+                return true;
+            });
+
+            // Dividir en dos grupos como en el wireframe: "Nuevas" (primeras 3 o borradores recientes) y "Anteriores"
+            var grupoNuevas = filtradas.slice(0, 3);
+            var grupoAnteriores = filtradas.slice(3);
+
+            function cardItemHtml(n) {
+                var isSel = String(n.id) === String(noticiaActualId);
+                var st = (n.estado || 'publicada').toLowerCase();
+                var numImgs = Array.isArray(n.imagenes) ? n.imagenes.length : 1;
+                return '<div class="ed-news-item' + (isSel ? ' active' : '') + '" data-news-id="' + esc(n.id) + '">' +
+                    '<h4 class="ed-news-item-title">' + esc(n.titulo || 'Sin título') + '</h4>' +
+                    '<div class="ed-news-item-meta">' +
+                        '<div>' +
+                            '<span class="ed-status-badge st-' + esc(st) + '">' + esc(labelEstado(st)) + '</span> ' +
+                            '<span style="margin-left: 4px;">' + esc(formatearFechaCorta(n.fecha_solo || n.fecha)) + '</span>' +
+                        '</div>' +
+                        '<span title="Imágenes en carrusel"><i class="fas fa-images"></i> ' + numImgs + '</span>' +
+                    '</div>' +
+                '</div>';
+            }
+
+            var html = '';
+            if (grupoNuevas.length) {
+                html += '<div class="ed-group-label"><span>Nuevas</span><span>' + grupoNuevas.length + '</span></div>';
+                html += grupoNuevas.map(cardItemHtml).join('');
+            }
+            if (grupoAnteriores.length) {
+                html += '<div class="ed-group-label" style="margin-top: 16px;"><span>Anteriores</span><span>' + grupoAnteriores.length + '</span></div>';
+                html += grupoAnteriores.map(cardItemHtml).join('');
+            }
+            if (!filtradas.length) {
+                html = '<p style="font-size: 0.85rem; color: var(--ed-muted); text-align: center; padding: 24px 8px;">No se encontraron noticias con ese filtro.</p>';
+            }
+
+            listContainer.innerHTML = html;
+
+            Array.prototype.forEach.call(listContainer.querySelectorAll('.ed-news-item'), function (card) {
+                card.addEventListener('click', function () {
+                    var idSel = this.getAttribute('data-news-id');
+                    seleccionarNoticiaPorId(idSel);
+                });
+            });
+        }
+
+        function cargarEnEditor(n) {
+            noticiaActualId = n.id ? String(n.id) : '';
+            inputId.value = noticiaActualId;
+            topModeLabel.textContent = noticiaActualId ? ('Editar noticia #' + noticiaActualId) : 'Nueva noticia (Borrador)';
+            btnDeleteNoticia.style.display = noticiaActualId ? 'inline-flex' : 'none';
+
+            inputTitular.value = n.titulo || '';
+            inputBajada.value = n.subtitulo || n.resumen || '';
+
+            var cuerpoFull = n.cuerpo || n.resumen || '';
+            var partesP = String(cuerpoFull).split(/\n\n+/);
+            if (partesP.length > 1) {
+                inputCuerpoTop.value = partesP.slice(0, Math.ceil(partesP.length / 2)).join('\n\n');
+                inputCuerpoBottom.value = partesP.slice(Math.ceil(partesP.length / 2)).join('\n\n');
+            } else {
+                inputCuerpoTop.value = cuerpoFull;
+                inputCuerpoBottom.value = '';
+            }
+
+            selectEstado.value = (n.estado || 'publicada').toLowerCase();
+            selectSeccion.value = n.categoria || 'Gestión Industrial';
+            if (n.autor) {
+                var existeAutor = Array.prototype.some.call(selectAutor.options, function (op) { return op.value === n.autor; });
+                if (!existeAutor) {
+                    var opt = document.createElement('option');
+                    opt.value = n.autor;
+                    opt.textContent = n.autor;
+                    selectAutor.appendChild(opt);
+                }
+                selectAutor.value = n.autor;
+            }
+            inputProgramacion.value = n.programacion || ((n.fecha_solo || '') + (n.hora_solo ? ', ' + n.hora_solo : '')) || 'Hoy, 18:00';
+
+            etiquetasActuales = Array.isArray(n.etiquetas) && n.etiquetas.length ? n.etiquetas.slice() : ['CVG Alcasa', 'Prensa'];
+            renderEtiquetas();
+
+            galeriaActual = (Array.isArray(n.imagenes) && n.imagenes.length)
+                ? n.imagenes.map(function (im) {
+                    return typeof im === 'string' ? { url: im, pie: '' } : { url: im.url, pie: im.pie || '' };
+                })
+                : [{ url: n.imagen || '/assets/img/noticias/noticia-761.jpg', pie: n.pie_foto || '' }];
+            slideIndexActual = 0;
+            renderCarruselEditor();
+
+            historialActual = Array.isArray(n.historial) ? n.historial : [];
+            var vCount = n.versiones_count || (historialActual.length || 1);
+            versionCountText.textContent = vCount + (vCount === 1 ? ' versión' : ' versiones');
+
+            actualizarContadorPalabras();
+            renderListaIzquierda();
+        }
+
+        function seleccionarNoticiaPorId(idBuscado) {
+            for (var i = 0; i < todasNoticias.length; i++) {
+                if (String(todasNoticias[i].id) === String(idBuscado)) {
+                    cargarEnEditor(todasNoticias[i]);
+                    return;
+                }
+            }
+        }
+
+        function iniciarModoNuevaNoticia() {
+            noticiaActualId = '';
+            cargarEnEditor({
+                id: '',
+                estado: 'borrador',
+                categoria: 'Gestión Industrial',
+                titulo: '',
+                subtitulo: '',
+                resumen: '',
+                cuerpo: '',
+                imagen: '/assets/img/noticias/noticia-773.jpg',
+                imagenes: [{ url: '/assets/img/noticias/noticia-773.jpg', pie: '' }],
+                etiquetas: ['CVG Alcasa', 'Producción'],
+                programacion: 'Hoy, 18:00',
+                versiones_count: 1,
+                historial: []
+            });
+            inputTitular.focus();
+        }
+
+        document.getElementById('btnNuevaNoticiaTop').addEventListener('click', iniciarModoNuevaNoticia);
+
+        // Barra de herramientas de formato
+        Array.prototype.forEach.call(document.querySelectorAll('.ed-tool-btn[data-fmt]'), function (btn) {
+            btn.addEventListener('click', function () {
+                var fmt = this.getAttribute('data-fmt');
+                var ta = inputCuerpoTop;
+                var start = ta.selectionStart || 0;
+                var end = ta.selectionEnd || 0;
+                var sel = ta.value.substring(start, end) || 'texto';
+                var rep = sel;
+                if (fmt === 'bold') rep = '**' + sel + '**';
+                if (fmt === 'italic') rep = '_' + sel + '_';
+                if (fmt === 'h2') rep = '\n## ' + sel + '\n';
+                if (fmt === 'quote') rep = '\n«' + sel + '»\n';
+                if (fmt === 'list') rep = '\n• ' + sel + '\n• ';
+                if (fmt === 'link') {
+                    var url = prompt('URL del enlace:', 'http://alcasa.com.ve');
+                    if (url) rep = sel + ' (' + url + ')';
+                }
+                if (fmt === 'video') {
+                    rep = '\n[Video institucional CVG Alcasa: ' + sel + ']\n';
+                }
+                ta.value = ta.value.substring(0, start) + rep + ta.value.substring(end);
+                ta.focus();
+                actualizarContadorPalabras();
+            });
+        });
+
+        // Subida de hasta 20 imágenes al carrusel
+        function abrirSelectorImagenes() {
+            if (galeriaActual.length >= MAX_IMGS) {
+                alert('Ya alcanzaste el máximo de ' + MAX_IMGS + ' imágenes en el carrusel de esta noticia.');
+                return;
+            }
+            filesInput.click();
+        }
+
+        document.getElementById('btnToolbarAddImgs').addEventListener('click', abrirSelectorImagenes);
+        document.getElementById('btnAddMoreImagesCenter').addEventListener('click', abrirSelectorImagenes);
+        dropzoneBox.addEventListener('click', abrirSelectorImagenes);
+
+        filesInput.addEventListener('change', function () {
+            if (!this.files || !this.files.length) return;
+            var disponibles = MAX_IMGS - galeriaActual.length;
+            if (disponibles <= 0) {
+                alert('El carrusel permite un máximo de 20 imágenes por noticia.');
+                return;
+            }
+            var fd = new FormData();
+            fd.append('id', noticiaActualId || 'nueva');
+            var totalSubir = Math.min(this.files.length, disponibles);
+            for (var i = 0; i < totalSubir; i++) {
+                fd.append('imagenes[]', this.files[i]);
+            }
+            autosaveStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subiendo ' + totalSubir + ' imagen(es)...';
+
+            fetch('/api/prensa_admin.php?action=upload_images', {
+                method: 'POST',
+                body: fd
+            })
+            .then(function (r) { return r.json(); })
+            .then(function (res) {
+                if (res && res.success && Array.isArray(res.imagenes)) {
+                    // Si solo había el placeholder por defecto en una noticia nueva, reemplazarlo
+                    if (!noticiaActualId && galeriaActual.length === 1 && galeriaActual[0].url === '/assets/img/noticias/noticia-773.jpg') {
+                        galeriaActual = [];
+                    }
+                    res.imagenes.forEach(function (im) {
+                        if (galeriaActual.length < MAX_IMGS) {
+                            galeriaActual.push({ url: im.url, pie: im.pie || '' });
+                        }
+                    });
+                    slideIndexActual = galeriaActual.length - 1;
+                    renderCarruselEditor();
+                    autosaveStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#16a34a;"></i> ' + res.mensaje;
+                } else {
+                    alert((res && res.error) || 'No se pudieron subir las imágenes.');
+                }
+                filesInput.value = '';
+            })
+            .catch(function () {
+                alert('Error de red al subir las imágenes.');
+                filesInput.value = '';
+            });
+        });
+
+        // Añadir etiquetas
+        function agregarEtiquetaDesdeInput() {
+            var val = (inputNewTag.value || '').trim();
+            if (!val) return;
+            if (etiquetasActuales.indexOf(val) === -1) {
+                etiquetasActuales.push(val);
+                renderEtiquetas();
+            }
+            inputNewTag.value = '';
+        }
+
+        document.getElementById('btnAddTag').addEventListener('click', agregarEtiquetaDesdeInput);
+        inputNewTag.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                agregarEtiquetaDesdeInput();
+            }
+        });
+
+        [inputTitular, inputBajada, inputCuerpoTop, inputCuerpoBottom].forEach(function (el) {
+            el.addEventListener('input', function () {
+                actualizarContadorPalabras();
+                autosaveStatus.innerHTML = '<i class="fas fa-pen" style="color:#d97706;"></i> Cambios sin guardar...';
+            });
+        });
+
+        // Filtros y búsqueda de la columna izquierda
+        searchInput.addEventListener('input', function () {
+            busquedaTexto = this.value || '';
+            renderListaIzquierda();
+        });
+
+        Array.prototype.forEach.call(filterBar.querySelectorAll('.ed-filter-chip'), function (chip) {
+            chip.addEventListener('click', function () {
+                Array.prototype.forEach.call(filterBar.querySelectorAll('.ed-filter-chip'), function (c) { c.classList.remove('active'); });
+                this.classList.add('active');
+                filtroEstado = this.getAttribute('data-filter') || 'todas';
+                renderListaIzquierda();
+            });
+        });
+
+        // Guardar Borrador vs Publicar
+        function guardarNoticiaServidor(estadoObjetivo) {
+            var titulo = (inputTitular.value || '').trim();
+            var bajada = (inputBajada.value || '').trim();
+            var cTop = (inputCuerpoTop.value || '').trim();
+            var cBot = (inputCuerpoBottom.value || '').trim();
+            var cuerpoUnido = [cTop, cBot].filter(Boolean).join('\n\n');
+
+            if (!titulo) {
+                alert('Por favor ingresa el Titular de la noticia.');
+                inputTitular.focus();
+                return;
+            }
+            if (!bajada && !cuerpoUnido) {
+                alert('Por favor ingresa la bajada/resumen o el cuerpo de la noticia.');
+                inputBajada.focus();
+                return;
+            }
+
+            selectEstado.value = estadoObjetivo;
+
+            var fd = new FormData();
+            fd.append('action', noticiaActualId ? 'update' : 'create');
+            fd.append('id', noticiaActualId);
+            fd.append('estado', estadoObjetivo);
+            fd.append('titulo', titulo);
+            fd.append('subtitulo', bajada);
+            fd.append('resumen', bajada || cuerpoUnido.substring(0, 280));
+            fd.append('cuerpo', cuerpoUnido || bajada);
+            fd.append('categoria', selectSeccion.value);
+            fd.append('autor', selectAutor.value);
+            fd.append('programacion', inputProgramacion.value);
+            fd.append('pie_foto', (galeriaActual[0] && galeriaActual[0].pie) || inputPieActual.value || '');
+            fd.append('etiquetas', JSON.stringify(etiquetasActuales));
+            fd.append('imagenes_json', JSON.stringify(galeriaActual.slice(0, MAX_IMGS)));
+
+            autosaveStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+
+            fetch('/api/prensa_admin.php?action=' + (noticiaActualId ? 'update' : 'create'), {
+                method: 'POST',
+                body: fd
+            })
+            .then(function (r) { return r.json(); })
+            .then(function (res) {
+                if (res && res.success && res.noticia) {
+                    ultimoGuardadoTs = Date.now();
+                    autosaveStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#16a34a;"></i> Guardado hace instantes (' + labelEstado(estadoObjetivo) + ')';
+                    var guardada = res.noticia;
+                    noticiaActualId = String(guardada.id);
+
+                    var reemplazada = false;
+                    for (var i = 0; i < todasNoticias.length; i++) {
+                        if (String(todasNoticias[i].id) === noticiaActualId) {
+                            todasNoticias[i] = guardada;
+                            reemplazada = true;
+                            break;
+                        }
+                    }
+                    if (!reemplazada) {
+                        todasNoticias.unshift(guardada);
+                    }
+                    cargarEnEditor(guardada);
+                } else {
+                    autosaveStatus.innerHTML = '<i class="fas fa-triangle-exclamation" style="color:#dc2626;"></i> Error al guardar';
+                    alert((res && res.error) || 'No se pudo guardar la noticia.');
+                }
+            })
+            .catch(function () {
+                autosaveStatus.innerHTML = '<i class="fas fa-triangle-exclamation" style="color:#dc2626;"></i> Error de conexión';
+            });
+        }
+
+        document.getElementById('btnGuardarBorrador').addEventListener('click', function () {
+            guardarNoticiaServidor('borrador');
+        });
+
+        document.getElementById('btnPublicarNoticia').addEventListener('click', function () {
+            var est = selectEstado.value === 'archivada' ? 'archivada' : 'publicada';
+            guardarNoticiaServidor(est);
+        });
+
+        btnDeleteNoticia.addEventListener('click', function () {
+            if (!noticiaActualId) return;
+            if (!confirm('¿Seguro que deseas eliminar la noticia #' + noticiaActualId + '?')) return;
+            var fd = new FormData();
+            fd.append('action', 'delete');
+            fd.append('id', noticiaActualId);
+            fetch('/api/prensa_admin.php?action=delete', { method: 'POST', body: fd })
+                .then(function (r) { return r.json(); })
+                .then(function (res) {
+                    if (res && res.success) {
+                        todasNoticias = todasNoticias.filter(function (x) { return String(x.id) !== String(noticiaActualId); });
+                        if (todasNoticias.length) {
+                            cargarEnEditor(todasNoticias[0]);
+                        } else {
+                            iniciarModoNuevaNoticia();
+                        }
+                    }
+                });
+        });
+
+        // Vista Previa Modal
+        var modalPreview = document.getElementById('modalVistaPrevia');
+        document.getElementById('btnVistaPrevia').addEventListener('click', function () {
+            var titulo = inputTitular.value || 'Título de la noticia en edición';
+            var bajada = inputBajada.value || 'Resumen ejecutivo de la nota institucional.';
+            var cuerpo = [inputCuerpoTop.value, inputCuerpoBottom.value].filter(Boolean).join('\n\n') || bajada;
+            var imgs = galeriaActual.length ? galeriaActual : [{ url: '/assets/img/noticias/noticia-761.jpg', pie: '' }];
+
+            var slidesHtml = imgs.map(function (im, i) {
+                return '<img class="prensa-api-thumb prensa-carousel-slide' + (i === 0 ? ' active' : '') + '" data-p-idx="' + i + '" src="' + esc(im.url) + '" alt="' + esc(im.pie || titulo) + '">';
+            }).join('');
+
+            document.getElementById('previewCardContainer').innerHTML =
+                '<article class="prensa-api-card prensa-card-horizontal is-top-news" id="previewCardEl" data-curr="0">' +
+                    '<div class="prensa-api-thumb-wrap prensa-thumb-carousel">' +
+                        '<div class="prensa-thumb-badges">' +
+                            '<span class="prensa-rank-badge featured"><i class="fas fa-bolt"></i> #01</span>' +
+                            '<span class="prensa-carousel-counter"><i class="fas fa-images"></i> <b id="prevCurrNum">1</b>/' + imgs.length + '</span>' +
+                        '</div>' +
+                        '<div class="prensa-carousel-stage">' + slidesHtml + '</div>' +
+                        (imgs.length > 1
+                            ? '<button type="button" class="prensa-carousel-nav prev" id="prevCardPrev"><i class="fas fa-chevron-left"></i></button>' +
+                              '<button type="button" class="prensa-carousel-nav next" id="prevCardNext"><i class="fas fa-chevron-right"></i></button>'
+                            : '') +
+                    '</div>' +
+                    '<div class="prensa-api-card-body">' +
+                        '<div class="prensa-row-meta">' +
+                            '<span class="prensa-cat-badge"><i class="fas fa-tag"></i> ' + esc(selectSeccion.value) + '</span>' +
+                            '<span class="prensa-strip-item"><i class="fas fa-calendar-alt"></i> ' + esc(inputProgramacion.value || 'Hoy') + '</span>' +
+                            '<span class="prensa-strip-item"><i class="fas fa-user-pen"></i> ' + esc(selectAutor.value) + '</span>' +
+                        '</div>' +
+                        '<h3 class="prensa-api-title">' + esc(titulo) + '</h3>' +
+                        '<p class="prensa-api-excerpt">' + esc(bajada) + '</p>' +
+                    '</div>' +
+                '</article>';
+
+            document.getElementById('previewFullBody').textContent = cuerpo;
+            modalPreview.style.display = 'flex';
+
+            var pCurr = 0;
+            function stepPrevCard(dir) {
+                var card = document.getElementById('previewCardEl');
+                if (!card) return;
+                pCurr = (pCurr + dir + imgs.length) % imgs.length;
+                Array.prototype.forEach.call(card.querySelectorAll('.prensa-carousel-slide'), function (sl, idx) {
+                    sl.classList.toggle('active', idx === pCurr);
+                });
+                var num = document.getElementById('prevCurrNum');
+                if (num) num.textContent = String(pCurr + 1);
+            }
+            var bP = document.getElementById('prevCardPrev');
+            var bN = document.getElementById('prevCardNext');
+            if (bP) bP.onclick = function () { stepPrevCard(-1); };
+            if (bN) bN.onclick = function () { stepPrevCard(1); };
+        });
+
+        document.getElementById('btnClosePreviewModal').addEventListener('click', function () {
+            modalPreview.style.display = 'none';
+        });
+
+        // Modal de Historial de Versiones y Restauración
+        var modalHistory = document.getElementById('modalHistorialVersiones');
+        document.getElementById('btnOpenHistoryModal').addEventListener('click', function () {
+            var listEl = document.getElementById('historyVersionsList');
+            if (!historialActual.length) {
+                listEl.innerHTML = '<div style="padding:14px;border:1px solid var(--ed-border);border-radius:10px;background:#faf9f5;">' +
+                    '<strong>Versión #1 (Actual)</strong> · Estado: ' + esc(labelEstado(selectEstado.value)) +
+                    '<div style="font-size:0.82rem;color:var(--ed-muted);margin-top:4px;">Guarda un borrador o publica cambios para generar nuevas versiones restaurables.</div>' +
+                '</div>';
+            } else {
+                listEl.innerHTML = historialActual.map(function (h, i) {
+                    return '<div style="padding:12px 14px;border:1px solid var(--ed-border);border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff;">' +
+                        '<div>' +
+                            '<strong>Versión #' + esc(h.version) + '</strong> · <span class="ed-status-badge st-' + esc(h.estado || 'publicada') + '">' + esc(labelEstado(h.estado || 'publicada')) + '</span> ' +
+                            '<span style="font-size:0.82rem;color:var(--ed-muted);margin-left:6px;">' + esc(h.fecha) + ' por <b>' + esc(h.usuario) + '</b> (' + esc(h.accion || 'Guardado') + ')</span>' +
+                            '<div style="font-size:0.86rem;color:#334155;margin-top:4px;">' + esc((h.datos && h.datos.titulo) || '') + '</div>' +
+                        '</div>' +
+                        '<button type="button" class="btn-ed" data-restore-idx="' + i + '" style="flex-shrink:0;"><i class="fas fa-rotate-left"></i> Restaurar</button>' +
+                    '</div>';
+                }).join('');
+
+                Array.prototype.forEach.call(listEl.querySelectorAll('button[data-restore-idx]'), function (btn) {
+                    btn.addEventListener('click', function () {
+                        var idx = parseInt(this.getAttribute('data-restore-idx') || '0', 10);
+                        var snap = historialActual[idx];
+                        if (snap && snap.datos) {
+                            var datosRest = Object.assign({}, snap.datos, {
+                                historial: historialActual,
+                                versiones_count: historialActual.length
+                            });
+                            cargarEnEditor(datosRest);
+                            modalHistory.style.display = 'none';
+                            autosaveStatus.innerHTML = '<i class="fas fa-rotate-left" style="color:var(--ed-purple);"></i> Versión #' + snap.version + ' restaurada en el editor';
+                        }
+                    });
+                });
+            }
+            modalHistory.style.display = 'flex';
+        });
+
+        document.getElementById('btnCloseHistoryModal').addEventListener('click', function () {
+            modalHistory.style.display = 'none';
+        });
+
+        function cargarTodasLasNoticias() {
+            fetch('/api/prensa_admin.php?action=list_all')
+                .then(function (r) { return r.json(); })
+                .then(function (res) {
+                    if (res && res.success && Array.isArray(res.noticias)) {
+                        todasNoticias = res.noticias;
+                        var params = new URLSearchParams(window.location.search);
+                        var targetId = params.get('id');
+                        if (targetId) {
+                            seleccionarNoticiaPorId(targetId);
+                        } else if (todasNoticias.length) {
+                            cargarEnEditor(todasNoticias[0]);
+                        } else {
+                            iniciarModoNuevaNoticia();
+                        }
+                    }
+                });
+        }
+
+        function verificarSesion() {
+            fetch('/api/prensa_admin.php?action=status')
+                .then(function (r) { return r.json(); })
+                .then(function (st) {
+                    if (st && st.authenticated && st.user) {
+                        loginView.style.display = 'none';
+                        workspace.style.display = 'block';
+                        userActiveBadge.innerHTML = '<i class="fas fa-user-check" style="color:#16a34a;"></i> ' + esc(st.user.usuario) + ' (' + esc(st.user.rol) + ')';
+                        cargarTodasLasNoticias();
+                    } else {
+                        loginView.style.display = 'block';
+                        workspace.style.display = 'none';
+                        cargarBotonesCuentasRapidas();
+                    }
+                });
+        }
+
+        function cargarBotonesCuentasRapidas() {
+            var box = document.getElementById('redQuickAccounts');
+            if (!box) return;
+            fetch('/api/prensa_admin.php?action=accounts')
+                .then(function (r) { return r.json(); })
+                .then(function (res) {
+                    var accs = (res && Array.isArray(res.accounts)) ? res.accounts : [];
+                    box.innerHTML = accs.map(function (a, i) {
+                        return '<button type="button" class="btn-ed" data-acc="' + i + '" style="justify-content:space-between;width:100%;text-align:left;font-size:0.8rem;">' +
+                            '<span><i class="fas fa-user-shield" style="color:var(--alcasa-blue);"></i> <strong>' + esc(a.usuario) + '</strong> / <code>' + esc(a.password) + '</code></span>' +
+                            '<span style="color:var(--ed-muted);font-size:0.74rem;">' + esc(a.rol.toUpperCase()) + '</span>' +
+                        '</button>';
+                    }).join('');
+                    Array.prototype.forEach.call(box.querySelectorAll('button[data-acc]'), function (b) {
+                        b.addEventListener('click', function () {
+                            var a = accs[parseInt(this.getAttribute('data-acc') || '0', 10)];
+                            if (!a) return;
+                            document.getElementById('redUser').value = a.usuario;
+                            document.getElementById('redPass').value = a.password;
+                        });
+                    });
+                });
+        }
+
+        formLogin.addEventListener('submit', function (e) {
+            e.preventDefault();
+            loginMsg.textContent = 'Verificando credenciales...';
+            loginMsg.className = 'contacto-mensaje';
+            fetch('/api/prensa_admin.php?action=login', {
+                method: 'POST',
+                body: new FormData(formLogin)
+            })
+            .then(function (r) { return r.json(); })
+            .then(function (res) {
+                if (res && res.success) {
+                    loginMsg.textContent = '';
+                    verificarSesion();
+                } else {
+                    loginMsg.textContent = (res && res.error) || 'Usuario o contraseña incorrectos.';
+                    loginMsg.className = 'contacto-mensaje error';
+                }
+            });
+        });
+
+        document.getElementById('btnRedLogout').addEventListener('click', function () {
+            fetch('/api/prensa_admin.php?action=logout', { method: 'POST' })
+                .then(function () { verificarSesion(); });
+        });
+
+        verificarSesion();
+    })();
+    </script>
+</body>
+</html>

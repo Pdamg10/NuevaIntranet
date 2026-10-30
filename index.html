@@ -1,13 +1,887 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/css/main.css"><title>CVG Aluminio del Caroní, S.A. - Alcasa</title><meta name="description" content="Producción de aluminio primario, laminación, fundición y extrusión en Venezuela."></head><body>
-<div id="site-header"></div>
-<main>
-<div class="hero" id="inicio"><div class="wrap"><h1>Aluminio de Guayana para la industria nacional</h1><p>Pioneros del aluminio en Venezuela desde 1967: fundición, laminación y extrusión.</p><a class="btn" href="#productos">Ver productos</a></div></div>
-<section id="empresa"><div class="wrap"><h2>Empresa</h2><p class="sub">Quiénes somos</p><p id="empresa-txt"></p><div class="grid"><div class="card"><h3>Misión</h3><p id="mision"></p></div><div class="card"><h3>Visión</h3><p id="vision"></p></div></div></div></section>
-<section class="alt" id="productos"><div class="wrap"><h2>Productos</h2><p class="sub">Soluciones de aluminio para la industria transformadora</p><div class="grid" id="productos-grid"></div></div></section>
-<section id="prensa"><div class="wrap"><h2>Sala de Prensa</h2><p class="sub">Últimas noticias de CVG Alcasa</p><div class="news" id="noticias" data-max="4"></div><p><a class="btn" href="/prensa.html">Ver todas las noticias</a></p></div></section>
-<section class="alt" id="galeria"><div class="wrap"><h2>Galería de procesos</h2><p class="sub">Conoce nuestros procesos productivos</p><div class="grid" id="videos-grid"></div></div></section>
-<section id="empleo"><div class="wrap"><h2>Trabaja con nosotros</h2><p class="sub">Envía tu síntesis curricular y forma parte de CVG Alcasa.</p>
-<form id="cv-form" enctype="multipart/form-data"><input name="nombre" placeholder="Nombre completo *" required maxlength="100"><input name="cedula" placeholder="Cédula de identidad *" required maxlength="20"><input name="correo" type="email" placeholder="Correo electrónico *" required maxlength="120"><input name="telefono" type="tel" placeholder="Teléfono *" required maxlength="30"><select name="nivel" id="cv-nivel" required></select><select name="area" id="cv-area" required></select><textarea name="resumen" rows="3" placeholder="Resumen breve (opcional)" maxlength="1000"></textarea><label>Síntesis curricular (PDF, DOC o DOCX, máx. 10 MB) *<input type="file" id="cv-archivo" name="cv_archivo" accept=".pdf,.doc,.docx" required></label><span class="fname"></span><button class="btn" type="submit">Enviar postulación</button><div id="cv-msg" role="status"></div></form></div></section>
-<section class="alt" id="contacto"><div class="wrap"><h2>Contáctanos</h2><p class="sub">Déjanos tus datos y te responderemos a la brevedad.</p>
-<form id="contacto-form"><input name="nombre" placeholder="Nombre completo *" required maxlength="100"><input name="correo" type="email" placeholder="Correo electrónico *" required maxlength="120"><input name="empresa" placeholder="Empresa u organización" maxlength="100"><select name="interes" id="interes"></select><textarea name="comentario" rows="4" placeholder="Comentario" maxlength="1000"></textarea><button class="btn" type="submit">Enviar</button><div id="msg" role="status"></div></form></div></section>
-</main><div id="site-footer"></div><script src="/assets/js/app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVG Aluminio del Caroní, S.A. (CVG Alcasa) | Portal Oficial Institucional</title>
+    <meta name="description" content="CVG Aluminio del Caroní, S.A. (CVG Alcasa) - Empresa líder pionera en la producción y transformación de aluminio primario, fundición, laminación y extrusión en Venezuela.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026k">
+</head>
+<body id="inicio">
+
+    <!-- =========================================
+         HEADER CORPORATIVO (Renderizado por /assets/js/app.js)
+         ========================================= -->
+    <div id="site-header"></div>
+
+    <!-- =========================================
+         1. BANNER ROTATIVO (ESTILO OFICIAL ALCASA.COM.VE)
+         ========================================= -->
+    <section class="alcoa-hero" aria-label="Banner Principal">
+        <div class="hero-slider" id="heroSlider">
+            <div class="hero-slide active" style="background-image: url('/assets/img/hero-laminacion.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('/assets/img/hero-fundicion.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('/assets/img/hero-extrusion.jpg');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content" id="heroContent">
+            <h2>Laminación</h2>
+            <p>Nuestros productos</p>
+            <a href="#productos" data-cat="Laminación" class="hero-btn">Acceder <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="slider-controls">
+            <button type="button" class="slider-btn" id="heroPrevBtn" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+            <button type="button" class="slider-btn" id="heroNextBtn" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <div class="slider-indicators" id="sliderIndicators">
+            <span class="indicator active" data-slide="0" role="button" tabindex="0" aria-label="Diapositiva 1"></span>
+            <span class="indicator" data-slide="1" role="button" tabindex="0" aria-label="Diapositiva 2"></span>
+            <span class="indicator" data-slide="2" role="button" tabindex="0" aria-label="Diapositiva 3"></span>
+        </div>
+    </section>
+
+    <!-- =========================================
+         CONTENIDO PRINCIPAL INTEGRADO (SIN POPUPS)
+         ========================================= -->
+    <main class="content-wrapper">
+
+        <!-- 2. SECCIÓN: MÁS QUE UNA SIMPLE EMPRESA (TABS Y MASCOTA INTEGRADA) -->
+        <section class="empresa-section fold-reveal" id="empresa">
+            <div class="section-header">
+                <h2 class="blur-text" data-delay="150" data-direction="top" data-animate-by="words">Más que una simple empresa</h2>
+                <p class="empresa-header-lead blur-text" data-delay="120" data-direction="top" data-animate-by="words">
+                    Somos un pilar de la industria del aluminio en Venezuela, dedicados a transformar el aluminio en soluciones de vanguardia. Con un equipo comprometido y una visión de futuro, impulsamos el desarrollo y la innovación en cada uno de nuestros procesos.
+                </p>
+            </div>
+
+            <!-- Navegación de pestañas -->
+            <div class="empresa-tabs-nav">
+                <button type="button" class="empresa-tab-btn active" data-tab="tab-quienes-somos">
+                    <i class="fas fa-landmark"></i> ¿Quiénes somos?
+                </button>
+                <button type="button" class="empresa-tab-btn" data-tab="tab-mision-vision">
+                    <i class="fas fa-compass"></i> Misión y Visión
+                </button>
+                <button type="button" class="empresa-tab-btn" data-tab="tab-valores">
+                    <i class="fas fa-medal"></i> Nuestros Valores
+                </button>
+                <button type="button" class="empresa-tab-btn" data-tab="tab-pilares">
+                    <i class="fas fa-shield-alt"></i> Pilares de Gestión
+                </button>
+            </div>
+
+            <div class="empresa-tabs-content">
+                <!-- TAB 1: ¿Quiénes somos? -->
+                <div class="empresa-tab-pane active" id="tab-quienes-somos">
+                    <div class="empresa-grid-2col">
+                        <div class="empresa-text-card">
+                            <h3><i class="fas fa-industry" style="color: var(--alcasa-accent);"></i> Industria Básica de Vanguardia</h3>
+                            <p id="empresa-txt">
+                                <strong>CVG Aluminio del Caroní, S.A. (CVG Alcasa)</strong> es la empresa pionera de la industria del aluminio en Venezuela, fundada el 14 de octubre de 1967. Como industria básica del Estado venezolano, tutelada por la <strong>Corporación Venezolana de Guayana (CVG)</strong> y adscrita al Ministerio del Poder Popular de Desarrollo Minero Ecológico, somos productora y comercializadora de cilindros, productos laminados y perfiles de extrusión.
+                            </p>
+                            <p style="margin-top: 15px;">
+                                Contamos con tres áreas operativas estratégicas: <strong>Planta de Fundición</strong> (capacidad instalada de <strong>120.000 Tm/año</strong> en cilindros 6063 homogeneizados), <strong>Planta Extrusora de 7"</strong> (<strong>10.500 Tm/año</strong> en perfilería arquitectónica y estructural) y <strong>Planta de Laminación</strong> (Colada Continua de <strong>12.000 Tm/año</strong>, Laminador en Caliente Clecim-Cosim de <strong>120.000 Tm/año</strong> y Laminador en Frío "Hugo Chávez" de <strong>170.000 Tm/año</strong>).
+                            </p>
+                        </div>
+                        <div class="welcome-mascot">
+                            <img src="/assets/img/mascota-alcasa.png" alt="Mascota Institucional CVG Alcasa" class="mascot-img">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: Misión y Visión -->
+                <div class="empresa-tab-pane" id="tab-mision-vision">
+                    <div class="empresa-grid-2col" style="grid-template-columns: 1fr 1fr;">
+                        <div class="empresa-text-card" style="border-left-color: var(--alcasa-blue);">
+                            <h3><i class="fas fa-bullseye" style="color: var(--alcasa-blue);"></i> Misión</h3>
+                            <p id="mision">Transformar y comercializar en forma eficiente los productos de aluminio garantizando el suministro de materia prima al sector transformador nacional, fomentando la diversificación productiva con mayor valor agregado, defendiendo la soberanía productiva y tecnológica.</p>
+                        </div>
+                        <div class="empresa-text-card" style="border-left-color: var(--alcasa-accent);">
+                            <h3><i class="fas fa-eye" style="color: var(--alcasa-accent);"></i> Visión</h3>
+                            <p id="vision">Posicionar a CVG Alcasa como impulsador de la industria del aluminio, permitiendo diversificar y transformar la materia prima en productos terminados, que aporten al sostenimiento socio-económico del país, bajo las premisas del nuevo modelo productivo que apunta al Socialismo del Siglo XXI.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: Valores Institucionales -->
+                <div class="empresa-tab-pane" id="tab-valores">
+                    <div class="valores-grid">
+                        <div class="valor-card">
+                            <div class="valor-icon"><i class="fas fa-award"></i></div>
+                            <h4>Excelencia</h4>
+                            <p>Nos esforzamos por superar las expectativas en cada proyecto, buscando siempre la máxima calidad y la mejora continua en todo lo que hacemos.</p>
+                        </div>
+                        <div class="valor-card">
+                            <div class="valor-icon"><i class="fas fa-handshake"></i></div>
+                            <h4>Compromiso</h4>
+                            <p>Estamos dedicados al éxito de nuestros clientes y del país. Asumimos sus objetivos como propios y trabajamos con pasión y responsabilidad.</p>
+                        </div>
+                        <div class="valor-card">
+                            <div class="valor-icon"><i class="fas fa-balance-scale"></i></div>
+                            <h4>Transparencia</h4>
+                            <p>Actuamos con honestidad e integridad. La comunicación clara y abierta es la base para construir relaciones de confianza duraderas.</p>
+                        </div>
+                        <div class="valor-card">
+                            <div class="valor-icon"><i class="fas fa-users"></i></div>
+                            <h4>Cooperación</h4>
+                            <p>Fomentamos el trabajo en equipo uniendo el talento y la experiencia técnica de nuestra clase trabajadora.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: Pilares de Gestión -->
+                <div class="empresa-tab-pane" id="tab-pilares">
+                    <div class="valores-grid">
+                        <div class="valor-card">
+                            <div class="valor-icon"><i class="fas fa-cogs"></i></div>
+                            <h4>Eficiencia Productiva</h4>
+                            <p>Maximizamos el uso de recursos y optimizamos procesos metalúrgicos para garantizar aluminio primario y transformado de alta calidad.</p>
+                        </div>
+                        <div class="valor-card">
+                            <div class="valor-icon"><i class="fas fa-user-graduate"></i></div>
+                            <h4>Talento Humano</h4>
+                            <p>Reconocemos a nuestros trabajadores como el motor fundamental de la industria, impulsando su capacitación y participación activa.</p>
+                        </div>
+                        <div class="valor-card">
+                            <div class="valor-icon"><i class="fas fa-hands-helping"></i></div>
+                            <h4>Compromiso Social</h4>
+                            <p>Generamos un impacto positivo tangible en las familias trabajadoras, en la educación y en las comunidades de la región Guayana.</p>
+                        </div>
+                        <div class="valor-card">
+                            <div class="valor-icon"><i class="fas fa-seedling"></i></div>
+                            <h4>Sostenibilidad Ambiental</h4>
+                            <p>Operamos con apego ecológico, promoviendo el reciclaje y protegiendo el entorno natural de la cuenca del Caroní.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+             3. SECCIÓN: CONOCE NUESTROS PRODUCTOS (2 PRODUCTOS DESTACADOS EN INICIO + ENLACE A SECCIÓN COMPLETA)
+             ========================================= -->
+        <section id="productos" class="fold-reveal">
+            <div class="section-header">
+                <h2 class="blur-text" data-delay="150" data-direction="top" data-animate-by="words">Conoce Nuestros Productos</h2>
+                <p>Productos destacados del Catálogo Oficial CVG Alcasa 2025 — Explora nuestra sección completa con los 32 productos en orden</p>
+            </div>
+
+            <!-- VITRINA PRINCIPAL: SOLO 2 PRODUCTOS A LA VISTA (CILINDROS TOCHOS Y ROLLO DE ALUMINIO LISO O STUCCO) -->
+            <div class="home-featured-products-grid" id="productosGlowingContainer">
+
+                <!-- Producto Destacado 1: Cilindros Tochos (#01 del Catálogo) -->
+                <article class="product-showcase-card" data-category="Fundición">
+                    <div class="product-showcase-img-wrap">
+                        <span class="product-showcase-order">#01 · Planta de Fundición</span>
+                        <img src="/assets/img/productos/cilindros-tochos.jpg" alt="Cilindros Tochos - Producto Final CVG Alcasa" class="product-showcase-img">
+                    </div>
+                    <div class="product-showcase-content">
+                        <div class="product-showcase-header">
+                            <span class="product-showcase-sub">Cilindros de CVG Alcasa · Billet Cylinders</span>
+                            <h3>Cilindros Tochos</h3>
+                        </div>
+                        <p class="product-showcase-desc">
+                            Cilindros de aluminio primario homogeneizados en hornos de tratamiento térmico, fundidos en colada vertical continua y cortados a medida para alimentar prensas de extrusión con máxima pureza y precisión metalúrgica.
+                        </p>
+                        <ul class="product-showcase-specs">
+                            <li><strong><i class="fas fa-Atom"></i> Aleación:</strong> 6063 / S6063</li>
+                            <li><strong><i class="fas fa-fire-flame-curved"></i> Temple:</strong> T5 (Homogenizado)</li>
+                            <li><strong><i class="fas fa-circle-dot"></i> Diámetro:</strong> 7" (177,8 mm)</li>
+                            <li><strong><i class="fas fa-ruler-horizontal"></i> Longitud:</strong> Cortados a medida</li>
+                        </ul>
+                        <div class="product-showcase-actions">
+                            <button type="button" class="btn-catalog-cotizar" data-producto="Cilindros Tochos (Fundición)">
+                                <i class="fas fa-file-invoice"></i> Cotizar Producto
+                            </button>
+                            <button type="button" class="btn-catalog-ficha" data-product-index="0">
+                                <i class="fas fa-file-lines"></i> Ficha Técnica
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Producto Destacado 2: Rollo de aluminio liso o stucco (#29 del Catálogo) -->
+                <article class="product-showcase-card" data-category="Laminación">
+                    <div class="product-showcase-img-wrap">
+                        <span class="product-showcase-order">#29 · Planta de Laminación</span>
+                        <img src="/assets/img/productos/rollo-aluminio-liso-stucco.jpg" alt="Rollo de aluminio liso o stucco - Producto Final CVG Alcasa" class="product-showcase-img">
+                    </div>
+                    <div class="product-showcase-content">
+                        <div class="product-showcase-header">
+                            <span class="product-showcase-sub">Laminados de CVG Alcasa · Smooth or Stucco Roll</span>
+                            <h3>Rollo de aluminio liso o stucco</h3>
+                        </div>
+                        <p class="product-showcase-desc">
+                            Bobina de aluminio de bajo espesor laminada en frío con superficie lisa brillante o grabada stucco de calibre uniforme, ideal para líneas de acanalado de techos, aislamiento térmico, refrigeración, ductería y empaques.
+                        </p>
+                        <ul class="product-showcase-specs">
+                            <li><strong><i class="fas fa-layer-group"></i> Aleación:</strong> 1050, 1100 y 3003</li>
+                            <li><strong><i class="fas fa-sliders"></i> Temple:</strong> F/H - O / H-14 / H-16 / H-18</li>
+                            <li><strong><i class="fas fa-compress"></i> Espesor:</strong> De 0.3 hasta 0.9 mm</li>
+                            <li><strong><i class="fas fa-arrows-left-right"></i> Ancho / Acabado:</strong> 1220 mm · Liso y stucco</li>
+                        </ul>
+                        <div class="product-showcase-actions">
+                            <button type="button" class="btn-catalog-cotizar" data-producto="Rollo de aluminio liso o stucco (Laminación)">
+                                <i class="fas fa-file-invoice"></i> Cotizar Producto
+                            </button>
+                            <button type="button" class="btn-catalog-ficha" data-product-index="28">
+                                <i class="fas fa-file-lines"></i> Ficha Técnica
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- PANEL DE FICHA TÉCNICA EXPANDIBLE EN LA PÁGINA (SIN POPUPS) -->
+            <div class="product-ficha-panel" id="productFichaPanel" style="display: none;">
+                <div class="ficha-header">
+                    <div>
+                        <h4><i class="fas fa-certificate" style="color: var(--alcasa-accent);"></i> <span id="fichaTituloTexto">Cilindros Tochos</span></h4>
+                        <div class="ficha-sub" id="fichaAleacion">Serie AA 6063 / S6063 — Temple T5 (Homogenizado)</div>
+                    </div>
+                    <button type="button" class="ficha-close-btn" id="fichaCloseBtn" aria-label="Cerrar ficha técnica">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="ficha-grid">
+                    <div class="ficha-item">
+                        <div class="ficha-item-title"><i class="fas fa-flask"></i> Composición Química &amp; Acabado</div>
+                        <div class="ficha-item-value" id="fichaPureza">Aluminio primario aleado con Silicio (Si) y Magnesio (Mg) homogeneizado en hornos de tratamiento térmico</div>
+                    </div>
+                    <div class="ficha-item">
+                        <div class="ficha-item-title"><i class="fas fa-boxes-stacked"></i> Dimensiones &amp; Presentaciones</div>
+                        <div class="ficha-item-value" id="fichaPresentaciones">Diámetro 7" (177,8 mm) | Longitud: Cortados a medida según requerimiento de prensa</div>
+                    </div>
+                    <div class="ficha-item">
+                        <div class="ficha-item-title"><i class="fas fa-gauge-high"></i> Propiedades Metalúrgicas &amp; Bultos</div>
+                        <div class="ficha-item-value" id="fichaPropiedades">Estructura cristalina uniforme, alta fluidez de extrusión y excelente respuesta al anodizado</div>
+                    </div>
+                    <div class="ficha-item">
+                        <div class="ficha-item-title"><i class="fas fa-shield-halved"></i> Normas Técnicas &amp; Catálogo</div>
+                        <div class="ficha-item-value" id="fichaNormas">Catálogo Oficial CVG Alcasa 2025 / COVENIN 284 / ASTM B221</div>
+                    </div>
+                    <div class="ficha-item" style="grid-column: 1 / -1;">
+                        <div class="ficha-item-title"><i class="fas fa-industry"></i> Usos &amp; Aplicaciones Industriales</div>
+                        <div class="ficha-item-value" id="fichaUsos">Materia prima directa para prensas extrusoras de perfilería arquitectónica, estructural y tubular.</div>
+                    </div>
+                </div>
+                <div class="ficha-actions">
+                    <button type="button" class="btn-catalog-cotizar" id="fichaBtnCotizar" data-producto="Cilindros Tochos (Fundición)" style="flex: 0 0 auto; padding: 11px 24px;">
+                        <i class="fas fa-file-invoice"></i> Cotizar esta Especificación
+                    </button>
+                </div>
+            </div>
+
+            <!-- CTA PRINCIPAL A LA SECCIÓN COMPLETA DE PRODUCTOS (32 PRODUCTOS EN ORDEN) -->
+            <div class="productos-home-cta-banner">
+                <div class="productos-home-cta-text">
+                    <h4><i class="fas fa-boxes-stacked" style="color: var(--alcasa-accent);"></i> Catálogo Completo CVG Alcasa 2025 (32 Productos en Orden)</h4>
+                    <p>Explora todos nuestros productos de Fundición (Cilindros), Extrusión (Tubos, Ángulos, Ventanas, Puertas, Fachadas) y Laminación (Rollos y Láminas Noral / Frescalum) con imagen de producto terminado y tablas técnicas.</p>
+                </div>
+                <div class="productos-home-cta-buttons">
+                    <a href="/productos.html" class="btn-ver-todos-productos">
+                        <i class="fas fa-th-list"></i> Ver Todos los Productos (32) <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="/assets/media/CATALOGO_CVG_ALCASA_2025.pdf" target="_blank" rel="noopener noreferrer" class="btn-outline-corp" style="border-color: var(--alcasa-accent); color: var(--alcasa-accent);">
+                        <i class="fas fa-file-pdf"></i> Descargar Catálogo CVG Alcasa 2025 (PDF)
+                    </a>
+                </div>
+            </div>
+
+            <!-- Enlaces directos por línea hacia la sección de productos -->
+            <div class="productos-extra-links">
+                <a href="/productos.html?linea=Fundición" class="btn-outline-corp"><i class="fas fa-fire"></i> Cilindros / Fundición (2)</a>
+                <a href="/productos.html?linea=Extrusión" class="btn-outline-corp"><i class="fas fa-cubes"></i> Perfilería / Extrusión (24)</a>
+                <a href="/productos.html?linea=Laminación" class="btn-outline-corp"><i class="fas fa-layer-group"></i> Laminados / Laminación (6)</a>
+            </div>
+
+            <!-- ACORDEÓN DE PREGUNTAS FRECUENTES (FAQ) -->
+            <div class="faq-box" id="faq">
+                <div class="faq-box-header">
+                    <h3 class="blur-text" data-delay="150" data-direction="top" data-animate-by="words">
+                        <i class="fas fa-question-circle" style="color: var(--alcasa-accent);"></i> Preguntas Frecuentes
+                    </h3>
+                    <p>Respuestas inmediatas a las consultas comerciales más habituales</p>
+                </div>
+
+                <div class="faq-grid">
+                    <div class="faq-item open">
+                        <div class="faq-question">
+                            <span>¿Cómo puedo realizar un pedido?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Comunícate directamente con nuestro departamento de Comercialización a través del formulario inferior o llamando a nuestros números directos. Se asignará un asesor comercial que evaluará tu requerimiento, ficha técnica del producto, volumen solicitado y condiciones de despacho.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>¿En cuánto tiempo obtendré mi pedido?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            El tiempo de entrega depende del tipo de producto y el volumen requerido, pero los despachos más comunes tardan entre <strong>10 a 12 días hábiles</strong> tras la confirmación de la orden técnica y comercial.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>¿Cómo se gestiona la exportación y distribución nacional?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Para el sector transformador nacional despachamos directamente desde nuestras plantas en Matanzas. En operaciones de exportación y convenios estratégicos, nuestro precio y logística se coordinan con las normativas portuarias y aduaneras vigentes de la República Bolivariana de Venezuela.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+             4. SECCIÓN: PULSO INDUSTRIAL CVG ALCASA (TOP 10 NOTICIAS CON MINIATURA, DESCRIPCIÓN, FECHA Y HORA)
+             ========================================= -->
+        <section id="prensa" class="fold-reveal">
+            <div class="section-header">
+                <span class="prensa-section-kicker"><i class="fas fa-bolt"></i> Informativo Oficial en Tiempo Real · CVG Aluminio del Caroní, S.A.</span>
+                <h2 class="blur-text" data-delay="150" data-direction="top" data-animate-by="words">Pulso Industrial CVG Alcasa</h2>
+                <p>Las 10 noticias, circulares y avances estratégicos más importantes de CVG Alcasa con miniatura, resumen, fecha y hora oficial</p>
+            </div>
+
+            <!-- Estado de conexión con la API de Noticias -->
+            <div class="prensa-api-status" id="prensaApiCounter">
+                <i class="fas fa-spinner fa-spin" style="color: var(--alcasa-accent);"></i>
+                <span>Sincronizando las 10 noticias más importantes de CVG Alcasa...</span>
+            </div>
+
+            <!-- Panel Expandible de Lectura y Vista Completa de Afiche/Comunicado -->
+            <div class="noticia-detail-panel" id="noticiaDetailPanel" style="display: none;">
+                <div class="noticia-panel-header">
+                    <div>
+                        <span class="prensa-api-category" id="noticiaPanelCategoria"><i class="fas fa-tag"></i> Institucional</span>
+                        <h4 id="noticiaPanelTitulo" style="color:#ffffff;font-size:1.45rem;margin-top:8px;">Comunicado Oficial CVG Alcasa</h4>
+                        <div class="noticia-panel-meta" id="noticiaPanelMeta"></div>
+                    </div>
+                    <button type="button" class="ficha-close-btn" id="noticiaPanelCloseBtn" aria-label="Cerrar vista rápida">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="noticia-panel-body">
+                    <div class="noticia-panel-img-wrap">
+                        <img id="noticiaPanelImg" src="/assets/img/placeholder.svg" alt="Imagen de la noticia CVG Alcasa">
+                    </div>
+                    <div class="noticia-panel-text-wrap">
+                        <p id="noticiaPanelResumen"></p>
+                        <div class="noticia-panel-actions">
+                            <a id="noticiaPanelLink" href="http://alcasa.com.ve:5001/minimal" target="_blank" rel="noopener noreferrer" class="btn-prensa">
+                                <i class="fas fa-external-link-alt"></i> Abrir Nota Original en el Periódico Digital CVG Alcasa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenedor dinámico donde se renderizan las 10 noticias más importantes (1 Destacada + 9 en Grilla 3x3) -->
+            <div id="prensaNoticiasContainer">
+                <div class="prensa-layout-wrapper" id="prensaNoticiasGrid" data-max="10"></div>
+            </div>
+
+            <!-- Contenedor de iframe de respaldo si la API no responde -->
+            <div class="prensa-iframe-fallback" id="prensaIframeFallback">
+                <iframe data-src="http://alcasa.com.ve:5001/minimal" id="prensaIframeEl" title="Periódico Digital de CVG Alcasa"></iframe>
+            </div>
+
+            <div style="display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 28px;">
+                <button type="button" class="btn-outline-corp" id="btnMostrarMasPrensa" style="display: none; cursor: pointer;">
+                    <i class="fas fa-plus-circle"></i> Ver más noticias anteriores
+                </button>
+                <a href="/prensa.html" class="btn-prensa">
+                    <i class="fas fa-newspaper"></i> Explorar Portal Informativo Completo <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- =========================================
+             5. SECCIÓN: OPORTUNIDADES LABORALES (POSTULACIÓN DE CV CON /api/cv.php)
+             ========================================= -->
+        <section class="oportunidades-section fold-reveal" id="oportunidades">
+            <div id="empleo"></div>
+            <div class="section-header">
+                <h2 class="blur-text" data-delay="150" data-direction="top" data-animate-by="words">Oportunidades Laborales</h2>
+                <p>Forma parte de la familia industrial pionera del aluminio en Venezuela. Postula tu síntesis curricular (CV)</p>
+            </div>
+
+            <div class="oportunidades-grid">
+
+                <!-- Columna Izquierda: Información de Talento Humano y Áreas -->
+                <div class="oportunidades-info-card">
+                    <div>
+                        <h3><i class="fas fa-user-check"></i> Talento Humano CVG Alcasa</h3>
+                        <div class="oportunidades-quote">
+                            "El activo más valioso de CVG Alcasa no está en nuestros balances, sino en el talento, la pasión y el compromiso de nuestra gente."
+                        </div>
+                        <p style="color: #cbd5e1; font-size: 0.93rem; line-height: 1.65;">
+                            Buscamos profesionales, técnicos, especialistas y jóvenes en formación comprometidos con el desarrollo productivo de Guayana. Registra tus datos y adjunta tu Síntesis Curricular para integrar nuestra base de elegibles:
+                        </p>
+
+                        <div class="oportunidades-areas-list">
+                            <div class="oportunidades-area-item">
+                                <i class="fas fa-fire-burner"></i>
+                                <div>
+                                    <strong>Operaciones de Planta y Metalurgia</strong>
+                                    <span>Fundición, Laminación, Extrusión, Reducción y Control de Procesos.</span>
+                                </div>
+                            </div>
+                            <div class="oportunidades-area-item">
+                                <i class="fas fa-gears"></i>
+                                <div>
+                                    <strong>Mantenimiento Industrial e Ingeniería</strong>
+                                    <span>Mecánica industrial, electricidad de potencia, instrumentación, electrónica y proyectos.</span>
+                                </div>
+                            </div>
+                            <div class="oportunidades-area-item">
+                                <i class="fas fa-helmet-safety"></i>
+                                <div>
+                                    <strong>Seguridad Industrial y Salud Ocupacional (SIAHO)</strong>
+                                    <span>Higiene industrial, prevención de riesgos laborales, ambiente y salud integral.</span>
+                                </div>
+                            </div>
+                            <div class="oportunidades-area-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <div>
+                                    <strong>Gestión Corporativa, Sistemas y Pasantías</strong>
+                                    <span>Administración, logística, informática, pasantías universitarias y aprendices INCES.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="oportunidades-meta-footer">
+                        <div><i class="fas fa-location-dot"></i> Gerencia de Personal — Zona Industrial Matanzas, Ciudad Guayana</div>
+                        <div><i class="fas fa-clock"></i> Atención: Lunes a Viernes de 7:00 AM a 4:00 PM</div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Formulario de Envío de Síntesis Curricular (CV) -->
+                <div class="cv-form-card">
+                    <h3><i class="fas fa-file-arrow-up"></i> Envía tu Síntesis Curricular (CV)</h3>
+                    <p class="cv-form-subtitle">Completa tus datos profesionales y adjunta tu currículum actualizado para optar por una vacante.</p>
+
+                    <form id="formPostulacionCV" class="cv-form" enctype="multipart/form-data" autocomplete="off">
+                        <div class="cv-form-row">
+                            <div class="cv-field">
+                                <label for="cv-nombre">Nombres y Apellidos *</label>
+                                <input type="text" id="cv-nombre" name="nombre" required maxlength="120" placeholder="Ej. Carlos Rodríguez">
+                            </div>
+                            <div class="cv-field">
+                                <label for="cv-cedula">Cédula de Identidad *</label>
+                                <input type="text" id="cv-cedula" name="cedula" required maxlength="20" placeholder="Ej. V-18.543.210">
+                            </div>
+                        </div>
+
+                        <div class="cv-form-row">
+                            <div class="cv-field">
+                                <label for="cv-correo">Correo Electrónico *</label>
+                                <input type="email" id="cv-correo" name="correo" required maxlength="120" placeholder="tucorreo@ejemplo.com">
+                            </div>
+                            <div class="cv-field">
+                                <label for="cv-telefono">Teléfono / WhatsApp *</label>
+                                <input type="tel" id="cv-telefono" name="telefono" required maxlength="35" placeholder="Ej. 0414-8501234">
+                            </div>
+                        </div>
+
+                        <div class="cv-form-row">
+                            <div class="cv-field">
+                                <label for="cv-nivel">Nivel Académico / Título *</label>
+                                <select id="cv-nivel" name="nivel" required>
+                                    <option value="">-- Selecciona tu nivel --</option>
+                                    <option value="Ingeniero / Licenciado">Ingeniero / Licenciado</option>
+                                    <option value="Técnico Superior Universitario (T.S.U.)">Técnico Superior Universitario (T.S.U.)</option>
+                                    <option value="Técnico Medio / Oficio Industrial">Técnico Medio / Oficio Industrial</option>
+                                    <option value="Especialista / Postgrado">Especialista / Postgrado</option>
+                                    <option value="Pasante Universitario / Aprendiz INCES">Pasante Universitario / Aprendiz INCES</option>
+                                </select>
+                            </div>
+                            <div class="cv-field">
+                                <label for="cv-area">Área de Postulación *</label>
+                                <select id="cv-area" name="area" required>
+                                    <option value="">-- Selecciona un área --</option>
+                                    <option value="Operaciones de Planta (Fundición / Laminación / Extrusión)">Operaciones de Planta (Fundición / Laminación / Extrusión)</option>
+                                    <option value="Mantenimiento Industrial (Mecánico / Eléctrico / Instrumentación)">Mantenimiento Industrial (Mecánico / Eléctrico / Instrumentación)</option>
+                                    <option value="Ingeniería, Metalurgia y Control de Calidad">Ingeniería, Metalurgia y Control de Calidad</option>
+                                    <option value="Seguridad Industrial, Ambiente y Salud (SIAHO)">Seguridad Industrial, Ambiente y Salud (SIAHO)</option>
+                                    <option value="Informática, Sistemas y Telecomunicaciones">Informática, Sistemas y Telecomunicaciones</option>
+                                    <option value="Administración, Finanzas y Logística">Administración, Finanzas y Logística</option>
+                                    <option value="Programa de Pasantías / Aprendices INCES">Programa de Pasantías / Aprendices INCES</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="cv-field">
+                            <label for="cv-archivo">Adjuntar Síntesis Curricular (PDF, DOC, DOCX) *</label>
+                            <div class="cv-file-dropzone" id="cvDropzone">
+                                <input type="file" id="cv-archivo" name="cv_archivo" accept=".pdf,.doc,.docx" required>
+                                <div class="cv-file-dropzone-content">
+                                    <i class="fas fa-cloud-arrow-up" id="cvDropzoneIcon"></i>
+                                    <span class="cv-file-dropzone-title" id="cvDropzoneTitle">Haz clic o arrastra aquí tu archivo de CV</span>
+                                    <span class="cv-file-dropzone-hint" id="cvDropzoneHint">Formatos admitidos: PDF, DOC o DOCX (Máx. 10 MB)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cv-field">
+                            <label for="cv-resumen">Resumen Profesional y Años de Experiencia</label>
+                            <textarea id="cv-resumen" name="resumen" rows="3" maxlength="1200" placeholder="Describe brevemente tu profesión, especialidad técnica, años de experiencia y disponibilidad..."></textarea>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 4px;">
+                            <button type="submit" class="btn-contacto-enviar" id="btnEnviarCV" style="width: 100%; justify-content: center;">
+                                <i class="fas fa-paper-plane"></i> Enviar Postulación y CV
+                            </button>
+                            <div class="contacto-mensaje" id="cvMensaje" role="status" style="width: 100%; text-align: center;"></div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =========================================
+             6. SECCIÓN: NUESTROS CLIENTES
+             ========================================= -->
+        <section class="clientes-section fold-reveal" id="clientes">
+            <div class="section-header">
+                <h2 class="blur-text" data-delay="150" data-direction="top" data-animate-by="words">Nuestros Clientes</h2>
+                <p>Muestra de opiniones de clientes y aliados que confían en nuestro aluminio</p>
+            </div>
+
+            <div class="clientes-grid">
+                <div class="cliente-testimonio-card">
+                    <div class="cliente-quote">
+                        <i class="fas fa-quote-left"></i>
+                        Una gran empresa con suministro oportuno y especificaciones exactas para grandes obras de infraestructura en el país.
+                    </div>
+                    <div class="cliente-autor">
+                        <div class="cliente-avatar">EA</div>
+                        <div class="cliente-info">
+                            <h5>Empresa Constructora</h5>
+                            <span>Sector Infraestructura</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cliente-testimonio-card">
+                    <div class="cliente-quote">
+                        <i class="fas fa-quote-left"></i>
+                        El aluminio es de calidad insuperable. La uniformidad de los perfiles extruidos y las bobinas permite operar sin fallas en línea.
+                    </div>
+                    <div class="cliente-autor">
+                        <div class="cliente-avatar">ED</div>
+                        <div class="cliente-info">
+                            <h5>Empresa Distribuidora</h5>
+                            <span>Cadena de Suministro Nacional</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cliente-testimonio-card">
+                    <div class="cliente-quote">
+                        <i class="fas fa-quote-left"></i>
+                        Excelente atención al cliente y gestión transparente de despachos para el sector transformador nacional y de exportación.
+                    </div>
+                    <div class="cliente-autor">
+                        <div class="cliente-avatar">EE</div>
+                        <div class="cliente-info">
+                            <h5>Empresa Exportadora</h5>
+                            <span>Comercio Internacional</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+             7. GALERÍA DE VIDEOS Y PROCESOS
+             ========================================= -->
+        <section id="galeria" class="fold-reveal">
+            <div class="section-header">
+                <h2 class="blur-text" data-delay="150" data-direction="top" data-animate-by="words">Galería de Procesos</h2>
+                <p>Conoce nuestras plantas en acción, hitos productivos y tecnología</p>
+            </div>
+
+            <div class="glowing-cards-container" id="galeriaGlowingContainer">
+
+                <!-- Tarjeta 1: Planta de Laminación -->
+                <div class="glowing-card-parent">
+                    <div class="glowing-card-exact card3">
+                        <div class="glowing-card-exact-bg" style="background-image: url('/assets/img/video-lami.jpg');"></div>
+                        <div class="glowing-card-exact-overlay"></div>
+                        <div class="glowing-card-body">
+                            <span class="glowing-card-badge">Planta de Laminación</span>
+                            <h4 class="blur-text" data-delay="120" data-direction="top" data-animate-by="words">Planta de Laminación en Frío y Caliente</h4>
+                            <p class="blur-text" data-delay="80" data-direction="top" data-animate-by="words">Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación que aseguran maleabilidad superior y calibrado micrométrico.</p>
+                            <div class="glowing-card-actions">
+                                <button type="button" class="see-more-link btn-ver-video" data-video-index="0" data-video-title="Planta de Laminación en Frío y Caliente" data-video-badge="Planta de Laminación" data-video-poster="/assets/img/video-lami.jpg" data-video-desc="Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación.">VER VIDEO <i class="fas fa-play-circle"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2: Planta de Fundición -->
+                <div class="glowing-card-parent">
+                    <div class="glowing-card-exact">
+                        <div class="glowing-card-exact-bg" style="background-image: url('/assets/img/video-fund.jpg');"></div>
+                        <div class="glowing-card-exact-overlay"></div>
+                        <div class="glowing-card-body">
+                            <span class="glowing-card-badge">Planta de Fundición</span>
+                            <h4 class="blur-text" data-delay="120" data-direction="top" data-animate-by="words">Planta de Fundición y Hornos de Fusión</h4>
+                            <p class="blur-text" data-delay="80" data-direction="top" data-animate-by="words">Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de lingotes P1020 y cilindros de calidad metalúrgica internacional.</p>
+                            <div class="glowing-card-actions">
+                                <button type="button" class="see-more-link btn-ver-video" data-video-index="1" data-video-title="Planta de Fundición y Hornos de Fusión" data-video-badge="Planta de Fundición" data-video-poster="/assets/img/video-fund.jpg" data-video-desc="Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de lingotes P1020 y cilindros.">VER VIDEO <i class="fas fa-play-circle"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 3: Planta Extrusora -->
+                <div class="glowing-card-parent">
+                    <div class="glowing-card-exact card2">
+                        <div class="glowing-card-exact-bg" style="background-image: url('/assets/img/video-ext.jpg');"></div>
+                        <div class="glowing-card-exact-overlay"></div>
+                        <div class="glowing-card-body">
+                            <span class="glowing-card-badge">Planta de Extrusión</span>
+                            <h4 class="blur-text" data-delay="120" data-direction="top" data-animate-by="words">Planta de Extrusión y Prensas de Perfilería</h4>
+                            <p class="blur-text" data-delay="80" data-direction="top" data-animate-by="words">Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida para la industria de la construcción y el transporte.</p>
+                            <div class="glowing-card-actions">
+                                <button type="button" class="see-more-link btn-ver-video" data-video-index="2" data-video-title="Planta de Extrusión y Prensas de Perfilería" data-video-badge="Planta de Extrusión" data-video-poster="/assets/img/video-ext.jpg" data-video-desc="Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida.">VER VIDEO <i class="fas fa-play-circle"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 4: Ayudas Técnicas -->
+                <div class="glowing-card-parent">
+                    <div class="glowing-card-exact card4">
+                        <div class="glowing-card-exact-bg" style="background-image: url('/assets/img/video-at.jpg');"></div>
+                        <div class="glowing-card-exact-overlay"></div>
+                        <div class="glowing-card-body">
+                            <span class="glowing-card-badge">Compromiso Social</span>
+                            <h4 class="blur-text" data-delay="120" data-direction="top" data-animate-by="words">Taller Soberano de Ayudas Técnicas</h4>
+                            <p class="blur-text" data-delay="80" data-direction="top" data-animate-by="words">Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables.</p>
+                            <div class="glowing-card-actions">
+                                <button type="button" class="see-more-link btn-ver-video" data-video-index="3" data-video-title="Taller Soberano de Ayudas Técnicas" data-video-badge="Compromiso Social" data-video-poster="/assets/img/video-at.jpg" data-video-desc="Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana.">VER VIDEO <i class="fas fa-play-circle"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 5: CVG Alcasa Hoy -->
+                <div class="glowing-card-parent">
+                    <div class="glowing-card-exact card3">
+                        <div class="glowing-card-exact-bg" style="background-image: url('/assets/img/video-hoy.png');"></div>
+                        <div class="glowing-card-exact-overlay"></div>
+                        <div class="glowing-card-body">
+                            <span class="glowing-card-badge">Noticiero Corporativo CVG Alcasa</span>
+                            <h4 class="blur-text" data-delay="120" data-direction="top" data-animate-by="words">CVG Alcasa Hoy — Hitos y Logros Productivos</h4>
+                            <p class="blur-text" data-delay="80" data-direction="top" data-animate-by="words">Cobertura audiovisual de la reactivación industrial, jornadas de mantenimiento mayor y la entrega inquebrantable de la clase trabajadora de CVG Alcasa forjando la soberanía patria.</p>
+                            <div class="glowing-card-actions">
+                                <button type="button" class="see-more-link btn-ver-video" data-video-index="4" data-video-title="CVG Alcasa Hoy — Hitos y Logros Productivos" data-video-badge="Noticiero Corporativo CVG Alcasa" data-video-poster="/assets/img/video-hoy.png" data-video-desc="Cobertura audiovisual de la reactivación industrial y jornadas de mantenimiento mayor de CVG Alcasa.">VER VIDEO <i class="fas fa-play-circle"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 6: Empresas Tuteladas -->
+                <div class="glowing-card-parent">
+                    <div class="glowing-card-exact">
+                        <div class="glowing-card-exact-bg" style="background-image: url('/assets/img/video-sn.jpg');"></div>
+                        <div class="glowing-card-exact-overlay"></div>
+                        <div class="glowing-card-body">
+                            <span class="glowing-card-badge">Cadena del Aluminio CVG</span>
+                            <h4 class="blur-text" data-delay="120" data-direction="top" data-animate-by="words">Integración de Empresas Tuteladas de la CVG</h4>
+                            <p class="blur-text" data-delay="80" data-direction="top" data-animate-by="words">Alianza y sinergia estratégica dentro de la Corporación Venezolana de Guayana (CVG) para fortalecer el encadenamiento productivo entre CVG Bauxilum, CVG Venalum, CVG Carbonorca y CVG Alcasa.</p>
+                            <div class="glowing-card-actions">
+                                <button type="button" class="see-more-link btn-ver-video" data-video-index="5" data-video-title="Integración de Empresas Tuteladas de la CVG" data-video-badge="Cadena del Aluminio CVG" data-video-poster="/assets/img/video-sn.jpg" data-video-desc="Alianza y sinergia estratégica dentro de la Corporación Venezolana de Guayana (CVG) y CVG Alcasa.">VER VIDEO <i class="fas fa-play-circle"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Visor de Video Expandible Inline -->
+            <div class="product-ficha-panel" id="videoPlayerPanel" style="display: none;">
+                <div class="ficha-header">
+                    <div>
+                        <h4><i class="fas fa-circle-play" style="color: var(--alcasa-accent);"></i> <span id="videoPanelTitle">Proceso Productivo</span></h4>
+                        <div class="ficha-sub" id="videoPanelBadge">Galería Audiovisual CVG Alcasa</div>
+                    </div>
+                    <button type="button" class="ficha-close-btn" id="videoPanelCloseBtn" aria-label="Cerrar reproductor">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="videoPanelMedia" style="margin-bottom: 18px;"></div>
+                <p id="videoPanelDesc" style="color: #cbd5e1; font-size: 0.96rem; line-height: 1.65;"></p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =========================================
+         8. FOOTER INSTITUCIONAL, OAC Y CONTACTO (/api/contacto.php)
+         ========================================= -->
+    <footer id="contacto">
+        <div class="container">
+
+            <!-- SISTEMA ATENCIÓN AL CIUDADANO (OAC) -->
+            <div class="atencion-ciudadano-box">
+                <div class="atencion-ciudadano-content">
+                    <div class="atencion-ciudadano-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="atencion-ciudadano-texto">
+                        <h3 class="blur-text" data-delay="150" data-direction="top">🆕 Sistema de Atención al Ciudadano (OAC)</h3>
+                        <p>Registra tus peticiones, quejas, reclamos, sugerencias y denuncias en línea. Obtén un número único con código QR para dar seguimiento a tu caso desde cualquier dispositivo.</p>
+                    </div>
+                </div>
+                <a href="http://190.202.49.114:5050/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="btn-atencion-ciudadano">
+                    <i class="fas fa-external-link-alt"></i> Acceder al sistema OAC
+                </a>
+            </div>
+
+            <!-- FORMULARIO DE CONTACTO -->
+            <div class="contacto-form-wrapper fold-reveal">
+                <h4 class="contacto-titulo">
+                    <i class="fas fa-envelope-open-text"></i> Contáctanos Directamente
+                </h4>
+                <p class="contacto-subtitulo">
+                    Déjanos tus datos y nos pondremos en contacto contigo a la brevedad posible.
+                </p>
+
+                <form id="formContacto" class="contacto-form" autocomplete="off">
+                    <div class="contacto-row">
+                        <div class="contacto-field">
+                            <label for="contacto-nombre">Nombre completo *</label>
+                            <input type="text" id="contacto-nombre" name="nombre" required maxlength="120" placeholder="Tu nombre y apellido">
+                        </div>
+                        <div class="contacto-field">
+                            <label for="contacto-correo">Correo electrónico *</label>
+                            <input type="email" id="contacto-correo" name="correo" required maxlength="120" placeholder="tucorreo@ejemplo.com">
+                        </div>
+                    </div>
+
+                    <div class="contacto-row">
+                        <div class="contacto-field">
+                            <label for="contacto-empresa">Empresa u Organización</label>
+                            <input type="text" id="contacto-empresa" name="empresa" maxlength="120" placeholder="Nombre de tu empresa">
+                        </div>
+                        <div class="contacto-field">
+                            <label for="contacto-interes">Línea o Producto de interés</label>
+                            <select id="contacto-interes" name="interes">
+                                <option value="">-- Selecciona una opción --</option>
+                                <option value="Cilindros Tochos (Fundición)">Cilindros Tochos (Fundición)</option>
+                                <option value="Cilindros 120 a 220 pulgadas (Fundición)">Cilindros 120" a 220" (Fundición)</option>
+                                <option value="Rollo de aluminio liso o stucco (Laminación)">Rollo de aluminio liso o stucco (Laminación)</option>
+                                <option value="Rollo de aluminio liso 3-6mm (Laminación)">Rollo de aluminio liso 3-6 mm (Laminación)</option>
+                                <option value="Rollo liso o stucco espesor medio 1-2.99mm (Laminación)">Rollo liso o stucco espesor medio 1-2.99 mm (Laminación)</option>
+                                <option value="Láminas de aluminio a tamaño lisa o stucco (Laminación)">Láminas de aluminio lisa o stucco (Laminación)</option>
+                                <option value="Láminas de aluminio Noral Trapezoidal (Laminación)">Láminas Noral Trapezoidal (Laminación)</option>
+                                <option value="Láminas de aluminio Frescalum Sinusoidal (Laminación)">Láminas Frescalum Sinusoidal (Laminación)</option>
+                                <option value="Tubería Redonda, Rectangular y Cuadrada (Extrusión)">Tubería Redonda, Rectangular y Cuadrada (Extrusión)</option>
+                                <option value="Ángulos, Barandas y Cortineras (Extrusión)">Ángulos, Barandas y Cortineras (Extrusión)</option>
+                                <option value="Sistemas de Ventanas 744, Ecobel, Panorámica, Caroní, Proyectante (Extrusión)">Sistemas de Ventanas (744, Ecobel, Panorámica, Caroní, Proyectante)</option>
+                                <option value="Fachadas, Vidrieras, Cielo Raso y Puertas (Extrusión)">Fachadas, Vidrieras, Cielo Raso y Puertas (Extrusión)</option>
+                                <option value="Registro de Proveedor">Registro de Proveedor</option>
+                                <option value="Comercialización General">Comercialización General</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="contacto-field contacto-field-full">
+                        <label for="contacto-comentario">Comentario o Requerimiento</label>
+                        <textarea id="contacto-comentario" name="comentario" rows="4" maxlength="2000" placeholder="Cuéntanos en qué podemos ayudarte..."></textarea>
+                    </div>
+
+                    <div class="contacto-actions">
+                        <button type="submit" class="btn-contacto-enviar" id="btnContactoEnviar">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                        </button>
+                        <div class="contacto-mensaje" id="contactoMensaje" role="status"></div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- COLUMNAS DEL FOOTER -->
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>CVG Aluminio del Caroní, S.A.</h4>
+                    <p>
+                        CVG Aluminio del Caroní, S.A. (CVG Alcasa)<br>
+                        Zona Industrial Matanzas, Avenida Fuerzas Armadas,<br>
+                        Ciudad Guayana, Estado Bolívar, Venezuela.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/Alcasa.CVG/?locale=es_LA" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/alcasa_cvg/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@alcasaaluminiodelcaronis.a8220" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.tiktok.com/@cvg_alcasa" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#empresa" data-tab-target="tab-quienes-somos"><i class="fas fa-chevron-right"></i> Quiénes somos</a></li>
+                        <li><a href="#empresa" data-tab-target="tab-mision-vision"><i class="fas fa-chevron-right"></i> Misión y Visión</a></li>
+                        <li><a href="#empresa" data-tab-target="tab-valores"><i class="fas fa-chevron-right"></i> Valores</a></li>
+                        <li><a href="#oportunidades"><i class="fas fa-chevron-right"></i> Oportunidades Laborales</a></li>
+                        <li><a href="/prensa.html"><i class="fas fa-chevron-right"></i> Pulso Industrial CVG Alcasa</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="/productos.html"><i class="fas fa-chevron-right"></i> Catálogo Completo (32)</a></li>
+                        <li><a href="/productos.html?linea=Fundición"><i class="fas fa-chevron-right"></i> Cilindros / Fundición</a></li>
+                        <li><a href="/productos.html?linea=Extrusión"><i class="fas fa-chevron-right"></i> Perfilería / Extrusión</a></li>
+                        <li><a href="/productos.html?linea=Laminación"><i class="fas fa-chevron-right"></i> Laminados / Laminación</a></li>
+                        <li><a href="#faq"><i class="fas fa-chevron-right"></i> Preguntas Frecuentes</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contacto Oficial</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="color: var(--alcasa-accent);"></i> Zona Industrial Matanzas, Ciudad Guayana</li>
+                        <li><i class="fas fa-clock" style="color: var(--alcasa-accent);"></i> Lun - Vie: 7:00am – 4:00pm</li>
+                        <li><i class="fas fa-phone" style="color: var(--alcasa-accent);"></i> +58 (0286) 9801476 / +58 (0412) 2522272</li>
+                        <li><i class="fas fa-envelope" style="color: var(--alcasa-accent);"></i> comercializacion@alcasa.com.ve</li>
+                        <li><i class="fas fa-id-card" style="color: var(--alcasa-accent);"></i> RIF: G-20110929-0</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 - CVG Aluminio del Caroní, S.A. (CVG Alcasa). Todos los derechos reservados. | RIF: G-20110929-0</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="/assets/js/app.js?v=2026k"></script>
+</body>
+</html>

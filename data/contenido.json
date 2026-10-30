@@ -1,98 +1,1012 @@
 {
- "empresa": {
-  "texto": "CVG Aluminio del Caroní, S.A. (Alcasa) es la empresa pionera de la industria del aluminio en Venezuela. Fundada el 14 de octubre de 1967, forma parte de la Corporación Venezolana de Guayana y produce aluminio primario y sus aleaciones, con destino al mercado nacional transformador.",
-  "mision": "PENDIENTE: texto oficial de Misión",
-  "vision": "PENDIENTE: texto oficial de Visión"
- },
- "productos": [
-  {
-   "nombre": "Lingotes de aluminio",
-   "linea": "Fundición",
-   "desc": "Lingotes de 22,5 kg, 454 kg y 680 kg.",
-   "imagen": ""
+  "empresa": {
+    "subtitulo": "Somos un pilar de la industria del aluminio en Venezuela, dedicados a transformar el aluminio en soluciones de vanguardia. Con un equipo comprometido y una visión de futuro, impulsamos el desarrollo y la innovación en cada uno de nuestros procesos.",
+    "texto": "CVG Aluminio del Caroní, S.A. (CVG Alcasa) es la empresa pionera de la industria del aluminio en Venezuela, fundada el 14 de octubre de 1967. Como industria básica del Estado venezolano, tutelada por la Corporación Venezolana de Guayana (CVG) y adscrita al Ministerio del Poder Popular de Desarrollo Minero Ecológico, somos productora y comercializadora de cilindros, productos laminados y perfiles de extrusión.",
+    "texto2": "Contamos con tres áreas operativas estratégicas: Planta de Fundición (capacidad de 120.000 Tm/año en cilindros 6063 homogeneizados), Planta Extrusora de 7\" (10.500 Tm/año en perfilería arquitectónica y estructural) y Planta de Laminación (Colada Continua de 12.000 Tm/año, Laminador en Caliente Clecim-Cosim de 120.000 Tm/año y Laminador en Frío \"Hugo Chávez\" de 170.000 Tm/año).",
+    "mision": "Transformar y comercializar en forma eficiente los productos de aluminio garantizando el suministro de materia prima al sector transformador nacional, fomentando la diversificación productiva con mayor valor agregado, defendiendo la soberanía productiva y tecnológica.",
+    "vision": "Posicionar a CVG Alcasa como impulsador de la industria del aluminio, permitiendo diversificar y transformar la materia prima en productos terminados, que aporten al sostenimiento socio-económico del país, bajo las premisas del nuevo modelo productivo que apunta al Socialismo del Siglo XXI.",
+    "areas_industriales": [
+      {
+        "planta": "Planta de Fundición",
+        "capacidad": "120.000 Tm/año",
+        "icono": "fa-fire-burner",
+        "detalle": "Dos (2) hornos de retención de 50 Tm c/u, un (1) horno de fusión y colada vertical de cilindros de 38 Tm, una (1) mesa de colada de cilindros de 7\", una (1) sierra de corte y dos (2) hornos de homogeneizado de cilindros.",
+        "productos_clave": "Cilindros Tochos y Cilindros de 7\" en aleación AA 6063/S6063 temple T5 homogeneizados."
+      },
+      {
+        "planta": "Planta Extrusora",
+        "capacidad": "10.500 Tm/año",
+        "icono": "fa-cubes",
+        "detalle": "Prensa de extrusión de 7\" para producción de tuberías, ángulos, barandas, cortineras, fachadas, puertas y sistemas de ventanas.",
+        "productos_clave": "24 líneas de perfiles estructurales y arquitectónicos en aleación AA 6063/S6063 temple T5."
+      },
+      {
+        "planta": "Planta de Laminación",
+        "capacidad": "170.000 Tm/año (Frío) / 120.000 Tm/año (Caliente)",
+        "icono": "fa-layer-group",
+        "detalle": "Planta de Colada Continua (12.000 Tm/año), Laminador en Caliente Clecim-Cosim (120.000 Tm/año) y Laminador en Frío \"Hugo Chávez\" (170.000 Tm/año).",
+        "productos_clave": "Rollos de aluminio liso o stucco (alto, medio y bajo espesor), láminas lisas/stucco, Noral Trapezoidal y Frescalum Sinusoidal."
+      }
+    ],
+    "valores": [
+      {
+        "icono": "fa-award",
+        "titulo": "Excelencia",
+        "desc": "Nos esforzamos por superar las expectativas en cada proyecto, buscando siempre la máxima calidad y la mejora continua en todo lo que hacemos."
+      },
+      {
+        "icono": "fa-handshake",
+        "titulo": "Compromiso",
+        "desc": "Estamos dedicados al éxito de nuestros clientes y del país. Asumimos sus objetivos como propios y trabajamos con pasión y responsabilidad."
+      },
+      {
+        "icono": "fa-balance-scale",
+        "titulo": "Transparencia",
+        "desc": "Actuamos con honestidad e integridad. La comunicación clara y abierta es la base para construir relaciones de confianza duraderas."
+      },
+      {
+        "icono": "fa-users",
+        "titulo": "Cooperación",
+        "desc": "Fomentamos el trabajo en equipo uniendo el talento y la experiencia técnica de nuestra clase trabajadora."
+      }
+    ],
+    "pilares": [
+      {
+        "icono": "fa-cogs",
+        "titulo": "Eficiencia Productiva",
+        "desc": "Maximizamos el uso de recursos y optimizamos procesos metalúrgicos para garantizar aluminio primario y transformado de alta calidad."
+      },
+      {
+        "icono": "fa-user-graduate",
+        "titulo": "Talento Humano",
+        "desc": "Reconocemos a nuestros trabajadores como el motor fundamental de la industria, impulsando su capacitación y participación activa."
+      },
+      {
+        "icono": "fa-hands-helping",
+        "titulo": "Compromiso Social",
+        "desc": "Generamos un impacto positivo tangible en las familias trabajadoras, en la educación y en las comunidades de la región Guayana."
+      },
+      {
+        "icono": "fa-seedling",
+        "titulo": "Sostenibilidad Ambiental",
+        "desc": "Operamos con apego ecológico, promoviendo el reciclaje y protegiendo el entorno natural de la cuenca del Caroní."
+      }
+    ]
   },
-  {
-   "nombre": "Cilindros para extrusión",
-   "linea": "Fundición",
-   "desc": "Cilindros (tochos) para extrusión.",
-   "imagen": ""
-  },
-  {
-   "nombre": "Láminas lisas y estriadas",
-   "linea": "Laminación",
-   "desc": "Láminas para aplicaciones industriales.",
-   "imagen": ""
-  },
-  {
-   "nombre": "Bobinas",
-   "linea": "Laminación",
-   "desc": "Bobinas lisas y embozadas.",
-   "imagen": ""
-  },
-  {
-   "nombre": "Perfiles, tubos y ángulos",
-   "linea": "Extrusión",
-   "desc": "Perfilería para la construcción.",
-   "imagen": ""
-  },
-  {
-   "nombre": "Ventanas y puertas",
-   "linea": "Extrusión",
-   "desc": "Sistemas de ventanas y puertas de aluminio.",
-   "imagen": ""
-  }
- ],
- "videos": [
-  {
-   "titulo": "Laminación",
-   "src": "",
-   "poster": ""
-  },
-  {
-   "titulo": "Fundición",
-   "src": "",
-   "poster": ""
-  },
-  {
-   "titulo": "Extrusora",
-   "src": "",
-   "poster": ""
-  },
-  {
-   "titulo": "Ayudas Técnicas",
-   "src": "",
-   "poster": ""
-  },
-  {
-   "titulo": "Alcasa Hoy",
-   "src": "",
-   "poster": ""
-  },
-  {
-   "titulo": "Empresas Tuteladas",
-   "src": "",
-   "poster": ""
-  }
- ],
- "contacto": {
-  "direccion": "Avenida Fuerzas Armadas, Zona Industrial Matanzas, Ciudad Guayana, estado Bolívar",
-  "email": "webmaster@alcasa.com.ve",
-  "rif": "G-20110929-0",
-  "periodico": "http://alcasa.com.ve:5001/minimal"
- },
- "cv": {
-  "niveles": [
-   "Bachiller",
-   "TSU",
-   "Universitario",
-   "Postgrado"
+  "productos": [
+    {
+      "orden": 1,
+      "id": "cilindros-tochos",
+      "nombre": "Cilindros Tochos",
+      "nombre_en": "Billet Cylinders",
+      "linea": "Fundición",
+      "badge": "Cilindros de CVG Alcasa · #01",
+      "destacado_home": true,
+      "desc": "Cilindros de aluminio primario homogeneizados en aleación 6063/S6063 temple T5 y diámetro 7\", cortados a medida para alimentar prensas de extrusión con máxima precisión metalúrgica.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Diámetro: 7\" | Longitud: Cortados a medida | Homogenizado",
+      "imagen": "/assets/img/productos/cilindros-tochos.jpg",
+      "estilo": "",
+      "cotizar": "Cilindros Tochos (Fundición)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5 (Homogenizado)",
+        "pureza": "Aluminio primario aleado con Silicio (Si) y Magnesio (Mg) homogeneizado en hornos de tratamiento térmico",
+        "presentaciones": "Diámetro 7\" (177,8 mm) | Longitud: Cortados a medida según requerimiento de prensa",
+        "propiedades": "Estructura cristalina uniforme, alta fluidez de extrusión y excelente respuesta al anodizado",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 / COVENIN 284 / ASTM B221",
+        "usos": "Materia prima directa para prensas extrusoras de perfilería arquitectónica, estructural y tubular."
+      },
+      "codigos_tabla": [
+        { "codigo": "TOCHO-7", "detalle": "Diámetro 7\" (177,8 mm) · Homogenizado", "bulto": "A medida", "peso": "Según corte" }
+      ]
+    },
+    {
+      "orden": 2,
+      "id": "cilindros",
+      "nombre": "Cilindros",
+      "nombre_en": "Cylinders",
+      "linea": "Fundición",
+      "badge": "Cilindros de CVG Alcasa · #02",
+      "destacado_home": false,
+      "desc": "Barras cilíndricas de colada vertical en aleación 6063/S6063 temple T5 con diámetro de 7\" y longitudes industriales de 120\" a 220\", completamente homogeneizadas.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Diámetro: 7\" | Longitud: 120\" a 220\" | Homogenizado",
+      "imagen": "/assets/img/productos/cilindros.jpg",
+      "estilo": "card4",
+      "cotizar": "Cilindros 120 a 220 pulgadas (Fundición)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5 (Homogenizado)",
+        "pureza": "Colada vertical continua de 38 Tm con homogeneizado completo libre de segregación",
+        "presentaciones": "Diámetro: 7\" | Longitud estándar: de 120\" (3,05 m) a 220\" (5,58 m)",
+        "propiedades": "Excelente trabajabilidad en caliente, superficie cilíndrica uniforme y alta pureza metalúrgica",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 / COVENIN 284 / ASTM B221",
+        "usos": "Suministro industrial para plantas extrusoras con sierra de corte en línea y transformación pesada."
+      },
+      "codigos_tabla": [
+        { "codigo": "CIL-7-120/220", "detalle": "Diámetro 7\" · Longitud 120\" a 220\" · Homogenizado", "bulto": "Estándar", "peso": "Según longitud" }
+      ]
+    },
+    {
+      "orden": 3,
+      "id": "tubo-redondo",
+      "nombre": "Tubo Redondo",
+      "nombre_en": "Round Tubes",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #03",
+      "destacado_home": false,
+      "desc": "Perfiles tubulares cilíndricos extruidos en aleación 6063/S6063 temple T5 de alta precisión dimensional, ideales para conducción, mobiliario, barandas y estructuras.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 502, ALC 503, ALC 505",
+      "imagen": "/assets/img/productos/tubo-redondo.jpg",
+      "estilo": "card2",
+      "cotizar": "Tubo Redondo ALC 502 / 503 / 505 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Producto final extruido hueco sin costura con tolerancia milimétrica de pared",
+        "presentaciones": "Longitud hasta 6,1 mts | ALC 502 (Ø 12,70 mm), ALC 503 (Ø 19,05 mm), ALC 505 (Ø 25,40 mm)",
+        "propiedades": "Bultos de 580 pz (389,2 kg), 272 pz (248,9 kg) y 126 pz (238,3 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 3",
+        "usos": "Estructuras tubulares ligeras, antenas, mobiliario institucional, pasamanos y aplicaciones mecánicas."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 502", "detalle": "Dim.: A-12,70 | B-10,41 | C-1,14 mm", "bulto": "580 pz.", "peso": "389,2 kgs." },
+        { "codigo": "ALC 503", "detalle": "Dim.: A-19,05 | B-16,58 | C-1,24 mm", "bulto": "272 pz.", "peso": "248,9 kgs." },
+        { "codigo": "ALC 505", "detalle": "Dim.: A-25,40 | B-22,25 | C-1,57 mm", "bulto": "126 pz.", "peso": "238,3 kgs." }
+      ]
+    },
+    {
+      "orden": 4,
+      "id": "tubos-rectangulares",
+      "nombre": "Tubos Rectangulares",
+      "nombre_en": "Rectangular Tubes",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #04",
+      "destacado_home": false,
+      "desc": "Perfiles tubulares de sección rectangular extruidos en aleación 6063/S6063 temple T5 de acabado recto para marcos estructurales, portones, fachadas y cerramientos.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 103, ALC 106, ALC 111",
+      "imagen": "/assets/img/productos/tubos-rectangulares.jpg",
+      "estilo": "card2",
+      "cotizar": "Tubos Rectangulares ALC 103 / 106 / 111 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfilería tubular cerrada de alta rigidez a la flexión y torsión",
+        "presentaciones": "Longitud hasta 6,1 mts | ALC 103 (50,80 x 25,40 x 1,55 mm), ALC 106 (76,20 x 25,40 x 1,60 mm), ALC 111 (76,20 x 31,75 x 1,50 mm)",
+        "propiedades": "Bultos de 80 pz (248,9 kg), 64 pz (296,7 kg) y 64 pz (304,5 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 3",
+        "usos": "Cerramientos arquitectónicos, bastidores industriales, tabiquería, carrocerías y estructuras civiles."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 103", "detalle": "Dim.: A-50,80 | B-25,40 | C-1,55 mm", "bulto": "80 pz.", "peso": "248,9 kgs." },
+        { "codigo": "ALC 106", "detalle": "Dim.: A-76,20 | B-25,40 | C-1,60 mm", "bulto": "64 pz.", "peso": "296,7 kgs." },
+        { "codigo": "ALC 111", "detalle": "Dim.: A-76,20 | B-31,75 | C-1,50 mm", "bulto": "64 pz.", "peso": "304,5 kgs." }
+      ]
+    },
+    {
+      "orden": 5,
+      "id": "tubos-cuadrados",
+      "nombre": "Tubos Cuadrados",
+      "nombre_en": "Square Tubes",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #05",
+      "destacado_home": false,
+      "desc": "Tubería estructural cuadrada en aluminio 6063/S6063 temple T5 con excelente simetría axial y acabado superficial listo para anodizado o pintura electrostática.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 123, ALC 126, ALC 128",
+      "imagen": "/assets/img/productos/tubos-cuadrados.jpg",
+      "estilo": "card2",
+      "cotizar": "Tubos Cuadrados ALC 123 / 126 / 128 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Sección cuadrada hueca de aristas definidas y espesor homogéneo",
+        "presentaciones": "Longitud hasta 6,1 mts | ALC 123 (25,40 x 1,40 mm), ALC 126 (38,10 x 1,60 mm), ALC 128 (50,80 x 1,50 mm)",
+        "propiedades": "Bultos de 160 pz (253,8 kg), 72 pz (267,9 kg) y 54 pz (253,6 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 3",
+        "usos": "Columnas ligeras, soportes modulares, mobiliario metálico, rejas arquitectónicas y estructuras."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 123", "detalle": "Dim.: A-25,40 | B-1,40 mm", "bulto": "160 pz.", "peso": "253,8 kgs." },
+        { "codigo": "ALC 126", "detalle": "Dim.: A-38,10 | B-1,60 mm", "bulto": "72 pz.", "peso": "267,9 kgs." },
+        { "codigo": "ALC 128", "detalle": "Dim.: A-50,80 | B-1,50 mm", "bulto": "54 pz.", "peso": "253,6 kgs." }
+      ]
+    },
+    {
+      "orden": 6,
+      "id": "angulo-lados-iguales",
+      "nombre": "Ángulo de lados iguales",
+      "nombre_en": "Angle of equal sides",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #06",
+      "destacado_home": false,
+      "desc": "Perfiles en L de alas simétricas a 90° extruidos en aleación 6063/S6063 temple T5 para refuerzos estructurales, remates arquitectónicos y soportes industriales.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 224, ALC 226, ALC 227, ALC 229",
+      "imagen": "/assets/img/productos/angulo-lados-iguales.jpg",
+      "estilo": "card2",
+      "cotizar": "Ángulo de lados iguales ALC 224 / 226 / 227 / 229 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfil angular de lados iguales con escuadra exacta de 90°",
+        "presentaciones": "Longitud hasta 6,1 mts | ALC 224 (19,05 x 2,38 mm), ALC 226 (25,40 x 1,50 mm), ALC 227 (25,40 x 3,17 mm), ALC 229 (38,10 x 3,17 mm)",
+        "propiedades": "Bultos desde 95 pz hasta 288 pz (289,9 kg a 439,2 kg por bulto)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 3",
+        "usos": "Esquineros de protección, bastidores, cerchas ligeras, rematería y carpintería metálica."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 224", "detalle": "Dim.: A-19,05 | B-2,38 mm", "bulto": "216 pz.", "peso": "289,9 kgs." },
+        { "codigo": "ALC 226", "detalle": "Dim.: A-25,40 | B-1,50 mm", "bulto": "288 pz.", "peso": "351,4 kgs." },
+        { "codigo": "ALC 227", "detalle": "Dim.: A-25,40 | B-3,17 mm", "bulto": "180 pz.", "peso": "439,2 kgs." },
+        { "codigo": "ALC 229", "detalle": "Dim.: A-38,10 | B-3,17 mm", "bulto": "95 pz.", "peso": "353,5 kgs." }
+      ]
+    },
+    {
+      "orden": 7,
+      "id": "barandas",
+      "nombre": "Barandas",
+      "nombre_en": "Railings",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #07",
+      "destacado_home": false,
+      "desc": "Perfiles ergonómicos para pasamanos y barandas arquitectónicas en aleación 6063/S6063 temple T5, con ranura inferior de encastre para balcones y escaleras.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 966, ALC 999",
+      "imagen": "/assets/img/productos/barandas.jpg",
+      "estilo": "card2",
+      "cotizar": "Barandas ALC 966 / ALC 999 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfil pasamanos de contorno redondeado ergonómico y alta resistencia a la intemperie",
+        "presentaciones": "Longitud hasta 6,1 mts | ALC 966 (37,8 x 20,2 mm) y ALC 999 (40 x 21 mm)",
+        "propiedades": "Bultos de 120 piezas (300,1 kgs y 307,4 kgs respectivamente)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 4",
+        "usos": "Pasamanos de escaleras, balcones residenciales, edificios comerciales y pasarelas peatonales."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 966", "detalle": "Sección: 37,8 x 20,2 mm (Interior 26,4 mm)", "bulto": "120 pz.", "peso": "300,1 kgs." },
+        { "codigo": "ALC 999", "detalle": "Sección: 40,0 x 21,0 mm (Interior 26,6 mm)", "bulto": "120 pz.", "peso": "307,4 kgs." }
+      ]
+    },
+    {
+      "orden": 8,
+      "id": "cortineras",
+      "nombre": "Cortineras",
+      "nombre_en": "Curtains",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #08",
+      "destacado_home": false,
+      "desc": "Rieles tubulares ranurados para sistemas de cortinas y correderas livianas en aleación 6063/S6063 temple T5 de deslizamiento suave y alta durabilidad.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 0002, ALC 0003",
+      "imagen": "/assets/img/productos/cortineras.jpg",
+      "estilo": "card2",
+      "cotizar": "Cortineras ALC 0002 / ALC 0003 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfil riel con guía longitudinal integrada libre de rebabas",
+        "presentaciones": "Longitud hasta 6,1 mts | ALC 0002 (Ø 3/4\" · 19 x 18 mm) y ALC 0003 (Ø 1\" · 25,4 x 22,8 mm)",
+        "propiedades": "ALC 0002: Bulto 272 pz (232,3 kg) | ALC 0003: Bulto 126 pz (153,7 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 4",
+        "usos": "Rieles de cortinería doméstica, hotelera, hospitalaria y sistemas colgantes ligeros."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 0002", "detalle": "Ø 3/4\" (19 x 18 mm · espesor 1,0 mm)", "bulto": "272 pz.", "peso": "232,3 kgs." },
+        { "codigo": "ALC 0003", "detalle": "Ø 1\" (25,4 x 22,8 mm · espesor 1,0 mm)", "bulto": "126 pz.", "peso": "153,7 kgs." }
+      ]
+    },
+    {
+      "orden": 9,
+      "id": "varios",
+      "nombre": "Varios",
+      "nombre_en": "Others",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #09",
+      "destacado_home": false,
+      "desc": "Perfiles especiales multipropósito (cámara tubular escalonada ALC 5006 y tablilla acanalada ALC 5012) en aleación 6063/S6063 temple T5 para aplicaciones industriales.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 5006, ALC 5012",
+      "imagen": "/assets/img/productos/varios.jpg",
+      "estilo": "card2",
+      "cotizar": "Perfiles Varios ALC 5006 / ALC 5012 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Extrusiones de geometría especial para revestimiento, furgones y carpintería",
+        "presentaciones": "Longitud hasta 6,1 mts | ALC 5006 (47 x 20 mm) y ALC 5012 (ancho 138,6 mm)",
+        "propiedades": "ALC 5006: Bulto 80 pz (385,5 kg) | ALC 5012: Bulto 36 pz (118,6 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 4",
+        "usos": "Revestimientos acanalados, carrocerías, tableros modulares y desarrollos especiales."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 5006", "detalle": "Perfil tubular con aleta: 47 x 20 mm", "bulto": "80 pz.", "peso": "385,5 kgs." },
+        { "codigo": "ALC 5012", "detalle": "Tablilla acanalada ancho: 138,6 mm", "bulto": "36 pz.", "peso": "118,6 kgs." }
+      ]
+    },
+    {
+      "orden": 10,
+      "id": "ventana-serie-744",
+      "nombre": "Ventana serie 744",
+      "nombre_en": "Window series 744",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #10",
+      "destacado_home": false,
+      "desc": "Sistema completo de perfilería arquitectónica para ensamble de ventanas corredizas Serie 744 en aleación 6063/S6063 temple T5 con cierre hermético y felpa perimetral.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 3700 al ALC 3706",
+      "imagen": "/assets/img/productos/ventana-serie-744.jpg",
+      "estilo": "card4",
+      "cotizar": "Ventana serie 744 ALC 3700-3706 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Kit completo de riel superior, riel inferior, jamba, cabezal, traslape y engarzadores",
+        "presentaciones": "Longitud hasta 6,1 mts | Códigos ALC 3700, ALC 3701, ALC 3702 (3002), ALC 3703, ALC 3704, ALC 3705 y ALC 3706",
+        "propiedades": "Bultos de 108, 120 y 160 piezas (pesos entre 263,5 kg y 351,4 kg por bulto)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 4",
+        "usos": "Ventanas corredizas residenciales, edificios multifamiliares, oficinas y proyectos habitacionales."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 3700", "detalle": "Riel / Marco superior Serie 744 (49,5 x 19,9 mm)", "bulto": "120 pz.", "peso": "285,5 kgs." },
+        { "codigo": "ALC 3701", "detalle": "Riel inferior Serie 744 (48,6 x 19,9 mm)", "bulto": "120 pz.", "peso": "270,8 kgs." },
+        { "codigo": "ALC 3702 (3002)", "detalle": "Jamba lateral Serie 744 (49,5 x 22,2 mm)", "bulto": "120 pz.", "peso": "270,8 kgs." },
+        { "codigo": "ALC 3703", "detalle": "Zócalo / Cabezal hoja Serie 744 (45,1 x 22,5 mm)", "bulto": "108 pz.", "peso": "263,5 kgs." },
+        { "codigo": "ALC 3704", "detalle": "Engarzador lateral hoja Serie 744 (23,3 x 22,2 mm)", "bulto": "160 pz.", "peso": "283,0 kgs." },
+        { "codigo": "ALC 3705", "detalle": "Traslape central Serie 744 (24,2 x 22,5 mm)", "bulto": "160 pz.", "peso": "351,4 kgs." },
+        { "codigo": "ALC 3706", "detalle": "Adaptador / Guía Serie 744 (50,0 mm)", "bulto": "120 pz.", "peso": "278,2 kgs." }
+      ]
+    },
+    {
+      "orden": 11,
+      "id": "puerta-bano",
+      "nombre": "Puerta de baño",
+      "nombre_en": "Bathroom door",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #11",
+      "destacado_home": false,
+      "desc": "Sistema corredizo de aluminio anodizable en aleación 6063/S6063 temple T5 para cerramiento de duchas y puertas de baño resistentes a la humedad continua.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 3713, ALC 3714, ALC 3715, ALC 3716",
+      "imagen": "/assets/img/productos/puerta-bano.jpg",
+      "estilo": "card4",
+      "cotizar": "Puerta de baño ALC 3713-3716 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfiles anticorrosivos para ambientes húmedos con canales para vidrio o acrílico",
+        "presentaciones": "Longitud hasta 6,1 mts | ALC 3715 (Riel), ALC 3716 (Lateral), ALC 3713 y ALC 3714",
+        "propiedades": "ALC 3715 (1,07 kg/m), ALC 3716 (0,29 kg/m), ALC 3713/3714 (128 pz · 132,7 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 4",
+        "usos": "Puertas corredizas para duchas, cabinas sanitarias, vestuarios y divisiones interiores."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 3715", "detalle": "Riel superior puerta de baño (42,1 x 27,3 mm)", "bulto": "Estándar", "peso": "1,07 kgs./m" },
+        { "codigo": "ALC 3716", "detalle": "Perfil lateral guía (28,6 x 19,1 mm)", "bulto": "Estándar", "peso": "0,29 kgs./m" },
+        { "codigo": "ALC 3713", "detalle": "Marco hoja puerta de baño (24,2 x 10,8 mm)", "bulto": "128 pz.", "peso": "132,7 kgs." },
+        { "codigo": "ALC 3714", "detalle": "Zócalo guía inferior (38,4 x 15,8 mm)", "bulto": "128 pz.", "peso": "132,7 kgs." }
+      ]
+    },
+    {
+      "orden": 12,
+      "id": "angulo-lados-desiguales",
+      "nombre": "Ángulo de lados desiguales",
+      "nombre_en": "Angle of unequal sides",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #12",
+      "destacado_home": false,
+      "desc": "Perfil angular asimétrico en L (38,10 x 19,05 x 3,17 mm) extruido en aleación 6063/S6063 temple T5 para fijaciones estructurales y apoyos de diferente luz.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Código: ALC 244",
+      "imagen": "/assets/img/productos/angulo-lados-desiguales.jpg",
+      "estilo": "card2",
+      "cotizar": "Ángulo de lados desiguales ALC 244 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfil estructural L de alas desiguales y espesor reforzado de 3,17 mm (1/8\")",
+        "presentaciones": "Longitud hasta 6,1 mts | Código ALC 244: A-38,10 mm (1 1/2\") x B-19,05 mm (3/4\") x C-3,17 mm (1/8\")",
+        "propiedades": "Bulto de 120 piezas con peso neto de 329,4 kgs por bulto",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 5",
+        "usos": "Soportes asimétricos de fachada, anclajes industriales, rieles guía y bastidores."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 244", "detalle": "Dim.: A-38,10 mm | B-19,05 mm | C-3,17 mm", "bulto": "120 pz.", "peso": "329,4 kgs." }
+      ]
+    },
+    {
+      "orden": 13,
+      "id": "ventana-corredera-ecobel",
+      "nombre": "Ventana corredera tipo Ecobel",
+      "nombre_en": "Ecobel-type sliding window",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #13",
+      "destacado_home": false,
+      "desc": "Línea de perfiles arquitectónicos para ventana corredera tipo Ecobel en aleación 6063/S6063 temple T5, optimizada para ligereza, hermeticidad y rápido ensamblaje.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 670, ALC 672, ALC 673, ALC 674",
+      "imagen": "/assets/img/productos/ventana-corredera-ecobel.jpg",
+      "estilo": "card4",
+      "cotizar": "Ventana corredera tipo Ecobel ALC 670-674 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Sistema corredizo liviano de alta eficiencia en carpintería de aluminio",
+        "presentaciones": "Longitud hasta 6,1 mts | Códigos ALC 670, ALC 672, ALC 673 y ALC 674",
+        "propiedades": "Bultos de 120, 144 y 160 piezas (pesos desde 278,2 kg hasta 409,9 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 5",
+        "usos": "Ventanas corredizas residenciales y comerciales de excelente relación costo-resistencia."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 670", "detalle": "Perfil hoja / engarzador Ecobel (30,4 x 16,0 mm)", "bulto": "160 pz.", "peso": "409,9 kgs." },
+        { "codigo": "ALC 672", "detalle": "Traslape central Ecobel (30,0 x 21,9 mm)", "bulto": "144 pz.", "peso": "325,0 kgs." },
+        { "codigo": "ALC 673", "detalle": "Riel superior / cabezal Ecobel (54,0 x 23,0 mm)", "bulto": "120 pz.", "peso": "358,7 kgs." },
+        { "codigo": "ALC 674", "detalle": "Riel inferior Ecobel (54,0 x 19,3 mm)", "bulto": "120 pz.", "peso": "278,2 kgs." }
+      ]
+    },
+    {
+      "orden": 14,
+      "id": "ventana-panoramica-2-canales",
+      "nombre": "Ventana panorámica 2 canales",
+      "nombre_en": "2 channel panoramic window",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #14",
+      "destacado_home": false,
+      "desc": "Sistema de ventana panorámica de 2 canales en aleación 6063/S6063 temple T5 para vanos de amplia visión con doble hoja móvil deslizante.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 780, ALC 790, ALC 791, ALC 792",
+      "imagen": "/assets/img/productos/ventana-panoramica-2-canales.jpg",
+      "estilo": "card4",
+      "cotizar": "Ventana panorámica 2 canales ALC 780-792 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfilería panorámica de doble riel con desagüe y guía de rodamiento reforzada",
+        "presentaciones": "Longitud hasta 6,1 mts | Códigos ALC 780, ALC 790, ALC 791 y ALC 792",
+        "propiedades": "Bultos de 160 y 180 piezas (pesos de 318,4 kg a 429,4 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 5",
+        "usos": "Ventanales panorámicos de 2 vías para apartamentos, balcones, oficinas y residencias."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 780", "detalle": "Perfil hoja panorámica (32,8 x 25,4 mm)", "bulto": "180 pz.", "peso": "351,4 kgs." },
+        { "codigo": "ALC 790", "detalle": "Jamba marco 2 canales (35,1 x 30,5 mm)", "bulto": "180 pz.", "peso": "318,4 kgs." },
+        { "codigo": "ALC 791", "detalle": "Cabezal superior 2 canales (35,1 x 30,5 mm)", "bulto": "160 pz.", "peso": "351,4 kgs." },
+        { "codigo": "ALC 792", "detalle": "Riel inferior 2 canales (41,6 x 35,1 mm)", "bulto": "160 pz.", "peso": "429,4 kgs." }
+      ]
+    },
+    {
+      "orden": 15,
+      "id": "ventana-panoramica-3-canales",
+      "nombre": "Ventana panorámica 3 canales",
+      "nombre_en": "3 channel panoramic window",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #15",
+      "destacado_home": false,
+      "desc": "Sistema de ventana panorámica de 3 canales en aleación 6063/S6063 temple T5 que permite apertura de hasta dos tercios del vano con tres hojas corredizas.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 780, ALC 820, ALC 821, ALC 822",
+      "imagen": "/assets/img/productos/ventana-panoramica-3-canales.jpg",
+      "estilo": "card4",
+      "cotizar": "Ventana panorámica 3 canales ALC 780 / 820-822 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Marco tri-riel de 54,4 mm de ancho para máxima ventilación e iluminación natural",
+        "presentaciones": "Longitud hasta 6,1 mts | Códigos ALC 780, ALC 820, ALC 821 y ALC 822",
+        "propiedades": "Bultos de 128, 144 y 180 piezas (pesos de 342,6 kg a 452,9 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 5",
+        "usos": "Terrazas, salones amplios, fachadas residenciales y locales con requerimiento de gran apertura."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 780", "detalle": "Perfil hoja panorámica (32,8 x 25,4 mm)", "bulto": "180 pz.", "peso": "351,4 kgs." },
+        { "codigo": "ALC 820", "detalle": "Riel inferior 3 canales (54,4 x 41,6 mm)", "bulto": "128 pz.", "peso": "452,9 kgs." },
+        { "codigo": "ALC 821", "detalle": "Jamba lateral 3 canales (54,4 x 30,5 mm)", "bulto": "144 pz.", "peso": "342,6 kgs." },
+        { "codigo": "ALC 822", "detalle": "Cabezal superior 3 canales (54,4 x 30,5 mm)", "bulto": "128 pz.", "peso": "390,4 kgs." }
+      ]
+    },
+    {
+      "orden": 16,
+      "id": "ventana-panoramica-4-canales",
+      "nombre": "Ventana panorámica 4 canales",
+      "nombre_en": "4 channel panoramic window",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #16",
+      "destacado_home": false,
+      "desc": "Sistema monumental de ventana panorámica de 4 canales (73,7 mm de base) en aleación 6063/S6063 temple T5 para grandes luces arquitectónicas y cerramientos de piso a techo.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 780, ALC 783, ALC 830, ALC 831",
+      "imagen": "/assets/img/productos/ventana-panoramica-4-canales.jpg",
+      "estilo": "card4",
+      "cotizar": "Ventana panorámica 4 canales ALC 780 / 783 / 830 / 831 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfilería cuádruple riel de alta capacidad portante para cuatro hojas móviles",
+        "presentaciones": "Longitud hasta 6,1 mts | Códigos ALC 780, ALC 783, ALC 830 y ALC 831",
+        "propiedades": "Bultos de 80, 90 y 180 piezas (pesos de 312,9 kg a 390,4 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 5",
+        "usos": "Pent-houses, salones de eventos, lobbies hoteleros y grandes ventanales panorámicos."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 780", "detalle": "Perfil hoja panorámica (32,8 x 25,4 mm)", "bulto": "180 pz.", "peso": "351,4 kgs." },
+        { "codigo": "ALC 783", "detalle": "Jamba lateral 4 canales (73,7 x 30,5 mm)", "bulto": "90 pz.", "peso": "312,9 kgs." },
+        { "codigo": "ALC 830", "detalle": "Cabezal superior 4 canales (73,7 x 30,5 mm)", "bulto": "80 pz.", "peso": "341,6 kgs." },
+        { "codigo": "ALC 831", "detalle": "Riel inferior 4 canales (73,7 x 41,6 mm)", "bulto": "80 pz.", "peso": "390,4 kgs." }
+      ]
+    },
+    {
+      "orden": 17,
+      "id": "fachada-vidriera-2x1",
+      "nombre": "Fachada y vidriera serie 2 1/2 x 1 1/4",
+      "nombre_en": "Facade and stained glass series 2 1/2 x 1 1/4",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #17",
+      "destacado_home": false,
+      "desc": "Perfiles tubulares con bolsillo portavidrio Serie 2 1/2\" x 1 1/4\" (63,5 x 31,8 mm) en aleación 6063/S6063 temple T5 para vidrieras comerciales y divisiones.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Códigos: ALC 936, ALC 937",
+      "imagen": "/assets/img/productos/fachada-vidriera-2x1.jpg",
+      "estilo": "",
+      "cotizar": "Fachada y vidriera serie 2 1/2 x 1 1/4 ALC 936 / 937 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Sistema de montantes y travesaños comerciales para vidrio fijo",
+        "presentaciones": "Códigos ALC 936 (63,5 x 31,8 mm liso con canal) y ALC 937 (63,5 x 42,9 mm doble aleta)",
+        "propiedades": "Bultos de 50 piezas (195,2 kgs y 228,8 kgs por bulto)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 8",
+        "usos": "Vidrieras de locales comerciales, tabiquería corporativa de vidrio y fachadas integrales."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 936", "detalle": "Perfil vidriera 63,5 x 31,8 mm (2 1/2\" x 1 1/4\")", "bulto": "50 pz.", "peso": "195,2 kgs." },
+        { "codigo": "ALC 937", "detalle": "Perfil vidriera 63,5 x 42,9 mm con alojamiento", "bulto": "50 pz.", "peso": "228,8 kgs." }
+      ]
+    },
+    {
+      "orden": 18,
+      "id": "fachada-vidriera-3x1",
+      "nombre": "Fachada y vidriera serie 3 x 1 1/4",
+      "nombre_en": "Facade and stained glass series 3 x 1 1/4",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #18",
+      "destacado_home": false,
+      "desc": "Perfiles de mayor inercia estructural Serie 3\" x 1 1/4\" (76,2 x 31,8 mm) en aleación 6063/S6063 temple T5 para fachadas comerciales de gran altura.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Códigos: ALC 1447, ALC 1448",
+      "imagen": "/assets/img/productos/fachada-vidriera-3x1.jpg",
+      "estilo": "",
+      "cotizar": "Fachada y vidriera serie 3 x 1 1/4 ALC 1447 / 1448 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfiles portantes de 76,2 mm de profundidad para resistir mayores cargas de viento",
+        "presentaciones": "Códigos ALC 1447 (76,2 x 42,9 mm) y ALC 1448 (76,2 x 31,8 mm)",
+        "propiedades": "Bultos de 50 piezas (231,8 kgs y 222,7 kgs por bulto)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 8",
+        "usos": "Fachadas comerciales de doble altura, concesionarios, bancos y centros empresariales."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 1447", "detalle": "Montante vidriera 76,2 x 42,9 mm (3\" x 1 1/4\")", "bulto": "50 pz.", "peso": "231,8 kgs." },
+        { "codigo": "ALC 1448", "detalle": "Travesaño vidriera 76,2 x 31,8 mm (3\" x 1 1/4\")", "bulto": "50 pz.", "peso": "222,7 kgs." }
+      ]
+    },
+    {
+      "orden": 19,
+      "id": "fachada-vidriera",
+      "nombre": "Fachada y vidriera",
+      "nombre_en": "Facade and stained glass",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #19",
+      "destacado_home": false,
+      "desc": "Perfiles pisavidrio y junquillos de sujeción (ALC 927 y ALC 929) en aleación 6063/S6063 temple T5 para fijación segura de cristales en sistemas de fachada.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Códigos: ALC 927, ALC 929",
+      "imagen": "/assets/img/productos/fachada-vidriera.jpg",
+      "estilo": "",
+      "cotizar": "Fachada y vidriera pisavidrios ALC 927 / 929 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfiles complementarios de encastre a presión para sellado de vidrieras",
+        "presentaciones": "Códigos ALC 927 (29,7 x 12,5 mm) y ALC 929 (31,8 x 13,5 mm)",
+        "propiedades": "Bultos de 256 piezas (359,20 kgs y 343,6 kgs por bulto)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 8",
+        "usos": "Sujeción de cristales, acabado perimetral de vidrieras serie 2 1/2\" y 3\"."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 927", "detalle": "Junquillo / Pisavidrio de fachada (29,7 x 12,5 mm)", "bulto": "256 pz.", "peso": "359,20 kgs." },
+        { "codigo": "ALC 929", "detalle": "Canal / Pisavidrio de fachada (31,8 x 13,5 mm)", "bulto": "256 pz.", "peso": "343,6 kgs." }
+      ]
+    },
+    {
+      "orden": 20,
+      "id": "cielo-raso",
+      "nombre": "Cielo raso",
+      "nombre_en": "Flat / Smooth Ceiling",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #20",
+      "destacado_home": false,
+      "desc": "Perfilería T de suspensión (ALC 2001 y ALC 2042) en aleación 6063/S6063 temple T5 para estructuras de cielo raso suspendido liviano e inoxidable.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: 3,74 m y 3,60 m | Códigos: ALC 2001, ALC 2042",
+      "imagen": "/assets/img/productos/cielo-raso.jpg",
+      "estilo": "card2",
+      "cotizar": "Cielo raso ALC 2001 / ALC 2042 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfiles T ultraligeros resistentes a la corrosión para soporte de láminas de techo falso",
+        "presentaciones": "ALC 2001 (Long. 3,74 mts · 25,4 x 19,1 mm) y ALC 2042 (Long. 3,60 mts · 19,8 x 13,5 mm)",
+        "propiedades": "ALC 2001: 120 pz (71,8 kg) | ALC 2042: 600 pz (194,4 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 8",
+        "usos": "Cielos rasos suspendidos en hospitales, oficinas, plantas de alimentos y comercios."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 2001", "detalle": "Perfil T principal 25,4 x 19,1 mm · Long.: 3,74 mts.", "bulto": "120 pz.", "peso": "71,8 kgs." },
+        { "codigo": "ALC 2042", "detalle": "Perfil T secundario 19,8 x 13,5 mm · Long.: 3,60 mts.", "bulto": "600 pz.", "peso": "194,4 kgs." }
+      ]
+    },
+    {
+      "orden": 21,
+      "id": "puertas-fachadas-canto-redondo",
+      "nombre": "Puertas y fachadas canto redondo",
+      "nombre_en": "Doors and facades round edge",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #21",
+      "destacado_home": false,
+      "desc": "Perfiles tubulares robustos de canto redondo (ALC 965 y ALC 966) en aleación 6063/S6063 temple T5 para puertas monumentales de alto tráfico y fachadas.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Códigos: ALC 965, ALC 966",
+      "imagen": "/assets/img/productos/puertas-fachadas-canto-redondo.jpg",
+      "estilo": "",
+      "cotizar": "Puertas y fachadas canto redondo ALC 965 / 966 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Sección pesada de 99,3 mm con borde curvo para pivotes de puertas batientes",
+        "presentaciones": "Códigos ALC 965 (99,3 x 44,5 mm doble aleta) y ALC 966 (99,3 x 44,5 mm canto redondo)",
+        "propiedades": "Bultos de 24 piezas (117,1 kgs y 114,2 kgs por bulto)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 8",
+        "usos": "Puertas principales de bancos, centros comerciales, edificios públicos y fachadas."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 965", "detalle": "Perfil puerta canto redondo doble aleta (99,3 x 44,5 mm)", "bulto": "24 pz.", "peso": "117,1 kgs." },
+        { "codigo": "ALC 966", "detalle": "Perfil puerta canto redondo simple (99,3 x 44,5 mm)", "bulto": "24 pz.", "peso": "114,2 kgs." }
+      ]
+    },
+    {
+      "orden": 22,
+      "id": "ventana-corredera-caroni",
+      "nombre": "Ventana corredera Caroní",
+      "nombre_en": "Caroni sliding window",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #22",
+      "destacado_home": false,
+      "desc": "Sistema emblemático de ventana corredera línea Caroní en aleación 6063/S6063 temple T5 con rieles de 75 mm de ancho y alta hermeticidad estructural.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Códigos: ALC 740, ALC 745, ALC 747, ALC 748",
+      "imagen": "/assets/img/productos/ventana-corredera-caroni.jpg",
+      "estilo": "card4",
+      "cotizar": "Ventana corredera Caroní ALC 740 / 745 / 747 / 748 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Línea arquitectónica pesada diseñada por CVG Alcasa para climas tropicales exigentes",
+        "presentaciones": "Códigos ALC 740 (Riel 75,0 mm), ALC 747 (Cabezal 75,0 mm), ALC 745 (Jamba 75,1 mm) y ALC 748 (Hoja 37,0 mm)",
+        "propiedades": "Bultos de 60, 80 y 150 piezas (pesos de 247,1 kg a 336,7 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 9",
+        "usos": "Ventanas corredizas de alta gama, desarrollos institucionales, hoteles y residencias."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 740", "detalle": "Riel inferior Caroní (75,0 x 38,0 mm)", "bulto": "60 pz.", "peso": "292,8 kgs." },
+        { "codigo": "ALC 747", "detalle": "Cabezal superior Caroní (75,0 x 25,2 mm)", "bulto": "80 pz.", "peso": "336,7 kgs." },
+        { "codigo": "ALC 745", "detalle": "Jamba lateral Caroní (75,1 x 25,2 mm)", "bulto": "60 pz.", "peso": "248,9 kgs." },
+        { "codigo": "ALC 748", "detalle": "Perfil hoja corredera Caroní (37,0 x 25,6 mm)", "bulto": "150 pz.", "peso": "247,1 kgs." }
+      ]
+    },
+    {
+      "orden": 23,
+      "id": "puertas-batientes-vaiven",
+      "nombre": "Puertas batientes y vaivén",
+      "nombre_en": "Swing doors",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #23",
+      "destacado_home": false,
+      "desc": "Perfilería arquitectónica para puertas batientes y de doble acción (vaivén) en aleación 6063/S6063 temple T5 para accesos comerciales e institucionales.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Códigos: ALC 952, ALC 953, ALC 955, ALC 956",
+      "imagen": "/assets/img/productos/puertas-batientes-vaiven.jpg",
+      "estilo": "",
+      "cotizar": "Puertas batientes y vaivén ALC 952 / 953 / 955 / 956 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfiles tubulares de 44,5 mm de espesor con junquillo portavidrio integrado",
+        "presentaciones": "Códigos ALC 953 (60,3 x 44,5 mm), ALC 956 (65,1 x 44,5 mm), ALC 955 (101,6 x 44,5 mm) y ALC 952 (Junquillo)",
+        "propiedades": "Bultos de 40, 50 y 200 piezas (pesos de 195,2 kg a 262,3 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 9",
+        "usos": "Puertas de acceso comercial, oficinas, clínicas y locales de alto tránsito peatonal."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 953", "detalle": "Parante puerta batiente (60,3 x 44,5 mm)", "bulto": "50 pz.", "peso": "262,3 kgs." },
+        { "codigo": "ALC 956", "detalle": "Cabezal / Zócalo medio (65,1 x 44,5 mm)", "bulto": "50 pz.", "peso": "244,0 kgs." },
+        { "codigo": "ALC 955", "detalle": "Zócalo inferior pesado (101,6 x 44,5 mm)", "bulto": "40 pz.", "peso": "195,2 kgs." },
+        { "codigo": "ALC 952", "detalle": "Pisavidrio puerta batiente (22,9 x 16,5 mm)", "bulto": "200 pz.", "peso": "219,6 kgs." }
+      ]
+    },
+    {
+      "orden": 24,
+      "id": "puertas-bano-templex",
+      "nombre": "Puertas para baño Templex",
+      "nombre_en": "Templex Bathroom Doors",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #24",
+      "destacado_home": false,
+      "desc": "Sistema de perfilería pesada línea Templex en aleación 6063/S6063 temple T5 para puertas de baño en vidrio templado de seguridad.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: 5,4 m y 6,1 m | Códigos: ALC 907, ALC 908, ALC 909",
+      "imagen": "/assets/img/productos/puertas-bano-templex.jpg",
+      "estilo": "card4",
+      "cotizar": "Puertas para baño Templex ALC 907 / 908 / 909 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Rieles superiores de alta carga para rodamientos de cristales templados",
+        "presentaciones": "ALC 907 (Long. 5,4 mts · 46,9 x 25,0 mm), ALC 908 (Long. 6,1 mts · 54,0 x 49,2 mm), ALC 909 (Long. 6,1 mts · 60,0 x 56,5 mm)",
+        "propiedades": "Bultos de 120 pz (213,8 kg y 314,8 kg) y 48 pz (266,4 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 9",
+        "usos": "Cabinas de ducha en vidrio templado para hoteles, residencias y clubes deportivos."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 907", "detalle": "Guía inferior Templex (46,9 x 25,0 mm) · Long.: 5,4 mts.", "bulto": "120 pz.", "peso": "213,8 kgs." },
+        { "codigo": "ALC 908", "detalle": "Cabezal riel Templex (54,0 x 49,2 mm) · Long.: 6,1 mts.", "bulto": "120 pz.", "peso": "314,8 kgs." },
+        { "codigo": "ALC 909", "detalle": "Cabezal reforzado Templex (60,0 x 56,5 mm) · Long.: 6,1 mts.", "bulto": "48 pz.", "peso": "266,4 kgs." }
+      ]
+    },
+    {
+      "orden": 25,
+      "id": "puertas-batientes-junior",
+      "nombre": "Puertas batientes Junior",
+      "nombre_en": "Junior Swing doors",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #25",
+      "destacado_home": false,
+      "desc": "Serie liviana de perfiles para puertas batientes tipo Junior (espesor 31,8 mm) en aleación 6063/S6063 temple T5 para divisiones interiores de oficinas y comercios.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Códigos: ALC 958, ALC 959, ALC 960",
+      "imagen": "/assets/img/productos/puertas-batientes-junior.jpg",
+      "estilo": "",
+      "cotizar": "Puertas batientes Junior ALC 958 / 959 / 960 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Sistema batiente estilizado de 1 1/4\" (31,8 mm) con junquillo a presión",
+        "presentaciones": "Códigos ALC 958 (Marco 58,7 x 31,8 mm), ALC 959 (Hoja 55,6 x 31,8 mm) y ALC 960 (Pisavidrio 19,1 x 16,5 mm)",
+        "propiedades": "Bultos de 50 piezas (244,0 kg y 216,6 kg) y 200 piezas (195,2 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 9",
+        "usos": "Puertas interiores de oficinas, consultorios, tabiquería corporativa y comercios."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 958", "detalle": "Marco puerta Junior (58,7 x 31,8 mm)", "bulto": "50 pz.", "peso": "244,0 kgs." },
+        { "codigo": "ALC 959", "detalle": "Hoja puerta Junior (55,6 x 31,8 mm)", "bulto": "50 pz.", "peso": "216,6 kgs." },
+        { "codigo": "ALC 960", "detalle": "Pisavidrio serie Junior (19,1 x 16,5 mm)", "bulto": "200 pz.", "peso": "195,2 kgs." }
+      ]
+    },
+    {
+      "orden": 26,
+      "id": "ventana-proyectante",
+      "nombre": "Ventana proyectante",
+      "nombre_en": "Projecting window",
+      "linea": "Extrusión",
+      "badge": "Perfilería de CVG Alcasa · #26",
+      "destacado_home": false,
+      "desc": "Sistema completo de perfilería para ventana proyectante hacia el exterior en aleación 6063/S6063 temple T5 con doble contacto hermético contra lluvia y viento.",
+      "spec": "Aleación: 6063/S6063 | Temple: T5 | Códigos: ALC 3707 al ALC 3712",
+      "imagen": "/assets/img/productos/ventana-proyectante.jpg",
+      "estilo": "card4",
+      "cotizar": "Ventana proyectante ALC 3707-3712 (Extrusión)",
+      "ficha": {
+        "aleacion": "Serie AA 6063 / S6063 — Temple T5",
+        "pureza": "Perfiles de cámara europea/proyectante para brazos de empuje en acero inoxidable o aluminio",
+        "presentaciones": "Códigos ALC 3707, ALC 3708, ALC 3709, ALC 3710, ALC 3711 y ALC 3712",
+        "propiedades": "Bultos de 96, 108 y 128 piezas (pesos de 187,4 kg a 310,4 kg)",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Perfilería pág. 10",
+        "usos": "Edificios corporativos, fachadas muro cortina, clínicas, escuelas y torres residenciales."
+      },
+      "codigos_tabla": [
+        { "codigo": "ALC 3707", "detalle": "Marco exterior ventana proyectante (39,5 x 38,0 mm)", "bulto": "96 pz.", "peso": "310,4 kgs." },
+        { "codigo": "ALC 3708", "detalle": "Hoja proyectante perimetral (40,6 x 38,0 mm)", "bulto": "108 pz.", "peso": "276,7 kgs." },
+        { "codigo": "ALC 3709", "detalle": "Travesaño intermedio proyectante (59,0 x 38,0 mm)", "bulto": "108 pz.", "peso": "210,8 kgs." },
+        { "codigo": "ALC 3710", "detalle": "Bota-agua / Vierteaguas proyectante (37,9 mm)", "bulto": "108 pz.", "peso": "191,1 kgs." },
+        { "codigo": "ALC 3711", "detalle": "Adaptador inversor proyectante (40,6 x 38,0 mm)", "bulto": "96 pz.", "peso": "269,4 kgs." },
+        { "codigo": "ALC 3712", "detalle": "Pisavidrio ventana proyectante (21,2 x 15,6 mm)", "bulto": "128 pz.", "peso": "187,4 kgs." }
+      ]
+    },
+    {
+      "orden": 27,
+      "id": "rollo-aluminio-liso",
+      "nombre": "Rollo de aluminio liso",
+      "nombre_en": "Smooth roll (Bobina de espesor alto)",
+      "linea": "Laminación",
+      "badge": "Laminados de CVG Alcasa · #27",
+      "destacado_home": false,
+      "desc": "Bobina de aluminio laminado de espesor alto (3 a 6 mm) en aleaciones 1050, 1100 y 3003 con acabado liso sin corte de borde para usos metalmecánicos pesados.",
+      "spec": "Aleación: 1050, 1100 y 3003 | Temple: F/H - O / H-14 / H-16 / H-18 | Espesor: 3 - 6 mm | Ancho: 1295 - 1300 mm",
+      "imagen": "/assets/img/productos/rollo-aluminio-liso.jpg",
+      "estilo": "card3",
+      "cotizar": "Rollo de aluminio liso 3-6mm (Laminación)",
+      "ficha": {
+        "aleacion": "Series AA 1050, AA 1100 y AA 3003 — Temples F/H - O / H-14 / H-16 / H-18",
+        "pureza": "Bobina de espesor alto laminada en caliente con acabado superficial liso (Sin corte de borde)",
+        "presentaciones": "Espesor: 3 a 6 mm | Ancho: 1295 a 1300 mm",
+        "propiedades": "Alta conformabilidad, excelente soldabilidad y resistencia a la corrosión industrial",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Laminados pág. 10 / ASTM B209",
+        "usos": "Tanques de almacenamiento, calderería, pisos industriales, embarcaciones y re-laminación."
+      },
+      "codigos_tabla": [
+        { "codigo": "BOB-ALTO-LISO", "detalle": "Aleación 1050/1100/3003 · Espesor 3 - 6 mm · Ancho 1295 - 1300 mm", "bulto": "Bobina", "peso": "Acabado Liso (Sin corte de borde)" }
+      ]
+    },
+    {
+      "orden": 28,
+      "id": "rollo-liso-stucco-medio",
+      "nombre": "Rollo liso o stucco (Espesor medio)",
+      "nombre_en": "Stucco roll (Bobina de espesor medio)",
+      "linea": "Laminación",
+      "badge": "Laminados de CVG Alcasa · #28",
+      "destacado_home": false,
+      "desc": "Bobina de aluminio de espesor medio (1 a 2.99 mm) y ancho de 1220 mm en aleaciones 1050, 1100 y 3003, disponible en acabado liso (todos los espesores) o stucco (1 mm).",
+      "spec": "Aleación: 1050, 1100 y 3003 | Temple: F/H - O / H-14 / H-16 / H-18 | Espesor: 1 - 2.99 mm | Ancho: 1220 mm",
+      "imagen": "/assets/img/productos/rollo-liso-stucco-medio.jpg",
+      "estilo": "card3",
+      "cotizar": "Rollo liso o stucco espesor medio 1-2.99mm (Laminación)",
+      "ficha": {
+        "aleacion": "Series AA 1050, AA 1100 y AA 3003 — Temples F/H - O / H-14 / H-16 / H-18",
+        "pureza": "Bobina de espesor medio con acabado liso (todas las medidas) o gofrado stucco (en 1 mm)",
+        "presentaciones": "Espesor: 1 a 2.99 mm | Ancho: 1220 mm",
+        "propiedades": "Calibre controlado en laminador en frío, óptima reflectividad térmica y ductilidad",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Laminados pág. 10 / ASTM B209",
+        "usos": "Revestimientos industriales, carrocerías, señalización vial, ductos y paneles aislantes."
+      },
+      "codigos_tabla": [
+        { "codigo": "BOB-MED-LISO", "detalle": "Espesor 1 - 2.99 mm · Ancho 1220 mm · Acabado liso: Todas", "bulto": "Bobina", "peso": "Temple F/H - O / H14 / H16 / H18" },
+        { "codigo": "BOB-MED-STUCCO", "detalle": "Espesor 1.00 mm · Ancho 1220 mm · Acabado stucco: 1 mm", "bulto": "Bobina", "peso": "Temple F/H - O / H14 / H16 / H18" }
+      ]
+    },
+    {
+      "orden": 29,
+      "id": "rollo-aluminio-liso-stucco",
+      "nombre": "Rollo de aluminio liso o stucco",
+      "nombre_en": "Smooth or stucco roll (Bobina de bajo espesor)",
+      "linea": "Laminación",
+      "badge": "Laminados de CVG Alcasa · #29",
+      "destacado_home": true,
+      "desc": "Bobina de aluminio de bajo espesor (de 0.3 hasta 0.9 mm) y 1220 mm de ancho en aleaciones 1050, 1100 y 3003 con acabado liso y stucco para acanalado, aislamiento y empaques.",
+      "spec": "Aleación: 1050, 1100 y 3003 | Temple: F/H - O / H-14 / H-16 / H-18 | Espesor: 0.3 a 0.9 mm | Ancho: 1220 mm | Acabado: Liso y stucco",
+      "imagen": "/assets/img/productos/rollo-aluminio-liso-stucco.jpg",
+      "estilo": "card3",
+      "cotizar": "Rollo de aluminio liso o stucco (Laminación)",
+      "ficha": {
+        "aleacion": "Series AA 1050, AA 1100 y AA 3003 — Temples F/H - O / H-14 / H-16 / H-18",
+        "pureza": "Bobina de aluminio de bajo espesor laminada en frío con superficie lisa brillante o grabada stucco",
+        "presentaciones": "Espesor: de 0.3 hasta 0.9 mm | Ancho estándar: 1220 mm | Acabado: Liso y stucco",
+        "propiedades": "Excelente formabilidad para perfiladoras de techos, aislamiento térmico/acústico y embutido",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Laminados pág. 11 / ASTM B209 / COVENIN 1324",
+        "usos": "Fabricación de láminas acanaladas para techos, recubrimiento de tuberías térmicas, refrigeración y envases."
+      },
+      "codigos_tabla": [
+        { "codigo": "BOB-BAJO-03/09", "detalle": "Aleación 1050, 1100 y 3003 · Espesor de 0.3 hasta 0.9 mm · Ancho 1220 mm", "bulto": "Bobina", "peso": "Acabado Liso y Stucco" }
+      ]
+    },
+    {
+      "orden": 30,
+      "id": "laminas-aluminio-lisa-stucco",
+      "nombre": "Láminas de aluminio a tamaño lisa o stucco",
+      "nombre_en": "Aluminum sheets to size smooth or stucco",
+      "linea": "Laminación",
+      "badge": "Laminados de CVG Alcasa · #30",
+      "destacado_home": false,
+      "desc": "Láminas planas de aluminio cortadas a medida en aleaciones 1050, 1100 y 3003 con acabado liso o stucco para revestimiento, carpintería metálica y furgones.",
+      "spec": "Aleación: 1050, 1100 y 3003 | Espesor: 0.33 - 2.00 mm | Ancho: 1.220 mm | Longitud: 1.00 hasta 3.66 mts | Acabado: Lisa y stucco",
+      "imagen": "/assets/img/productos/laminas-aluminio-lisa-stucco.jpg",
+      "estilo": "card3",
+      "cotizar": "Láminas de aluminio a tamaño lisa o stucco (Laminación)",
+      "ficha": {
+        "aleacion": "Series AA 1050, AA 1100 y AA 3003",
+        "pureza": "Lámina plana nivelada y cortada a longitud con acabado superficial liso o gofrado stucco",
+        "presentaciones": "Espesor: 0.33 mm a 2.00 mm | Ancho: 1.220 mm | Longitud: 1.00 hasta 3.66 mts",
+        "propiedades": "Planicidad garantizada, alta resistencia a la oxidación y facilidad de plegado y troquelado",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Laminados pág. 11 / ASTM B209",
+        "usos": "Revestimiento arquitectónico, carpintería metálica, ductería de aire acondicionado, furgones y señalética."
+      },
+      "codigos_tabla": [
+        { "codigo": "LAM-PLANA", "detalle": "Espesor 0.33 - 2.00 mm · Ancho 1.220 mm · Longitud 1.00 a 3.66 mts", "bulto": "Paleta", "peso": "Acabado Lisa y Stucco" }
+      ]
+    },
+    {
+      "orden": 31,
+      "id": "laminas-noral-trapezoidal",
+      "nombre": "Láminas de aluminio Noral Trapezoidal",
+      "nombre_en": "Noral trapezoidal sheets",
+      "linea": "Laminación",
+      "badge": "Laminados de CVG Alcasa · #31",
+      "destacado_home": false,
+      "desc": "Láminas acanaladas de perfil Noral Trapezoidal de hasta 12 metros de largo, ideales para cubiertas y revestimientos de paredes y techos de galpones industriales y fachadas.",
+      "spec": "Longitud: 1.00 hasta 12.0 mts | Espesor: 0.3 mm / 1 mm | Perfil: Noral Trapezoidal",
+      "imagen": "/assets/img/productos/laminas-noral-trapezoidal.jpg",
+      "estilo": "card3",
+      "cotizar": "Láminas de aluminio Noral Trapezoidal (Laminación)",
+      "ficha": {
+        "aleacion": "Aluminio laminado conformado en frío — Perfil Noral Trapezoidal",
+        "pureza": "Crestas trapezoidales rigidizantes de gran capacidad de desagüe pluvial y resistencia mecánica",
+        "presentaciones": "Longitud: desde 1.00 hasta 12.0 mts | Espesor: 0.3 mm a 1.0 mm",
+        "propiedades": "Alta reflectividad solar (reduce temperatura interior), ultraligera e inmune a la corrosión",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Laminados pág. 11",
+        "usos": "Ideal para cubiertas y revestimientos de paredes y techos de galpones industriales y fachadas."
+      },
+      "codigos_tabla": [
+        { "codigo": "NORAL-TRAP", "detalle": "Perfil Trapezoidal · Longitud 1.00 hasta 12.0 mts · Espesor 0.3 mm / 1 mm", "bulto": "A medida", "peso": "Cubiertas y fachadas industriales" }
+      ]
+    },
+    {
+      "orden": 32,
+      "id": "laminas-frescalum-sinusoidal",
+      "nombre": "Láminas de aluminio Frescalum Sinusoidal",
+      "nombre_en": "Frescalum sinusoidal sheets",
+      "linea": "Laminación",
+      "badge": "Laminados de CVG Alcasa · #32",
+      "destacado_home": false,
+      "desc": "Láminas acanaladas onduladas tipo Frescalum Sinusoidal de alta reflectividad térmica, ampliamente utilizadas en techos de fábricas, almacenes, estacionamientos y centros de exposiciones.",
+      "spec": "Longitud: 1.00 hasta 3.66 mts | Espesor: 0.3 mm / 1 mm | Perfil: Frescalum Sinusoidal",
+      "imagen": "/assets/img/productos/laminas-frescalum-sinusoidal.jpg",
+      "estilo": "card3",
+      "cotizar": "Láminas de aluminio Frescalum Sinusoidal (Laminación)",
+      "ficha": {
+        "aleacion": "Aluminio laminado conformado en frío — Perfil Ondulado Frescalum Sinusoidal",
+        "pureza": "Geometría sinusoidal continua que combina rigidez, ligereza y confort térmico interior",
+        "presentaciones": "Longitud: desde 1.00 hasta 3.66 mts | Espesor: 0.3 mm a 1.0 mm",
+        "propiedades": "Confort térmico superior, fácil instalación y resistencia total a ambientes salinos e industriales",
+        "normas": "Catálogo Oficial CVG Alcasa 2025 — Laminados pág. 11",
+        "usos": "Ampliamente utilizada en techos de fábricas, almacenes, estacionamientos, centros de exposiciones, viviendas y galpones."
+      },
+      "codigos_tabla": [
+        { "codigo": "FRESCALUM-SIN", "detalle": "Perfil Sinusoidal · Longitud 1.00 hasta 3.66 mts · Espesor 0.3 mm / 1 mm", "bulto": "Paquete", "peso": "Techos industriales y comerciales" }
+      ]
+    }
   ],
-  "areas": [
-   "Producción",
-   "Mantenimiento",
-   "Administración",
-   "Tecnología",
-   "Otra"
-  ]
- }
+  "videos": [
+    {
+      "titulo": "Planta de Laminación en Frío y Caliente",
+      "badge": "Planta de Laminación",
+      "desc": "Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación que aseguran maleabilidad superior y calibrado micrométrico.",
+      "src": "",
+      "poster": "/assets/img/video-lami.jpg",
+      "estilo": "card3"
+    },
+    {
+      "titulo": "Planta de Fundición y Hornos de Fusión",
+      "badge": "Planta de Fundición",
+      "desc": "Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de cilindros tochos 6063 de calidad metalúrgica internacional.",
+      "src": "",
+      "poster": "/assets/img/video-fund.jpg",
+      "estilo": ""
+    },
+    {
+      "titulo": "Planta de Extrusión y Prensas de Perfilería",
+      "badge": "Planta de Extrusión",
+      "desc": "Prensas de alta presión de 7 pulgadas que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados para la industria de la construcción y el transporte.",
+      "src": "",
+      "poster": "/assets/img/video-ext.jpg",
+      "estilo": "card2"
+    },
+    {
+      "titulo": "Taller Soberano de Ayudas Técnicas",
+      "badge": "Compromiso Social",
+      "desc": "Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables.",
+      "src": "",
+      "poster": "/assets/img/video-at.jpg",
+      "estilo": "card4"
+    },
+    {
+      "titulo": "CVG Alcasa Hoy — Hitos y Logros Productivos",
+      "badge": "Noticiero Corporativo CVG Alcasa",
+      "desc": "Cobertura audiovisual de la reactivación industrial, jornadas de mantenimiento mayor y la entrega inquebrantable de la clase trabajadora de CVG Alcasa forjando la soberanía patria.",
+      "src": "",
+      "poster": "/assets/img/video-hoy.png",
+      "estilo": "card3"
+    },
+    {
+      "titulo": "Integración de Empresas Tuteladas de la CVG",
+      "badge": "Cadena del Aluminio CVG",
+      "desc": "Alianza y sinergia estratégica dentro de la Corporación Venezolana de Guayana (CVG) para fortalecer el encadenamiento productivo entre CVG Bauxilum, CVG Venalum, CVG Carbonorca y CVG Alcasa.",
+      "src": "",
+      "poster": "/assets/img/video-sn.jpg",
+      "estilo": ""
+    }
+  ],
+  "contacto": {
+    "direccion": "Zona Industrial Matanzas, Avenida Fuerzas Armadas, Ciudad Guayana, Estado Bolívar, Venezuela",
+    "horario": "Lun - Vie: 7:00am – 4:00pm",
+    "telefono": "+58 (0286) 9801476 / +58 (0412) 2522272",
+    "email": "comercializacion@alcasa.com.ve",
+    "email_proveedores": "atencion.proveedores@alcasa.com.ve",
+    "email_webmaster": "webmaster@alcasa.com.ve",
+    "rif": "G-20110929-0",
+    "periodico": "http://alcasa.com.ve:5001/minimal",
+    "oac": "http://190.202.49.114:5050/",
+    "whatsapp": "https://wa.me/584122522272?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20web%20de%20CVG%20Alcasa%20y%20quisiera%20informaci%C3%B3n%20sobre%20sus%20productos."
+  },
+  "cv": {
+    "niveles": [
+      "Ingeniero / Licenciado",
+      "Técnico Superior Universitario (T.S.U.)",
+      "Técnico Medio / Oficio Industrial",
+      "Especialista / Postgrado",
+      "Pasante Universitario / Aprendiz INCES"
+    ],
+    "areas": [
+      "Operaciones de Planta (Fundición / Laminación / Extrusión)",
+      "Mantenimiento Industrial (Mecánico / Eléctrico / Instrumentación)",
+      "Ingeniería, Metalurgia y Control de Calidad",
+      "Seguridad Industrial, Ambiente y Salud (SIAHO)",
+      "Informática, Sistemas y Telecomunicaciones",
+      "Administración, Finanzas y Logística",
+      "Programa de Pasantías / Aprendices INCES"
+    ]
+  }
 }

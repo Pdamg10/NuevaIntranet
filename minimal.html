@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulso Industrial CVG Alcasa — Vista Compacta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026k">
+    <style>
+        body {
+            background: #f4f7fb;
+            padding: 18px 16px;
+        }
+        .minimal-shell {
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+        .minimal-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--alcasa-blue);
+        }
+        .minimal-topbar h2 {
+            font-size: 1.3rem;
+            color: var(--alcasa-blue);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="minimal-shell">
+        <div class="minimal-topbar">
+            <h2><i class="fas fa-bolt" style="color: var(--alcasa-accent);"></i> Pulso Industrial CVG Alcasa</h2>
+            <div class="prensa-api-status" id="prensaApiCounter" style="margin: 0;">
+                <i class="fas fa-spinner fa-spin" style="color: var(--alcasa-accent);"></i>
+                <span>Cargando noticias oficiales...</span>
+            </div>
+        </div>
+
+        <div class="noticia-detail-panel" id="noticiaDetailPanel" style="display: none;">
+            <div class="noticia-detail-header">
+                <div class="noticia-detail-meta">
+                    <span class="noticia-detail-cat" id="noticiaDetailCat">Gestión Industrial</span>
+                    <span class="noticia-detail-datetime" id="noticiaDetailDatetime"></span>
+                </div>
+                <button type="button" class="ficha-close-btn" id="noticiaDetailCloseBtn" aria-label="Cerrar noticia">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="noticia-detail-body">
+                <div class="noticia-detail-img-wrap">
+                    <img src="/assets/img/placeholder.svg" alt="Miniatura de noticia CVG Alcasa" id="noticiaDetailImg">
+                </div>
+                <div class="noticia-detail-content">
+                    <h4 id="noticiaDetailTitle">Título de la noticia</h4>
+                    <p id="noticiaDetailText">Descripción completa del comunicado oficial de CVG Aluminio del Caroní, S.A. (CVG Alcasa).</p>
+                    <div class="noticia-detail-actions">
+                        <a href="http://alcasa.com.ve:5001/" target="_blank" rel="noopener noreferrer" class="btn-ver-todos-productos" id="noticiaDetailExternalLink">
+                            <i class="fas fa-up-right-from-square"></i> Abrir Comunicado Oficial Completo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="prensa-layout-wrapper" id="noticias" data-max="10"></div>
+
+        <div style="display: flex; justify-content: center; margin-top: 18px;">
+            <button class="btn-outline-corp" id="mas" hidden>
+                <i class="fas fa-plus-circle"></i> Ver archivo adicional de noticias
+            </button>
+        </div>
+    </div>
+
+    <script src="/assets/js/app.js?v=2026k"></script>
+</body>
+</html>

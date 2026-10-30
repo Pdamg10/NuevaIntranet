@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador de Contactos y Postulaciones (CV) — CVG Alcasa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026i">
+    <style>
+        .admin-wrap {
+            max-width: 1180px;
+            margin: 36px auto 60px;
+            padding: 0 20px;
+        }
+        .admin-box {
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid var(--medium-gray);
+            border-top: 4px solid var(--alcasa-blue);
+            box-shadow: 0 10px 30px rgba(0, 25, 55, 0.08);
+            padding: 28px 30px;
+        }
+        .admin-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            padding-bottom: 18px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .admin-tab-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--medium-gray);
+            background: #f8fafc;
+            color: var(--alcasa-blue);
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .admin-tab-btn.active {
+            background: var(--alcasa-blue);
+            color: #ffffff;
+            border-color: var(--alcasa-blue);
+        }
+        .admin-row-card {
+            background: #ffffff;
+            border: 1px solid var(--medium-gray);
+            border-left: 4px solid var(--alcasa-blue);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .admin-row-card:hover {
+            border-left-color: var(--alcasa-accent);
+            background: #f8fbff;
+        }
+        .admin-row-info h4 {
+            color: var(--alcasa-blue);
+            margin: 0 0 4px 0;
+            font-size: 1rem;
+        }
+        .admin-row-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            margin-bottom: 6px;
+        }
+        .admin-row-desc {
+            font-size: 0.88rem;
+            color: #334155;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="site-header"></div>
+
+    <main class="admin-wrap">
+        <!-- Pantalla de Login si no hay sesión -->
+        <div class="admin-box" id="adminLoginBox" style="max-width: 480px; margin: 40px auto;">
+            <h2 style="color: var(--alcasa-blue); margin-bottom: 6px;"><i class="fas fa-user-shield" style="color: var(--alcasa-accent);"></i> Acceso Administrativo</h2>
+            <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 18px;">Gestión de Contactos Comerciales y Postulaciones de Síntesis Curricular (CV)</p>
+            <form id="formAdminDatosLogin" autocomplete="off">
+                <div class="cv-field" style="margin-bottom: 12px;">
+                    <label for="admUser">Usuario *</label>
+                    <input type="text" id="admUser" name="usuario" required placeholder="admin / talento / comercializacion">
+                </div>
+                <div class="cv-field" style="margin-bottom: 16px;">
+                    <label for="admPass">Contraseña *</label>
+                    <input type="password" id="admPass" name="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-contacto-enviar" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-right-to-bracket"></i> Ingresar al Panel
+                </button>
+                <div class="contacto-mensaje" id="admLoginMsg" style="margin-top: 10px; text-align: center;"></div>
+                <div id="admQuickAccounts" style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed rgba(14,165,233,0.28); font-size: 0.82rem;">
+                    <div style="margin-bottom: 6px; font-weight: 600; color: #0f172a;">
+                        <i class="fas fa-key" style="color: var(--alcasa-accent);"></i> Cuentas configuradas (clic para autocompletar):
+                    </div>
+                    <div id="admQuickAccountsList" style="display: flex; flex-direction: column; gap: 6px;"></div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Panel Principal de Contactos y Postulaciones de CV -->
+        <div class="admin-box" id="adminMainBox" style="display: none;">
+            <div class="admin-top">
+                <div>
+                    <h2 style="color: var(--alcasa-blue); margin: 0;"><i class="fas fa-folder-tree" style="color: var(--alcasa-accent);"></i> Bandeja de Contactos y Postulaciones (CV)</h2>
+                    <span id="admUserInfo" style="font-size: 0.85rem; color: var(--alcasa-accent); font-weight: 600;"></span>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button type="button" class="btn-outline-corp" id="btnRecargarDatos"><i class="fas fa-rotate"></i> Recargar</button>
+                    <a href="/prensa.html" class="btn-outline-corp"><i class="fas fa-newspaper"></i> Sala de Prensa</a>
+                    <button type="button" class="btn-outline-corp" id="btnSalirDatos" style="border-color: #dc2626; color: #dc2626;"><i class="fas fa-right-from-bracket"></i> Salir</button>
+                </div>
+            </div>
+
+            <div class="admin-tabs">
+                <button type="button" class="admin-tab-btn active" id="tabBtnContactos">
+                    <i class="fas fa-envelope-open-text"></i> Contactos Comerciales (<span id="countContactos">0</span>)
+                </button>
+                <button type="button" class="admin-tab-btn" id="tabBtnCV">
+                    <i class="fas fa-file-pdf"></i> Postulaciones de CV / Empleo (<span id="countCV">0</span>)
+                </button>
+            </div>
+
+            <div id="paneContactos"></div>
+            <div id="paneCV" style="display: none;"></div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="/assets/js/app.js?v=2026i"></script>
+    <script>
+    (function () {
+        var loginBox = document.getElementById('adminLoginBox');
+        var mainBox = document.getElementById('adminMainBox');
+        var formLogin = document.getElementById('formAdminDatosLogin');
+        var msgEl = document.getElementById('admLoginMsg');
+        var userInfo = document.getElementById('admUserInfo');
+        var paneContactos = document.getElementById('paneContactos');
+        var paneCV = document.getElementById('paneCV');
+        var tabBtnContactos = document.getElementById('tabBtnContactos');
+        var tabBtnCV = document.getElementById('tabBtnCV');
+
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+            });
+        }
+
+        function renderBandejas(data) {
+            loginBox.style.display = 'none';
+            mainBox.style.display = 'block';
+            if (data.user) {
+                userInfo.textContent = data.user.nombre + ' · ' + data.user.nivel;
+            }
+            var contactos = data.contactos || [];
+            var cvs = data.postulaciones || [];
+            document.getElementById('countContactos').textContent = contactos.length;
+            document.getElementById('countCV').textContent = cvs.length;
+
+            if (!contactos.length) {
+                paneContactos.innerHTML = '<p style="color:#64748b;padding:18px 0;">No hay mensajes de contacto registrados aún.</p>';
+            } else {
+                paneContactos.innerHTML = contactos.map(function (c) {
+                    return '<div class="admin-row-card">' +
+                        '<div class="admin-row-info" style="flex:1;">' +
+                            '<h4>' + esc(c.nombre) + ' <span class="prensa-cat-badge">' + esc(c.interes || 'General') + '</span></h4>' +
+                            '<div class="admin-row-meta">' +
+                                '<span><i class="fas fa-calendar"></i> ' + esc(c.fecha) + '</span>' +
+                                '<span><i class="fas fa-envelope"></i> <a href="mailto:' + esc(c.correo) + '">' + esc(c.correo) + '</a></span>' +
+                                (c.empresa ? '<span><i class="fas fa-building"></i> ' + esc(c.empresa) + '</span>' : '') +
+                            '</div>' +
+                            '<p class="admin-row-desc">' + esc(c.comentario) + '</p>' +
+                        '</div>' +
+                    '</div>';
+                }).join('');
+            }
+
+            if (!cvs.length) {
+                paneCV.innerHTML = '<p style="color:#64748b;padding:18px 0;">No hay postulaciones de Síntesis Curricular registradas aún.</p>';
+            } else {
+                paneCV.innerHTML = cvs.map(function (p) {
+                    var linkCV = p.archivo ? '/api/admin_datos.php?tipo=descargar_cv&archivo=' + encodeURIComponent(p.archivo) : '#';
+                    return '<div class="admin-row-card">' +
+                        '<div class="admin-row-info" style="flex:1;">' +
+                            '<h4>' + esc(p.nombre) + ' · <small>' + esc(p.cedula) + '</small> <span class="prensa-cat-badge">' + esc(p.area) + '</span></h4>' +
+                            '<div class="admin-row-meta">' +
+                                '<span><i class="fas fa-calendar"></i> ' + esc(p.fecha) + '</span>' +
+                                '<span><i class="fas fa-graduation-cap"></i> ' + esc(p.nivel) + '</span>' +
+                                '<span><i class="fas fa-phone"></i> ' + esc(p.telefono) + '</span>' +
+                                '<span><i class="fas fa-envelope"></i> ' + esc(p.correo) + '</span>' +
+                            '</div>' +
+                            '<p class="admin-row-desc">' + esc(p.resumen || 'Sin resumen adicional.') + '</p>' +
+                        '</div>' +
+                        (p.archivo ? '<div><a href="' + linkCV + '" target="_blank" class="btn-prensa-card"><i class="fas fa-file-arrow-down"></i> Descargar CV</a></div>' : '') +
+                    '</div>';
+                }).join('');
+            }
+        }
+
+        function cargarDatos() {
+            fetch('/api/admin_datos.php')
+                .then(function (r) { return r.json(); })
+                .then(function (res) {
+                    if (res && res.success) {
+                        renderBandejas(res);
+                    } else {
+                        loginBox.style.display = 'block';
+                        mainBox.style.display = 'none';
+                    }
+                })
+                .catch(function () {});
+        }
+
+        formLogin.addEventListener('submit', function (e) {
+            e.preventDefault();
+            msgEl.textContent = 'Verificando...';
+            fetch('/api/prensa_admin.php?action=login', {
+                method: 'POST',
+                body: new FormData(formLogin)
+            })
+            .then(function (r) { return r.json(); })
+            .then(function (res) {
+                if (res && res.success) {
+                    msgEl.textContent = '';
+                    cargarDatos();
+                } else {
+                    msgEl.textContent = (res && res.error) || 'Credenciales inválidas.';
+                    msgEl.className = 'contacto-mensaje error';
+                }
+            });
+        });
+
+        tabBtnContactos.addEventListener('click', function () {
+            tabBtnContactos.classList.add('active');
+            tabBtnCV.classList.remove('active');
+            paneContactos.style.display = 'block';
+            paneCV.style.display = 'none';
+        });
+
+        tabBtnCV.addEventListener('click', function () {
+            tabBtnCV.classList.add('active');
+            tabBtnContactos.classList.remove('active');
+            paneCV.style.display = 'block';
+            paneContactos.style.display = 'none';
+        });
+
+        document.getElementById('btnRecargarDatos').addEventListener('click', cargarDatos);
+        document.getElementById('btnSalirDatos').addEventListener('click', function () {
+            fetch('/api/prensa_admin.php?action=logout', { method: 'POST' }).then(function () {
+                loginBox.style.display = 'block';
+                mainBox.style.display = 'none';
+            });
+        });
+
+        var qList = document.getElementById('admQuickAccountsList');
+        if (qList) {
+            fetch('/api/prensa_admin.php?action=accounts')
+                .then(function (r) { return r.json(); })
+                .then(function (res) {
+                    var accs = (res && Array.isArray(res.accounts)) ? res.accounts : [];
+                    qList.innerHTML = accs.map(function (a, i) {
+                        return '<button type="button" class="btn-outline-corp" data-idx="' + i + '" style="justify-content:space-between;padding:6px 10px;font-size:0.78rem;text-align:left;">' +
+                            '<span><i class="fas fa-user-check"></i> <strong>' + esc(a.usuario) + '</strong> / <code>' + esc(a.password) + '</code></span>' +
+                            '<span style="opacity:0.75;">' + esc(a.nivel) + '</span>' +
+                        '</button>';
+                    }).join('');
+                    Array.prototype.forEach.call(qList.querySelectorAll('button[data-idx]'), function (b) {
+                        b.addEventListener('click', function () {
+                            var a = accs[parseInt(this.getAttribute('data-idx') || '0', 10)];
+                            if (!a) return;
+                            document.getElementById('admUser').value = a.usuario;
+                            document.getElementById('admPass').value = a.password;
+                        });
+                    });
+                })
+                .catch(function () {});
+        }
+
+        cargarDatos();
+    })();
+    </script>
+</body>
+</html>

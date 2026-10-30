@@ -1,1 +1,163 @@
-[{"titulo":"PENDIENTE: noticia de ejemplo","resumen":"Texto breve de la noticia. Se mostrará mientras la API del periódico no responda.","imagen":"","fecha":"","url":"/prensa.html"}]
+[
+  {
+    "id": "761",
+    "estado": "publicada",
+    "categoria": "Invitación Cultural",
+    "subtitulo": "Cultura CVG Alcasa",
+    "titulo": "Invitación a la obra de teatro \"La Torta que puso Adán\"",
+    "resumen": "La obra \"La Torta que puso Adán\" del escritor venezolano Aquiles Nazoa es un sainete teatral cómico y breve que recrea con humor y picardía venezolana la historia de Adán y Eva para el disfrute de la familia trabajadora de CVG Alcasa.",
+    "imagen": "/assets/img/noticias/noticia-761.jpg",
+    "imagenes": [
+      { "url": "/assets/img/noticias/noticia-761.jpg", "pie": "Afiche oficial de la obra teatral 'La Torta que puso Adán' en CVG Alcasa" },
+      { "url": "/assets/img/noticias/noticia-748.jpg", "pie": "Actividades culturales e integración de la familia alcasiana" },
+      { "url": "/assets/img/noticias/noticia-752.jpg", "pie": "Encuentros culturales y conmemorativos de la clase trabajadora" }
+    ],
+    "fecha": "28/10/2026 13:49",
+    "fecha_solo": "28/10/2026",
+    "hora_solo": "13:49",
+    "url": "http://alcasa.com.ve:5001/noticia/761"
+  },
+  {
+    "id": "760",
+    "estado": "publicada",
+    "categoria": "Información de Interés",
+    "subtitulo": "Solicitudes de Pedidos Año 2026",
+    "titulo": "CIRCULAR: Solicitudes de Pedidos",
+    "resumen": "Comunicado oficial sobre la recepción y procesamiento de Solicitudes de Pedidos correspondientes al ejercicio 2026 en las unidades operativas y administrativas de CVG Aluminio del Caroní, S.A.",
+    "imagen": "/assets/img/noticias/noticia-760.jpg",
+    "imagenes": [
+      { "url": "/assets/img/noticias/noticia-760.jpg", "pie": "Circular oficial sobre Solicitudes de Pedidos 2026" },
+      { "url": "/assets/img/noticias/noticia-757.jpg", "pie": "Lineamientos administrativos para unidades organizativas de CVG Alcasa" }
+    ],
+    "fecha": "28/10/2026 13:05",
+    "fecha_solo": "28/10/2026",
+    "hora_solo": "13:05",
+    "url": "http://alcasa.com.ve:5001/noticia/760"
+  },
+  {
+    "id": "759",
+    "estado": "publicada",
+    "categoria": "Fechas Importantes",
+    "subtitulo": "Feliz día para todos los ingenieros que laboran en nuestra CVG Alcasa",
+    "titulo": "Día del Ingeniero en CVG Alcasa",
+    "resumen": "El Día del Ingeniero en Venezuela se celebra cada 28 de octubre en conmemoración de la fundación del Colegio de Ingenieros de Venezuela (CIV). Reconocemos el talento técnico que impulsa las plantas de CVG Alcasa.",
+    "imagen": "/assets/img/noticias/noticia-759.jpg",
+    "imagenes": [
+      { "url": "/assets/img/noticias/noticia-759.jpg", "pie": "Reconocimiento a los ingenieros e ingenieras de CVG Alcasa" },
+      { "url": "/assets/img/hero-fundicion.jpg", "pie": "Operaciones de fundición e ingeniería metalúrgica en planta" },
+      { "url": "/assets/img/hero-laminacion.jpg", "pie": "Procesos industriales de laminación y transformación del aluminio" }
+    ],
+    "fecha": "28/10/2026 07:56",
+    "fecha_solo": "28/10/2026",
+    "hora_solo": "07:56",
+    "url": "http://alcasa.com.ve:5001/noticia/759"
+  },
+  {
+    "id": "758",
+    "categoria": "Institucional y Deportes",
+    "subtitulo": "Elección de la Madrina del Reinado de los XLV Juegos Deportivos Interempresas de Guayana 2026",
+    "titulo": "Circular: Elección de la Madrina de los XLV Juegos Interempresas 2026",
+    "resumen": "Buscamos a la candidata con el carisma, la elegancia y el espíritu deportivo para representar dignamente a CVG Alcasa en el Reinado de los XLV Juegos Deportivos Interempresas de Guayana 2026.",
+    "imagen": "/assets/img/noticias/noticia-758.jpg",
+    "fecha": "20/10/2026 16:01",
+    "fecha_solo": "20/10/2026",
+    "hora_solo": "16:01",
+    "url": "http://alcasa.com.ve:5001/noticia/758"
+  },
+  {
+    "id": "757",
+    "categoria": "Procedimientos Administrativos",
+    "subtitulo": "Administrativo CVG Alcasa",
+    "titulo": "Sustitución Temporal en Unidades Organizativas",
+    "resumen": "Se hace del conocimiento de todas las unidades organizativas de CVG Alcasa las disposiciones administrativas vigentes sobre sustituciones temporales de personal.",
+    "imagen": "/assets/img/noticias/noticia-757.jpg",
+    "fecha": "16/10/2026 16:01",
+    "fecha_solo": "16/10/2026",
+    "hora_solo": "16:01",
+    "url": "http://alcasa.com.ve:5001/noticia/757"
+  },
+  {
+    "id": "753",
+    "categoria": "Responsabilidad Social",
+    "subtitulo": "Bienestar Social para la Clase Trabajadora",
+    "titulo": "Invitación a Gran Feria Agrícola en CVG Alcasa",
+    "resumen": "Jornada de atención alimentaria y feria agrícola organizada en beneficio directo de los trabajadores y trabajadoras de CVG Aluminio del Caroní, S.A. y sus familias.",
+    "imagen": "/assets/img/noticias/noticia-753.jpg",
+    "fecha": "14/10/2026 12:21",
+    "fecha_solo": "14/10/2026",
+    "hora_solo": "12:21",
+    "url": "http://alcasa.com.ve:5001/noticia/753"
+  },
+  {
+    "id": "752",
+    "categoria": "Aniversario Institucional",
+    "subtitulo": "59 Aniversario de CVG Alcasa",
+    "titulo": "Invitación Especial para la Clase Trabajadora de CVG Alcasa",
+    "resumen": "Invitación oficial a la Misa de Acción de Gracias y actos conmemorativos por el 59° Aniversario de CVG Alcasa, pionera en la producción y transformación del aluminio en Venezuela.",
+    "imagen": "/assets/img/noticias/noticia-752.jpg",
+    "fecha": "13/10/2026 16:31",
+    "fecha_solo": "13/10/2026",
+    "hora_solo": "16:31",
+    "url": "http://alcasa.com.ve:5001/noticia/752"
+  },
+  {
+    "id": "751",
+    "categoria": "Responsabilidad Social",
+    "subtitulo": "Salud Ocupacional y Bienestar Integral",
+    "titulo": "CVG Alcasa promueve charla sobre salud mental para sus trabajadores",
+    "resumen": "CVG Alcasa promueve activamente la salud y el bienestar integral de sus trabajadores a través de charlas psicoeducativas y jornadas preventivas orientadas al equilibrio laboral y familiar.",
+    "imagen": "/assets/img/noticias/noticia-751.jpg",
+    "fecha": "09/10/2026 15:46",
+    "fecha_solo": "09/10/2026",
+    "hora_solo": "15:46",
+    "url": "http://alcasa.com.ve:5001/noticia/751"
+  },
+  {
+    "id": "750",
+    "categoria": "Ámbito Nacional e Institucional",
+    "subtitulo": "Nacional e Institucional",
+    "titulo": "Trabajadores de CVG Alcasa conmemoraron 14 años de la Victoria histórica del Comandante Chávez",
+    "resumen": "La fuerza laboral de CVG Alcasa participó en la jornada conmemorativa reafirmando el compromiso productivo y soberano de las industrias básicas de Guayana.",
+    "imagen": "/assets/img/noticias/noticia-750.jpg",
+    "fecha": "08/10/2026 09:05",
+    "fecha_solo": "08/10/2026",
+    "hora_solo": "09:05",
+    "url": "http://alcasa.com.ve:5001/noticia/750"
+  },
+  {
+    "id": "749",
+    "categoria": "Responsabilidad Social",
+    "subtitulo": "El Centro de Educación Inicial CVG Alcasa evoluciona",
+    "titulo": "El Centro de Educación Inicial CVG Alcasa evoluciona a Unidad Educativa Colegio CVG Alcasa (U.E.C. CVG Alcasa)",
+    "resumen": "Como parte del fortalecimiento institucional y educativo ejecutado con recursos propios, el plantel evoluciona estructural y curricularmente garantizando la expansión progresiva de la oferta académica.",
+    "imagen": "/assets/img/noticias/noticia-749.jpg",
+    "fecha": "04/10/2026 10:17",
+    "fecha_solo": "04/10/2026",
+    "hora_solo": "10:17",
+    "url": "http://alcasa.com.ve:5001/noticia/749"
+  },
+  {
+    "id": "748",
+    "categoria": "Cultura y Recreación",
+    "subtitulo": "Cultura y recreación",
+    "titulo": "Nº 06 CVG Alcasa celebró la música y el talento de sus trabajadores con un emotivo Mediodía Cultural",
+    "resumen": "Encuentro musical y artístico protagonizado por los trabajadores y trabajadoras de CVG Alcasa para fortalecer la identidad cultural guayanesa dentro de nuestra planta.",
+    "imagen": "/assets/img/noticias/noticia-748.jpg",
+    "fecha": "02/10/2026 11:49",
+    "fecha_solo": "02/10/2026",
+    "hora_solo": "11:49",
+    "url": "http://alcasa.com.ve:5001/noticia/748"
+  },
+  {
+    "id": "739",
+    "categoria": "Contraloría General",
+    "subtitulo": "Contraloría General de la República",
+    "titulo": "Declaración Jurada de Patrimonio — Jornada de Actualización en CVG Alcasa",
+    "resumen": "Resolución 01-00-000-163, Gaceta Oficial N° 43.460: Jornada especial de actualización de la Declaración Jurada de Patrimonio (DJP) dirigida al personal de CVG Alcasa.",
+    "imagen": "/assets/img/noticias/noticia-739.jpg",
+    "fecha": "30/09/2026 18:55",
+    "fecha_solo": "30/09/2026",
+    "hora_solo": "18:55",
+    "url": "http://alcasa.com.ve:5001/noticia/739"
+  }
+]
