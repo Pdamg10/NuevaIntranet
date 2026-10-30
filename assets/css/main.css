@@ -3066,6 +3066,12 @@ iframe.goog-te-banner-frame,
     align-items: stretch;
 }
 
+.oportunidades-grid.oportunidades-grid-single {
+    grid-template-columns: 1fr;
+    max-width: 820px;
+    margin: 0 auto;
+}
+
 .oportunidades-info-card {
     background: linear-gradient(145deg, #002b56 0%, #001833 100%);
     color: #ffffff;

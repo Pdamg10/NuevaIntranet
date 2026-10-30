@@ -1183,42 +1183,19 @@
     var prensaAuthUser = null;
 
     function renderCardNoticia(n, idx) {
-        var rankStr = '#' + String(idx + 1).padStart(2, '0');
-        var rankClass = idx === 0 ? 'prensa-rank-badge featured' : 'prensa-rank-badge';
-
         var imgs = (Array.isArray(n.imagenes) && n.imagenes.length) ? n.imagenes.slice(0, 20) : [{ url: n.imagen || PH, pie: '' }];
-        var totalImgs = imgs.length;
         var slidesHtml = imgs.map(function (im, sIdx) {
             return '<img loading="lazy" class="prensa-api-thumb prensa-carousel-slide' + (sIdx === 0 ? ' active' : '') + '" ' +
                 'data-slide-idx="' + sIdx + '" src="' + esc(im.url || PH) + '" alt="' + esc(im.pie || n.titulo) + '" ' +
                 'onerror="this.onerror=null;this.src=\'' + PH + '\';">';
         }).join('');
 
-        var controlsHtml = totalImgs > 1
-            ? '<button type="button" class="prensa-carousel-nav prev" data-dir="-1" aria-label="Imagen anterior" title="Imagen anterior"><i class="fas fa-chevron-left"></i></button>' +
-              '<button type="button" class="prensa-carousel-nav next" data-dir="1" aria-label="Siguiente imagen" title="Siguiente imagen"><i class="fas fa-chevron-right"></i></button>' +
-              '<div class="prensa-carousel-dots">' +
-                  imgs.slice(0, 8).map(function (_, dIdx) {
-                      return '<span class="prensa-carousel-dot' + (dIdx === 0 ? ' active' : '') + '" data-dot-idx="' + dIdx + '"></span>';
-                  }).join('') +
-              '</div>'
-            : '';
-
-        var counterBadgeHtml = '<span class="prensa-carousel-counter" title="Galería de imágenes de la noticia">' +
-            '<i class="fas fa-images"></i> <b class="prensa-carousel-curr">1</b>/' + totalImgs +
-        '</span>';
-
         return '' +
             '<article class="prensa-api-card prensa-card-horizontal' + (idx === 0 ? ' is-top-news' : '') + '" data-noticia-idx="' + idx + '" data-curr-slide="0">' +
                 '<div class="prensa-api-thumb-wrap prensa-thumb-carousel">' +
-                    '<div class="prensa-thumb-badges">' +
-                        '<span class="' + rankClass + '">' + (idx === 0 ? '<i class="fas fa-bolt"></i> ' : '') + esc(rankStr) + '</span>' +
-                        counterBadgeHtml +
-                    '</div>' +
                     '<div class="prensa-carousel-stage">' +
                         slidesHtml +
                     '</div>' +
-                    controlsHtml +
                 '</div>' +
                 '<div class="prensa-api-card-body">' +
                     '<div class="prensa-row-meta">' +
@@ -1284,16 +1261,43 @@
 
         function actualizarUIEditorial() {
             var autenticado = !!prensaAuthUser;
+            var perms = (autenticado && Array.isArray(prensaAuthUser.permisos)) ? prensaAuthUser.permisos : [];
+            var esAdmin = autenticado && prensaAuthUser.rol === 'admin';
+            var tienePrensa = autenticado && (esAdmin || perms.indexOf('prensa') !== -1);
+            var tieneContactos = autenticado && (esAdmin || perms.indexOf('contactos') !== -1);
+            var tieneCV = autenticado && (esAdmin || perms.indexOf('cv') !== -1);
+
             if (btnToggleLogin) btnToggleLogin.style.display = autenticado ? 'none' : 'inline-flex';
-            if (btnNuevaNoticia) btnNuevaNoticia.style.display = autenticado ? 'inline-flex' : 'none';
-            if (btnIrContactosCV) btnIrContactosCV.style.display = autenticado ? 'inline-flex' : 'none';
+            if (btnNuevaNoticia) btnNuevaNoticia.style.display = tienePrensa ? 'inline-flex' : 'none';
+            if (btnIrContactosCV) btnIrContactosCV.style.display = (tieneContactos || tieneCV) ? 'inline-flex' : 'none';
             if (btnLogout) btnLogout.style.display = autenticado ? 'inline-flex' : 'none';
             if (autenticado && userBadge) {
                 userBadge.textContent = (prensaAuthUser.nombre || prensaAuthUser.usuario) + ' · ' + (prensaAuthUser.nivel || '');
             }
-            if (!autenticado && editorPanel) {
+            if (!tienePrensa && editorPanel) {
                 editorPanel.style.display = 'none';
             }
+
+            var adminBarEl = $('#prensaAdminBar');
+            if (adminBarEl) {
+                if (!autenticado) {
+                    adminBarEl.innerHTML = '<a href="/redaccion.html" class="btn-outline-corp" style="padding: 8px 16px; font-size: 0.84rem;"><i class="fas fa-user-lock"></i> Iniciar Sesión</a>';
+                } else {
+                    var btns = '<span style="font-size:0.8rem;font-weight:700;color:var(--alcasa-blue);margin-right:6px;"><i class="fas fa-user-check" style="color:#16a34a;"></i> ' + esc(prensaAuthUser.usuario) + '</span>';
+                    if (tienePrensa) {
+                        btns += '<a href="/redaccion.html" class="btn-outline-corp" style="padding: 7px 14px; font-size: 0.82rem;"><i class="fas fa-pen-to-square"></i> Redacción Prensa</a>';
+                    }
+                    if (tieneContactos && tieneCV) {
+                        btns += '<a href="/contactos.html" class="btn-outline-corp" style="padding: 7px 14px; font-size: 0.82rem;"><i class="fas fa-folder-tree"></i> Contactos y CV</a>';
+                    } else if (tieneContactos) {
+                        btns += '<a href="/contactos.html" class="btn-outline-corp" style="padding: 7px 14px; font-size: 0.82rem;"><i class="fas fa-envelope-open-text"></i> Bandeja Contactos</a>';
+                    } else if (tieneCV) {
+                        btns += '<a href="/contactos.html" class="btn-outline-corp" style="padding: 7px 14px; font-size: 0.82rem;"><i class="fas fa-file-pdf"></i> Bandeja CV</a>';
+                    }
+                    adminBarEl.innerHTML = btns;
+                }
+            }
+
             if (todas.length) dibujar();
         }
 
@@ -1678,7 +1682,7 @@
         }
 
         // Consultar sesión activa si estamos en prensa.html
-        if (btnToggleLogin) {
+        if (btnToggleLogin || $('#prensaAdminBar')) {
             getJSON('/api/prensa_admin.php?action=status')
                 .then(function (st) {
                     if (st && st.authenticated && st.user) {
@@ -1842,9 +1846,21 @@
                     msgCV.className = 'contacto-mensaje';
                 }
 
+                var fd = new FormData(formCV);
+                var nombreVal = (formCV.nombre && formCV.nombre.value || '').trim();
+                var cedulaVal = (formCV.cedula && formCV.cedula.value || '').trim();
+                var telefonoVal = (formCV.telefono && formCV.telefono.value || '').trim();
+                var nivelVal = (formCV.nivel && formCV.nivel.value || '').trim();
+                var areaVal = (formCV.area && formCV.area.value || '').trim();
+                var resumenVal = (formCV.resumen && formCV.resumen.value || '').trim();
+
+                fd.set('empresa', 'Postulación CV — ' + nivelVal);
+                fd.set('interes', 'Oportunidad Laboral: ' + areaVal);
+                fd.set('comentario', 'Teléfono: ' + telefonoVal + ' | Archivo CV adjunto: ' + archivo.name + ' (' + (archivo.size / 1024).toFixed(1) + ' KB) | Resumen: ' + (resumenVal || 'Sin resumen adicional'));
+
                 fetch(CFG.cv, {
                     method: 'POST',
-                    body: new FormData(formCV)
+                    body: fd
                 })
                 .then(function (r) {
                     return r.json().then(function (j) {

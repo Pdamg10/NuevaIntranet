@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CVG Aluminio del Caroní, S.A. (CVG Alcasa) | Portal Oficial Institucional</title>
     <meta name="description" content="CVG Aluminio del Caroní, S.A. (CVG Alcasa) - Empresa líder pionera en la producción y transformación de aluminio primario, fundición, laminación y extrusión en Venezuela.">
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/assets/img/favicon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -411,7 +414,7 @@
         </section>
 
         <!-- =========================================
-             5. SECCIÓN: OPORTUNIDADES LABORALES (POSTULACIÓN DE CV CON /api/cv.php)
+             5. SECCIÓN: OPORTUNIDADES LABORALES (POSTULACIÓN DE CV CON /api/cv.php -> /contactos.html)
              ========================================= -->
         <section class="oportunidades-section fold-reveal" id="oportunidades">
             <div id="empleo"></div>
@@ -420,63 +423,14 @@
                 <p>Forma parte de la familia industrial pionera del aluminio en Venezuela. Postula tu síntesis curricular (CV)</p>
             </div>
 
-            <div class="oportunidades-grid">
+            <div class="oportunidades-grid oportunidades-grid-single">
 
-                <!-- Columna Izquierda: Información de Talento Humano y Áreas -->
-                <div class="oportunidades-info-card">
-                    <div>
-                        <h3><i class="fas fa-user-check"></i> Talento Humano CVG Alcasa</h3>
-                        <div class="oportunidades-quote">
-                            "El activo más valioso de CVG Alcasa no está en nuestros balances, sino en el talento, la pasión y el compromiso de nuestra gente."
-                        </div>
-                        <p style="color: #cbd5e1; font-size: 0.93rem; line-height: 1.65;">
-                            Buscamos profesionales, técnicos, especialistas y jóvenes en formación comprometidos con el desarrollo productivo de Guayana. Registra tus datos y adjunta tu Síntesis Curricular para integrar nuestra base de elegibles:
-                        </p>
-
-                        <div class="oportunidades-areas-list">
-                            <div class="oportunidades-area-item">
-                                <i class="fas fa-fire-burner"></i>
-                                <div>
-                                    <strong>Operaciones de Planta y Metalurgia</strong>
-                                    <span>Fundición, Laminación, Extrusión, Reducción y Control de Procesos.</span>
-                                </div>
-                            </div>
-                            <div class="oportunidades-area-item">
-                                <i class="fas fa-gears"></i>
-                                <div>
-                                    <strong>Mantenimiento Industrial e Ingeniería</strong>
-                                    <span>Mecánica industrial, electricidad de potencia, instrumentación, electrónica y proyectos.</span>
-                                </div>
-                            </div>
-                            <div class="oportunidades-area-item">
-                                <i class="fas fa-helmet-safety"></i>
-                                <div>
-                                    <strong>Seguridad Industrial y Salud Ocupacional (SIAHO)</strong>
-                                    <span>Higiene industrial, prevención de riesgos laborales, ambiente y salud integral.</span>
-                                </div>
-                            </div>
-                            <div class="oportunidades-area-item">
-                                <i class="fas fa-graduation-cap"></i>
-                                <div>
-                                    <strong>Gestión Corporativa, Sistemas y Pasantías</strong>
-                                    <span>Administración, logística, informática, pasantías universitarias y aprendices INCES.</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="oportunidades-meta-footer">
-                        <div><i class="fas fa-location-dot"></i> Gerencia de Personal — Zona Industrial Matanzas, Ciudad Guayana</div>
-                        <div><i class="fas fa-clock"></i> Atención: Lunes a Viernes de 7:00 AM a 4:00 PM</div>
-                    </div>
-                </div>
-
-                <!-- Columna Derecha: Formulario de Envío de Síntesis Curricular (CV) -->
+                <!-- Formulario Único: Envía tu Síntesis Curricular (CV) -->
                 <div class="cv-form-card">
                     <h3><i class="fas fa-file-arrow-up"></i> Envía tu Síntesis Curricular (CV)</h3>
                     <p class="cv-form-subtitle">Completa tus datos profesionales y adjunta tu currículum actualizado para optar por una vacante.</p>
 
-                    <form id="formPostulacionCV" class="cv-form" enctype="multipart/form-data" autocomplete="off">
+                    <form id="formPostulacionCV" class="cv-form" action="/api/cv.php" method="POST" enctype="multipart/form-data" autocomplete="off">
                         <div class="cv-form-row">
                             <div class="cv-field">
                                 <label for="cv-nombre">Nombres y Apellidos *</label>

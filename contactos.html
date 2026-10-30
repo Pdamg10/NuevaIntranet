@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrador de Contactos y Postulaciones (CV) — CVG Alcasa</title>
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/assets/img/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -126,27 +129,45 @@
         <div class="admin-box" id="adminMainBox" style="display: none;">
             <div class="admin-top">
                 <div>
-                    <h2 style="color: var(--alcasa-blue); margin: 0;"><i class="fas fa-folder-tree" style="color: var(--alcasa-accent);"></i> Bandeja de Contactos y Postulaciones (CV)</h2>
+                    <h2 id="admPanelHeading" style="color: var(--alcasa-blue); margin: 0;"><i class="fas fa-folder-tree" style="color: var(--alcasa-accent);"></i> Bandeja de Contactos y Postulaciones (CV)</h2>
                     <span id="admUserInfo" style="font-size: 0.85rem; color: var(--alcasa-accent); font-weight: 600;"></span>
                 </div>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                     <button type="button" class="btn-outline-corp" id="btnRecargarDatos"><i class="fas fa-rotate"></i> Recargar</button>
-                    <a href="/prensa.html" class="btn-outline-corp"><i class="fas fa-newspaper"></i> Sala de Prensa</a>
+                    <a href="/redaccion.html" class="btn-outline-corp" id="btnIrEditorPrensa" style="display: none;"><i class="fas fa-pen-to-square"></i> Editor de Prensa</a>
+                    <a href="/prensa.html" class="btn-outline-corp"><i class="fas fa-newspaper"></i> Ver Prensa Pública</a>
                     <button type="button" class="btn-outline-corp" id="btnSalirDatos" style="border-color: #dc2626; color: #dc2626;"><i class="fas fa-right-from-bracket"></i> Salir</button>
                 </div>
             </div>
 
-            <div class="admin-tabs">
-                <button type="button" class="admin-tab-btn active" id="tabBtnContactos">
-                    <i class="fas fa-envelope-open-text"></i> Contactos Comerciales (<span id="countContactos">0</span>)
-                </button>
-                <button type="button" class="admin-tab-btn" id="tabBtnCV">
-                    <i class="fas fa-file-pdf"></i> Postulaciones de CV / Empleo (<span id="countCV">0</span>)
-                </button>
+            <div class="admin-tabs" id="adminTabsBar" style="justify-content: space-between; align-items: center;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button type="button" class="admin-tab-btn active" id="tabBtnContactos">
+                        <i class="fas fa-envelope-open-text"></i> Contactos Comerciales (<span id="countContactos">0</span>)
+                    </button>
+                    <button type="button" class="admin-tab-btn" id="tabBtnCV">
+                        <i class="fas fa-file-pdf"></i> Postulaciones de CV / Empleo (<span id="countCV">0</span>)
+                    </button>
+                </div>
+                <div style="flex: 1; max-width: 340px; min-width: 220px;">
+                    <input type="search" id="admSearchInput" placeholder="Buscar por nombre, cédula, correo, área o empresa..." style="width: 100%; padding: 9px 14px; border: 1px solid var(--medium-gray); border-radius: 8px; font-size: 0.88rem;">
+                </div>
             </div>
 
             <div id="paneContactos"></div>
             <div id="paneCV" style="display: none;"></div>
+        </div>
+
+        <!-- Modal de Detalle (Formato Contactos.html) -->
+        <div id="admDetailModal" style="display: none; position: fixed; inset: 0; background: rgba(2,12,27,0.68); z-index: 9999; align-items: center; justify-content: center; padding: 18px;">
+            <div style="background: #ffffff; border-radius: 14px; max-width: 600px; width: 100%; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+                <div style="background: var(--alcasa-blue); color: #ffffff; padding: 16px 22px; display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="margin: 0; font-size: 1.08rem; color: #ffffff;"><i class="fas fa-id-card" style="color: var(--alcasa-accent);"></i> <span id="admModalTitle">Detalle del Registro</span></h3>
+                    <button type="button" id="admModalCloseBtn" style="background: rgba(255,255,255,0.15); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;"><i class="fas fa-times"></i></button>
+                </div>
+                <div id="admModalBody" style="padding: 20px 22px; font-size: 0.92rem; line-height: 1.65; color: #1e293b; max-height: 68vh; overflow-y: auto;"></div>
+                <div id="admModalActions" style="padding: 14px 22px; background: #f8fafc; border-top: 1px solid var(--medium-gray); display: flex; gap: 10px; flex-wrap: wrap;"></div>
+            </div>
         </div>
     </main>
 
@@ -160,10 +181,18 @@
         var formLogin = document.getElementById('formAdminDatosLogin');
         var msgEl = document.getElementById('admLoginMsg');
         var userInfo = document.getElementById('admUserInfo');
+        var panelHeading = document.getElementById('admPanelHeading');
+        var btnIrEditorPrensa = document.getElementById('btnIrEditorPrensa');
         var paneContactos = document.getElementById('paneContactos');
         var paneCV = document.getElementById('paneCV');
         var tabBtnContactos = document.getElementById('tabBtnContactos');
         var tabBtnCV = document.getElementById('tabBtnCV');
+        var searchInput = document.getElementById('admSearchInput');
+        var detailModal = document.getElementById('admDetailModal');
+        var modalTitle = document.getElementById('admModalTitle');
+        var modalBody = document.getElementById('admModalBody');
+        var modalActions = document.getElementById('admModalActions');
+        var lastData = null;
 
         function esc(s) {
             return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -171,55 +200,215 @@
             });
         }
 
-        function renderBandejas(data) {
+        function copiarTexto(txt, aviso) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(txt).then(function () { alert(aviso || 'Copiado al portapapeles.'); });
+            } else {
+                var ta = document.createElement('textarea');
+                ta.value = txt;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                alert(aviso || 'Copiado al portapapeles.');
+            }
+        }
+
+        function formatoNormalizadoCV(p) {
+            return {
+                fecha: p.fecha || '',
+                nombre: (p.nombre || '') + (p.cedula ? ' (C.I: ' + p.cedula + ')' : ''),
+                cedula: p.cedula || '',
+                correo: p.correo || '',
+                telefono: p.telefono || '',
+                empresa: 'Postulación CV — ' + (p.nivel || 'No especificado'),
+                nivel: p.nivel || '',
+                interes: 'Oportunidad Laboral: ' + (p.area || 'General'),
+                area: p.area || '',
+                comentario: 'Teléfono: ' + (p.telefono || '—') + ' | Archivo CV: ' + (p.archivo || '—') + ' | Resumen: ' + (p.resumen || 'Sin resumen adicional.'),
+                resumen: p.resumen || 'Sin resumen adicional.',
+                archivo: p.archivo || '',
+                ip: p.ip || ''
+            };
+        }
+
+        function abrirModalRegistro(item, esCV) {
+            var reg = esCV ? formatoNormalizadoCV(item) : item;
+            modalTitle.textContent = reg.nombre || 'Detalle';
+            var linkCV = reg.archivo ? ('/api/admin_datos.php?tipo=descargar_cv&archivo=' + encodeURIComponent(reg.archivo)) : '';
+            modalBody.innerHTML =
+                '<div style="margin-bottom:10px;"><strong><i class="fas fa-calendar-alt"></i> Fecha:</strong> ' + esc(reg.fecha) + '</div>' +
+                '<div style="margin-bottom:10px;"><strong><i class="fas fa-user"></i> Nombre:</strong> ' + esc(reg.nombre) + '</div>' +
+                '<div style="margin-bottom:10px;"><strong><i class="fas fa-envelope"></i> Correo:</strong> <a href="mailto:' + esc(reg.correo) + '">' + esc(reg.correo) + '</a></div>' +
+                (reg.telefono ? '<div style="margin-bottom:10px;"><strong><i class="fas fa-phone"></i> Teléfono / WhatsApp:</strong> ' + esc(reg.telefono) + '</div>' : '') +
+                '<div style="margin-bottom:10px;"><strong><i class="fas fa-building"></i> ' + (esCV ? 'Nivel Académico' : 'Empresa') + ':</strong> ' + esc(reg.empresa || '—') + '</div>' +
+                '<div style="margin-bottom:10px;"><strong><i class="fas fa-tag"></i> ' + (esCV ? 'Área de Postulación' : 'Interés') + ':</strong> ' + esc(reg.interes || '—') + '</div>' +
+                '<div style="margin-bottom:10px;"><strong><i class="fas fa-comment-dots"></i> ' + (esCV ? 'Resumen Profesional' : 'Comentario') + ':</strong><div style="background:#f8fafc;padding:10px 12px;border-radius:8px;border:1px solid #e2e8f0;margin-top:4px;">' + esc(esCV ? reg.resumen : reg.comentario) + '</div></div>' +
+                (reg.ip ? '<div style="font-size:0.8rem;color:#64748b;"><strong><i class="fas fa-globe"></i> IP:</strong> ' + esc(reg.ip) + '</div>' : '');
+
+            modalActions.innerHTML =
+                '<button type="button" class="btn-outline-corp" id="btnModalWA" style="border-color:#16a34a;color:#16a34a;"><i class="fab fa-whatsapp"></i> Copiar WhatsApp</button>' +
+                '<button type="button" class="btn-outline-corp" id="btnModalMail"><i class="fas fa-envelope"></i> Copiar Correo</button>' +
+                '<button type="button" class="btn-outline-corp" id="btnModalCopyAll"><i class="fas fa-copy"></i> Copiar Todo</button>' +
+                (linkCV ? '<a href="' + linkCV + '" target="_blank" class="btn-prensa-card"><i class="fas fa-file-arrow-down"></i> Descargar CV Adjunto</a>' : '');
+
+            var txtWA = '*Nombre:* ' + reg.nombre + '\n' +
+                (reg.empresa ? '*Empresa / Nivel:* ' + reg.empresa + '\n' : '') +
+                '*Correo:* ' + reg.correo + '\n' +
+                (reg.telefono ? '*Teléfono:* ' + reg.telefono + '\n' : '') +
+                '*Interés / Área:* ' + reg.interes + '\n' +
+                '*Fecha:* ' + reg.fecha + '\n\n*Detalle:*\n' + (esCV ? reg.resumen : reg.comentario);
+
+            var txtMail = 'Asunto: ' + (reg.interes || 'Contacto CVG Alcasa') + '\nPara: ' + reg.correo + '\n\nEstimado/a ' + reg.nombre + ',\nHemos recibido su registro en el portal oficial de CVG Aluminio del Caroní, S.A. (CVG Alcasa).\n\nDetalle recibido:\n"' + (esCV ? reg.resumen : reg.comentario) + '"\n\nSaludos cordiales,\nCVG ALCASA';
+
+            var txtAll = 'Fecha: ' + reg.fecha + '\nNombre: ' + reg.nombre + '\nCorreo: ' + reg.correo + '\nEmpresa/Nivel: ' + (reg.empresa || '') + '\nInterés/Área: ' + (reg.interes || '') + '\nDetalle: ' + (reg.comentario || '');
+
+            document.getElementById('btnModalWA').onclick = function () { copiarTexto(txtWA, 'Formato WhatsApp copiado.'); };
+            document.getElementById('btnModalMail').onclick = function () { copiarTexto(txtMail, 'Formato de correo copiado.'); };
+            document.getElementById('btnModalCopyAll').onclick = function () { copiarTexto(txtAll, 'Registro completo copiado.'); };
+
+            detailModal.style.display = 'flex';
+        }
+
+        document.getElementById('admModalCloseBtn').addEventListener('click', function () {
+            detailModal.style.display = 'none';
+        });
+        detailModal.addEventListener('click', function (e) {
+            if (e.target === detailModal) detailModal.style.display = 'none';
+        });
+
+        function renderBandejas(data, mantenerTab) {
+            lastData = data;
             loginBox.style.display = 'none';
             mainBox.style.display = 'block';
-            if (data.user) {
-                userInfo.textContent = data.user.nombre + ' · ' + data.user.nivel;
+            var u = data.user || {};
+            var perms = Array.isArray(u.permisos) ? u.permisos : [];
+            var esAdmin = u.rol === 'admin';
+            var pv = data.permisos_vista || {};
+            var puedeContactos = pv.contactos !== undefined ? !!pv.contactos : (esAdmin || perms.indexOf('contactos') !== -1);
+            var puedeCV = pv.cv !== undefined ? !!pv.cv : (esAdmin || perms.indexOf('cv') !== -1);
+            var puedePrensa = pv.prensa !== undefined ? !!pv.prensa : (esAdmin || perms.indexOf('prensa') !== -1);
+
+            if (u.nombre || u.usuario) {
+                userInfo.textContent = (u.nombre || u.usuario) + ' · ' + (u.nivel || u.rol);
             }
-            var contactos = data.contactos || [];
-            var cvs = data.postulaciones || [];
+            if (btnIrEditorPrensa) {
+                btnIrEditorPrensa.style.display = puedePrensa ? 'inline-flex' : 'none';
+            }
+
+            if (!mantenerTab) {
+                if (puedeContactos && puedeCV) {
+                    if (panelHeading) panelHeading.innerHTML = '<i class="fas fa-folder-tree" style="color: var(--alcasa-accent);"></i> Bandeja General de Contactos y Postulaciones (CV)';
+                    tabBtnContactos.style.display = 'inline-flex';
+                    tabBtnCV.style.display = 'inline-flex';
+                    tabBtnContactos.classList.add('active');
+                    tabBtnCV.classList.remove('active');
+                    paneContactos.style.display = 'block';
+                    paneCV.style.display = 'none';
+                } else if (puedeContactos) {
+                    if (panelHeading) panelHeading.innerHTML = '<i class="fas fa-envelope-open-text" style="color: var(--alcasa-accent);"></i> Bandeja Exclusiva de Contactos Comerciales y Cotizaciones';
+                    tabBtnContactos.style.display = 'inline-flex';
+                    tabBtnContactos.classList.add('active');
+                    tabBtnCV.style.display = 'none';
+                    tabBtnCV.classList.remove('active');
+                    paneContactos.style.display = 'block';
+                    paneCV.style.display = 'none';
+                } else if (puedeCV) {
+                    if (panelHeading) panelHeading.innerHTML = '<i class="fas fa-file-pdf" style="color: var(--alcasa-accent);"></i> Bandeja Exclusiva de Postulaciones de Empleo y CV';
+                    tabBtnContactos.style.display = 'none';
+                    tabBtnContactos.classList.remove('active');
+                    tabBtnCV.style.display = 'inline-flex';
+                    tabBtnCV.classList.add('active');
+                    paneContactos.style.display = 'none';
+                    paneCV.style.display = 'block';
+                }
+            }
+
+            var q = ((searchInput && searchInput.value) || '').toLowerCase().trim();
+            var contactos = (data.contactos || []).filter(function (c) {
+                if (!q) return true;
+                var blob = [c.nombre, c.correo, c.empresa, c.interes, c.comentario].join(' ').toLowerCase();
+                return blob.indexOf(q) !== -1;
+            });
+            var cvs = (data.postulaciones || []).filter(function (p) {
+                if (!q) return true;
+                var blob = [p.nombre, p.cedula, p.correo, p.telefono, p.nivel, p.area, p.resumen].join(' ').toLowerCase();
+                return blob.indexOf(q) !== -1;
+            });
+
             document.getElementById('countContactos').textContent = contactos.length;
             document.getElementById('countCV').textContent = cvs.length;
 
-            if (!contactos.length) {
-                paneContactos.innerHTML = '<p style="color:#64748b;padding:18px 0;">No hay mensajes de contacto registrados aún.</p>';
-            } else {
-                paneContactos.innerHTML = contactos.map(function (c) {
-                    return '<div class="admin-row-card">' +
-                        '<div class="admin-row-info" style="flex:1;">' +
-                            '<h4>' + esc(c.nombre) + ' <span class="prensa-cat-badge">' + esc(c.interes || 'General') + '</span></h4>' +
-                            '<div class="admin-row-meta">' +
-                                '<span><i class="fas fa-calendar"></i> ' + esc(c.fecha) + '</span>' +
-                                '<span><i class="fas fa-envelope"></i> <a href="mailto:' + esc(c.correo) + '">' + esc(c.correo) + '</a></span>' +
-                                (c.empresa ? '<span><i class="fas fa-building"></i> ' + esc(c.empresa) + '</span>' : '') +
+            if (puedeContactos) {
+                if (!contactos.length) {
+                    paneContactos.innerHTML = '<p style="color:#64748b;padding:18px 0;">No hay mensajes de contacto que coincidan con la vista actual.</p>';
+                } else {
+                    paneContactos.innerHTML = contactos.map(function (c, idx) {
+                        return '<div class="admin-row-card">' +
+                            '<div class="admin-row-info" style="flex:1;">' +
+                                '<h4>' + esc(c.nombre) + ' <span class="prensa-cat-badge">' + esc(c.interes || 'General') + '</span></h4>' +
+                                '<div class="admin-row-meta">' +
+                                    '<span><i class="fas fa-calendar"></i> ' + esc(c.fecha) + '</span>' +
+                                    '<span><i class="fas fa-envelope"></i> <a href="mailto:' + esc(c.correo) + '">' + esc(c.correo) + '</a></span>' +
+                                    (c.empresa ? '<span><i class="fas fa-building"></i> ' + esc(c.empresa) + '</span>' : '') +
+                                '</div>' +
+                                '<p class="admin-row-desc">' + esc(c.comentario) + '</p>' +
                             '</div>' +
-                            '<p class="admin-row-desc">' + esc(c.comentario) + '</p>' +
-                        '</div>' +
-                    '</div>';
-                }).join('');
+                            '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
+                                '<button type="button" class="btn-outline-corp" data-ver-c="' + idx + '" style="padding:7px 12px;font-size:0.8rem;"><i class="fas fa-eye"></i> Ver</button>' +
+                            '</div>' +
+                        '</div>';
+                    }).join('');
+                    Array.prototype.forEach.call(paneContactos.querySelectorAll('button[data-ver-c]'), function (btn) {
+                        btn.addEventListener('click', function () {
+                            var item = contactos[parseInt(this.getAttribute('data-ver-c') || '0', 10)];
+                            if (item) abrirModalRegistro(item, false);
+                        });
+                    });
+                }
+            } else {
+                paneContactos.innerHTML = '';
             }
 
-            if (!cvs.length) {
-                paneCV.innerHTML = '<p style="color:#64748b;padding:18px 0;">No hay postulaciones de Síntesis Curricular registradas aún.</p>';
-            } else {
-                paneCV.innerHTML = cvs.map(function (p) {
-                    var linkCV = p.archivo ? '/api/admin_datos.php?tipo=descargar_cv&archivo=' + encodeURIComponent(p.archivo) : '#';
-                    return '<div class="admin-row-card">' +
-                        '<div class="admin-row-info" style="flex:1;">' +
-                            '<h4>' + esc(p.nombre) + ' · <small>' + esc(p.cedula) + '</small> <span class="prensa-cat-badge">' + esc(p.area) + '</span></h4>' +
-                            '<div class="admin-row-meta">' +
-                                '<span><i class="fas fa-calendar"></i> ' + esc(p.fecha) + '</span>' +
-                                '<span><i class="fas fa-graduation-cap"></i> ' + esc(p.nivel) + '</span>' +
-                                '<span><i class="fas fa-phone"></i> ' + esc(p.telefono) + '</span>' +
-                                '<span><i class="fas fa-envelope"></i> ' + esc(p.correo) + '</span>' +
+            if (puedeCV) {
+                if (!cvs.length) {
+                    paneCV.innerHTML = '<p style="color:#64748b;padding:18px 0;">No hay postulaciones de Síntesis Curricular que coincidan con la vista actual.</p>';
+                } else {
+                    paneCV.innerHTML = cvs.map(function (p, idx) {
+                        var linkCV = p.archivo ? '/api/admin_datos.php?tipo=descargar_cv&archivo=' + encodeURIComponent(p.archivo) : '#';
+                        return '<div class="admin-row-card">' +
+                            '<div class="admin-row-info" style="flex:1;">' +
+                                '<h4>' + esc(p.nombre) + ' · <small>C.I: ' + esc(p.cedula) + '</small> <span class="prensa-cat-badge">Oportunidad Laboral: ' + esc(p.area) + '</span></h4>' +
+                                '<div class="admin-row-meta">' +
+                                    '<span><i class="fas fa-calendar"></i> ' + esc(p.fecha) + '</span>' +
+                                    '<span><i class="fas fa-graduation-cap"></i> Postulación CV — ' + esc(p.nivel) + '</span>' +
+                                    '<span><i class="fas fa-phone"></i> ' + esc(p.telefono) + '</span>' +
+                                    '<span><i class="fas fa-envelope"></i> <a href="mailto:' + esc(p.correo) + '">' + esc(p.correo) + '</a></span>' +
+                                '</div>' +
+                                '<p class="admin-row-desc">' + esc(p.resumen || 'Sin resumen adicional.') + '</p>' +
                             '</div>' +
-                            '<p class="admin-row-desc">' + esc(p.resumen || 'Sin resumen adicional.') + '</p>' +
-                        '</div>' +
-                        (p.archivo ? '<div><a href="' + linkCV + '" target="_blank" class="btn-prensa-card"><i class="fas fa-file-arrow-down"></i> Descargar CV</a></div>' : '') +
-                    '</div>';
-                }).join('');
+                            '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">' +
+                                '<button type="button" class="btn-outline-corp" data-ver-cv="' + idx + '" style="padding:7px 12px;font-size:0.8rem;"><i class="fas fa-eye"></i> Ver ficha</button>' +
+                                (p.archivo ? '<a href="' + linkCV + '" target="_blank" class="btn-prensa-card"><i class="fas fa-file-arrow-down"></i> Descargar CV</a>' : '') +
+                            '</div>' +
+                        '</div>';
+                    }).join('');
+                    Array.prototype.forEach.call(paneCV.querySelectorAll('button[data-ver-cv]'), function (btn) {
+                        btn.addEventListener('click', function () {
+                            var item = cvs[parseInt(this.getAttribute('data-ver-cv') || '0', 10)];
+                            if (item) abrirModalRegistro(item, true);
+                        });
+                    });
+                }
+            } else {
+                paneCV.innerHTML = '';
             }
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', function () {
+                if (lastData) renderBandejas(lastData, true);
+            });
         }
 
         function cargarDatos() {
@@ -229,8 +418,24 @@
                     if (res && res.success) {
                         renderBandejas(res);
                     } else {
-                        loginBox.style.display = 'block';
-                        mainBox.style.display = 'none';
+                        // Verificar si tiene sesión activa pero es usuario exclusivo de Prensa (Nivel 2)
+                        fetch('/api/prensa_admin.php?action=status')
+                            .then(function (r2) { return r2.json(); })
+                            .then(function (st) {
+                                if (st && st.authenticated && st.user) {
+                                    var perms = Array.isArray(st.user.permisos) ? st.user.permisos : [];
+                                    if (perms.indexOf('prensa') !== -1 && perms.indexOf('contactos') === -1 && perms.indexOf('cv') === -1) {
+                                        window.location.href = '/redaccion.html';
+                                        return;
+                                    }
+                                }
+                                loginBox.style.display = 'block';
+                                mainBox.style.display = 'none';
+                            })
+                            .catch(function () {
+                                loginBox.style.display = 'block';
+                                mainBox.style.display = 'none';
+                            });
                     }
                 })
                 .catch(function () {});
@@ -245,8 +450,14 @@
             })
             .then(function (r) { return r.json(); })
             .then(function (res) {
-                if (res && res.success) {
+                if (res && res.success && res.user) {
                     msgEl.textContent = '';
+                    var perms = Array.isArray(res.user.permisos) ? res.user.permisos : [];
+                    var esAdmin = res.user.rol === 'admin';
+                    if (!esAdmin && perms.indexOf('contactos') === -1 && perms.indexOf('cv') === -1 && perms.indexOf('prensa') !== -1) {
+                        window.location.href = '/redaccion.html';
+                        return;
+                    }
                     cargarDatos();
                 } else {
                     msgEl.textContent = (res && res.error) || 'Credenciales inválidas.';

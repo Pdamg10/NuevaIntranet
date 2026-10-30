@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redacción / Editar Noticia — Sala de Prensa CVG Alcasa</title>
     <meta name="description" content="Panel editorial de tres zonas para redacción, edición, carrusel de hasta 20 imágenes, borradores e historial de versiones de CVG Alcasa.">
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/main.css?v=2026k">
     <style>
@@ -719,7 +722,7 @@
             <span>Estructura del panel de edición de noticias · <strong>CVG Aluminio del Caroní, S.A. (CVG Alcasa)</strong></span>
             <div style="display: flex; gap: 16px; align-items: center;">
                 <a href="/prensa.html"><i class="fas fa-arrow-left"></i> Volver a Sala de Prensa</a>
-                <a href="/contactos.html"><i class="fas fa-address-book"></i> Panel Contactos y CV</a>
+                <a href="/contactos.html" id="linkPanelContactosCV" style="display: none;"><i class="fas fa-address-book"></i> Panel Contactos y CV</a>
                 <span id="redUserActiveBadge" style="font-weight: 600; color: #0f172a;"></span>
                 <button type="button" id="btnRedLogout" class="btn-ed btn-ed-danger" style="padding: 4px 10px; font-size: 0.78rem;">
                     <i class="fas fa-power-off"></i> Salir
@@ -1189,11 +1192,13 @@
             });
         }
 
+        var usuarioPuedeEliminar = false;
+
         function cargarEnEditor(n) {
             noticiaActualId = n.id ? String(n.id) : '';
             inputId.value = noticiaActualId;
             topModeLabel.textContent = noticiaActualId ? ('Editar noticia #' + noticiaActualId) : 'Nueva noticia (Borrador)';
-            btnDeleteNoticia.style.display = noticiaActualId ? 'inline-flex' : 'none';
+            btnDeleteNoticia.style.display = (noticiaActualId && usuarioPuedeEliminar) ? 'inline-flex' : 'none';
 
             inputTitular.value = n.titulo || '';
             inputBajada.value = n.subtitulo || n.resumen || '';
@@ -1514,15 +1519,7 @@
             document.getElementById('previewCardContainer').innerHTML =
                 '<article class="prensa-api-card prensa-card-horizontal is-top-news" id="previewCardEl" data-curr="0">' +
                     '<div class="prensa-api-thumb-wrap prensa-thumb-carousel">' +
-                        '<div class="prensa-thumb-badges">' +
-                            '<span class="prensa-rank-badge featured"><i class="fas fa-bolt"></i> #01</span>' +
-                            '<span class="prensa-carousel-counter"><i class="fas fa-images"></i> <b id="prevCurrNum">1</b>/' + imgs.length + '</span>' +
-                        '</div>' +
                         '<div class="prensa-carousel-stage">' + slidesHtml + '</div>' +
-                        (imgs.length > 1
-                            ? '<button type="button" class="prensa-carousel-nav prev" id="prevCardPrev"><i class="fas fa-chevron-left"></i></button>' +
-                              '<button type="button" class="prensa-carousel-nav next" id="prevCardNext"><i class="fas fa-chevron-right"></i></button>'
-                            : '') +
                     '</div>' +
                     '<div class="prensa-api-card-body">' +
                         '<div class="prensa-row-meta">' +
@@ -1539,20 +1536,17 @@
             modalPreview.style.display = 'flex';
 
             var pCurr = 0;
-            function stepPrevCard(dir) {
-                var card = document.getElementById('previewCardEl');
-                if (!card) return;
-                pCurr = (pCurr + dir + imgs.length) % imgs.length;
-                Array.prototype.forEach.call(card.querySelectorAll('.prensa-carousel-slide'), function (sl, idx) {
-                    sl.classList.toggle('active', idx === pCurr);
-                });
-                var num = document.getElementById('prevCurrNum');
-                if (num) num.textContent = String(pCurr + 1);
+            if (window._prevAutoTimer) clearInterval(window._prevAutoTimer);
+            if (imgs.length > 1) {
+                window._prevAutoTimer = setInterval(function () {
+                    var card = document.getElementById('previewCardEl');
+                    if (!card || modalPreview.style.display === 'none') return;
+                    pCurr = (pCurr + 1) % imgs.length;
+                    Array.prototype.forEach.call(card.querySelectorAll('.prensa-carousel-slide'), function (sl, idx) {
+                        sl.classList.toggle('active', idx === pCurr);
+                    });
+                }, 4000);
             }
-            var bP = document.getElementById('prevCardPrev');
-            var bN = document.getElementById('prevCardNext');
-            if (bP) bP.onclick = function () { stepPrevCard(-1); };
-            if (bN) bN.onclick = function () { stepPrevCard(1); };
         });
 
         document.getElementById('btnClosePreviewModal').addEventListener('click', function () {
@@ -1627,9 +1621,33 @@
                 .then(function (r) { return r.json(); })
                 .then(function (st) {
                     if (st && st.authenticated && st.user) {
+                        var perms = Array.isArray(st.user.permisos) ? st.user.permisos : [];
+                        var esAdmin = st.user.rol === 'admin';
+                        var tienePrensa = esAdmin || perms.indexOf('prensa') !== -1;
+                        var tieneContactosOCV = esAdmin || perms.indexOf('contactos') !== -1 || perms.indexOf('cv') !== -1;
+
+                        // Si el usuario es de Comercialización (Nivel 3) o Talento Humano (Nivel 4), redirigir a su módulo exclusivo
+                        if (!tienePrensa && tieneContactosOCV) {
+                            window.location.href = '/contactos.html';
+                            return;
+                        }
+                        if (!tienePrensa) {
+                            loginView.style.display = 'block';
+                            workspace.style.display = 'none';
+                            loginMsg.textContent = 'Tu cuenta no tiene permisos para acceder al Editor de Sala de Prensa.';
+                            loginMsg.className = 'contacto-mensaje error';
+                            return;
+                        }
+
+                        usuarioPuedeEliminar = esAdmin || perms.indexOf('prensa_eliminar') !== -1;
+                        var linkContactosEl = document.getElementById('linkPanelContactosCV');
+                        if (linkContactosEl) {
+                            linkContactosEl.style.display = tieneContactosOCV ? 'inline-flex' : 'none';
+                        }
+
                         loginView.style.display = 'none';
                         workspace.style.display = 'block';
-                        userActiveBadge.innerHTML = '<i class="fas fa-user-check" style="color:#16a34a;"></i> ' + esc(st.user.usuario) + ' (' + esc(st.user.rol) + ')';
+                        userActiveBadge.innerHTML = '<i class="fas fa-user-check" style="color:#16a34a;"></i> ' + esc(st.user.nombre || st.user.usuario) + ' · <span style="color:var(--alcasa-blue);">' + esc(st.user.nivel || st.user.rol) + '</span>';
                         cargarTodasLasNoticias();
                     } else {
                         loginView.style.display = 'block';

@@ -65,13 +65,23 @@ header('Content-Type: application/json; charset=utf-8');
 
 $puedeContactos = $esAdmin || in_array('contactos', $permisos, true);
 $puedeCV = $esAdmin || in_array('cv', $permisos, true);
+$puedePrensa = $esAdmin || in_array('prensa', $permisos, true);
+
+if (!$puedeContactos && !$puedeCV) {
+    fail('Tu cuenta no tiene permisos para acceder al módulo de Contactos Comerciales ni Postulaciones de CV.', 403);
+}
 
 $contactos = $puedeContactos ? leerCsvComoArray(STORAGE . '/contactos.csv') : [];
 $postulaciones = $puedeCV ? leerCsvComoArray(STORAGE . '/postulaciones.csv') : [];
 
 echo json_encode([
-    'success'       => true,
-    'user'          => $_SESSION['alcasa_user'],
-    'contactos'     => $contactos,
-    'postulaciones' => $postulaciones
+    'success'        => true,
+    'user'           => $_SESSION['alcasa_user'],
+    'permisos_vista' => [
+        'contactos' => $puedeContactos,
+        'cv'        => $puedeCV,
+        'prensa'    => $puedePrensa
+    ],
+    'contactos'      => $contactos,
+    'postulaciones'  => $postulaciones
 ], JSON_UNESCAPED_UNICODE);

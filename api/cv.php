@@ -60,6 +60,16 @@ csv_append(
 
 notify(MAIL_RRHH, 'Nueva postulación (CV) - CVG Alcasa', "{$d['nombre']} | {$d['area']} | archivo: $name");
 out(true, [
-    'mensaje' => "¡Postulación recibida con éxito! Tu Síntesis Curricular ha sido registrada para el área de {$d['area']}.",
-    'archivo' => $name
+    'mensaje'  => "¡Postulación recibida con éxito! Tu Síntesis Curricular ha sido registrada para el área de {$d['area']}.",
+    'archivo'  => $name,
+    'registro' => [
+        'fecha'      => date('Y-m-d H:i:s'),
+        'nombre'     => "{$d['nombre']} (C.I: {$d['cedula']})",
+        'correo'     => $d['correo'],
+        'telefono'   => $d['telefono'],
+        'empresa'    => "Postulación CV — {$d['nivel']}",
+        'interes'    => "Oportunidad Laboral: {$d['area']}",
+        'comentario' => "Teléfono: {$d['telefono']} | Archivo CV adjunto: $name | Resumen: " . ($d['resumen'] ?: 'Sin resumen adicional'),
+        'archivo'    => $name
+    ]
 ]);
