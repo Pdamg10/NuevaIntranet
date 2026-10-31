@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/main.css?v=2026i">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026q">
 </head>
 <body id="pagina-productos">
 
@@ -104,43 +104,84 @@
                 Mostrando los <strong>32 productos oficiales</strong> en orden correlativo del Catálogo CVG Alcasa 2025
             </div>
 
-            <!-- Panel de Ficha Técnica Expandible (Inline) -->
-            <div class="product-ficha-panel" id="productFichaPanel" style="display: none; margin-bottom: 30px;">
-                <div class="ficha-header">
-                    <div>
-                        <h4><i class="fas fa-certificate" style="color: var(--alcasa-accent);"></i> <span id="fichaTituloTexto">Cilindros Tochos</span></h4>
-                        <div class="ficha-sub" id="fichaAleacion">Serie AA 6063 / S6063 — Temple T5 (Homogenizado)</div>
+            <!-- VENTANA FLOTANTE (MODAL) DE FICHA TÉCNICA DETALLADA -->
+            <div class="ficha-modal-backdrop" id="productFichaPanel" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="fichaTituloTexto">
+                <div class="ficha-modal-dialog">
+                    <div class="ficha-header">
+                        <div>
+                            <div class="ficha-kicker-row">
+                                <span class="ficha-kicker-badge" id="fichaBadgeOrden">#01 · Fundición</span>
+                                <span class="ficha-kicker-en" id="fichaNombreIngles">Billet Cylinders</span>
+                            </div>
+                            <h4><i class="fas fa-certificate" style="color: var(--alcasa-accent);"></i> <span id="fichaTituloTexto">Cilindros Tochos</span></h4>
+                            <div class="ficha-sub" id="fichaAleacion">Serie AA 6063 / S6063 — Temple T5 (Homogenizado)</div>
+                        </div>
+                        <button type="button" class="ficha-close-btn" id="fichaCloseBtn" aria-label="Cerrar ficha técnica">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
-                    <button type="button" class="ficha-close-btn" id="fichaCloseBtn" aria-label="Cerrar ficha técnica">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="ficha-grid">
-                    <div class="ficha-item">
-                        <div class="ficha-item-title"><i class="fas fa-flask"></i> Composición Química &amp; Acabado</div>
-                        <div class="ficha-item-value" id="fichaPureza"></div>
+
+                    <div class="ficha-modal-body">
+                        <!-- Resumen superior con imagen del producto y descripción -->
+                        <div class="ficha-overview-box">
+                            <div class="ficha-overview-img-wrap">
+                                <img src="/assets/img/productos/cilindros-tochos.jpg" alt="Producto CVG Alcasa" id="fichaImagenProducto">
+                            </div>
+                            <div class="ficha-overview-info">
+                                <div class="ficha-overview-label"><i class="fas fa-circle-info"></i> Descripción General del Producto</div>
+                                <p id="fichaDescTexto">Cilindros de aluminio primario homogeneizados en aleación 6063/S6063 temple T5 y diámetro 7", cortados a medida para alimentar prensas de extrusión con máxima precisión metalúrgica.</p>
+                                <div class="ficha-spec-summary-pill" id="fichaSpecResumen">
+                                    <i class="fas fa-microchip"></i> Aleación: 6063/S6063 | Temple: T5 | Diámetro: 7" | Longitud: Cortados a medida | Homogenizado
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cuadrícula ordenada de especificaciones técnicas -->
+                        <div class="ficha-section-subtitle">
+                            <i class="fas fa-sliders"></i> Especificaciones Metalúrgicas y Técnicas de Fábrica
+                        </div>
+                        <div class="ficha-grid">
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-layer-group"></i> Aleación y Temple Oficial</div>
+                                <div class="ficha-item-value" id="fichaAleacionBox">Serie AA 6063 / S6063 — Temple T5 (Homogenizado)</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-flask"></i> Composición Química &amp; Acabado</div>
+                                <div class="ficha-item-value" id="fichaPureza">Aluminio primario aleado con Silicio (Si) y Magnesio (Mg) homogeneizado en hornos de tratamiento térmico</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-ruler-combined"></i> Dimensiones &amp; Presentaciones</div>
+                                <div class="ficha-item-value" id="fichaPresentaciones">Diámetro 7" (177,8 mm) | Longitud: Cortados a medida según requerimiento de prensa</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-boxes-stacked"></i> Propiedades &amp; Empaque por Bulto</div>
+                                <div class="ficha-item-value" id="fichaPropiedades">Estructura cristalina uniforme, alta fluidez de extrusión y excelente respuesta al anodizado</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-shield-halved"></i> Normas Técnicas &amp; Catálogo</div>
+                                <div class="ficha-item-value" id="fichaNormas">Catálogo Oficial CVG Alcasa 2025 / COVENIN 284 / ASTM B221</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-industry"></i> Usos &amp; Aplicaciones Industriales</div>
+                                <div class="ficha-item-value" id="fichaUsos">Materia prima directa para prensas extrusoras de perfilería arquitectónica, estructural y tubular.</div>
+                            </div>
+                        </div>
+
+                        <!-- Tabla detallada de Códigos, Dimensiones, Piezas por Bulto y Peso -->
+                        <div id="fichaTablaCodigosWrap" style="margin-top: 18px;"></div>
                     </div>
-                    <div class="ficha-item">
-                        <div class="ficha-item-title"><i class="fas fa-boxes-stacked"></i> Dimensiones &amp; Presentaciones</div>
-                        <div class="ficha-item-value" id="fichaPresentaciones"></div>
+
+                    <div class="ficha-actions">
+                        <button type="button" class="btn-catalog-cotizar" id="fichaBtnCotizar" data-producto="Cilindros Tochos (Fundición)" style="flex: 0 0 auto; padding: 11px 24px;">
+                            <i class="fas fa-file-invoice"></i> Cotizar esta Especificación
+                        </button>
+                        <a href="/assets/media/CATALOGO_CVG_ALCASA_2025.pdf" target="_blank" rel="noopener noreferrer" class="btn-modal-secondary">
+                            <i class="fas fa-file-pdf"></i> Catálogo PDF 2025
+                        </a>
+                        <button type="button" class="btn-modal-close" id="fichaBtnCerrarFooter" style="margin-left: auto;">
+                            <i class="fas fa-times"></i> Cerrar
+                        </button>
                     </div>
-                    <div class="ficha-item">
-                        <div class="ficha-item-title"><i class="fas fa-gauge-high"></i> Propiedades Metalúrgicas &amp; Bultos</div>
-                        <div class="ficha-item-value" id="fichaPropiedades"></div>
-                    </div>
-                    <div class="ficha-item">
-                        <div class="ficha-item-title"><i class="fas fa-shield-halved"></i> Normas Técnicas &amp; Catálogo</div>
-                        <div class="ficha-item-value" id="fichaNormas"></div>
-                    </div>
-                    <div class="ficha-item" style="grid-column: 1 / -1;">
-                        <div class="ficha-item-title"><i class="fas fa-industry"></i> Usos &amp; Aplicaciones Industriales</div>
-                        <div class="ficha-item-value" id="fichaUsos"></div>
-                    </div>
-                </div>
-                <div class="ficha-actions">
-                    <button type="button" class="btn-catalog-cotizar" id="fichaBtnCotizar" data-producto="Cilindros Tochos (Fundición)" style="flex: 0 0 auto; padding: 11px 24px;">
-                        <i class="fas fa-file-invoice"></i> Solicitar Cotización de este Producto
-                    </button>
                 </div>
             </div>
 
@@ -294,6 +335,6 @@
         </div>
     </footer>
 
-    <script src="/assets/js/app.js?v=2026i"></script>
+    <script src="/assets/js/app.js?v=2026q"></script>
 </body>
 </html>

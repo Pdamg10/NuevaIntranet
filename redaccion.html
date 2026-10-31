@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/main.css?v=2026k">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026m">
     <style>
         :root {
             --ed-bg: #f6f5f0;
@@ -43,28 +43,24 @@
             padding: 20px 24px 48px;
         }
 
-        .redaccion-CaptionTop {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.88rem;
-            color: var(--ed-muted);
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .redaccion-CaptionTop a {
-            color: var(--alcasa-blue);
-            font-weight: 600;
-            text-decoration: none;
+        .redaccion-user-chip {
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: var(--ed-gray-bg);
+            border: 1px solid var(--ed-border);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--ed-text);
         }
 
-        .redaccion-CaptionTop a:hover {
-            color: var(--alcasa-accent);
+        .redaccion-divider {
+            width: 1px;
+            height: 24px;
+            background: var(--ed-border);
+            margin: 0 2px;
         }
 
         /* BARRA SUPERIOR */
@@ -680,12 +676,16 @@
     </style>
 </head>
 <body class="redaccion-body">
-    <div id="site-header"></div>
 
     <!-- VISTA 1: LOGIN EDITORIAL (SI NO HA INICIADO SESIÓN) -->
-    <section id="redaccionLoginView" style="max-width: 520px; margin: 48px auto; padding: 0 20px; display: none;">
+    <section id="redaccionLoginView" style="max-width: 520px; margin: 56px auto; padding: 0 20px; display: none;">
         <div class="redaccion-zone" style="padding: 28px 26px;">
-            <span class="zone-pill">Acceso Editorial</span>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;">
+                <span class="zone-pill" style="margin-bottom: 0;">Sistema Interno · Acceso Editorial</span>
+                <a href="/prensa.html" class="btn-ed" style="padding: 5px 11px; font-size: 0.78rem; text-decoration: none;">
+                    <i class="fas fa-arrow-left"></i> Sala de Prensa
+                </a>
+            </div>
             <h2 style="margin: 6px 0 6px; color: var(--alcasa-blue); font-size: 1.45rem;">
                 <i class="fas fa-newspaper" style="color: var(--alcasa-accent);"></i> Redacción — Sala de Prensa
             </h2>
@@ -716,23 +716,13 @@
         </div>
     </section>
 
-    <!-- VISTA 2: PANEL DE EDICIÓN DE 3 ZONAS (WIREFRAME DE REDACCIÓN) -->
+    <!-- VISTA 2: PANEL DE EDICIÓN DE 3 ZONAS -->
     <main class="redaccion-shell" id="redaccionWorkspace" style="display: none;">
-        <div class="redaccion-CaptionTop">
-            <span>Estructura del panel de edición de noticias · <strong>CVG Aluminio del Caroní, S.A. (CVG Alcasa)</strong></span>
-            <div style="display: flex; gap: 16px; align-items: center;">
-                <a href="/prensa.html"><i class="fas fa-arrow-left"></i> Volver a Sala de Prensa</a>
-                <a href="/contactos.html" id="linkPanelContactosCV" style="display: none;"><i class="fas fa-address-book"></i> Panel Contactos y CV</a>
-                <span id="redUserActiveBadge" style="font-weight: 600; color: #0f172a;"></span>
-                <button type="button" id="btnRedLogout" class="btn-ed btn-ed-danger" style="padding: 4px 10px; font-size: 0.78rem;">
-                    <i class="fas fa-power-off"></i> Salir
-                </button>
-            </div>
-        </div>
 
-        <!-- BARRA SUPERIOR: ACCIONES GLOBALES -->
+        <!-- BARRA SUPERIOR: ACCIONES GLOBALES Y NAVEGACIÓN DEL MÓDULO -->
         <header class="redaccion-topbar">
             <div class="redaccion-topbar-left">
+                <img src="/assets/img/favicon.png" alt="CVG Alcasa" style="width: 34px; height: 34px; object-fit: contain; flex-shrink: 0;">
                 <div>
                     <span class="redaccion-brand-title">Redacción</span>
                     <span class="redaccion-brand-sub">/ <span id="topModeLabel">Editar noticia</span></span>
@@ -740,20 +730,31 @@
                 <button type="button" class="btn-ed" id="btnNuevaNoticiaTop" title="Crear una noticia desde cero">
                     <i class="fas fa-plus"></i> Nueva noticia
                 </button>
+                <span id="redUserActiveBadge" class="redaccion-user-chip"></span>
             </div>
 
             <div class="redaccion-topbar-right">
                 <span class="redaccion-autosave" id="autosaveStatus">
                     <i class="fas fa-check-circle" style="color: #16a34a;"></i> Guardado hace 1 min
                 </span>
+                <a href="/contactos.html" id="linkPanelContactosCV" class="btn-ed" style="display: none; text-decoration: none;" title="Ir a la bandeja de Contactos y CV">
+                    <i class="fas fa-address-book"></i> Contactos y CV
+                </a>
+                <a href="/prensa.html" class="btn-ed" style="text-decoration: none;" title="Ver Sala de Prensa pública">
+                    <i class="fas fa-newspaper"></i> Ver Sala de Prensa
+                </a>
+                <span class="redaccion-divider"></span>
                 <button type="button" class="btn-ed" id="btnVistaPrevia">
-                    Vista previa
+                    <i class="fas fa-eye"></i> Vista previa
                 </button>
                 <button type="button" class="btn-ed" id="btnGuardarBorrador">
-                    Guardar borrador
+                    <i class="fas fa-floppy-disk"></i> Guardar borrador
                 </button>
                 <button type="button" class="btn-ed btn-ed-primary" id="btnPublicarNoticia">
-                    Publicar
+                    <i class="fas fa-paper-plane"></i> Publicar
+                </button>
+                <button type="button" id="btnRedLogout" class="btn-ed btn-ed-danger" title="Cerrar sesión">
+                    <i class="fas fa-power-off"></i> Salir
                 </button>
             </div>
         </header>
@@ -958,9 +959,6 @@
         </div>
     </div>
 
-    <div id="site-footer"></div>
-
-    <script src="/assets/js/app.js?v=2026k"></script>
     <script>
     (function () {
         var MAX_IMGS = 20;
@@ -1068,7 +1066,7 @@
 
         function renderCarruselEditor() {
             if (!galeriaActual.length) {
-                galeriaActual = [{ url: '/assets/img/noticias/noticia-773.jpg', pie: '' }];
+                galeriaActual = [{ url: '/assets/img/noticias/noticia-761.jpg', pie: '' }];
             }
             if (galeriaActual.length > MAX_IMGS) {
                 galeriaActual = galeriaActual.slice(0, MAX_IMGS);
@@ -1265,8 +1263,8 @@
                 subtitulo: '',
                 resumen: '',
                 cuerpo: '',
-                imagen: '/assets/img/noticias/noticia-773.jpg',
-                imagenes: [{ url: '/assets/img/noticias/noticia-773.jpg', pie: '' }],
+                imagen: '/assets/img/noticias/noticia-761.jpg',
+                imagenes: [{ url: '/assets/img/noticias/noticia-761.jpg', pie: '' }],
                 etiquetas: ['CVG Alcasa', 'Producción'],
                 programacion: 'Hoy, 18:00',
                 versiones_count: 1,
@@ -1340,7 +1338,7 @@
             .then(function (res) {
                 if (res && res.success && Array.isArray(res.imagenes)) {
                     // Si solo había el placeholder por defecto en una noticia nueva, reemplazarlo
-                    if (!noticiaActualId && galeriaActual.length === 1 && galeriaActual[0].url === '/assets/img/noticias/noticia-773.jpg') {
+                    if (!noticiaActualId && galeriaActual.length === 1 && galeriaActual[0].url === '/assets/img/noticias/noticia-761.jpg') {
                         galeriaActual = [];
                     }
                     res.imagenes.forEach(function (im) {

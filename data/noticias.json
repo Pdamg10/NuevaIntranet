@@ -8,9 +8,18 @@
     "resumen": "La obra \"La Torta que puso Adán\" del escritor venezolano Aquiles Nazoa es un sainete teatral cómico y breve que recrea con humor y picardía venezolana la historia de Adán y Eva para el disfrute de la familia trabajadora de CVG Alcasa.",
     "imagen": "/assets/img/noticias/noticia-761.jpg",
     "imagenes": [
-      { "url": "/assets/img/noticias/noticia-761.jpg", "pie": "Afiche oficial de la obra teatral 'La Torta que puso Adán' en CVG Alcasa" },
-      { "url": "/assets/img/noticias/noticia-748.jpg", "pie": "Actividades culturales e integración de la familia alcasiana" },
-      { "url": "/assets/img/noticias/noticia-752.jpg", "pie": "Encuentros culturales y conmemorativos de la clase trabajadora" }
+      {
+        "url": "/assets/img/noticias/noticia-761.jpg",
+        "pie": "Afiche oficial de la obra teatral 'La Torta que puso Adán' en CVG Alcasa"
+      },
+      {
+        "url": "/assets/img/noticias/noticia-748.jpg",
+        "pie": "Actividades culturales e integración de la familia alcasiana"
+      },
+      {
+        "url": "/assets/img/noticias/noticia-752.jpg",
+        "pie": "Encuentros culturales y conmemorativos de la clase trabajadora"
+      }
     ],
     "fecha": "28/10/2026 13:49",
     "fecha_solo": "28/10/2026",
@@ -26,8 +35,14 @@
     "resumen": "Comunicado oficial sobre la recepción y procesamiento de Solicitudes de Pedidos correspondientes al ejercicio 2026 en las unidades operativas y administrativas de CVG Aluminio del Caroní, S.A.",
     "imagen": "/assets/img/noticias/noticia-760.jpg",
     "imagenes": [
-      { "url": "/assets/img/noticias/noticia-760.jpg", "pie": "Circular oficial sobre Solicitudes de Pedidos 2026" },
-      { "url": "/assets/img/noticias/noticia-757.jpg", "pie": "Lineamientos administrativos para unidades organizativas de CVG Alcasa" }
+      {
+        "url": "/assets/img/noticias/noticia-760.jpg",
+        "pie": "Circular oficial sobre Solicitudes de Pedidos 2026"
+      },
+      {
+        "url": "/assets/img/noticias/noticia-757.jpg",
+        "pie": "Lineamientos administrativos para unidades organizativas de CVG Alcasa"
+      }
     ],
     "fecha": "28/10/2026 13:05",
     "fecha_solo": "28/10/2026",
@@ -43,9 +58,18 @@
     "resumen": "El Día del Ingeniero en Venezuela se celebra cada 28 de octubre en conmemoración de la fundación del Colegio de Ingenieros de Venezuela (CIV). Reconocemos el talento técnico que impulsa las plantas de CVG Alcasa.",
     "imagen": "/assets/img/noticias/noticia-759.jpg",
     "imagenes": [
-      { "url": "/assets/img/noticias/noticia-759.jpg", "pie": "Reconocimiento a los ingenieros e ingenieras de CVG Alcasa" },
-      { "url": "/assets/img/hero-fundicion.jpg", "pie": "Operaciones de fundición e ingeniería metalúrgica en planta" },
-      { "url": "/assets/img/hero-laminacion.jpg", "pie": "Procesos industriales de laminación y transformación del aluminio" }
+      {
+        "url": "/assets/img/noticias/noticia-759.jpg",
+        "pie": "Reconocimiento a los ingenieros e ingenieras de CVG Alcasa"
+      },
+      {
+        "url": "/assets/img/fotos-web-fachada3.png",
+        "pie": "Operaciones de fundición e ingeniería metalúrgica en planta"
+      },
+      {
+        "url": "/assets/img/fotos-web-lam1.png",
+        "pie": "Procesos industriales de laminación y transformación del aluminio"
+      }
     ],
     "fecha": "28/10/2026 07:56",
     "fecha_solo": "28/10/2026",
@@ -159,5 +183,765 @@
     "fecha_solo": "30/09/2026",
     "hora_solo": "18:55",
     "url": "http://alcasa.com.ve:5001/noticia/739"
+  },
+  {
+    "id": "738",
+    "estado": "publicada",
+    "categoria": "Deportes",
+    "subtitulo": "Deportes",
+    "titulo": "Información Cronograma deportivo",
+    "resumen": "Deportes. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Hoja_deportiva_cronograma_de_la_Jornada_Deportiva_1_20260930170259791247.jpg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Hoja_deportiva_cronograma_de_la_Jornada_Deportiva_1_20260930170259791247.jpg",
+        "pie": "Información Cronograma deportivo"
+      }
+    ],
+    "fecha": "30/09/2026 17:01",
+    "fecha_solo": "30/09/2026",
+    "hora_solo": "17:01",
+    "url": "http://alcasa.com.ve:5001/noticia/738"
+  },
+  {
+    "id": "737",
+    "estado": "publicada",
+    "categoria": "Comunicado. 📢",
+    "subtitulo": "Deportes",
+    "titulo": "Información",
+    "resumen": "Deportes. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Hoja_deportiva_Responsabilidad_por_disciplina_20260930165639550692.jpg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Hoja_deportiva_Responsabilidad_por_disciplina_20260930165639550692.jpg",
+        "pie": "Información"
+      }
+    ],
+    "fecha": "30/09/2026 16:53",
+    "fecha_solo": "30/09/2026",
+    "hora_solo": "16:53",
+    "url": "http://alcasa.com.ve:5001/noticia/737"
+  },
+  {
+    "id": "736",
+    "estado": "publicada",
+    "categoria": "Responsabilidad Social",
+    "subtitulo": "Responsabilidad Social",
+    "titulo": "Invitación Dile NO a la Violencia Contra la Mujer",
+    "resumen": "Responsabilidad Social. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Taller_Violencia_contra_la_Mujer__20260930165124019705.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Taller_Violencia_contra_la_Mujer__20260930165124019705.jpeg",
+        "pie": "Invitación Dile NO a la Violencia Contra la Mujer"
+      }
+    ],
+    "fecha": "30/09/2026 16:49",
+    "fecha_solo": "30/09/2026",
+    "hora_solo": "16:49",
+    "url": "http://alcasa.com.ve:5001/noticia/736"
+  },
+  {
+    "id": "735",
+    "estado": "publicada",
+    "categoria": "Cultura",
+    "subtitulo": "Cultura",
+    "titulo": "Invitación",
+    "resumen": "Cultura. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Medio_Dia_Cultural_20260930141359580391.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Medio_Dia_Cultural_20260930141359580391.jpeg",
+        "pie": "Invitación"
+      }
+    ],
+    "fecha": "30/09/2026 14:12",
+    "fecha_solo": "30/09/2026",
+    "hora_solo": "14:12",
+    "url": "http://alcasa.com.ve:5001/noticia/735"
+  },
+  {
+    "id": "734",
+    "estado": "publicada",
+    "categoria": "Laboral",
+    "subtitulo": "Compromiso con nuestros trabajadores",
+    "titulo": "Estudiantes de la UBTJR entregan Proyecto de Servicio Comunitario de la Aldea Universitaria Aristóbulo Istúriz de CVG Alcasa 📎",
+    "resumen": "Compromiso con nuestros trabajadores. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "/assets/img/noticias/noticia-759.jpg",
+    "imagenes": [
+      {
+        "url": "/assets/img/noticias/noticia-759.jpg",
+        "pie": "Estudiantes de la UBTJR entregan Proyecto de Servicio Comunitario de la Aldea Universitaria Aristóbulo Istúriz de CVG Alcasa 📎"
+      }
+    ],
+    "fecha": "28/09/2026 11:30",
+    "fecha_solo": "28/09/2026",
+    "hora_solo": "11:30",
+    "url": "http://alcasa.com.ve:5001/noticia/734"
+  },
+  {
+    "id": "733",
+    "estado": "publicada",
+    "categoria": "Salud",
+    "subtitulo": "Responsabilidad Social",
+    "titulo": "CVG Alcasa invita a la clase trabajadora a asistir al taller Mujer en la Atención Oportuna del Trauma Psicoemocional",
+    "resumen": "El trauma psicoemocional en la mujer surge cuando una experiencia dolorosa o violenta supera su capacidad de procesamiento mental y físico, afectando ...",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/CVG_Alcasa_invita_a_la_clase_trabajadora_a_asistir_al_taller_Mujer_en_la_Atencion_Oportuna_del_Trauma_Psicoemocional_20260925113422760218.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/CVG_Alcasa_invita_a_la_clase_trabajadora_a_asistir_al_taller_Mujer_en_la_Atencion_Oportuna_del_Trauma_Psicoemocional_20260925113422760218.jpeg",
+        "pie": "CVG Alcasa invita a la clase trabajadora a asistir al taller Mujer en la Atención Oportuna del Trauma Psicoemocional"
+      }
+    ],
+    "fecha": "25/09/2026 11:32",
+    "fecha_solo": "25/09/2026",
+    "hora_solo": "11:32",
+    "url": "http://alcasa.com.ve:5001/noticia/733"
+  },
+  {
+    "id": "732",
+    "estado": "publicada",
+    "categoria": "Responsabilidad Social",
+    "subtitulo": "Responsabilidad Social",
+    "titulo": "CVG Alcasa entrega ayudas técnicas a trabajadores con discapacidad 📎",
+    "resumen": "Responsabilidad Social. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "/assets/img/noticias/noticia-761.jpg",
+    "imagenes": [
+      {
+        "url": "/assets/img/noticias/noticia-761.jpg",
+        "pie": "CVG Alcasa entrega ayudas técnicas a trabajadores con discapacidad 📎"
+      }
+    ],
+    "fecha": "25/09/2026 11:29",
+    "fecha_solo": "25/09/2026",
+    "hora_solo": "11:29",
+    "url": "http://alcasa.com.ve:5001/noticia/732"
+  },
+  {
+    "id": "731",
+    "estado": "publicada",
+    "categoria": "Control de Emergencias",
+    "subtitulo": "Prevención y Seguridad Industrial",
+    "titulo": "Control de Emergencias de CVG Alcasa actualiza conocimiento con sistemas fijos de protección contra incendios 📎",
+    "resumen": "Prevención y Seguridad Industrial. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "/assets/img/noticias/noticia-739.jpg",
+    "imagenes": [
+      {
+        "url": "/assets/img/noticias/noticia-739.jpg",
+        "pie": "Control de Emergencias de CVG Alcasa actualiza conocimiento con sistemas fijos de protección contra incendios 📎"
+      }
+    ],
+    "fecha": "25/09/2026 11:25",
+    "fecha_solo": "25/09/2026",
+    "hora_solo": "11:25",
+    "url": "http://alcasa.com.ve:5001/noticia/731"
+  },
+  {
+    "id": "730",
+    "estado": "publicada",
+    "categoria": "Ambito Deportivo",
+    "subtitulo": "Venezuela Triunfa en losXIII Juegos Deportivos Suramericanos  en Argentina",
+    "titulo": "Nº 15 Trabajadora alcasiana acompaña la victoria dorada de Venezuela en Argentina 📎",
+    "resumen": "Venezuela Triunfa en losXIII Juegos Deportivos Suramericanos  en Argentina. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "/assets/img/noticias/noticia-748.jpg",
+    "imagenes": [
+      {
+        "url": "/assets/img/noticias/noticia-748.jpg",
+        "pie": "Nº 15 Trabajadora alcasiana acompaña la victoria dorada de Venezuela en Argentina 📎"
+      }
+    ],
+    "fecha": "25/09/2026 11:18",
+    "fecha_solo": "25/09/2026",
+    "hora_solo": "11:18",
+    "url": "http://alcasa.com.ve:5001/noticia/730"
+  },
+  {
+    "id": "728",
+    "estado": "publicada",
+    "categoria": "Ambito nacional",
+    "subtitulo": "Nacional e Institucional",
+    "titulo": "Delcy Rodríguez intervino ante la Asamblea General de la ONU",
+    "resumen": "La presidenta interina de Venezuela, Delcy Rodríguez, aseguró este miércoles (23.09.2026) que habrá elecciones en el país, luego de agradecer al manda...",
+    "autor": "Comunicación Estratégica.",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Delcy_Rodriguez_intervino_ante_la_Asamblea_General_de_la_ONU_20260924083124003276.jpg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Delcy_Rodriguez_intervino_ante_la_Asamblea_General_de_la_ONU_20260924083124003276.jpg",
+        "pie": "Delcy Rodríguez intervino ante la Asamblea General de la ONU"
+      }
+    ],
+    "fecha": "24/09/2026 08:23",
+    "fecha_solo": "24/09/2026",
+    "hora_solo": "08:23",
+    "url": "http://alcasa.com.ve:5001/noticia/728"
+  },
+  {
+    "id": "729",
+    "estado": "publicada",
+    "categoria": "Ambito nacional",
+    "subtitulo": "Nacional e Institucional",
+    "titulo": "Trabajadores de CVG Alcasa respaldan a la presidenta Delcy Rodríguez ante la ONU",
+    "resumen": "La presidenta Delcy Rodríguez se encuentra desde el pasado lunes en Nueva York para participar en el 81º período de sesiones de la Asamblea General de...",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/N87_Trabajadores_de_CVG_Alcasa_respaldan_a_la_presidenta_Delcy_Rodriguez_ante_la_ONU_20260924084002187448.jpg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/N87_Trabajadores_de_CVG_Alcasa_respaldan_a_la_presidenta_Delcy_Rodriguez_ante_la_ONU_20260924084002187448.jpg",
+        "pie": "Trabajadores de CVG Alcasa respaldan a la presidenta Delcy Rodríguez ante la ONU"
+      }
+    ],
+    "fecha": "24/09/2026 08:04",
+    "fecha_solo": "24/09/2026",
+    "hora_solo": "08:04",
+    "url": "http://alcasa.com.ve:5001/noticia/729"
+  },
+  {
+    "id": "727",
+    "estado": "publicada",
+    "categoria": "Planeación y Control de Procesos",
+    "subtitulo": "Normalización",
+    "titulo": "CVG Alcasa realiza taller sobre sistemas hidraúlicos en la Planta de Fundición para la optimización de procesos",
+    "resumen": "La optimización de procesos en una Planta de Fundición mediante sistemas hidráulicos es crucial para mejorar la seguridad, la precisión y la productiv...",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/N84_CVG_Alcasa_realiza_taller_sobre_sistemas_hidraulicos_en_la_Planta_de_Fundicion_para_la_optimizacion_de_procesos_20260918071201224005.jpg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/N84_CVG_Alcasa_realiza_taller_sobre_sistemas_hidraulicos_en_la_Planta_de_Fundicion_para_la_optimizacion_de_procesos_20260918071201224005.jpg",
+        "pie": "CVG Alcasa realiza taller sobre sistemas hidraúlicos en la Planta de Fundición para la optimización de procesos"
+      }
+    ],
+    "fecha": "17/09/2026 13:05",
+    "fecha_solo": "17/09/2026",
+    "hora_solo": "13:05",
+    "url": "http://alcasa.com.ve:5001/noticia/727"
+  },
+  {
+    "id": "726",
+    "estado": "publicada",
+    "categoria": "Responsabilidad Social",
+    "subtitulo": "Beneficios",
+    "titulo": "CVG Alcasa realiza con éxito feria agrícola que beneficia a la fuerza laboral 📎",
+    "resumen": "Beneficios. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica.",
+    "imagen": "/assets/img/noticias/noticia-752.jpg",
+    "imagenes": [
+      {
+        "url": "/assets/img/noticias/noticia-752.jpg",
+        "pie": "CVG Alcasa realiza con éxito feria agrícola que beneficia a la fuerza laboral 📎"
+      }
+    ],
+    "fecha": "17/09/2026 11:28",
+    "fecha_solo": "17/09/2026",
+    "hora_solo": "11:28",
+    "url": "http://alcasa.com.ve:5001/noticia/726"
+  },
+  {
+    "id": "725",
+    "estado": "publicada",
+    "categoria": "Sustitución temporal",
+    "subtitulo": "De Interes Interno",
+    "titulo": "Sustitución Temporal",
+    "resumen": "De Interes Interno. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Sustitucion_Temporal_20260915123724935727.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Sustitucion_Temporal_20260915123724935727.jpeg",
+        "pie": "Sustitución Temporal"
+      }
+    ],
+    "fecha": "15/09/2026 12:36",
+    "fecha_solo": "15/09/2026",
+    "hora_solo": "12:36",
+    "url": "http://alcasa.com.ve:5001/noticia/725"
+  },
+  {
+    "id": "723",
+    "estado": "publicada",
+    "categoria": "Responsabilidad Social",
+    "subtitulo": "Social",
+    "titulo": "Invitación al conversatorio sobre los derechos cívicos de la mujer",
+    "resumen": "Los derechos cívicos y políticos de la mujer venezolana garantizan su participación en la vida pública, el sufragio y la igualdad ante la ley.Derechos...",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Derechos_Civicos_de_la_Mujer__20260905113703034052.JPG",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Derechos_Civicos_de_la_Mujer__20260905113703034052.JPG",
+        "pie": "Invitación al conversatorio sobre los derechos cívicos de la mujer"
+      }
+    ],
+    "fecha": "05/09/2026 11:26",
+    "fecha_solo": "05/09/2026",
+    "hora_solo": "11:26",
+    "url": "http://alcasa.com.ve:5001/noticia/723"
+  },
+  {
+    "id": "721",
+    "estado": "publicada",
+    "categoria": "Servicio Social",
+    "subtitulo": "Sociedad",
+    "titulo": "Trabajadores de CVG Alcasa participan en la Charla sobre la Violencia de Género 📎",
+    "resumen": "Sociedad. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "/assets/img/noticias/noticia-760.jpg",
+    "imagenes": [
+      {
+        "url": "/assets/img/noticias/noticia-760.jpg",
+        "pie": "Trabajadores de CVG Alcasa participan en la Charla sobre la Violencia de Género 📎"
+      }
+    ],
+    "fecha": "03/09/2026 08:26",
+    "fecha_solo": "03/09/2026",
+    "hora_solo": "08:26",
+    "url": "http://alcasa.com.ve:5001/noticia/721"
+  },
+  {
+    "id": "720",
+    "estado": "publicada",
+    "categoria": "Sustitución temporal",
+    "subtitulo": "Laborales",
+    "titulo": "Sustitución Temporal",
+    "resumen": "Laborales. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/sustitucion_Temporal__20260902111925394711.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/sustitucion_Temporal__20260902111925394711.jpeg",
+        "pie": "Sustitución Temporal"
+      }
+    ],
+    "fecha": "02/09/2026 11:17",
+    "fecha_solo": "02/09/2026",
+    "hora_solo": "11:17",
+    "url": "http://alcasa.com.ve:5001/noticia/720"
+  },
+  {
+    "id": "719",
+    "estado": "publicada",
+    "categoria": "Deportes",
+    "subtitulo": "Deportes",
+    "titulo": "CVG Alcasa triunfó en Fútbol 📎",
+    "resumen": "Deportes. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "/assets/img/noticias/noticia-739.jpg",
+    "imagenes": [
+      {
+        "url": "/assets/img/noticias/noticia-739.jpg",
+        "pie": "CVG Alcasa triunfó en Fútbol 📎"
+      }
+    ],
+    "fecha": "25/08/2026 14:13",
+    "fecha_solo": "25/08/2026",
+    "hora_solo": "14:13",
+    "url": "http://alcasa.com.ve:5001/noticia/719"
+  },
+  {
+    "id": "718",
+    "estado": "publicada",
+    "categoria": "Efemérides",
+    "subtitulo": "Día del Bombero",
+    "titulo": "CVG Alcasa celebró el día del Bombero con un emotivo reconocimiento",
+    "resumen": "En Venezuela, el Día Nacional del Bombero se celebra cada 20 de agosto. La fecha se oficializó en el año 1972 tras realizarse el Primer Congreso Venez...",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/N77_CVG_Alcasa_celebro_el_Dia_del_Bombero_con_un_emotivo_reconocimiento_20260821080225678364.JPG",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/N77_CVG_Alcasa_celebro_el_Dia_del_Bombero_con_un_emotivo_reconocimiento_20260821080225678364.JPG",
+        "pie": "CVG Alcasa celebró el día del Bombero con un emotivo reconocimiento"
+      }
+    ],
+    "fecha": "20/08/2026 14:55",
+    "fecha_solo": "20/08/2026",
+    "hora_solo": "14:55",
+    "url": "http://alcasa.com.ve:5001/noticia/718"
+  },
+  {
+    "id": "717",
+    "estado": "publicada",
+    "categoria": "Cultura y deporte",
+    "subtitulo": "Cutura y deporte",
+    "titulo": "CVG Alcasa destaca en jornada deportiva y cultural",
+    "resumen": "Cutura y deporte. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/CVG_Alcasa_destaca_en_jornada_deportiva_y_cultural__20260820092229862277.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/CVG_Alcasa_destaca_en_jornada_deportiva_y_cultural__20260820092229862277.jpeg",
+        "pie": "CVG Alcasa destaca en jornada deportiva y cultural"
+      }
+    ],
+    "fecha": "19/08/2026 14:20",
+    "fecha_solo": "19/08/2026",
+    "hora_solo": "14:20",
+    "url": "http://alcasa.com.ve:5001/noticia/717"
+  },
+  {
+    "id": "716",
+    "estado": "publicada",
+    "categoria": "Higiene y seguridad",
+    "subtitulo": "Normalización y control de higiene y seguridad",
+    "titulo": "CVG Alcasa impulsa la cultura preventiva en materia de control de incendios",
+    "resumen": "Normalización y control de higiene y seguridad. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/CVG_Alcasa_impulsa_la_cultura_preventiva_en_materia_de_Control_de_Incendiosjpeg_20260820091931601686.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/CVG_Alcasa_impulsa_la_cultura_preventiva_en_materia_de_Control_de_Incendiosjpeg_20260820091931601686.jpeg",
+        "pie": "CVG Alcasa impulsa la cultura preventiva en materia de control de incendios"
+      }
+    ],
+    "fecha": "19/08/2026 14:03",
+    "fecha_solo": "19/08/2026",
+    "hora_solo": "14:03",
+    "url": "http://alcasa.com.ve:5001/noticia/716"
+  },
+  {
+    "id": "715",
+    "estado": "publicada",
+    "categoria": "Servicio Social",
+    "subtitulo": "Protección social y tributaria",
+    "titulo": "CVG Alcasa garantiza una jornada de atención social y tributaria para sus trabajadores",
+    "resumen": "Protección social y tributaria. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/CVG_Alcasa_garantiza_una_jornada_integral_de_atencion_social_y_tributaria_para_sus_trabajadores__20260820091449700445.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/CVG_Alcasa_garantiza_una_jornada_integral_de_atencion_social_y_tributaria_para_sus_trabajadores__20260820091449700445.jpeg",
+        "pie": "CVG Alcasa garantiza una jornada de atención social y tributaria para sus trabajadores"
+      }
+    ],
+    "fecha": "19/08/2026 14:01",
+    "fecha_solo": "19/08/2026",
+    "hora_solo": "14:01",
+    "url": "http://alcasa.com.ve:5001/noticia/715"
+  },
+  {
+    "id": "712",
+    "estado": "publicada",
+    "categoria": "Servicio Social",
+    "subtitulo": "",
+    "titulo": "Invitación Jornada Integral",
+    "resumen": "Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Invitacion_Jornada_Integral__20260814220713055766.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Invitacion_Jornada_Integral__20260814220713055766.jpeg",
+        "pie": "Invitación Jornada Integral"
+      }
+    ],
+    "fecha": "14/08/2026 13:22",
+    "fecha_solo": "14/08/2026",
+    "hora_solo": "13:22",
+    "url": "http://alcasa.com.ve:5001/noticia/712"
+  },
+  {
+    "id": "710",
+    "estado": "publicada",
+    "categoria": "Beneficios",
+    "subtitulo": "Jornada Integral 17 al 18 de agosto",
+    "titulo": "Circular Jornada Integral 17 y 18 de agosto 2026",
+    "resumen": "Jornada Integral 17 al 18 de agosto. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Circular_Jornada_Integral_17_y_18_de_agosto__20260814065206423695.jpg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Circular_Jornada_Integral_17_y_18_de_agosto__20260814065206423695.jpg",
+        "pie": "Circular Jornada Integral 17 y 18 de agosto 2026"
+      }
+    ],
+    "fecha": "13/08/2026 08:49",
+    "fecha_solo": "13/08/2026",
+    "hora_solo": "08:49",
+    "url": "http://alcasa.com.ve:5001/noticia/710"
+  },
+  {
+    "id": "709",
+    "estado": "publicada",
+    "categoria": "Beneficios",
+    "subtitulo": "CIRCULAR Programa de Multidosis 2026",
+    "titulo": "Programa de Multidosis",
+    "resumen": "CIRCULAR Programa de Multidosis 2026. Comunicado oficial emitido por la Gerencia de Comunicación Estratégica de CVG Alcasa para conocimiento de toda la clase trabajadora.",
+    "autor": "Comunicación Estratégica",
+    "imagen": "http://alcasa.com.ve:5001/uploads/CIRCULAR_Programa_de_Multidosis_2026ppt_20260814064813717532.jpg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/CIRCULAR_Programa_de_Multidosis_2026ppt_20260814064813717532.jpg",
+        "pie": "Programa de Multidosis"
+      }
+    ],
+    "fecha": "13/08/2026 08:45",
+    "fecha_solo": "13/08/2026",
+    "hora_solo": "08:45",
+    "url": "http://alcasa.com.ve:5001/noticia/709"
+  },
+  {
+    "id": "185",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "Jorrnada Integral 17 Y 18 De Agosto",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: Jorrnada Integral 17 y 18 de agosto .jpeg Tipo: Imagen Fecha original del archivo: 2026-08-11 0...",
+    "autor": "Sistema",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Jorrnada_Integral_17_y_18_de_agosto__20260813103923041735.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Jorrnada_Integral_17_y_18_de_agosto__20260813103923041735.jpeg",
+        "pie": "Jorrnada Integral 17 Y 18 De Agosto"
+      }
+    ],
+    "fecha": "11/08/2026 06:05",
+    "fecha_solo": "11/08/2026",
+    "hora_solo": "06:05",
+    "url": "http://alcasa.com.ve:5001/noticia/185"
+  },
+  {
+    "id": "119",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "Donantes De Sangre Ennys Gutiérrez",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: Donantes de Sangre Ennys Gutiérrez.jpg Tipo: Imagen Fecha original del archivo: 2026-08-11 02:0...",
+    "autor": "Sistema",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Donantes_de_Sangre_Ennys_Gutierrez_20260813103910631217.jpg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Donantes_de_Sangre_Ennys_Gutierrez_20260813103910631217.jpg",
+        "pie": "Donantes De Sangre Ennys Gutiérrez"
+      }
+    ],
+    "fecha": "11/08/2026 02:03",
+    "fecha_solo": "11/08/2026",
+    "hora_solo": "02:03",
+    "url": "http://alcasa.com.ve:5001/noticia/119"
+  },
+  {
+    "id": "314",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "N°76 Cvg Alcasa Capacitó A Estudiantes De La Ubt En Primeros Auxilios Para Reforzar La Seguridad Laboral",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: N°76 CVG Alcasa capacitó a estudiantes de la UBT en primeros auxilios para reforzar la segurida...",
+    "autor": "Sistema",
+    "imagen": "http://alcasa.com.ve:5001/uploads/N76_CVG_Alcasa_capacito_a_estudiantes_de_la_UBT_en_primeros_auxilios_para_reforzar_la_seguridad_laboral_20260813104004348063.jpg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/N76_CVG_Alcasa_capacito_a_estudiantes_de_la_UBT_en_primeros_auxilios_para_reforzar_la_seguridad_laboral_20260813104004348063.jpg",
+        "pie": "N°76 Cvg Alcasa Capacitó A Estudiantes De La Ubt En Primeros Auxilios Para Reforzar La Seguridad Laboral"
+      }
+    ],
+    "fecha": "10/08/2026 08:57",
+    "fecha_solo": "10/08/2026",
+    "hora_solo": "08:57",
+    "url": "http://alcasa.com.ve:5001/noticia/314"
+  },
+  {
+    "id": "138",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "Felicitaciones Al Equipo De Laminación Por Su Victoria En Los Intergerencias 2026",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: Felicitaciones al equipo de laminación por su victoria en los Intergerencias 2026.jpeg Tipo: Im...",
+    "autor": "Sistema",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Felicitaciones_al_equipo_de_laminacion_por_su_victoria_en_los_Intergerencias_2026_20260813103915149150.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Felicitaciones_al_equipo_de_laminacion_por_su_victoria_en_los_Intergerencias_2026_20260813103915149150.jpeg",
+        "pie": "Felicitaciones Al Equipo De Laminación Por Su Victoria En Los Intergerencias 2026"
+      }
+    ],
+    "fecha": "10/08/2026 08:50",
+    "fecha_solo": "10/08/2026",
+    "hora_solo": "08:50",
+    "url": "http://alcasa.com.ve:5001/noticia/138"
+  },
+  {
+    "id": "356",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "Prorroga Sustitucion Temporal Gerencia De Comunicacion Estrategica 📎",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: Prorroga sustitucion temporal Gerencia de Comunicacion Estrategica.pdf Tipo: Documento Fecha or...",
+    "autor": "Sistema",
+    "imagen": "/assets/img/noticias/noticia-750.jpg",
+    "imagenes": [
+      {
+        "url": "/assets/img/noticias/noticia-750.jpg",
+        "pie": "Prorroga Sustitucion Temporal Gerencia De Comunicacion Estrategica 📎"
+      }
+    ],
+    "fecha": "10/08/2026 08:36",
+    "fecha_solo": "10/08/2026",
+    "hora_solo": "08:36",
+    "url": "http://alcasa.com.ve:5001/noticia/356"
+  },
+  {
+    "id": "376",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "Triptico Nº 3 Normas Generales De Control Interno Capítulo Ii 3er Trimestre 2026 (2) 📎",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: TRIPTICO Nº 3 Normas Generales de Control Interno - Capítulo II - 3er Trimestre 2026 (2).pdf T...",
+    "autor": "Sistema",
+    "imagen": "/assets/img/noticias/noticia-757.jpg",
+    "imagenes": [
+      {
+        "url": "/assets/img/noticias/noticia-757.jpg",
+        "pie": "Triptico Nº 3 Normas Generales De Control Interno Capítulo Ii 3er Trimestre 2026 (2) 📎"
+      }
+    ],
+    "fecha": "06/08/2026 04:37",
+    "fecha_solo": "06/08/2026",
+    "hora_solo": "04:37",
+    "url": "http://alcasa.com.ve:5001/noticia/376"
+  },
+  {
+    "id": "143",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "Final De Los Juegos Intergerencias Cvg Alcasa 2026",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: Final de los Juegos Intergerencias CVG Alcasa 2026.png Tipo: Imagen Fecha original del archivo:...",
+    "autor": "Sistema",
+    "imagen": "http://alcasa.com.ve:5001/uploads/Final_de_los_Juegos_Intergerencias_CVG_Alcasa_2026_20260813103915975110.png",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/Final_de_los_Juegos_Intergerencias_CVG_Alcasa_2026_20260813103915975110.png",
+        "pie": "Final De Los Juegos Intergerencias Cvg Alcasa 2026"
+      }
+    ],
+    "fecha": "06/08/2026 04:09",
+    "fecha_solo": "06/08/2026",
+    "hora_solo": "04:09",
+    "url": "http://alcasa.com.ve:5001/noticia/143"
+  },
+  {
+    "id": "313",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "N°75 Inician Obras Civiles Para La Consolidación De La Unidad Educativa Colegio Cvg Alcasa",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: N°75 Inician obras civiles para la consolidación de la Unidad Educativa Colegio CVG Alcasa.jpg...",
+    "autor": "Sistema",
+    "imagen": "http://alcasa.com.ve:5001/uploads/N75_Inician_obras_civiles_para_la_consolidacion_de_la_Unidad_Educativa_Colegio_CVG_Alcasa_20260813104004131540.jpg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/N75_Inician_obras_civiles_para_la_consolidacion_de_la_Unidad_Educativa_Colegio_CVG_Alcasa_20260813104004131540.jpg",
+        "pie": "N°75 Inician Obras Civiles Para La Consolidación De La Unidad Educativa Colegio Cvg Alcasa"
+      }
+    ],
+    "fecha": "06/08/2026 01:56",
+    "fecha_solo": "06/08/2026",
+    "hora_solo": "01:56",
+    "url": "http://alcasa.com.ve:5001/noticia/313"
+  },
+  {
+    "id": "666",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "Nº 74 Cvg Alcasa Impulsa Formación Comunitaria Mediante Capacitación En Primeros Auxilios Para Jóvenes Recreadores",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: Nº 74 CVG Alcasa impulsa formación comunitaria mediante capacitación en primeros auxilios pa...",
+    "autor": "Sistema",
+    "imagen": "http://alcasa.com.ve:5001/uploads/N74_CVG_Alcasa_fortalece_conocimientos_estrategicos_operativos_en_la_Planta_de_Extrusion_1_20260813103950398130_20260813105004551550.jpg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/N74_CVG_Alcasa_fortalece_conocimientos_estrategicos_operativos_en_la_Planta_de_Extrusion_1_20260813103950398130_20260813105004551550.jpg",
+        "pie": "Nº 74 Cvg Alcasa Impulsa Formación Comunitaria Mediante Capacitación En Primeros Auxilios Para Jóvenes Recreadores"
+      }
+    ],
+    "fecha": "05/08/2026 10:43",
+    "fecha_solo": "05/08/2026",
+    "hora_solo": "10:43",
+    "url": "http://alcasa.com.ve:5001/noticia/666"
+  },
+  {
+    "id": "324",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "Nº 13 Inicia Décima Edición De La Copa Aifi Con La Participación De Semillero De Alcasa",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: Nº 13 Inicia Décima edición de la Copa AIFI con la participación de semillero de Alcasa .jpeg T...",
+    "autor": "Sistema",
+    "imagen": "http://alcasa.com.ve:5001/uploads/No_13_Inicia_Decima_edicion_de_la_Copa_AIFI_con_la_participacion_de_semillero_de_Alcasa__20260813104006756519.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/No_13_Inicia_Decima_edicion_de_la_Copa_AIFI_con_la_participacion_de_semillero_de_Alcasa__20260813104006756519.jpeg",
+        "pie": "Nº 13 Inicia Décima Edición De La Copa Aifi Con La Participación De Semillero De Alcasa"
+      }
+    ],
+    "fecha": "05/08/2026 07:25",
+    "fecha_solo": "05/08/2026",
+    "hora_solo": "07:25",
+    "url": "http://alcasa.com.ve:5001/noticia/324"
+  },
+  {
+    "id": "322",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "Nº 12 Cvg Alcasa Mantiene El Entusiasmo Deportivo Con Una Exitosa 📎",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: Nº 12 CVG Alcasa mantiene el entusiasmo deportivo con una exitosa.pdf Tipo: Documento Fecha ori...",
+    "autor": "Sistema",
+    "imagen": "/assets/img/noticias/noticia-748.jpg",
+    "imagenes": [
+      {
+        "url": "/assets/img/noticias/noticia-748.jpg",
+        "pie": "Nº 12 Cvg Alcasa Mantiene El Entusiasmo Deportivo Con Una Exitosa 📎"
+      }
+    ],
+    "fecha": "01/08/2026 16:58",
+    "fecha_solo": "01/08/2026",
+    "hora_solo": "16:58",
+    "url": "http://alcasa.com.ve:5001/noticia/322"
+  },
+  {
+    "id": "334",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "Nº 74 Cvg Alcasa Impulsa Formación Comunitaria Mediante Capacitación En Primeros Auxilios Para Jóvenes Recreadores 📎",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: Nº 74 CVG Alcasa impulsa formación comunitaria mediante capacitación en primeros auxilios pa...",
+    "autor": "Sistema",
+    "imagen": "/assets/img/noticias/noticia-748.jpg",
+    "imagenes": [
+      {
+        "url": "/assets/img/noticias/noticia-748.jpg",
+        "pie": "Nº 74 Cvg Alcasa Impulsa Formación Comunitaria Mediante Capacitación En Primeros Auxilios Para Jóvenes Recreadores 📎"
+      }
+    ],
+    "fecha": "01/08/2026 16:31",
+    "fecha_solo": "01/08/2026",
+    "hora_solo": "16:31",
+    "url": "http://alcasa.com.ve:5001/noticia/334"
+  },
+  {
+    "id": "477",
+    "estado": "publicada",
+    "categoria": "Histórico",
+    "subtitulo": "",
+    "titulo": "Cvg Alcasa Rinde Homenaje Al Heroico Contingente De Voluntarios Tras Su Extraordinaria Labor De Rescate En La Guaira Jpeg",
+    "resumen": "Información histórica de CVG Alcasa Archivo original: CVG Alcasa rinde homenaje al heroico contingente de voluntarios tras su extraordinaria labor ...",
+    "autor": "Sistema",
+    "imagen": "http://alcasa.com.ve:5001/uploads/CVG_Alcasa_rinde_homenaje_al_heroico_contingente_de_voluntarios_tras_su_extraordinaria_labor_de_rescate_en_la_Guaira_jpeg_20260813103909583466_20260813105147837999.jpeg",
+    "imagenes": [
+      {
+        "url": "http://alcasa.com.ve:5001/uploads/CVG_Alcasa_rinde_homenaje_al_heroico_contingente_de_voluntarios_tras_su_extraordinaria_labor_de_rescate_en_la_Guaira_jpeg_20260813103909583466_20260813105147837999.jpeg",
+        "pie": "Cvg Alcasa Rinde Homenaje Al Heroico Contingente De Voluntarios Tras Su Extraordinaria Labor De Rescate En La Guaira Jpeg"
+      }
+    ],
+    "fecha": "24/07/2026 10:29",
+    "fecha_solo": "24/07/2026",
+    "hora_solo": "10:29",
+    "url": "http://alcasa.com.ve:5001/noticia/477"
   }
 ]

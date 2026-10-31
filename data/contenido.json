@@ -931,52 +931,148 @@
   ],
   "videos": [
     {
+      "id": "video-laminacion",
       "titulo": "Planta de Laminación en Frío y Caliente",
       "badge": "Planta de Laminación",
-      "desc": "Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación que aseguran maleabilidad superior y calibrado micrométrico.",
-      "src": "",
+      "categoria": "Planta de Laminación",
+      "duracion": "00:41",
+      "fecha": "Archivo Audiovisual Oficial",
+      "desc": "Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación Clecim-Cosim y Laminador en Frío que aseguran maleabilidad superior y calibrado micrométrico.",
+      "src": "/assets/media/videos/video-laminacion.mp4",
+      "gif": "/assets/img/galeria/gif-laminacion.gif",
       "poster": "/assets/img/video-lami.jpg",
       "estilo": "card3"
     },
     {
+      "id": "video-fundicion",
       "titulo": "Planta de Fundición y Hornos de Fusión",
       "badge": "Planta de Fundición",
-      "desc": "Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de cilindros tochos 6063 de calidad metalúrgica internacional.",
-      "src": "",
+      "categoria": "Planta de Fundición",
+      "duracion": "01:12",
+      "fecha": "Archivo Audiovisual Oficial",
+      "desc": "Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de cilindros tochos 6063 homogeneizados de calidad metalúrgica internacional.",
+      "src": "/assets/media/videos/video-fundicion.mp4",
+      "gif": "/assets/img/galeria/gif-fundicion.gif",
       "poster": "/assets/img/video-fund.jpg",
       "estilo": ""
     },
     {
+      "id": "video-extrusion",
       "titulo": "Planta de Extrusión y Prensas de Perfilería",
       "badge": "Planta de Extrusión",
-      "desc": "Prensas de alta presión de 7 pulgadas que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados para la industria de la construcción y el transporte.",
-      "src": "",
+      "categoria": "Planta de Extrusión",
+      "duracion": "01:00",
+      "fecha": "Archivo Audiovisual Oficial",
+      "desc": "Prensas de alta presión de 7 pulgadas que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida para la industria de la construcción y el transporte.",
+      "src": "/assets/media/videos/video-extrusion.mp4",
+      "gif": "/assets/img/galeria/gif-extrusion.gif",
       "poster": "/assets/img/video-ext.jpg",
       "estilo": "card2"
     },
     {
+      "id": "video-ayudas",
       "titulo": "Taller Soberano de Ayudas Técnicas",
       "badge": "Compromiso Social",
+      "categoria": "Compromiso Social",
+      "duracion": "00:25",
+      "fecha": "Archivo Audiovisual Oficial",
       "desc": "Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables.",
-      "src": "",
+      "src": "/assets/media/videos/video-ayudas-tecnicas.mp4",
+      "gif": "/assets/img/galeria/gif-ayudas.gif",
       "poster": "/assets/img/video-at.jpg",
       "estilo": "card4"
+    }
+  ],
+  "galeria_fotos": [
+    {
+      "titulo": "Bobinas de Aluminio Laminado para Despacho Nacional y Exportación",
+      "categoria": "Planta de Laminación",
+      "desc": "Rollos de aluminio laminado de alta pureza almacenados en la nave de despacho de la Planta de Laminación de CVG Alcasa.",
+      "imagen": "/assets/img/fotos-web-lam1.png"
     },
     {
-      "titulo": "CVG Alcasa Hoy — Hitos y Logros Productivos",
-      "badge": "Noticiero Corporativo CVG Alcasa",
-      "desc": "Cobertura audiovisual de la reactivación industrial, jornadas de mantenimiento mayor y la entrega inquebrantable de la clase trabajadora de CVG Alcasa forjando la soberanía patria.",
-      "src": "",
-      "poster": "/assets/img/video-hoy.png",
-      "estilo": "card3"
+      "titulo": "Línea de Colada Continua de Laminación",
+      "categoria": "Planta de Laminación",
+      "desc": "Proceso de colada continua de bandas de aluminio para su posterior reducción de espesor en los trenes de laminación.",
+      "imagen": "/assets/img/galeria/laminacion-colada-continua.jpg"
     },
     {
-      "titulo": "Integración de Empresas Tuteladas de la CVG",
-      "badge": "Cadena del Aluminio CVG",
-      "desc": "Alianza y sinergia estratégica dentro de la Corporación Venezolana de Guayana (CVG) para fortalecer el encadenamiento productivo entre CVG Bauxilum, CVG Venalum, CVG Carbonorca y CVG Alcasa.",
-      "src": "",
-      "poster": "/assets/img/video-sn.jpg",
-      "estilo": ""
+      "titulo": "Tren de Laminación en Caliente y Bobinado Industrial",
+      "categoria": "Planta de Laminación",
+      "desc": "Operación del tren laminador procesando láminas y bobinas con control dimensional y acabado superficial uniforme.",
+      "imagen": "/assets/img/galeria/laminacion-tren-caliente.jpg"
+    },
+    {
+      "titulo": "Lote de Bobinas Terminadas en Planta de Laminación",
+      "categoria": "Planta de Laminación",
+      "desc": "Bobinas de aluminio liso y stucco embaladas y listas para suministro al sector transformador nacional.",
+      "imagen": "/assets/img/galeria/laminacion-bobinas.jpg"
+    },
+    {
+      "titulo": "Fachada y Acceso Principal de Planta de Fundición",
+      "categoria": "Planta de Fundición",
+      "desc": "Instalaciones del área de Fundición de CVG Aluminio del Caroní, S.A. con capacidad instalada de 120.000 Tm/año.",
+      "imagen": "/assets/img/fotos-web-fachada3.png"
+    },
+    {
+      "titulo": "Hornos de Fusión y Retención de Aluminio Primario",
+      "categoria": "Planta de Fundición",
+      "desc": "Preparación de carga y control térmico en los hornos de fusión y retención de 50 Tm en la Planta de Fundición.",
+      "imagen": "/assets/img/galeria/fundicion-horno.jpg"
+    },
+    {
+      "titulo": "Colada Vertical y Preparación de Aleaciones 6063",
+      "categoria": "Planta de Fundición",
+      "desc": "Operaciones metalúrgicas de colada y vaciado de aluminio líquido para la obtención de cilindros para extrusión.",
+      "imagen": "/assets/img/galeria/fundicion-colada.jpg"
+    },
+    {
+      "titulo": "Cilindros y Tochos Homogeneizados de 7 Pulgadas",
+      "categoria": "Planta de Fundición",
+      "desc": "Cilindros en aleación AA 6063/S6063 temple T5 procesados en los hornos de homogeneizado de CVG Alcasa.",
+      "imagen": "/assets/img/galeria/fundicion-cilindros.jpg"
+    },
+    {
+      "titulo": "Prensa Extrusora de 7 Pulgadas en Operación",
+      "categoria": "Planta de Extrusión",
+      "desc": "Transformación de cilindros tochos en perfilería estructural, tubular y arquitectónica en la Planta Extrusora.",
+      "imagen": "/assets/img/galeria/extrusion-prensa.jpg"
+    },
+    {
+      "titulo": "Mesa de Enfriamiento y Estirado de Perfilería Extruida",
+      "categoria": "Planta de Extrusión",
+      "desc": "Alineación y verificación de calidad dimensional de perfiles de aluminio recién salidos de la prensa de extrusión.",
+      "imagen": "/assets/img/galeria/extrusion-perfiles-1.jpg"
+    },
+    {
+      "titulo": "Perfiles Tubulares y Estructurales Serie ALC",
+      "categoria": "Planta de Extrusión",
+      "desc": "Lotes de perfilería de aluminio 6063-T5 clasificados por código de matriz para despacho comercial.",
+      "imagen": "/assets/img/galeria/extrusion-perfiles-2.jpg"
+    },
+    {
+      "titulo": "Complejo Industrial CVG Alcasa — Consolidando el Sistema Nacional del Aluminio",
+      "categoria": "Compromiso Social",
+      "desc": "Entrada principal de CVG Aluminio del Caroní, S.A. en la Zona Industrial Matanzas, Ciudad Guayana.",
+      "imagen": "/assets/img/fotos-web-fachada1-1.png"
+    },
+    {
+      "titulo": "Línea de Acabado y Planta de Pintura / Tratamiento",
+      "categoria": "Compromiso Social",
+      "desc": "Procesos complementarios de recubrimiento y preparación de componentes de aluminio de valor agregado.",
+      "imagen": "/assets/img/galeria/social-planta-pintura.jpg"
+    },
+    {
+      "titulo": "Fuerza Laboral Alcasiana en Operaciones de Planta",
+      "categoria": "Compromiso Social",
+      "desc": "Compromiso técnico y humano de los trabajadores y trabajadoras de CVG Alcasa en cada área operativa.",
+      "imagen": "/assets/img/galeria/social-trabajadores.jpg"
+    },
+    {
+      "titulo": "Jornadas Institucionales y Atención Social Integral",
+      "categoria": "Compromiso Social",
+      "desc": "Actividades de bienestar social, cultura y apoyo comunitario impulsadas por CVG Alcasa en Guayana.",
+      "imagen": "/assets/img/galeria/social-jornada.jpg"
     }
   ],
   "contacto": {

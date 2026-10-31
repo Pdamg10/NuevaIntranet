@@ -10,7 +10,8 @@ const BASE = 'http://alcasa.com.ve:5001';
 const TTL = 120;
 
 $includeAll = !empty($_GET['include_all']);
-$cache = sys_get_temp_dir() . '/cvg_alcasa_noticias_v4' . ($includeAll ? '_all' : '') . '.json';
+$reqPage = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 0;
+$cache = sys_get_temp_dir() . '/cvg_alcasa_noticias_v5' . ($includeAll ? '_all' : '') . ($reqPage > 0 ? '_p' . $reqPage : '') . '.json';
 $fallbackLocal = __DIR__ . '/../data/noticias.json';
 
 if (is_file($cache) && time() - filemtime($cache) < TTL && !isset($_GET['nocache'])) {
@@ -33,6 +34,176 @@ function httpGet(string $url, int $timeout = 6): string {
     return ($code === 200 && is_string($res)) ? $res : '';
 }
 
+$normalizarTextoCVG = function (string $txt): string {
+    if ($txt === '') return '';
+    $txt = preg_replace('/(?<!CVG\s)(?<!CVG-)Aluminios?\s+del\s+Caron[íi],?\s*S\.?A\.?/iu', 'CVG Aluminio del Caroní, S.A.', $txt);
+    $txt = preg_replace('/(?<!CVG\s)(?<!CVG-)(?<![.@\/])\bAlcasa\b/u', 'CVG Alcasa', $txt);
+    $txt = preg_replace('/\bCVG\s+CVG\s+/iu', 'CVG ', $txt);
+    return $txt;
+};
+
+// Cargar respaldo local y lista de noticias ocultas/eliminadas
+$localBackupMap = [];
+$localCustomNew = [];
+$ocultasFile = __DIR__ . '/../storage/noticias_ocultas.json';
+$ocultasIds = [];
+if (is_file($ocultasFile)) {
+    $ocArr = json_decode((string)file_get_contents($ocultasFile), true);
+    if (is_array($ocArr)) {
+        $ocultasIds = array_map('strval', $ocArr);
+    }
+}
+
+if (is_file($fallbackLocal)) {
+    $localArr = json_decode((string)file_get_contents($fallbackLocal), true);
+    if (is_array($localArr)) {
+        foreach ($localArr as $ln) {
+            if (!empty($ln['id'])) {
+                $lid = (string)$ln['id'];
+                if (in_array($lid, $ocultasIds, true)) continue;
+                $localBackupMap[$lid] = $ln;
+                if (!empty($ln['local_edit'])) {
+                    $localCustomNew[$lid] = $ln;
+                }
+            }
+        }
+    }
+}
+
+$fallbackPool = [
+    '/assets/img/noticias/noticia-761.jpg',
+    '/assets/img/noticias/noticia-760.jpg',
+    '/assets/img/noticias/noticia-759.jpg',
+    '/assets/img/noticias/noticia-758.jpg',
+    '/assets/img/noticias/noticia-757.jpg',
+    '/assets/img/noticias/noticia-753.jpg',
+    '/assets/img/noticias/noticia-752.jpg',
+    '/assets/img/noticias/noticia-751.jpg',
+    '/assets/img/noticias/noticia-750.jpg',
+    '/assets/img/noticias/noticia-749.jpg',
+    '/assets/img/noticias/noticia-748.jpg',
+    '/assets/img/noticias/noticia-739.jpg'
+];
+
+// Modo paginado directo desde http://alcasa.com.ve:5001/?page=N (para Sala de Prensa prensa.html)
+if ($reqPage > 0) {
+    $pageHtml = httpGet(BASE . '/?page=' . $reqPage, 6);
+    $totalPages = 72;
+    $pageItems = [];
+
+    if ($pageHtml !== '') {
+        if (preg_match_all('/\?page=(\d+)/', $pageHtml, $pm) && !empty($pm[1])) {
+            $maxP = max(array_map('intval', $pm[1]));
+            if ($maxP > 0) $totalPages = max($reqPage, $maxP);
+        }
+
+        if ($reqPage === 1 && !empty($localCustomNew)) {
+            foreach ($localCustomNew as $lid => $ln) {
+                $estado = strtolower(trim((string)($ln['estado'] ?? 'publicada')));
+                if ($estado !== 'publicada') continue;
+                $pageItems[] = $ln;
+            }
+        }
+
+        if (preg_match_all('/<article class="noticia-card">(.*?)<\/article>/s', $pageHtml, $matches)) {
+            foreach ($matches[1] as $cardHtml) {
+                if (!preg_match('/href="\/noticia\/(\d+)"/', $cardHtml, $idM)) continue;
+                $nid = (string)$idM[1];
+                if (in_array($nid, $ocultasIds, true)) continue;
+
+                $backup = $localBackupMap[$nid] ?? [];
+                $titOrig = '';
+                if (preg_match('/<h2><a[^>]*>(.*?)<\/a><\/h2>/s', $cardHtml, $tm)) {
+                    $titOrig = trim(html_entity_decode(strip_tags($tm[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+                }
+                $subOrig = '';
+                if (preg_match('/<p class="subtitulo">(.*?)<\/p>/s', $cardHtml, $sm)) {
+                    $subOrig = trim(html_entity_decode(strip_tags($sm[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+                }
+                $catOrig = '';
+                if (preg_match('/<span class="categoria">(.*?)<\/span>/s', $cardHtml, $cm)) {
+                    $catOrig = trim(html_entity_decode(strip_tags($cm[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+                }
+                $fecOrig = '';
+                if (preg_match('/📅\s*([0-9\/]+\s+[0-9:]+)/u', $cardHtml, $fm)) {
+                    $fecOrig = trim($fm[1]);
+                }
+                $autOrig = 'Gerencia de Comunicación Estratégica';
+                if (preg_match('/👤\s*([^<]+)/u', $cardHtml, $am)) {
+                    $autOrig = trim(html_entity_decode($am[1], ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+                }
+                $resOrig = '';
+                if (preg_match('/<p class="resumen">(.*?)<\/p>/s', $cardHtml, $rm)) {
+                    $resOrig = trim(html_entity_decode(strip_tags($rm[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+                    $resOrig = preg_replace('/\xC2\xA0|\s+/u', ' ', $resOrig);
+                }
+                $imgOrig = '';
+                if (preg_match('/<img\s+src="([^"]+)"\s+class="noticia-imagen"/i', $cardHtml, $im)) {
+                    $imgOrig = trim($im[1]);
+                    if ($imgOrig !== '' && $imgOrig[0] === '/') {
+                        $imgOrig = BASE . $imgOrig;
+                    }
+                }
+
+                $localThumbRel = '/assets/img/noticias/noticia-' . $nid . '.jpg';
+                $localThumbAbs = __DIR__ . '/..' . $localThumbRel;
+                if (is_file($localThumbAbs)) {
+                    $imagenFinal = $localThumbRel;
+                } elseif ($imgOrig !== '') {
+                    $imagenFinal = $imgOrig;
+                } elseif (!empty($backup['imagen'])) {
+                    $imagenFinal = (string)$backup['imagen'];
+                } else {
+                    $imagenFinal = $fallbackPool[abs((int)$nid) % count($fallbackPool)];
+                }
+
+                $tituloFinal = !empty($backup['titulo']) ? (string)$backup['titulo'] : ($titOrig ?: ('Comunicado Oficial #' . $nid));
+                $resumenFinal = (!empty($backup['resumen']) && mb_strlen((string)$backup['resumen']) >= mb_strlen($resOrig))
+                    ? (string)$backup['resumen']
+                    : ($resOrig ?: ($subOrig ? $subOrig . '. Comunicado oficial de CVG Alcasa.' : $tituloFinal));
+
+                $partesF = preg_split('/\s+/', $fecOrig, 2);
+                $imgsArr = (!empty($backup['imagenes']) && is_array($backup['imagenes']))
+                    ? $backup['imagenes']
+                    : [['url' => $imagenFinal, 'pie' => $tituloFinal]];
+
+                $pageItems[] = [
+                    'id'         => $nid,
+                    'estado'     => 'publicada',
+                    'categoria'  => $normalizarTextoCVG($catOrig ?: ($backup['categoria'] ?? ($subOrig ?: 'Comunicado Oficial'))),
+                    'subtitulo'  => $normalizarTextoCVG($subOrig),
+                    'titulo'     => $normalizarTextoCVG($tituloFinal),
+                    'resumen'    => $normalizarTextoCVG($resumenFinal),
+                    'cuerpo'     => $normalizarTextoCVG((string)($backup['cuerpo'] ?? $resumenFinal)),
+                    'autor'      => $autOrig,
+                    'imagen'     => $imgsArr[0]['url'] ?? $imagenFinal,
+                    'imagenes'   => $imgsArr,
+                    'fecha'      => $fecOrig,
+                    'fecha_solo' => $partesF[0] ?? $fecOrig,
+                    'hora_solo'  => $partesF[1] ?? '',
+                    'url'        => BASE . '/noticia/' . $nid
+                ];
+            }
+        }
+    }
+
+    if (empty($pageItems) && !empty($localBackupMap)) {
+        $allLocal = array_values($localBackupMap);
+        $perPage = 10;
+        $totalPages = max(1, (int)ceil(count($allLocal) / $perPage));
+        $pageItems = array_slice($allLocal, ($reqPage - 1) * $perPage, $perPage);
+    }
+
+    $respJson = json_encode([
+        'page'        => $reqPage,
+        'total_pages' => $totalPages,
+        'noticias'    => $pageItems
+    ], JSON_UNESCAPED_UNICODE);
+    @file_put_contents($cache, $respJson);
+    echo $respJson;
+    exit;
+}
+
 $rawApi = httpGet(BASE . '/api/noticias', 7);
 $d = $rawApi ? json_decode($rawApi, true) : null;
 
@@ -50,9 +221,9 @@ if (!is_array($d) || empty($d)) {
     exit;
 }
 
-// Extraer miniaturas, categorías y resúmenes desde las páginas principales del periódico digital
+// Extraer miniaturas, categorías y resúmenes desde las páginas 1 a 5 del periódico digital
 $htmlMeta = [];
-foreach ([BASE . '/', BASE . '/?page=2'] as $pageUrl) {
+foreach ([BASE . '/?page=1', BASE . '/?page=2', BASE . '/?page=3', BASE . '/?page=4', BASE . '/?page=5'] as $pageUrl) {
     $html = httpGet($pageUrl, 5);
     if (!$html) continue;
     if (preg_match_all('/<article class="noticia-card">(.*?)<\/article>/s', $html, $matches)) {
@@ -145,7 +316,7 @@ foreach ($localCustomNew as $lid => $ln) {
     if (!$includeAll && $estado !== 'publicada') {
         continue;
     }
-    $imgPortada = (string)($ln['imagen'] ?? '/assets/img/noticias/noticia-773.jpg');
+    $imgPortada = (string)($ln['imagen'] ?: '/assets/img/noticias/noticia-761.jpg');
     $imgs = [];
     if (!empty($ln['imagenes']) && is_array($ln['imagenes'])) {
         foreach (array_slice($ln['imagenes'], 0, 20) as $im) {
@@ -226,6 +397,20 @@ foreach ($list as $n) {
     }
 
     // Priorizar miniatura local optimizada si existe en /assets/img/noticias/noticia-{id}.jpg
+    $fallbackPool = [
+        '/assets/img/noticias/noticia-761.jpg',
+        '/assets/img/noticias/noticia-760.jpg',
+        '/assets/img/noticias/noticia-759.jpg',
+        '/assets/img/noticias/noticia-758.jpg',
+        '/assets/img/noticias/noticia-757.jpg',
+        '/assets/img/noticias/noticia-753.jpg',
+        '/assets/img/noticias/noticia-752.jpg',
+        '/assets/img/noticias/noticia-751.jpg',
+        '/assets/img/noticias/noticia-750.jpg',
+        '/assets/img/noticias/noticia-749.jpg',
+        '/assets/img/noticias/noticia-748.jpg',
+        '/assets/img/noticias/noticia-739.jpg'
+    ];
     $localThumbRel = '/assets/img/noticias/noticia-' . $id . '.jpg';
     $localThumbAbs = __DIR__ . '/..' . $localThumbRel;
     if ($id !== '' && is_file($localThumbAbs)) {
@@ -236,6 +421,9 @@ foreach ($list as $n) {
         $imagen = $backup['imagen'];
     } else {
         $imagen = $abs($pick($n, ['imagen', 'portada', 'miniatura', 'imagen_url', 'thumbnail', 'foto']));
+    }
+    if ($imagen === '') {
+        $imagen = $fallbackPool[abs((int)$id) % count($fallbackPool)];
     }
 
     $fechaRaw = trim((string)$pick($n, ['fecha', 'created_at', 'date']));

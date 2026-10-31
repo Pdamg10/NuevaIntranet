@@ -13,14 +13,132 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/main.css?v=2026k">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026q">
 </head>
 <body id="inicio">
 
     <!-- =========================================
-         HEADER CORPORATIVO (Renderizado por /assets/js/app.js)
+         HEADER CORPORATIVO (Con logos siempre visibles)
          ========================================= -->
-    <div id="site-header"></div>
+    <div id="site-header">
+        <div class="alcoa-langbar" translate="no">
+            <div class="container langbar-inner">
+                <span class="langbar-institucional-tag">
+                    <i class="fas fa-industry"></i> CVG Aluminio del Caroní, S.A. (CVG Alcasa) — Portal Institucional e Intranet
+                </span>
+                <div class="langbar-controls">
+                    <label for="alcoa-lang-select" class="alcoa-langbar-label">
+                        <i class="fas fa-globe"></i> Idioma:
+                    </label>
+                    <select id="alcoa-lang-select" class="alcoa-langbar-select" aria-label="Seleccionar idioma">
+                        <option value="es">Español</option>
+                        <option value="en">English</option>
+                        <option value="pt">Português</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="it">Italiano</option>
+                        <option value="ar">العربية</option>
+                        <option value="zh-CN">中文</option>
+                        <option value="ja">日本語</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <header class="alcoa-header" id="mainHeader">
+            <div class="container">
+                <div class="header-top">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú de navegación" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="header-logo-left">
+                        <a href="/index.html#inicio" class="header-inicio-link" title="CVG Alcasa - Inicio">
+                            <img src="/assets/img/logo-alcasa.png?v=2026m" width="190" height="106" loading="eager" decoding="sync" alt="Logo CVG Alcasa" class="logo-alcasa">
+                        </a>
+                    </div>
+                    <div class="menu-overlay" id="menuOverlay"></div>
+                    <nav class="main-navigation" id="mainNav" aria-label="Navegación principal">
+                        <div class="mobile-drawer-header">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <img src="/assets/img/logo-alcasa.png?v=2026m" alt="CVG Alcasa" style="height:42px;width:auto;object-fit:contain;">
+                                <span class="mobile-drawer-title">CVG Alcasa</span>
+                            </div>
+                            <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Cerrar menú">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <ul class="jelly-menu nav-list">
+                            <li class="active"><a href="/index.html#inicio" class="header-inicio-link">Inicio</a></li>
+                            <li class="nav-item-has-dropdown">
+                                <a href="/index.html#empresa" class="nav-link-dropdown"><span>Empresa</span><i class="fas fa-chevron-down dropdown-icon"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/index.html#empresa" data-tab-target="tab-quienes-somos">¿Quiénes somos?</a></li>
+                                    <li><a href="/index.html#empresa" data-tab-target="tab-mision-vision">Misión y Visión</a></li>
+                                    <li><a href="/index.html#empresa" data-tab-target="tab-valores">Nuestros Valores</a></li>
+                                    <li><a href="/index.html#empresa" data-tab-target="tab-pilares">Pilares de Gestión</a></li>
+                                    <li class="dropdown-divider"></li>
+                                    <li><a href="http://190.202.49.114:5050/" target="_blank" rel="noopener noreferrer">Oficina de Atención al Ciudadano</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item-has-dropdown">
+                                <a href="/productos.html" class="nav-link-dropdown"><span>Productos</span><i class="fas fa-chevron-down dropdown-icon"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/index.html#productos">Destacados en Inicio (2)</a></li>
+                                    <li><a href="/productos.html">Catálogo Completo 2025 (32)</a></li>
+                                    <li><a href="/productos.html?linea=Fundición">Cilindros / Fundición (2)</a></li>
+                                    <li><a href="/productos.html?linea=Extrusión">Perfilería / Extrusión (24)</a></li>
+                                    <li><a href="/productos.html?linea=Laminación">Laminados / Laminación (6)</a></li>
+                                    <li><a href="/index.html#faq">Preguntas Frecuentes (FAQ)</a></li>
+                                    <li class="dropdown-divider"></li>
+                                    <li><a href="/assets/media/CATALOGO_CVG_ALCASA_2025.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf" style="margin-right:6px;color:#ff6b1a;"></i>Descargar Catálogo CVG Alcasa 2025 (PDF)</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/index.html#oportunidades">Oportunidades</a></li>
+                            <li class="nav-item-has-dropdown">
+                                <a href="/prensa.html" class="nav-link-dropdown"><span>Actualidad</span><i class="fas fa-chevron-down dropdown-icon"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/index.html#prensa">Pulso Industrial (Top 10 Noticias)</a></li>
+                                    <li><a href="/prensa.html">Portal Pulso Industrial CVG Alcasa</a></li>
+                                    <li><a href="http://alcasa.com.ve:5001/minimal" target="_blank" rel="noopener noreferrer">Periódico Digital CVG Alcasa</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item-has-dropdown">
+                                <a href="/galeria.html" class="nav-link-dropdown"><span>Galería</span><i class="fas fa-chevron-down dropdown-icon"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/galeria.html">Galería Completa (Videos y Fotos)</a></li>
+                                    <li><a href="/galeria.html?tipo=videos">Videos de Procesos Completos (4)</a></li>
+                                    <li><a href="/galeria.html?cat=Planta+de+Laminación">Planta de Laminación</a></li>
+                                    <li><a href="/galeria.html?cat=Planta+de+Fundición">Planta de Fundición</a></li>
+                                    <li><a href="/galeria.html?cat=Planta+de+Extrusión">Planta de Extrusión</a></li>
+                                    <li><a href="/galeria.html?cat=Compromiso+Social">Compromiso Social e Instalaciones</a></li>
+                                    <li class="dropdown-divider"></li>
+                                    <li><a href="/index.html#galeria">Vista Previa en Inicio</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item-has-dropdown">
+                                <a href="#" class="nav-link-dropdown"><span>Extranet</span><i class="fas fa-chevron-down dropdown-icon"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="http://alcasa.com.ve/sitio/buscador_embedido.html" target="_blank" rel="noopener noreferrer">Consulta clave ARI</a></li>
+                                    <li><a href="http://alcasa.com.ve:5002" target="_blank" rel="noopener noreferrer">Acceso a la mensajería institucional</a></li>
+                                    <li><a href="http://190.202.49.114:5050/" target="_blank" rel="noopener noreferrer">Sistema OAC</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item-cta"><a href="#contacto">Contacto</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-logo-right">
+                        <a href="/index.html#inicio" class="header-inicio-link" title="Corporación Venezolana de Guayana - CVG Alcasa">
+                            <img src="/assets/img/logo-cvg.png?v=2026m" width="180" height="76" loading="eager" decoding="sync" alt="Logo CVG y CVG Alcasa" class="logo-segundo logo-cvg-blanco">
+                        </a>
+                        <div class="logo-divider"></div>
+                        <a href="/index.html#inicio" class="header-inicio-link" title="Gobierno Bolivariano de Venezuela">
+                            <img src="/assets/img/logo-institucional.png?v=2026m" width="175" height="52" loading="eager" decoding="sync" alt="Logo Institucional" class="logo-institucional">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="header-scroll-fade" id="headerScrollFade" aria-hidden="true"></div>
+        </header>
+    </div>
 
     <!-- =========================================
          1. BANNER ROTATIVO (ESTILO OFICIAL ALCASA.COM.VE)
@@ -244,43 +362,84 @@
 
             </div>
 
-            <!-- PANEL DE FICHA TÉCNICA EXPANDIBLE EN LA PÁGINA (SIN POPUPS) -->
-            <div class="product-ficha-panel" id="productFichaPanel" style="display: none;">
-                <div class="ficha-header">
-                    <div>
-                        <h4><i class="fas fa-certificate" style="color: var(--alcasa-accent);"></i> <span id="fichaTituloTexto">Cilindros Tochos</span></h4>
-                        <div class="ficha-sub" id="fichaAleacion">Serie AA 6063 / S6063 — Temple T5 (Homogenizado)</div>
+            <!-- VENTANA FLOTANTE (MODAL) DE FICHA TÉCNICA DETALLADA -->
+            <div class="ficha-modal-backdrop" id="productFichaPanel" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="fichaTituloTexto">
+                <div class="ficha-modal-dialog">
+                    <div class="ficha-header">
+                        <div>
+                            <div class="ficha-kicker-row">
+                                <span class="ficha-kicker-badge" id="fichaBadgeOrden">#01 · Fundición</span>
+                                <span class="ficha-kicker-en" id="fichaNombreIngles">Billet Cylinders</span>
+                            </div>
+                            <h4><i class="fas fa-certificate" style="color: var(--alcasa-accent);"></i> <span id="fichaTituloTexto">Cilindros Tochos</span></h4>
+                            <div class="ficha-sub" id="fichaAleacion">Serie AA 6063 / S6063 — Temple T5 (Homogenizado)</div>
+                        </div>
+                        <button type="button" class="ficha-close-btn" id="fichaCloseBtn" aria-label="Cerrar ficha técnica">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
-                    <button type="button" class="ficha-close-btn" id="fichaCloseBtn" aria-label="Cerrar ficha técnica">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="ficha-grid">
-                    <div class="ficha-item">
-                        <div class="ficha-item-title"><i class="fas fa-flask"></i> Composición Química &amp; Acabado</div>
-                        <div class="ficha-item-value" id="fichaPureza">Aluminio primario aleado con Silicio (Si) y Magnesio (Mg) homogeneizado en hornos de tratamiento térmico</div>
+
+                    <div class="ficha-modal-body">
+                        <!-- Resumen superior con imagen del producto y descripción -->
+                        <div class="ficha-overview-box">
+                            <div class="ficha-overview-img-wrap">
+                                <img src="/assets/img/productos/cilindros-tochos.jpg" alt="Producto CVG Alcasa" id="fichaImagenProducto">
+                            </div>
+                            <div class="ficha-overview-info">
+                                <div class="ficha-overview-label"><i class="fas fa-circle-info"></i> Descripción General del Producto</div>
+                                <p id="fichaDescTexto">Cilindros de aluminio primario homogeneizados en aleación 6063/S6063 temple T5 y diámetro 7", cortados a medida para alimentar prensas de extrusión con máxima precisión metalúrgica.</p>
+                                <div class="ficha-spec-summary-pill" id="fichaSpecResumen">
+                                    <i class="fas fa-microchip"></i> Aleación: 6063/S6063 | Temple: T5 | Diámetro: 7" | Longitud: Cortados a medida | Homogenizado
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cuadrícula ordenada de especificaciones técnicas -->
+                        <div class="ficha-section-subtitle">
+                            <i class="fas fa-Sliders"></i> Especificaciones Metalúrgicas y Técnicas de Fábrica
+                        </div>
+                        <div class="ficha-grid">
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-layer-group"></i> Aleación y Temple Oficial</div>
+                                <div class="ficha-item-value" id="fichaAleacionBox">Serie AA 6063 / S6063 — Temple T5 (Homogenizado)</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-flask"></i> Composición Química &amp; Acabado</div>
+                                <div class="ficha-item-value" id="fichaPureza">Aluminio primario aleado con Silicio (Si) y Magnesio (Mg) homogeneizado en hornos de tratamiento térmico</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-ruler-combined"></i> Dimensiones &amp; Presentaciones</div>
+                                <div class="ficha-item-value" id="fichaPresentaciones">Diámetro 7" (177,8 mm) | Longitud: Cortados a medida según requerimiento de prensa</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-boxes-stacked"></i> Propiedades &amp; Empaque por Bulto</div>
+                                <div class="ficha-item-value" id="fichaPropiedades">Estructura cristalina uniforme, alta fluidez de extrusión y excelente respuesta al anodizado</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-shield-halved"></i> Normas Técnicas &amp; Catálogo</div>
+                                <div class="ficha-item-value" id="fichaNormas">Catálogo Oficial CVG Alcasa 2025 / COVENIN 284 / ASTM B221</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-industry"></i> Usos &amp; Aplicaciones Industriales</div>
+                                <div class="ficha-item-value" id="fichaUsos">Materia prima directa para prensas extrusoras de perfilería arquitectónica, estructural y tubular.</div>
+                            </div>
+                        </div>
+
+                        <!-- Tabla detallada de Códigos, Dimensiones, Piezas por Bulto y Peso -->
+                        <div id="fichaTablaCodigosWrap" style="margin-top: 18px;"></div>
                     </div>
-                    <div class="ficha-item">
-                        <div class="ficha-item-title"><i class="fas fa-boxes-stacked"></i> Dimensiones &amp; Presentaciones</div>
-                        <div class="ficha-item-value" id="fichaPresentaciones">Diámetro 7" (177,8 mm) | Longitud: Cortados a medida según requerimiento de prensa</div>
+
+                    <div class="ficha-actions">
+                        <button type="button" class="btn-catalog-cotizar" id="fichaBtnCotizar" data-producto="Cilindros Tochos (Fundición)" style="flex: 0 0 auto; padding: 11px 24px;">
+                            <i class="fas fa-file-invoice"></i> Cotizar esta Especificación
+                        </button>
+                        <a href="/assets/media/CATALOGO_CVG_ALCASA_2025.pdf" target="_blank" rel="noopener noreferrer" class="btn-modal-secondary">
+                            <i class="fas fa-file-pdf"></i> Catálogo PDF 2025
+                        </a>
+                        <button type="button" class="btn-modal-close" id="fichaBtnCerrarFooter" style="margin-left: auto;">
+                            <i class="fas fa-times"></i> Cerrar
+                        </button>
                     </div>
-                    <div class="ficha-item">
-                        <div class="ficha-item-title"><i class="fas fa-gauge-high"></i> Propiedades Metalúrgicas &amp; Bultos</div>
-                        <div class="ficha-item-value" id="fichaPropiedades">Estructura cristalina uniforme, alta fluidez de extrusión y excelente respuesta al anodizado</div>
-                    </div>
-                    <div class="ficha-item">
-                        <div class="ficha-item-title"><i class="fas fa-shield-halved"></i> Normas Técnicas &amp; Catálogo</div>
-                        <div class="ficha-item-value" id="fichaNormas">Catálogo Oficial CVG Alcasa 2025 / COVENIN 284 / ASTM B221</div>
-                    </div>
-                    <div class="ficha-item" style="grid-column: 1 / -1;">
-                        <div class="ficha-item-title"><i class="fas fa-industry"></i> Usos &amp; Aplicaciones Industriales</div>
-                        <div class="ficha-item-value" id="fichaUsos">Materia prima directa para prensas extrusoras de perfilería arquitectónica, estructural y tubular.</div>
-                    </div>
-                </div>
-                <div class="ficha-actions">
-                    <button type="button" class="btn-catalog-cotizar" id="fichaBtnCotizar" data-producto="Cilindros Tochos (Fundición)" style="flex: 0 0 auto; padding: 11px 24px;">
-                        <i class="fas fa-file-invoice"></i> Cotizar esta Especificación
-                    </button>
                 </div>
             </div>
 
@@ -294,7 +453,7 @@
                     <a href="/productos.html" class="btn-ver-todos-productos">
                         <i class="fas fa-th-list"></i> Ver Todos los Productos (32) <i class="fas fa-arrow-right"></i>
                     </a>
-                    <a href="/assets/media/CATALOGO_CVG_ALCASA_2025.pdf" target="_blank" rel="noopener noreferrer" class="btn-outline-corp" style="border-color: var(--alcasa-accent); color: var(--alcasa-accent);">
+                    <a href="/assets/media/CATALOGO_CVG_ALCASA_2025.pdf" target="_blank" rel="noopener noreferrer" class="btn-outline-corp btn-cta-banner-white">
                         <i class="fas fa-file-pdf"></i> Descargar Catálogo CVG Alcasa 2025 (PDF)
                     </a>
                 </div>
@@ -366,29 +525,39 @@
                 <span>Sincronizando las 10 noticias más importantes de CVG Alcasa...</span>
             </div>
 
-            <!-- Panel Expandible de Lectura y Vista Completa de Afiche/Comunicado -->
-            <div class="noticia-detail-panel" id="noticiaDetailPanel" style="display: none;">
-                <div class="noticia-panel-header">
-                    <div>
-                        <span class="prensa-api-category" id="noticiaPanelCategoria"><i class="fas fa-tag"></i> Institucional</span>
-                        <h4 id="noticiaPanelTitulo" style="color:#ffffff;font-size:1.45rem;margin-top:8px;">Comunicado Oficial CVG Alcasa</h4>
-                        <div class="noticia-panel-meta" id="noticiaPanelMeta"></div>
-                    </div>
-                    <button type="button" class="ficha-close-btn" id="noticiaPanelCloseBtn" aria-label="Cerrar vista rápida">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="noticia-panel-body">
-                    <div class="noticia-panel-img-wrap">
-                        <img id="noticiaPanelImg" src="/assets/img/placeholder.svg" alt="Imagen de la noticia CVG Alcasa">
-                    </div>
-                    <div class="noticia-panel-text-wrap">
-                        <p id="noticiaPanelResumen"></p>
-                        <div class="noticia-panel-actions">
-                            <a id="noticiaPanelLink" href="http://alcasa.com.ve:5001/minimal" target="_blank" rel="noopener noreferrer" class="btn-prensa">
-                                <i class="fas fa-external-link-alt"></i> Abrir Nota Original en el Periódico Digital CVG Alcasa
-                            </a>
+            <!-- Ventana Flotante (Modal) de Vista Previa de Noticia -->
+            <div class="ficha-modal-backdrop" id="noticiaDetailPanel" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="noticiaPanelTitulo">
+                <div class="ficha-modal-dialog noticia-modal-dialog">
+                    <div class="ficha-header">
+                        <div>
+                            <div class="ficha-kicker-row">
+                                <span class="ficha-kicker-badge" id="noticiaPanelCategoria"><i class="fas fa-tag"></i> Institucional</span>
+                                <span class="ficha-kicker-en" id="noticiaPanelMeta"></span>
+                            </div>
+                            <h4><i class="fas fa-newspaper" style="color: var(--alcasa-accent);"></i> <span id="noticiaPanelTitulo">Comunicado Oficial CVG Alcasa</span></h4>
                         </div>
+                        <button type="button" class="ficha-close-btn" id="noticiaPanelCloseBtn" aria-label="Cerrar vista rápida">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="ficha-modal-body">
+                        <div class="noticia-panel-body">
+                            <div class="noticia-panel-img-wrap">
+                                <img id="noticiaPanelImg" src="/assets/img/placeholder.svg" alt="Imagen de la noticia CVG Alcasa">
+                            </div>
+                            <div class="noticia-panel-text-wrap">
+                                <div class="ficha-overview-label" style="margin-bottom: 8px;"><i class="fas fa-file-lines"></i> Resumen del Comunicado Oficial</div>
+                                <p id="noticiaPanelResumen"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ficha-actions">
+                        <a id="noticiaPanelLink" href="http://alcasa.com.ve:5001/?page=1" target="_blank" rel="noopener noreferrer" class="btn-ver-todos-productos">
+                            <i class="fas fa-up-right-from-square"></i> Abrir Nota Original en el Periódico Digital
+                        </a>
+                        <button type="button" class="btn-modal-close" id="noticiaModalCloseFooterBtn" style="margin-left: auto;">
+                            <i class="fas fa-times"></i> Cerrar Vista Previa
+                        </button>
                     </div>
                 </div>
             </div>
@@ -564,127 +733,167 @@
         </section>
 
         <!-- =========================================
-             7. GALERÍA DE VIDEOS Y PROCESOS
+             7. GALERÍA DE VIDEOS Y PROCESOS (ESTILO SALA DE PRENSA CON MINIATURA GIF)
              ========================================= -->
         <section id="galeria" class="fold-reveal">
             <div class="section-header">
+                <span class="prensa-kicker-badge">
+                    <i class="fas fa-photo-film"></i> Galería Audiovisual y Fotográfica · CVG Alcasa
+                </span>
                 <h2 class="blur-text" data-delay="150" data-direction="top" data-animate-by="words">Galería de Procesos</h2>
-                <p>Conoce nuestras plantas en acción, hitos productivos y tecnología</p>
+                <p>Conoce nuestras plantas en acción con vista previa animada (GIF) y accede a la galería clasificada de videos completos y fotografías</p>
             </div>
 
-            <div class="glowing-cards-container" id="galeriaGlowingContainer">
+            <!-- Lista horizontal estilo Sala de Prensa con miniaturas GIF animadas de cada video -->
+            <div class="prensa-list-horizontal" id="galeriaPrensaStyleList">
 
-                <!-- Tarjeta 1: Planta de Laminación -->
-                <div class="glowing-card-parent">
-                    <div class="glowing-card-exact card3">
-                        <div class="glowing-card-exact-bg" style="background-image: url('/assets/img/video-lami.jpg');"></div>
-                        <div class="glowing-card-exact-overlay"></div>
-                        <div class="glowing-card-body">
-                            <span class="glowing-card-badge">Planta de Laminación</span>
-                            <h4 class="blur-text" data-delay="120" data-direction="top" data-animate-by="words">Planta de Laminación en Frío y Caliente</h4>
-                            <p class="blur-text" data-delay="80" data-direction="top" data-animate-by="words">Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación que aseguran maleabilidad superior y calibrado micrométrico.</p>
-                            <div class="glowing-card-actions">
-                                <button type="button" class="see-more-link btn-ver-video" data-video-index="0" data-video-title="Planta de Laminación en Frío y Caliente" data-video-badge="Planta de Laminación" data-video-poster="/assets/img/video-lami.jpg" data-video-desc="Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación.">VER VIDEO <i class="fas fa-play-circle"></i></button>
-                            </div>
-                        </div>
+                <!-- Video 1: Planta de Laminación -->
+                <article class="prensa-api-card prensa-card-horizontal is-top-news" data-video-index="0">
+                    <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="0" data-video-title="Planta de Laminación en Frío y Caliente" data-video-badge="Planta de Laminación" data-video-poster="/assets/img/video-lami.jpg" data-video-src="/assets/media/videos/video-laminacion.mp4" data-video-desc="Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación Clecim-Cosim y Laminador en Frío." title="Clic para reproducir el video completo">
+                        <img src="/assets/img/galeria/gif-laminacion.gif" alt="GIF Planta de Laminación en Frío y Caliente" class="prensa-api-thumb">
+                        <span class="galeria-gif-badge"><i class="fas fa-film"></i> GIF · 00:41</span>
                     </div>
-                </div>
+                    <div class="prensa-api-card-body">
+                        <div class="prensa-row-meta">
+                            <span class="prensa-cat-badge"><i class="fas fa-layer-group"></i> Planta de Laminación</span>
+                            <span class="prensa-strip-item"><i class="fas fa-video"></i> Video Oficial del Proceso</span>
+                            <span class="prensa-strip-item"><i class="fas fa-clock"></i> Duración: 00:41 min</span>
+                        </div>
+                        <h3 class="prensa-api-title btn-ver-video" data-video-index="0" data-video-title="Planta de Laminación en Frío y Caliente" data-video-badge="Planta de Laminación" data-video-poster="/assets/img/video-lami.jpg" data-video-src="/assets/media/videos/video-laminacion.mp4" data-video-desc="Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación Clecim-Cosim y Laminador en Frío.">
+                            Planta de Laminación en Frío y Caliente
+                        </h3>
+                        <p class="prensa-api-excerpt">
+                            Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación que aseguran maleabilidad superior y calibrado micrométrico.
+                        </p>
+                    </div>
+                    <div class="prensa-api-footer">
+                        <button type="button" class="btn-prensa-quickview-sm btn-ver-video" data-video-index="0" data-video-title="Planta de Laminación en Frío y Caliente" data-video-badge="Planta de Laminación" data-video-poster="/assets/img/video-lami.jpg" data-video-src="/assets/media/videos/video-laminacion.mp4" data-video-desc="Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación Clecim-Cosim y Laminador en Frío.">
+                            <i class="fas fa-play-circle"></i> Ver video
+                        </button>
+                        <a href="/galeria.html?cat=Planta+de+Laminación" class="btn-prensa-card">
+                            Ver en Galería <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
 
-                <!-- Tarjeta 2: Planta de Fundición -->
-                <div class="glowing-card-parent">
-                    <div class="glowing-card-exact">
-                        <div class="glowing-card-exact-bg" style="background-image: url('/assets/img/video-fund.jpg');"></div>
-                        <div class="glowing-card-exact-overlay"></div>
-                        <div class="glowing-card-body">
-                            <span class="glowing-card-badge">Planta de Fundición</span>
-                            <h4 class="blur-text" data-delay="120" data-direction="top" data-animate-by="words">Planta de Fundición y Hornos de Fusión</h4>
-                            <p class="blur-text" data-delay="80" data-direction="top" data-animate-by="words">Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de lingotes P1020 y cilindros de calidad metalúrgica internacional.</p>
-                            <div class="glowing-card-actions">
-                                <button type="button" class="see-more-link btn-ver-video" data-video-index="1" data-video-title="Planta de Fundición y Hornos de Fusión" data-video-badge="Planta de Fundición" data-video-poster="/assets/img/video-fund.jpg" data-video-desc="Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de lingotes P1020 y cilindros.">VER VIDEO <i class="fas fa-play-circle"></i></button>
-                            </div>
-                        </div>
+                <!-- Video 2: Planta de Fundición -->
+                <article class="prensa-api-card prensa-card-horizontal" data-video-index="1">
+                    <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="1" data-video-title="Planta de Fundición y Hornos de Fusión" data-video-badge="Planta de Fundición" data-video-poster="/assets/img/video-fund.jpg" data-video-src="/assets/media/videos/video-fundicion.mp4" data-video-desc="Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de cilindros tochos 6063 de calidad metalúrgica internacional." title="Clic para reproducir el video completo">
+                        <img src="/assets/img/galeria/gif-fundicion.gif" alt="GIF Planta de Fundición y Hornos de Fusión" class="prensa-api-thumb">
+                        <span class="galeria-gif-badge"><i class="fas fa-film"></i> GIF · 01:12</span>
                     </div>
-                </div>
+                    <div class="prensa-api-card-body">
+                        <div class="prensa-row-meta">
+                            <span class="prensa-cat-badge"><i class="fas fa-fire-burner"></i> Planta de Fundición</span>
+                            <span class="prensa-strip-item"><i class="fas fa-video"></i> Video Oficial del Proceso</span>
+                            <span class="prensa-strip-item"><i class="fas fa-clock"></i> Duración: 01:12 min</span>
+                        </div>
+                        <h3 class="prensa-api-title btn-ver-video" data-video-index="1" data-video-title="Planta de Fundición y Hornos de Fusión" data-video-badge="Planta de Fundición" data-video-poster="/assets/img/video-fund.jpg" data-video-src="/assets/media/videos/video-fundicion.mp4" data-video-desc="Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de cilindros tochos 6063 de calidad metalúrgica internacional.">
+                            Planta de Fundición y Hornos de Fusión
+                        </h3>
+                        <p class="prensa-api-excerpt">
+                            Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de cilindros tochos 6063 homogeneizados de calidad metalúrgica internacional.
+                        </p>
+                    </div>
+                    <div class="prensa-api-footer">
+                        <button type="button" class="btn-prensa-quickview-sm btn-ver-video" data-video-index="1" data-video-title="Planta de Fundición y Hornos de Fusión" data-video-badge="Planta de Fundición" data-video-poster="/assets/img/video-fund.jpg" data-video-src="/assets/media/videos/video-fundicion.mp4" data-video-desc="Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de cilindros tochos 6063 de calidad metalúrgica internacional.">
+                            <i class="fas fa-play-circle"></i> Ver video
+                        </button>
+                        <a href="/galeria.html?cat=Planta+de+Fundición" class="btn-prensa-card">
+                            Ver en Galería <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
 
-                <!-- Tarjeta 3: Planta Extrusora -->
-                <div class="glowing-card-parent">
-                    <div class="glowing-card-exact card2">
-                        <div class="glowing-card-exact-bg" style="background-image: url('/assets/img/video-ext.jpg');"></div>
-                        <div class="glowing-card-exact-overlay"></div>
-                        <div class="glowing-card-body">
-                            <span class="glowing-card-badge">Planta de Extrusión</span>
-                            <h4 class="blur-text" data-delay="120" data-direction="top" data-animate-by="words">Planta de Extrusión y Prensas de Perfilería</h4>
-                            <p class="blur-text" data-delay="80" data-direction="top" data-animate-by="words">Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida para la industria de la construcción y el transporte.</p>
-                            <div class="glowing-card-actions">
-                                <button type="button" class="see-more-link btn-ver-video" data-video-index="2" data-video-title="Planta de Extrusión y Prensas de Perfilería" data-video-badge="Planta de Extrusión" data-video-poster="/assets/img/video-ext.jpg" data-video-desc="Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida.">VER VIDEO <i class="fas fa-play-circle"></i></button>
-                            </div>
-                        </div>
+                <!-- Video 3: Planta de Extrusión -->
+                <article class="prensa-api-card prensa-card-horizontal" data-video-index="2">
+                    <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="2" data-video-title="Planta de Extrusión y Prensas de Perfilería" data-video-badge="Planta de Extrusión" data-video-poster="/assets/img/video-ext.jpg" data-video-src="/assets/media/videos/video-extrusion.mp4" data-video-desc="Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida para la industria de la construcción y el transporte." title="Clic para reproducir el video completo">
+                        <img src="/assets/img/galeria/gif-extrusion.gif" alt="GIF Planta de Extrusión y Prensas de Perfilería" class="prensa-api-thumb">
+                        <span class="galeria-gif-badge"><i class="fas fa-film"></i> GIF · 01:00</span>
                     </div>
-                </div>
+                    <div class="prensa-api-card-body">
+                        <div class="prensa-row-meta">
+                            <span class="prensa-cat-badge"><i class="fas fa-cubes"></i> Planta de Extrusión</span>
+                            <span class="prensa-strip-item"><i class="fas fa-video"></i> Video Oficial del Proceso</span>
+                            <span class="prensa-strip-item"><i class="fas fa-clock"></i> Duración: 01:00 min</span>
+                        </div>
+                        <h3 class="prensa-api-title btn-ver-video" data-video-index="2" data-video-title="Planta de Extrusión y Prensas de Perfilería" data-video-badge="Planta de Extrusión" data-video-poster="/assets/img/video-ext.jpg" data-video-src="/assets/media/videos/video-extrusion.mp4" data-video-desc="Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida para la industria de la construcción y el transporte.">
+                            Planta de Extrusión y Prensas de Perfilería
+                        </h3>
+                        <p class="prensa-api-excerpt">
+                            Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida para la industria de la construcción y el transporte.
+                        </p>
+                    </div>
+                    <div class="prensa-api-footer">
+                        <button type="button" class="btn-prensa-quickview-sm btn-ver-video" data-video-index="2" data-video-title="Planta de Extrusión y Prensas de Perfilería" data-video-badge="Planta de Extrusión" data-video-poster="/assets/img/video-ext.jpg" data-video-src="/assets/media/videos/video-extrusion.mp4" data-video-desc="Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida para la industria de la construcción y el transporte.">
+                            <i class="fas fa-play-circle"></i> Ver video
+                        </button>
+                        <a href="/galeria.html?cat=Planta+de+Extrusión" class="btn-prensa-card">
+                            Ver en Galería <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
 
-                <!-- Tarjeta 4: Ayudas Técnicas -->
-                <div class="glowing-card-parent">
-                    <div class="glowing-card-exact card4">
-                        <div class="glowing-card-exact-bg" style="background-image: url('/assets/img/video-at.jpg');"></div>
-                        <div class="glowing-card-exact-overlay"></div>
-                        <div class="glowing-card-body">
-                            <span class="glowing-card-badge">Compromiso Social</span>
-                            <h4 class="blur-text" data-delay="120" data-direction="top" data-animate-by="words">Taller Soberano de Ayudas Técnicas</h4>
-                            <p class="blur-text" data-delay="80" data-direction="top" data-animate-by="words">Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables.</p>
-                            <div class="glowing-card-actions">
-                                <button type="button" class="see-more-link btn-ver-video" data-video-index="3" data-video-title="Taller Soberano de Ayudas Técnicas" data-video-badge="Compromiso Social" data-video-poster="/assets/img/video-at.jpg" data-video-desc="Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana.">VER VIDEO <i class="fas fa-play-circle"></i></button>
-                            </div>
-                        </div>
+                <!-- Video 4: Taller Soberano de Ayudas Técnicas -->
+                <article class="prensa-api-card prensa-card-horizontal" data-video-index="3">
+                    <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="3" data-video-title="Taller Soberano de Ayudas Técnicas" data-video-badge="Compromiso Social" data-video-poster="/assets/img/video-at.jpg" data-video-src="/assets/media/videos/video-ayudas-tecnicas.mp4" data-video-desc="Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables." title="Clic para reproducir el video completo">
+                        <img src="/assets/img/galeria/gif-ayudas.gif" alt="GIF Taller Soberano de Ayudas Técnicas" class="prensa-api-thumb">
+                        <span class="galeria-gif-badge"><i class="fas fa-film"></i> GIF · 00:25</span>
                     </div>
-                </div>
-
-                <!-- Tarjeta 5: CVG Alcasa Hoy -->
-                <div class="glowing-card-parent">
-                    <div class="glowing-card-exact card3">
-                        <div class="glowing-card-exact-bg" style="background-image: url('/assets/img/video-hoy.png');"></div>
-                        <div class="glowing-card-exact-overlay"></div>
-                        <div class="glowing-card-body">
-                            <span class="glowing-card-badge">Noticiero Corporativo CVG Alcasa</span>
-                            <h4 class="blur-text" data-delay="120" data-direction="top" data-animate-by="words">CVG Alcasa Hoy — Hitos y Logros Productivos</h4>
-                            <p class="blur-text" data-delay="80" data-direction="top" data-animate-by="words">Cobertura audiovisual de la reactivación industrial, jornadas de mantenimiento mayor y la entrega inquebrantable de la clase trabajadora de CVG Alcasa forjando la soberanía patria.</p>
-                            <div class="glowing-card-actions">
-                                <button type="button" class="see-more-link btn-ver-video" data-video-index="4" data-video-title="CVG Alcasa Hoy — Hitos y Logros Productivos" data-video-badge="Noticiero Corporativo CVG Alcasa" data-video-poster="/assets/img/video-hoy.png" data-video-desc="Cobertura audiovisual de la reactivación industrial y jornadas de mantenimiento mayor de CVG Alcasa.">VER VIDEO <i class="fas fa-play-circle"></i></button>
-                            </div>
+                    <div class="prensa-api-card-body">
+                        <div class="prensa-row-meta">
+                            <span class="prensa-cat-badge"><i class="fas fa-hands-helping"></i> Compromiso Social</span>
+                            <span class="prensa-strip-item"><i class="fas fa-video"></i> Video Oficial del Proceso</span>
+                            <span class="prensa-strip-item"><i class="fas fa-clock"></i> Duración: 00:25 min</span>
                         </div>
+                        <h3 class="prensa-api-title btn-ver-video" data-video-index="3" data-video-title="Taller Soberano de Ayudas Técnicas" data-video-badge="Compromiso Social" data-video-poster="/assets/img/video-at.jpg" data-video-src="/assets/media/videos/video-ayudas-tecnicas.mp4" data-video-desc="Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables.">
+                            Taller Soberano de Ayudas Técnicas
+                        </h3>
+                        <p class="prensa-api-excerpt">
+                            Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables.
+                        </p>
                     </div>
-                </div>
-
-                <!-- Tarjeta 6: Empresas Tuteladas -->
-                <div class="glowing-card-parent">
-                    <div class="glowing-card-exact">
-                        <div class="glowing-card-exact-bg" style="background-image: url('/assets/img/video-sn.jpg');"></div>
-                        <div class="glowing-card-exact-overlay"></div>
-                        <div class="glowing-card-body">
-                            <span class="glowing-card-badge">Cadena del Aluminio CVG</span>
-                            <h4 class="blur-text" data-delay="120" data-direction="top" data-animate-by="words">Integración de Empresas Tuteladas de la CVG</h4>
-                            <p class="blur-text" data-delay="80" data-direction="top" data-animate-by="words">Alianza y sinergia estratégica dentro de la Corporación Venezolana de Guayana (CVG) para fortalecer el encadenamiento productivo entre CVG Bauxilum, CVG Venalum, CVG Carbonorca y CVG Alcasa.</p>
-                            <div class="glowing-card-actions">
-                                <button type="button" class="see-more-link btn-ver-video" data-video-index="5" data-video-title="Integración de Empresas Tuteladas de la CVG" data-video-badge="Cadena del Aluminio CVG" data-video-poster="/assets/img/video-sn.jpg" data-video-desc="Alianza y sinergia estratégica dentro de la Corporación Venezolana de Guayana (CVG) y CVG Alcasa.">VER VIDEO <i class="fas fa-play-circle"></i></button>
-                            </div>
-                        </div>
+                    <div class="prensa-api-footer">
+                        <button type="button" class="btn-prensa-quickview-sm btn-ver-video" data-video-index="3" data-video-title="Taller Soberano de Ayudas Técnicas" data-video-badge="Compromiso Social" data-video-poster="/assets/img/video-at.jpg" data-video-src="/assets/media/videos/video-ayudas-tecnicas.mp4" data-video-desc="Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables.">
+                            <i class="fas fa-play-circle"></i> Ver video
+                        </button>
+                        <a href="/galeria.html?cat=Compromiso+Social" class="btn-prensa-card">
+                            Ver en Galería <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
-                </div>
+                </article>
 
             </div>
 
-            <!-- Visor de Video Expandible Inline -->
-            <div class="product-ficha-panel" id="videoPlayerPanel" style="display: none;">
-                <div class="ficha-header">
-                    <div>
-                        <h4><i class="fas fa-circle-play" style="color: var(--alcasa-accent);"></i> <span id="videoPanelTitle">Proceso Productivo</span></h4>
-                        <div class="ficha-sub" id="videoPanelBadge">Galería Audiovisual CVG Alcasa</div>
+            <!-- Botón de acceso a la Sección de Galería Completa (Videos + Fotografías clasificadas) -->
+            <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 26px;">
+                <a href="/galeria.html" class="btn-ver-todos-productos">
+                    <i class="fas fa-photo-film"></i> Explorar Galería Completa de Videos y Fotografías Clasificadas <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Ventana Flotante (Modal) de Reproducción de Video -->
+            <div class="ficha-modal-backdrop" id="videoPlayerPanel" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="videoPanelTitle">
+                <div class="ficha-modal-dialog" style="max-width: 880px;">
+                    <div class="ficha-header">
+                        <div>
+                            <h4><i class="fas fa-circle-play" style="color: var(--alcasa-accent);"></i> <span id="videoPanelTitle">Proceso Productivo</span></h4>
+                            <div class="ficha-sub" id="videoPanelBadge">Galería Audiovisual CVG Alcasa</div>
+                        </div>
+                        <button type="button" class="ficha-close-btn" id="videoPanelCloseBtn" aria-label="Cerrar reproductor">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
-                    <button type="button" class="ficha-close-btn" id="videoPanelCloseBtn" aria-label="Cerrar reproductor">
-                        <i class="fas fa-times"></i>
-                    </button>
+                    <div class="ficha-modal-body">
+                        <div id="videoPanelMedia" style="margin-bottom: 16px;"></div>
+                        <p id="videoPanelDesc" style="color: #cbd5e1; font-size: 0.96rem; line-height: 1.65; margin: 0;"></p>
+                    </div>
+                    <div class="ficha-actions">
+                        <a href="/galeria.html" class="btn-ver-todos-productos" style="padding: 10px 20px; font-size: 0.88rem;">
+                            <i class="fas fa-photo-film"></i> Ir a la Galería Completa
+                        </a>
+                    </div>
                 </div>
-                <div id="videoPanelMedia" style="margin-bottom: 18px;"></div>
-                <p id="videoPanelDesc" style="color: #cbd5e1; font-size: 0.96rem; line-height: 1.65;"></p>
             </div>
         </section>
 
@@ -836,6 +1045,6 @@
         </div>
     </footer>
 
-    <script src="/assets/js/app.js?v=2026k"></script>
+    <script src="/assets/js/app.js?v=2026q"></script>
 </body>
 </html>

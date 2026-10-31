@@ -100,7 +100,7 @@ function registrarVersionHistorial(string $file, string $id, array $registro, st
     return $todo[$id];
 }
 
-function normalizarGaleriaImagenes($rawImagenes, string $fallbackPortada = '/assets/img/noticias/noticia-773.jpg', string $fallbackPie = ''): array {
+function normalizarGaleriaImagenes($rawImagenes, string $fallbackPortada = '/assets/img/noticias/noticia-761.jpg', string $fallbackPie = ''): array {
     $out = [];
     if (is_string($rawImagenes) && trim($rawImagenes) !== '') {
         $decoded = json_decode($rawImagenes, true);
@@ -348,9 +348,9 @@ if ($action === 'list_all') {
         $lid = (string)($ln['id'] ?? '');
         if ($lid === '') continue;
         $seen[$lid] = true;
-        $imgs = normalizarGaleriaImagenes($ln['imagenes'] ?? [], (string)($ln['imagen'] ?? '/assets/img/noticias/noticia-773.jpg'), (string)($ln['pie_foto'] ?? ''));
+        $imgs = normalizarGaleriaImagenes($ln['imagenes'] ?? [], (string)($ln['imagen'] ?? '/assets/img/noticias/noticia-761.jpg'), (string)($ln['pie_foto'] ?? ''));
         $ln['imagenes'] = $imgs;
-        $ln['imagen'] = $imgs[0]['url'] ?? ($ln['imagen'] ?? '/assets/img/noticias/noticia-773.jpg');
+        $ln['imagen'] = $imgs[0]['url'] ?? ($ln['imagen'] ?? '/assets/img/noticias/noticia-761.jpg');
         $ln['estado'] = strtolower(trim((string)($ln['estado'] ?? 'publicada')));
         $ln['cuerpo'] = (string)($ln['cuerpo'] ?? ($ln['resumen'] ?? ''));
         $ln['autor'] = (string)($ln['autor'] ?? 'Gerencia de Comunicación Estratégica');
@@ -363,9 +363,9 @@ if ($action === 'list_all') {
         $fid = (string)($fn['id'] ?? '');
         if ($fid === '' || isset($seen[$fid])) continue;
         $seen[$fid] = true;
-        $imgs = normalizarGaleriaImagenes($fn['imagenes'] ?? [], (string)($fn['imagen'] ?? '/assets/img/noticias/noticia-773.jpg'), (string)($fn['pie_foto'] ?? ''));
+        $imgs = normalizarGaleriaImagenes($fn['imagenes'] ?? [], (string)($fn['imagen'] ?? '/assets/img/noticias/noticia-761.jpg'), (string)($fn['pie_foto'] ?? ''));
         $fn['imagenes'] = $imgs;
-        $fn['imagen'] = $imgs[0]['url'] ?? ($fn['imagen'] ?? '/assets/img/noticias/noticia-773.jpg');
+        $fn['imagen'] = $imgs[0]['url'] ?? ($fn['imagen'] ?? '/assets/img/noticias/noticia-761.jpg');
         $fn['estado'] = strtolower(trim((string)($fn['estado'] ?? 'publicada')));
         $fn['cuerpo'] = (string)($fn['cuerpo'] ?? ($fn['resumen'] ?? ''));
         $fn['autor'] = (string)($fn['autor'] ?? 'Gerencia de Comunicación Estratégica');
@@ -506,7 +506,7 @@ if ($action === 'create' || $action === 'update' || $action === 'save_draft') {
         }));
     }
     if (empty($galeriaExistente)) {
-        $galeriaExistente = [['url' => '/assets/img/noticias/noticia-773.jpg', 'pie' => $pieFoto]];
+        $galeriaExistente = [['url' => '/assets/img/noticias/noticia-761.jpg', 'pie' => $pieFoto]];
     }
     $galeriaFinal = array_slice($galeriaExistente, 0, MAX_IMAGES_PER_NEWS);
     if ($pieFoto !== '' && empty($galeriaFinal[0]['pie'])) {

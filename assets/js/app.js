@@ -287,8 +287,7 @@
 
                     var elementPosition = targetElement.getBoundingClientRect().top;
                     var rawDest = elementPosition + (window.pageYOffset || document.documentElement.scrollTop || 0);
-                    // Como la barra del menú desaparece al deslizar hacia abajo, usamos un margen limpio superior
-                    var headerOffset = rawDest > 220 ? 24 : 110;
+                    var headerOffset = 105;
                     smoothScrollTo(rawDest - headerOffset, 520);
                 }
             });
@@ -298,11 +297,18 @@
     /* ======================================================================
        4. HEADER CORPORATIVO UNIFICADO Y FOOTER INSTITUCIONAL
        ====================================================================== */
+    function isStandaloneBackofficePage() {
+        var p = (window.location.pathname || '').toLowerCase();
+        return p.indexOf('redaccion') !== -1 || p.indexOf('contactos') !== -1;
+    }
+
     function renderHeader() {
+        if (isStandaloneBackofficePage()) return;
         var h = $('#site-header') || $('#header-container');
         if (!h) return;
         var isPrensa = window.location.pathname.indexOf('prensa') !== -1;
         var isProductos = window.location.pathname.indexOf('productos') !== -1;
+        var isGaleria = window.location.pathname.indexOf('galeria') !== -1;
 
         h.innerHTML = '' +
             '<div class="alcoa-langbar" translate="no">' +
@@ -336,19 +342,22 @@
                         '</button>' +
                         '<div class="header-logo-left">' +
                             '<a href="/index.html#inicio" class="header-inicio-link" title="CVG Alcasa - Inicio">' +
-                                '<img src="/assets/img/logo-alcasa.png?v=2026" alt="Logo CVG Alcasa" class="logo-alcasa">' +
+                                '<img src="/assets/img/logo-alcasa.png?v=2026m" width="190" height="106" loading="eager" decoding="sync" alt="Logo CVG Alcasa" class="logo-alcasa">' +
                             '</a>' +
                         '</div>' +
                         '<div class="menu-overlay" id="menuOverlay"></div>' +
                         '<nav class="main-navigation" id="mainNav" aria-label="Navegación principal">' +
                             '<div class="mobile-drawer-header">' +
-                                '<span class="mobile-drawer-title">Menú Institucional CVG Alcasa</span>' +
+                                '<div style="display:flex;align-items:center;gap:10px;">' +
+                                    '<img src="/assets/img/logo-alcasa.png?v=2026m" alt="CVG Alcasa" style="height:42px;width:auto;object-fit:contain;">' +
+                                    '<span class="mobile-drawer-title">CVG Alcasa</span>' +
+                                '</div>' +
                                 '<button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Cerrar menú">' +
                                     '<i class="fas fa-times"></i>' +
                                 '</button>' +
                             '</div>' +
                             '<ul class="jelly-menu nav-list">' +
-                                '<li class="' + (!isPrensa && !isProductos ? 'active' : '') + '">' +
+                                '<li class="' + (!isPrensa && !isProductos && !isGaleria ? 'active' : '') + '">' +
                                     '<a href="/index.html#inicio" class="header-inicio-link">Inicio</a>' +
                                 '</li>' +
                                 '<li class="nav-item-has-dropdown">' +
@@ -395,8 +404,21 @@
                                         '<li><a href="http://alcasa.com.ve:5001/minimal" target="_blank" rel="noopener noreferrer">Periódico Digital CVG Alcasa</a></li>' +
                                     '</ul>' +
                                 '</li>' +
-                                '<li>' +
-                                    '<a href="/index.html#galeria">Galería</a>' +
+                                '<li class="nav-item-has-dropdown ' + (isGaleria ? 'active' : '') + '">' +
+                                    '<a href="/galeria.html" class="nav-link-dropdown">' +
+                                        '<span>Galería</span>' +
+                                        '<i class="fas fa-chevron-down dropdown-icon"></i>' +
+                                    '</a>' +
+                                    '<ul class="dropdown-menu">' +
+                                        '<li><a href="/galeria.html">Galería Completa (Videos y Fotos)</a></li>' +
+                                        '<li><a href="/galeria.html?tipo=videos">Videos de Procesos Completos (4)</a></li>' +
+                                        '<li><a href="/galeria.html?cat=Planta%20de%20Laminaci%C3%B3n">Planta de Laminación</a></li>' +
+                                        '<li><a href="/galeria.html?cat=Planta%20de%20Fundici%C3%B3n">Planta de Fundición</a></li>' +
+                                        '<li><a href="/galeria.html?cat=Planta%20de%20Extrusi%C3%B3n">Planta de Extrusión</a></li>' +
+                                        '<li><a href="/galeria.html?cat=Compromiso%20Social">Compromiso Social e Instalaciones</a></li>' +
+                                        '<li class="dropdown-divider"></li>' +
+                                        '<li><a href="/index.html#galeria">Vista Rápida en Inicio</a></li>' +
+                                    '</ul>' +
                                 '</li>' +
                                 '<li class="nav-item-has-dropdown">' +
                                     '<a href="#" class="nav-link-dropdown">' +
@@ -416,11 +438,11 @@
                         '</nav>' +
                         '<div class="header-logo-right">' +
                             '<a href="/index.html#inicio" class="header-inicio-link" title="Corporación Venezolana de Guayana - CVG Alcasa">' +
-                                '<img src="/assets/img/logo-cvg.png?v=2026" alt="Logo CVG y CVG Alcasa" class="logo-segundo logo-cvg-blanco">' +
+                                '<img src="/assets/img/logo-cvg.png?v=2026m" width="180" height="76" loading="eager" decoding="sync" alt="Logo CVG y CVG Alcasa" class="logo-segundo logo-cvg-blanco">' +
                             '</a>' +
                             '<div class="logo-divider"></div>' +
                             '<a href="/index.html#inicio" class="header-inicio-link" title="Gobierno Bolivariano de Venezuela">' +
-                                '<img src="/assets/img/logo-institucional.png?v=2026" alt="Logo Institucional" class="logo-institucional">' +
+                                '<img src="/assets/img/logo-institucional.png?v=2026m" width="175" height="52" loading="eager" decoding="sync" alt="Logo Institucional" class="logo-institucional">' +
                             '</a>' +
                         '</div>' +
                     '</div>' +
@@ -458,10 +480,9 @@
 
         var fadeEl = $('#headerScrollFade');
         var headerContainer = $('#site-header') || $('#header-container');
-        var isHomePage = document.body.id === 'inicio' || !!document.getElementById('heroSlider');
 
         if (headerContainer) {
-            if (isHomePage && headerContainer.dataset.scrollBound !== '1') {
+            if (headerContainer.dataset.scrollBound !== '1') {
                 headerContainer.dataset.scrollBound = '1';
                 var onScroll = function () {
                     var mainNavEl = $('#mainNav');
@@ -491,11 +512,6 @@
                 };
                 window.addEventListener('scroll', onScroll, { passive: true });
                 onScroll();
-            } else if (!isHomePage) {
-                headerContainer.style.opacity = '1';
-                headerContainer.style.transform = 'none';
-                headerContainer.style.pointerEvents = 'auto';
-                headerContainer.classList.remove('header-hidden-scroll', 'header-scrolled');
             }
         }
 
@@ -585,6 +601,7 @@
     }
 
     function renderFooter() {
+        if (isStandaloneBackofficePage()) return;
         var f = $('#site-footer');
         if (!f || $('footer', f)) return;
         var k = C.contacto || {};
@@ -757,10 +774,22 @@
     function initProductosCatalogo() {
         var fichaPanel = $('#productFichaPanel');
         var fichaCloseBtn = $('#fichaCloseBtn');
+        var fichaBtnCerrarFooter = $('#fichaBtnCerrarFooter');
         var fichaBtnCotizar = $('#fichaBtnCotizar');
+
+        if (fichaPanel && fichaPanel.parentElement !== document.body) {
+            document.body.appendChild(fichaPanel);
+        }
 
         var defaultSpecs = {
             0: {
+                orden: 1,
+                linea: 'Fundición',
+                nombre: 'Cilindros Tochos',
+                nombre_en: 'Billet Cylinders',
+                img: '/assets/img/productos/cilindros-tochos.jpg',
+                desc: 'Cilindros de aluminio primario homogeneizados en aleación 6063/S6063 temple T5 y diámetro 7", cortados a medida para alimentar prensas de extrusión con máxima precisión metalúrgica.',
+                spec: 'Aleación: 6063/S6063 | Temple: T5 | Diámetro: 7" | Longitud: Cortados a medida | Homogenizado',
                 titulo: 'Cilindros Tochos',
                 aleacion: 'Serie AA 6063 / S6063 — Temple T5 (Homogenizado)',
                 pureza: 'Aluminio primario aleado con Silicio (Si) y Magnesio (Mg) homogeneizado en hornos de tratamiento térmico',
@@ -768,9 +797,19 @@
                 propiedades: 'Estructura cristalina uniforme, alta fluidez de extrusión y excelente respuesta al anodizado',
                 normas: 'Catálogo Oficial CVG Alcasa 2025 / COVENIN 284 / ASTM B221',
                 usos: 'Materia prima directa para prensas extrusoras de perfilería arquitectónica, estructural y tubular.',
-                cotizar: 'Cilindros Tochos (Fundición)'
+                cotizar: 'Cilindros Tochos (Fundición)',
+                codigos_tabla: [
+                    { codigo: 'CIL-6063-7', detalle: 'Aleación 6063/S6063 · Temple T5 · Diámetro 7" (177,8 mm)', bulto: 'Cortados a medida', peso: 'Homogenizado' }
+                ]
             },
             28: {
+                orden: 29,
+                linea: 'Laminación',
+                nombre: 'Rollo de aluminio liso o stucco',
+                nombre_en: 'Smooth or Stucco Aluminum Roll',
+                img: '/assets/img/productos/rollo-aluminio-liso-stucco.jpg',
+                desc: 'Bobina de aluminio de bajo espesor laminada en frío con superficie lisa brillante o grabada stucco de calibre uniforme, ideal para líneas de acanalado de techos, aislamiento térmico, refrigeración, ductería y empaques.',
+                spec: 'Aleación: 1050, 1100 y 3003 | Temple: F/H - O / H-14 / H-16 / H-18 | Espesor: de 0.3 hasta 0.9 mm | Ancho: 1220 mm',
                 titulo: 'Rollo de aluminio liso o stucco',
                 aleacion: 'Series AA 1050, AA 1100 y AA 3003 — Temples F/H - O / H-14 / H-16 / H-18',
                 pureza: 'Bobina de aluminio de bajo espesor laminada en frío con superficie lisa brillante o grabada stucco',
@@ -778,32 +817,122 @@
                 propiedades: 'Excelente formabilidad para perfiladoras de techos, aislamiento térmico/acústico y embutido',
                 normas: 'Catálogo Oficial CVG Alcasa 2025 — Laminados pág. 11 / ASTM B209 / COVENIN 1324',
                 usos: 'Fabricación de láminas acanaladas para techos, recubrimiento de tuberías térmicas, refrigeración y envases.',
-                cotizar: 'Rollo de aluminio liso o stucco (Laminación)'
+                cotizar: 'Rollo de aluminio liso o stucco (Laminación)',
+                codigos_tabla: [
+                    { codigo: 'ROL-LISO-STUCCO', detalle: 'Aleaciones 1050 / 1100 / 3003 · Espesor 0.3 a 0.9 mm · Ancho 1220 mm', bulto: 'Bobina industrial', peso: 'Acabado Liso o Stucco' }
+                ]
             }
         };
 
+        function cerrarFichaModal() {
+            if (!fichaPanel) return;
+            fichaPanel.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
         function abrirFichaPorIndice(idx) {
             var prod = C.productos && C.productos[idx];
-            var prodJson = prod && prod.ficha
-                ? Object.assign({
-                    titulo: '#' + String(prod.orden || (idx + 1)).padStart(2, '0') + ' · ' + prod.nombre,
-                    cotizar: prod.cotizar || prod.nombre
-                }, prod.ficha)
-                : null;
-            var data = prodJson || defaultSpecs[idx] || defaultSpecs[0];
+            var def = defaultSpecs[idx] || defaultSpecs[0];
+            var f = (prod && prod.ficha) || {};
+            var ordenNum = (prod && prod.orden) || def.orden || (idx + 1);
+            var numStr = '#' + String(ordenNum).padStart(2, '0');
+            var lineaStr = (prod && prod.linea) || def.linea || 'Catálogo 2025';
+            var nombreProd = (prod && prod.nombre) || def.nombre || def.titulo;
+            var nombreEn = (prod && prod.nombre_en) || def.nombre_en || 'CVG Alcasa Official Product';
+            var imgProd = (prod && prod.img) || def.img || '/assets/img/productos/cilindros-tochos.jpg';
+            var descProd = (prod && prod.desc) || def.desc || '';
+            var specProd = (prod && prod.spec) || def.spec || '';
+            var codigosTabla = (prod && Array.isArray(prod.codigos_tabla) && prod.codigos_tabla.length)
+                ? prod.codigos_tabla
+                : (def.codigos_tabla || []);
+
+            var data = {
+                badgeOrden: numStr + ' · Planta de ' + lineaStr,
+                nombreEn: nombreEn,
+                titulo: nombreProd,
+                img: imgProd,
+                desc: descProd,
+                spec: specProd,
+                aleacion: f.aleacion || def.aleacion,
+                pureza: f.pureza || def.pureza,
+                presentaciones: f.presentaciones || def.presentaciones,
+                propiedades: f.propiedades || def.propiedades,
+                normas: f.normas || def.normas,
+                usos: f.usos || def.usos,
+                cotizar: (prod && (prod.cotizar || prod.nombre)) || def.cotizar
+            };
 
             if (fichaPanel && data) {
-                $('#fichaTituloTexto').textContent = data.titulo;
-                $('#fichaAleacion').textContent = data.aleacion;
-                $('#fichaPureza').textContent = data.pureza;
-                $('#fichaPresentaciones').textContent = data.presentaciones;
-                $('#fichaPropiedades').textContent = data.propiedades;
-                $('#fichaNormas').textContent = data.normas;
-                $('#fichaUsos').textContent = data.usos;
+                var badgeOrdenEl = $('#fichaBadgeOrden');
+                var nombreEnEl = $('#fichaNombreIngles');
+                var tituloEl = $('#fichaTituloTexto');
+                var aleacionEl = $('#fichaAleacion');
+                var aleacionBoxEl = $('#fichaAleacionBox');
+                var imgEl = $('#fichaImagenProducto');
+                var descEl = $('#fichaDescTexto');
+                var specResumenEl = $('#fichaSpecResumen');
+                var purezaEl = $('#fichaPureza');
+                var presentacionesEl = $('#fichaPresentaciones');
+                var propiedadesEl = $('#fichaPropiedades');
+                var normasEl = $('#fichaNormas');
+                var usosEl = $('#fichaUsos');
+                var tablaWrapEl = $('#fichaTablaCodigosWrap');
+
+                if (badgeOrdenEl) badgeOrdenEl.textContent = data.badgeOrden;
+                if (nombreEnEl) nombreEnEl.textContent = data.nombreEn;
+                if (tituloEl) tituloEl.textContent = data.titulo;
+                if (aleacionEl) aleacionEl.textContent = data.aleacion;
+                if (aleacionBoxEl) aleacionBoxEl.textContent = data.aleacion;
+                if (imgEl) {
+                    imgEl.src = data.img;
+                    imgEl.alt = data.titulo + ' - CVG Alcasa';
+                }
+                if (descEl) descEl.textContent = data.desc;
+                if (specResumenEl) {
+                    specResumenEl.innerHTML = '<i class="fas fa-microchip"></i> ' + esc(data.spec);
+                }
+                if (purezaEl) purezaEl.textContent = data.pureza;
+                if (presentacionesEl) presentacionesEl.textContent = data.presentaciones;
+                if (propiedadesEl) propiedadesEl.textContent = data.propiedades;
+                if (normasEl) normasEl.textContent = data.normas;
+                if (usosEl) usosEl.textContent = data.usos;
                 if (fichaBtnCotizar) fichaBtnCotizar.setAttribute('data-producto', data.cotizar);
 
-                fichaPanel.style.display = 'block';
-                fichaPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                if (tablaWrapEl) {
+                    if (codigosTabla.length) {
+                        tablaWrapEl.innerHTML = '' +
+                            '<div class="ficha-section-subtitle" style="margin-bottom:10px;">' +
+                                '<i class="fas fa-table-list"></i> Tabla de Códigos, Dimensiones, Piezas por Bulto y Peso Oficial' +
+                            '</div>' +
+                            '<div class="catalog-item-table-wrap ficha-modal-table-wrap">' +
+                                '<table class="catalog-item-table">' +
+                                    '<thead>' +
+                                        '<tr>' +
+                                            '<th>Código / Referencia</th>' +
+                                            '<th>Dimensiones / Especificación</th>' +
+                                            '<th>Piezas / Bulto</th>' +
+                                            '<th>Peso / Acabado</th>' +
+                                        '</tr>' +
+                                    '</thead>' +
+                                    '<tbody>' +
+                                        codigosTabla.map(function (r) {
+                                            return '<tr>' +
+                                                '<td><strong>' + esc(r.codigo || '-') + '</strong></td>' +
+                                                '<td>' + esc(r.detalle || '-') + '</td>' +
+                                                '<td>' + esc(r.bulto || '-') + '</td>' +
+                                                '<td>' + esc(r.peso || '-') + '</td>' +
+                                            '</tr>';
+                                        }).join('') +
+                                    '</tbody>' +
+                                '</table>' +
+                            '</div>';
+                    } else {
+                        tablaWrapEl.innerHTML = '';
+                    }
+                }
+
+                fichaPanel.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
             }
         }
 
@@ -860,7 +989,9 @@
                 btn.dataset.cotizarBound = '1';
                 btn.addEventListener('click', function (e) {
                     e.preventDefault();
-                    cotizarProducto(this.getAttribute('data-producto'));
+                    var prodName = this.getAttribute('data-producto');
+                    cerrarFichaModal();
+                    cotizarProducto(prodName);
                 });
             });
         }
@@ -868,7 +999,20 @@
         bindProductActionButtons(document);
 
         if (fichaCloseBtn && fichaPanel) {
-            fichaCloseBtn.addEventListener('click', function () { fichaPanel.style.display = 'none'; });
+            fichaCloseBtn.addEventListener('click', cerrarFichaModal);
+        }
+        if (fichaBtnCerrarFooter && fichaPanel) {
+            fichaBtnCerrarFooter.addEventListener('click', cerrarFichaModal);
+        }
+        if (fichaPanel) {
+            fichaPanel.addEventListener('click', function (e) {
+                if (e.target === fichaPanel) cerrarFichaModal();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && fichaPanel.style.display !== 'none') {
+                    cerrarFichaModal();
+                }
+            });
         }
 
         // Renderizado del Catálogo Completo Ordenado (#01 a #32) en /productos.html
@@ -1026,55 +1170,286 @@
     function initGaleriaVideos() {
         var panel = $('#videoPlayerPanel');
         var closeBtn = $('#videoPanelCloseBtn');
+        var closeFooterBtn = $('#videoPanelCloseFooterBtn');
         var titleEl = $('#videoPanelTitle');
         var badgeEl = $('#videoPanelBadge');
         var descEl = $('#videoPanelDesc');
         var bodyEl = $('#videoPanelMedia');
 
         if (!panel) return;
+        if (panel.parentElement !== document.body) {
+            document.body.appendChild(panel);
+        }
 
-        $$('.btn-ver-video').forEach(function (btn) {
-            btn.addEventListener('click', function (e) {
-                e.preventDefault();
-                var idx = parseInt(this.getAttribute('data-video-index') || '0', 10);
-                var v = (C.videos && C.videos[idx]) || {};
-                var titulo = v.titulo || this.getAttribute('data-video-title') || 'Proceso Productivo CVG Alcasa';
-                var badge = v.badge || this.getAttribute('data-video-badge') || 'Galería de Procesos';
-                var desc = v.desc || this.getAttribute('data-video-desc') || '';
-                var poster = v.poster || this.getAttribute('data-video-poster') || '/assets/img/hero-laminacion.jpg';
-                var src = v.src || this.getAttribute('data-video-src') || '';
+        function cerrarVideoModal() {
+            if (bodyEl) bodyEl.innerHTML = '';
+            panel.style.display = 'none';
+            document.body.style.overflow = '';
+        }
 
-                if (titleEl) titleEl.textContent = titulo;
-                if (badgeEl) badgeEl.textContent = badge;
-                if (descEl) descEl.textContent = desc;
+        function bindVideoTriggers(root) {
+            $$('.btn-ver-video', root || document).forEach(function (btn) {
+                if (btn.dataset.videoBound === '1') return;
+                btn.dataset.videoBound = '1';
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var idx = parseInt(this.getAttribute('data-video-index') || '0', 10);
+                    var v = (C.videos && C.videos[idx]) || {};
+                    var titulo = v.titulo || this.getAttribute('data-video-title') || 'Proceso Productivo CVG Alcasa';
+                    var badge = v.badge || this.getAttribute('data-video-badge') || 'Galería de Procesos';
+                    var desc = v.desc || this.getAttribute('data-video-desc') || '';
+                    var poster = v.poster || this.getAttribute('data-video-poster') || '/assets/img/hero-laminacion.jpg';
+                    var src = v.src || this.getAttribute('data-video-src') || '';
 
-                if (bodyEl) {
-                    if (src) {
-                        bodyEl.innerHTML = '<video controls autoplay playsinline poster="' + esc(poster) + '" src="' + esc(src) + '" style="width:100%;max-height:460px;border-radius:12px;background:#000;"></video>';
-                    } else {
-                        bodyEl.innerHTML = '' +
-                            '<div style="position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.15);background:#000;">' +
-                                '<img src="' + esc(poster) + '" alt="' + esc(titulo) + '" style="width:100%;max-height:420px;object-fit:cover;opacity:0.55;">' +
-                                '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;background:rgba(2,12,27,0.45);">' +
-                                    '<i class="fas fa-film" style="font-size:3rem;color:var(--alcasa-accent);margin-bottom:12px;"></i>' +
-                                    '<strong style="color:#fff;font-size:1.2rem;margin-bottom:6px;">' + esc(titulo) + '</strong>' +
-                                    '<span style="color:#cbd5e1;font-size:0.92rem;max-width:520px;">Archivo audiovisual del proceso productivo (configurable en <code>data/contenido.json</code> o en la biblioteca de medios de WordPress).</span>' +
-                                '</div>' +
-                            '</div>';
+                    if (titleEl) titleEl.textContent = titulo;
+                    if (badgeEl) badgeEl.textContent = badge;
+                    if (descEl) descEl.textContent = desc;
+
+                    if (bodyEl) {
+                        if (src) {
+                            bodyEl.innerHTML = '<video controls autoplay playsinline poster="' + esc(poster) + '" src="' + esc(src) + '" style="width:100%;max-height:500px;border-radius:12px;background:#000;display:block;"></video>';
+                        } else {
+                            bodyEl.innerHTML = '' +
+                                '<div style="position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.15);background:#000;">' +
+                                    '<img src="' + esc(poster) + '" alt="' + esc(titulo) + '" style="width:100%;max-height:420px;object-fit:cover;opacity:0.55;">' +
+                                    '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;background:rgba(2,12,27,0.45);">' +
+                                        '<i class="fas fa-film" style="font-size:3rem;color:var(--alcasa-accent);margin-bottom:12px;"></i>' +
+                                        '<strong style="color:#fff;font-size:1.2rem;margin-bottom:6px;">' + esc(titulo) + '</strong>' +
+                                        '<span style="color:#cbd5e1;font-size:0.92rem;max-width:520px;">Archivo audiovisual del proceso productivo.</span>' +
+                                    '</div>' +
+                                '</div>';
+                        }
                     }
-                }
 
-                panel.style.display = 'block';
-                panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    panel.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+        }
+
+        bindVideoTriggers(document);
+
+        if (closeBtn) closeBtn.addEventListener('click', cerrarVideoModal);
+        if (closeFooterBtn) closeFooterBtn.addEventListener('click', cerrarVideoModal);
+        panel.addEventListener('click', function (e) {
+            if (e.target === panel) cerrarVideoModal();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && panel.style.display !== 'none') {
+                cerrarVideoModal();
+            }
+        });
+    }
+
+    function initPaginaGaleria() {
+        var fotosGrid = $('#galeriaFotosGrid');
+        var videosSection = $('#galeriaVideosSection');
+        var fotosSection = $('#galeriaFotosSection');
+        var videosList = $('#galeriaVideosList');
+        var filterBtns = $$('#galeriaFilterBar .catalogo-filter-btn');
+        var searchInput = $('#galeriaSearchInput');
+        var countBar = $('#galeriaCountBar');
+        var videosBadge = $('#galeriaVideosCountBadge');
+        var fotosBadge = $('#galeriaFotosCountBadge');
+
+        if (!fotosGrid && !videosList) return;
+
+        var defaultFotos = [
+            { id: 'lam-1', categoria: 'Planta de Laminación', titulo: 'Bobinas de Aluminio Laminado Listas para Despacho', desc: 'Rollos de aluminio primario laminados en frío y caliente con acabado superficial de alta pureza para la industria nacional.', img: '/assets/img/galeria/laminacion-bobinas.jpg' },
+            { id: 'lam-2', categoria: 'Planta de Laminación', titulo: 'Línea de Colada Continua de Cintas de Aluminio', desc: 'Solidificación directa de aluminio fundido en cintas continuas para alimentación de los trenes de laminación.', img: '/assets/img/galeria/laminacion-colada-continua.jpg' },
+            { id: 'lam-3', categoria: 'Planta de Laminación', titulo: 'Tren de Laminación en Caliente Clecim-Cosim', desc: 'Reducción de espesor de planchones de aluminio mediante pases controlados de alta precisión.', img: '/assets/img/galeria/laminacion-tren-caliente.jpg' },
+            { id: 'lam-4', categoria: 'Planta de Laminación', titulo: 'Laminador en Frío de Alta Velocidad', desc: 'Operación del complejo laminador para bobinas delgadas y foil industrial.', img: '/assets/img/hero-laminacion.jpg' },
+            { id: 'fun-1', categoria: 'Planta de Fundición', titulo: 'Hornos de Fusión y Retención de Aluminio Primario', desc: 'Preparación metalúrgica de aleaciones serie 1000, 3000 y 6063 a temperaturas controladas.', img: '/assets/img/galeria/fundicion-horno.jpg' },
+            { id: 'fun-2', categoria: 'Planta de Fundición', titulo: 'Mesa de Colada Vertical de Cilindros Tochos', desc: 'Fundición semicontinua de cilindros de extrusión en aleación AA 6063.', img: '/assets/img/galeria/fundicion-colada.jpg' },
+            { id: 'fun-3', categoria: 'Planta de Fundición', titulo: 'Lotes de Cilindros Tochos Homogenizados 6063-T5', desc: 'Cilindros de 7 pulgadas inspeccionados por ultrasonido y listos para prensas de extrusión.', img: '/assets/img/galeria/fundicion-cilindros.jpg' },
+            { id: 'fun-4', categoria: 'Planta de Fundición', titulo: 'Operaciones en Nave de Fundición Matanzas', desc: 'Control de colada y aseguramiento de calidad metalúrgica por nuestra clase trabajadora.', img: '/assets/img/hero-fundicion.jpg' },
+            { id: 'ext-1', categoria: 'Planta de Extrusión', titulo: 'Prensa Extrusora de Perfilería Industrial', desc: 'Transformación termomecánica de cilindros tochos 6063 en perfiles estructurales y arquitectónicos.', img: '/assets/img/galeria/extrusion-prensa.jpg' },
+            { id: 'ext-2', categoria: 'Planta de Extrusión', titulo: 'Perfiles Tubulares y Estructurales Extruidos', desc: 'Lotes de tubería, ángulos y perfiles serie Caroní en mesa de enfriamiento y estirado.', img: '/assets/img/galeria/extrusion-perfiles-1.jpg' },
+            { id: 'ext-3', categoria: 'Planta de Extrusión', titulo: 'Control Dimensional de Perfilería de Aluminio', desc: 'Verificación de tolerancias milimétricas según normas COVENIN y catálogo técnico CVG Alcasa.', img: '/assets/img/galeria/extrusion-perfiles-2.jpg' },
+            { id: 'ext-4', categoria: 'Planta de Extrusión', titulo: 'Línea de Extrusión de 7 Pulgadas', desc: 'Capacidad instalada para abastecer al sector construcción, cerramientos y manufactura nacional.', img: '/assets/img/hero-extrusion.jpg' },
+            { id: 'soc-1', categoria: 'Compromiso Social', titulo: 'Clase Trabajadora de CVG Alcasa en Operaciones', desc: 'Talento humano técnico y obrero comprometido con la soberanía productiva del sector aluminio.', img: '/assets/img/galeria/social-trabajadores.jpg' },
+            { id: 'soc-2', categoria: 'Compromiso Social', titulo: 'Planta de Pintura y Acabados Industriales', desc: 'Instalaciones de recubrimiento y preparación superficial de láminas y perfiles de aluminio.', img: '/assets/img/galeria/social-planta-pintura.jpg' },
+            { id: 'soc-3', categoria: 'Compromiso Social', titulo: 'Jornadas de Atención Social y Bienestar Integral', desc: 'Despliegue de salud, recreación y dotación de ayudas técnicas para trabajadores y comunidades de Guayana.', img: '/assets/img/galeria/social-jornada.jpg' }
+        ];
+
+        var fotosList = (Array.isArray(C.galeria_fotos) && C.galeria_fotos.length) ? C.galeria_fotos : defaultFotos;
+        var activeFilter = 'all';
+        var currentQuery = '';
+        var currentFilteredFotos = fotosList.slice();
+
+        // Leer parámetros ?cat=... o ?tipo=videos|fotos de la URL
+        try {
+            var params = new URLSearchParams(window.location.search);
+            var catParam = params.get('cat');
+            var tipoParam = params.get('tipo');
+            if (tipoParam === 'videos' || tipoParam === 'fotos') {
+                activeFilter = tipoParam;
+            } else if (catParam) {
+                activeFilter = catParam;
+            }
+            if (activeFilter !== 'all') {
+                filterBtns.forEach(function (b) {
+                    b.classList.toggle('active', b.getAttribute('data-filter') === activeFilter);
+                });
+            }
+        } catch (e) {}
+
+        // Lightbox de fotografías
+        var lbModal = $('#galeriaLightboxModal');
+        if (lbModal && lbModal.parentElement !== document.body) {
+            document.body.appendChild(lbModal);
+        }
+        var lbCloseBtn = $('#lightboxCloseBtn');
+        var lbCloseFooterBtn = $('#lightboxCloseFooterBtn');
+        var lbPrevBtn = $('#lightboxPrevBtn');
+        var lbNextBtn = $('#lightboxNextBtn');
+        var lbImg = $('#lightboxImage');
+        var lbTitle = $('#lightboxTitle');
+        var lbCat = $('#lightboxCatBadge');
+        var lbCounter = $('#lightboxCounter');
+        var lbDesc = $('#lightboxDesc');
+        var lbRawBtn = $('#lightboxOpenRawBtn');
+        var currentPhotoIndex = 0;
+
+        function mostrarFotoLightbox(idx) {
+            if (!lbModal || !currentFilteredFotos.length) return;
+            if (idx < 0) idx = currentFilteredFotos.length - 1;
+            if (idx >= currentFilteredFotos.length) idx = 0;
+            currentPhotoIndex = idx;
+            var f = currentFilteredFotos[currentPhotoIndex];
+            if (lbImg) {
+                lbImg.src = f.img;
+                lbImg.alt = f.titulo;
+            }
+            if (lbTitle) lbTitle.textContent = f.titulo;
+            if (lbCat) lbCat.textContent = f.categoria;
+            if (lbCounter) lbCounter.textContent = 'Fotografía ' + (currentPhotoIndex + 1) + ' de ' + currentFilteredFotos.length;
+            if (lbDesc) lbDesc.textContent = f.desc;
+            if (lbRawBtn) lbRawBtn.href = f.img;
+            lbModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarLightbox() {
+            if (!lbModal) return;
+            lbModal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        if (lbCloseBtn) lbCloseBtn.addEventListener('click', cerrarLightbox);
+        if (lbCloseFooterBtn) lbCloseFooterBtn.addEventListener('click', cerrarLightbox);
+        if (lbPrevBtn) lbPrevBtn.addEventListener('click', function () { mostrarFotoLightbox(currentPhotoIndex - 1); });
+        if (lbNextBtn) lbNextBtn.addEventListener('click', function () { mostrarFotoLightbox(currentPhotoIndex + 1); });
+        if (lbModal) {
+            lbModal.addEventListener('click', function (e) {
+                if (e.target === lbModal) cerrarLightbox();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (lbModal.style.display === 'none') return;
+                if (e.key === 'Escape') cerrarLightbox();
+                if (e.key === 'ArrowLeft') mostrarFotoLightbox(currentPhotoIndex - 1);
+                if (e.key === 'ArrowRight') mostrarFotoLightbox(currentPhotoIndex + 1);
+            });
+        }
+
+        function renderGaleriaCompleta() {
+            var q = currentQuery.toLowerCase();
+            var showVideosSection = (activeFilter !== 'fotos');
+            var showFotosSection = (activeFilter !== 'videos');
+
+            // 1. Filtrar tarjetas de video
+            var videoCards = $$('.galeria-video-card', videosList || document);
+            var visibleVideos = 0;
+            videoCards.forEach(function (card) {
+                var cat = card.getAttribute('data-categoria') || '';
+                var text = (card.textContent || '').toLowerCase();
+                var matchCat = (activeFilter === 'all' || activeFilter === 'videos' || cat === activeFilter);
+                var matchQ = !q || text.indexOf(q) !== -1 || cat.toLowerCase().indexOf(q) !== -1;
+                var show = showVideosSection && matchCat && matchQ;
+                card.style.display = show ? '' : 'none';
+                if (show) visibleVideos++;
+            });
+
+            if (videosSection) {
+                videosSection.style.display = (showVideosSection && visibleVideos > 0) ? '' : 'none';
+            }
+            if (videosBadge) {
+                videosBadge.textContent = visibleVideos + (visibleVideos === 1 ? ' Video Disponible' : ' Videos Disponibles');
+            }
+
+            // 2. Filtrar y renderizar fotografías clasificadas
+            currentFilteredFotos = fotosList.filter(function (f) {
+                if (!showFotosSection) return false;
+                var matchCat = (activeFilter === 'all' || activeFilter === 'fotos' || f.categoria === activeFilter);
+                if (!matchCat) return false;
+                if (!q) return true;
+                var haystack = (f.titulo + ' ' + f.desc + ' ' + f.categoria).toLowerCase();
+                return haystack.indexOf(q) !== -1;
+            });
+
+            if (fotosSection) {
+                fotosSection.style.display = showFotosSection ? '' : 'none';
+            }
+            if (fotosBadge) {
+                fotosBadge.textContent = currentFilteredFotos.length + (currentFilteredFotos.length === 1 ? ' Fotografía Clasificada' : ' Fotografías Clasificadas');
+            }
+
+            if (fotosGrid) {
+                if (!currentFilteredFotos.length) {
+                    fotosGrid.innerHTML = '<div class="catalogo-empty-state"><i class="fas fa-camera"></i><p>No se encontraron fotografías en esta categoría o búsqueda.</p></div>';
+                } else {
+                    fotosGrid.innerHTML = currentFilteredFotos.map(function (f, idx) {
+                        return '' +
+                            '<article class="galeria-foto-card" data-foto-index="' + idx + '">' +
+                                '<div class="galeria-foto-thumb-wrap" data-foto-index="' + idx + '" title="Clic para ampliar fotografía">' +
+                                    '<img src="' + esc(f.img) + '" alt="' + esc(f.titulo) + '" class="galeria-foto-img" loading="lazy">' +
+                                    '<span class="galeria-foto-cat-badge"><i class="fas fa-tag"></i> ' + esc(f.categoria) + '</span>' +
+                                    '<div class="galeria-foto-zoom-overlay"><i class="fas fa-magnifying-glass-plus"></i> Ver Foto Completa</div>' +
+                                '</div>' +
+                                '<div class="galeria-foto-body">' +
+                                    '<h4>' + esc(f.titulo) + '</h4>' +
+                                    '<p>' + esc(f.desc) + '</p>' +
+                                    '<button type="button" class="btn-galeria-ampliar" data-foto-index="' + idx + '">' +
+                                        '<i class="fas fa-expand"></i> Ampliar Fotografía' +
+                                    '</button>' +
+                                '</div>' +
+                            '</article>';
+                    }).join('');
+
+                    $$('[data-foto-index]', fotosGrid).forEach(function (el) {
+                        el.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            var i = parseInt(this.getAttribute('data-foto-index') || '0', 10);
+                            mostrarFotoLightbox(i);
+                        });
+                    });
+                }
+            }
+
+            if (countBar) {
+                countBar.innerHTML = 'Mostrando <strong>' + visibleVideos + ' videos completos</strong> y <strong>' + currentFilteredFotos.length + ' fotografías clasificadas</strong> (' + (activeFilter === 'all' ? 'Todas las áreas' : esc(activeFilter)) + ')';
+            }
+        }
+
+        filterBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                filterBtns.forEach(function (b) { b.classList.remove('active'); });
+                this.classList.add('active');
+                activeFilter = this.getAttribute('data-filter') || 'all';
+                renderGaleriaCompleta();
             });
         });
 
-        if (closeBtn) {
-            closeBtn.addEventListener('click', function () {
-                if (bodyEl) bodyEl.innerHTML = '';
-                panel.style.display = 'none';
+        if (searchInput) {
+            searchInput.addEventListener('input', function () {
+                currentQuery = (this.value || '').trim();
+                renderGaleriaCompleta();
             });
         }
+
+        renderGaleriaCompleta();
     }
 
     /* ======================================================================
@@ -1130,32 +1505,35 @@
         var resumen = resumenRaw || tituloRaw;
 
         var fallbackImgs = [
-            '/assets/img/noticias/noticia-773.jpg',
-            '/assets/img/noticias/noticia-769.jpg',
-            '/assets/img/noticias/noticia-766.jpg',
-            '/assets/img/noticias/noticia-765.jpg',
-            '/assets/img/noticias/noticia-764.jpg',
-            '/assets/img/noticias/noticia-763.jpg',
-            '/assets/img/noticias/noticia-762.jpg',
+            '/assets/img/noticias/noticia-761.jpg',
             '/assets/img/noticias/noticia-760.jpg',
             '/assets/img/noticias/noticia-759.jpg',
-            '/assets/img/noticias/noticia-758.jpg'
+            '/assets/img/noticias/noticia-758.jpg',
+            '/assets/img/noticias/noticia-757.jpg',
+            '/assets/img/noticias/noticia-753.jpg',
+            '/assets/img/noticias/noticia-752.jpg',
+            '/assets/img/noticias/noticia-751.jpg',
+            '/assets/img/noticias/noticia-750.jpg',
+            '/assets/img/noticias/noticia-749.jpg',
+            '/assets/img/noticias/noticia-748.jpg',
+            '/assets/img/noticias/noticia-739.jpg'
         ];
-        var img = pick(['imagen', 'portada', 'miniatura', 'imagen_url', 'thumbnail', 'foto']) || fallbackImgs[idx % fallbackImgs.length] || PH;
+        var defImg = fallbackImgs[idx % fallbackImgs.length];
+        var img = pick(['imagen', 'portada', 'miniatura', 'imagen_url', 'thumbnail', 'foto']) || defImg;
         var rawImgs = (n && Array.isArray(n.imagenes)) ? n.imagenes : [];
         var imagenes = [];
         for (var j = 0; j < rawImgs.length && imagenes.length < 20; j++) {
             var it = rawImgs[j];
             if (typeof it === 'string' && it.trim()) {
                 imagenes.push({ url: it.trim(), pie: '' });
-            } else if (it && it.url) {
+            } else if (it && it.url && String(it.url).trim()) {
                 imagenes.push({ url: String(it.url).trim(), pie: normalizarCVG(decodificarUnicode(it.pie || '')) });
             }
         }
         if (!imagenes.length) {
-            imagenes.push({ url: img, pie: '' });
+            imagenes.push({ url: img || defImg, pie: '' });
         }
-        img = imagenes[0].url || img;
+        img = imagenes[0].url || img || defImg;
 
         var fh = separarFechaHora(pick(['fecha', 'created_at', 'date']), pick(['fecha_solo']), pick(['hora_solo']));
         var cuerpoRaw = normalizarCVG(decodificarUnicode(pick(['cuerpo', 'contenido']) || resumen));
@@ -1183,17 +1561,20 @@
     var prensaAuthUser = null;
 
     function renderCardNoticia(n, idx) {
-        var imgs = (Array.isArray(n.imagenes) && n.imagenes.length) ? n.imagenes.slice(0, 20) : [{ url: n.imagen || PH, pie: '' }];
+        var defFallback = '/assets/img/noticias/noticia-761.jpg';
+        var imgs = (Array.isArray(n.imagenes) && n.imagenes.length) ? n.imagenes.slice(0, 20) : [{ url: n.imagen || defFallback, pie: '' }];
         var slidesHtml = imgs.map(function (im, sIdx) {
-            return '<img loading="lazy" class="prensa-api-thumb prensa-carousel-slide' + (sIdx === 0 ? ' active' : '') + '" ' +
-                'data-slide-idx="' + sIdx + '" src="' + esc(im.url || PH) + '" alt="' + esc(im.pie || n.titulo) + '" ' +
-                'onerror="this.onerror=null;this.src=\'' + PH + '\';">';
+            var srcUrl = (im && im.url) ? im.url : (n.imagen || defFallback);
+            return '<img ' + (sIdx === 0 ? 'loading="eager"' : 'loading="lazy"') + ' decoding="async" class="prensa-api-thumb prensa-carousel-slide' + (sIdx === 0 ? ' active' : '') + '" ' +
+                'data-slide-idx="' + sIdx + '" src="' + esc(srcUrl) + '" alt="' + esc(im.pie || n.titulo) + '" ' +
+                'style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:none;outline:none;" ' +
+                'onerror="this.onerror=null;this.src=\'' + defFallback + '\';">';
         }).join('');
 
         return '' +
             '<article class="prensa-api-card prensa-card-horizontal' + (idx === 0 ? ' is-top-news' : '') + '" data-noticia-idx="' + idx + '" data-curr-slide="0">' +
                 '<div class="prensa-api-thumb-wrap prensa-thumb-carousel">' +
-                    '<div class="prensa-carousel-stage">' +
+                    '<div class="prensa-carousel-stage" style="position:relative;width:100%;height:100%;overflow:hidden;">' +
                         slidesHtml +
                     '</div>' +
                 '</div>' +
@@ -1227,81 +1608,117 @@
         var iframeEl = $('#prensaIframeEl') || $('#iframeFallback');
         var detailPanel = $('#noticiaDetailPanel');
         var detailCloseBtn = $('#noticiaDetailCloseBtn') || $('#noticiaPanelCloseBtn');
+        var detailFooterCloseBtn = $('#noticiaModalCloseFooterBtn');
+        var paginationBar = $('#prensaPaginationBar');
+        var isPaginatedMode = gridEl.getAttribute('data-paginated') === 'true';
 
-        // Controles editoriales (Login y Publicación en prensa.html)
-        var btnToggleLogin = $('#btnTogglePrensaLogin');
-        var btnNuevaNoticia = $('#btnNuevaNoticiaToggle');
-        var btnIrContactosCV = $('#btnIrPanelContactosCV');
-        var btnLogout = $('#btnLogoutPrensa');
-        var loginPanel = $('#prensaLoginPanel');
-        var btnCloseLogin = $('#btnClosePrensaLogin');
-        var formLogin = $('#formPrensaLogin');
-        var loginMsg = $('#prensaLoginMsg');
-        var editorPanel = $('#prensaEditorPanel');
-        var btnCloseEditor = $('#btnClosePrensaEditor');
-        var formEditor = $('#formPrensaEditor');
-        var editorHeading = $('#prensaEditorHeading');
-        var userBadge = $('#prensaUserBadge');
-        var editorMsg = $('#prensaEditorMsg');
-        var btnLimpiarEditor = $('#btnLimpiarEditorNoticia');
+        if (detailPanel && detailPanel.parentElement !== document.body) {
+            document.body.appendChild(detailPanel);
+        }
 
         var maxAttr = parseInt(gridEl.getAttribute('data-max') || '10', 10);
         var initialVisible = maxAttr || 10;
         var todas = [];
         var mostrandoTodas = false;
+        var currentPage = 1;
+        var totalPages = 72;
 
-        function resetEditorForm() {
-            if (!formEditor) return;
-            formEditor.reset();
-            if ($('#notiEditId')) $('#notiEditId').value = '';
-            if ($('#notiImagenActual')) $('#notiImagenActual').value = '';
-            if (editorHeading) editorHeading.innerHTML = '<i class="fas fa-pen-to-square" style="color: var(--alcasa-accent);"></i> Publicar Nueva Noticia';
-            if ($('#btnGuardarNoticia')) $('#btnGuardarNoticia').innerHTML = '<i class="fas fa-cloud-arrow-up"></i> Publicar Noticia Ahora';
-        }
+        try {
+            var pParams = new URLSearchParams(window.location.search);
+            var pQuery = parseInt(pParams.get('page') || '1', 10);
+            if (pQuery > 0) currentPage = pQuery;
+        } catch (e) {}
 
-        function actualizarUIEditorial() {
-            var autenticado = !!prensaAuthUser;
-            var perms = (autenticado && Array.isArray(prensaAuthUser.permisos)) ? prensaAuthUser.permisos : [];
-            var esAdmin = autenticado && prensaAuthUser.rol === 'admin';
-            var tienePrensa = autenticado && (esAdmin || perms.indexOf('prensa') !== -1);
-            var tieneContactos = autenticado && (esAdmin || perms.indexOf('contactos') !== -1);
-            var tieneCV = autenticado && (esAdmin || perms.indexOf('cv') !== -1);
-
-            if (btnToggleLogin) btnToggleLogin.style.display = autenticado ? 'none' : 'inline-flex';
-            if (btnNuevaNoticia) btnNuevaNoticia.style.display = tienePrensa ? 'inline-flex' : 'none';
-            if (btnIrContactosCV) btnIrContactosCV.style.display = (tieneContactos || tieneCV) ? 'inline-flex' : 'none';
-            if (btnLogout) btnLogout.style.display = autenticado ? 'inline-flex' : 'none';
-            if (autenticado && userBadge) {
-                userBadge.textContent = (prensaAuthUser.nombre || prensaAuthUser.usuario) + ' · ' + (prensaAuthUser.nivel || '');
+        function renderPaginacion(curr, total) {
+            if (!paginationBar || !isPaginatedMode) return;
+            if (total <= 1) {
+                paginationBar.style.display = 'none';
+                return;
             }
-            if (!tienePrensa && editorPanel) {
-                editorPanel.style.display = 'none';
-            }
+            paginationBar.style.display = 'flex';
+            var html = '';
+            html += '<button type="button" class="prensa-page-btn" data-page="1" ' + (curr <= 1 ? 'disabled' : '') + ' title="Primera página">«</button>';
+            html += '<button type="button" class="prensa-page-btn" data-page="' + Math.max(1, curr - 1) + '" ' + (curr <= 1 ? 'disabled' : '') + ' title="Página anterior">‹</button>';
 
-            var adminBarEl = $('#prensaAdminBar');
-            if (adminBarEl) {
-                if (!autenticado) {
-                    adminBarEl.innerHTML = '<a href="/redaccion.html" class="btn-outline-corp" style="padding: 8px 16px; font-size: 0.84rem;"><i class="fas fa-user-lock"></i> Iniciar Sesión</a>';
-                } else {
-                    var btns = '<span style="font-size:0.8rem;font-weight:700;color:var(--alcasa-blue);margin-right:6px;"><i class="fas fa-user-check" style="color:#16a34a;"></i> ' + esc(prensaAuthUser.usuario) + '</span>';
-                    if (tienePrensa) {
-                        btns += '<a href="/redaccion.html" class="btn-outline-corp" style="padding: 7px 14px; font-size: 0.82rem;"><i class="fas fa-pen-to-square"></i> Redacción Prensa</a>';
-                    }
-                    if (tieneContactos && tieneCV) {
-                        btns += '<a href="/contactos.html" class="btn-outline-corp" style="padding: 7px 14px; font-size: 0.82rem;"><i class="fas fa-folder-tree"></i> Contactos y CV</a>';
-                    } else if (tieneContactos) {
-                        btns += '<a href="/contactos.html" class="btn-outline-corp" style="padding: 7px 14px; font-size: 0.82rem;"><i class="fas fa-envelope-open-text"></i> Bandeja Contactos</a>';
-                    } else if (tieneCV) {
-                        btns += '<a href="/contactos.html" class="btn-outline-corp" style="padding: 7px 14px; font-size: 0.82rem;"><i class="fas fa-file-pdf"></i> Bandeja CV</a>';
-                    }
-                    adminBarEl.innerHTML = btns;
-                }
+            var startP = Math.max(1, curr - 2);
+            var endP = Math.min(total, startP + 4);
+            if (endP - startP < 4) startP = Math.max(1, endP - 4);
+
+            if (startP > 1) {
+                html += '<button type="button" class="prensa-page-btn" data-page="1">1</button>';
+                if (startP > 2) html += '<span class="prensa-page-ellipsis">…</span>';
+            }
+            for (var p = startP; p <= endP; p++) {
+                html += '<button type="button" class="prensa-page-btn' + (p === curr ? ' active' : '') + '" data-page="' + p + '">' + p + '</button>';
+            }
+            if (endP < total) {
+                if (endP < total - 1) html += '<span class="prensa-page-ellipsis">…</span>';
+                html += '<button type="button" class="prensa-page-btn" data-page="' + total + '">' + total + '</button>';
             }
 
-            if (todas.length) dibujar();
+            html += '<button type="button" class="prensa-page-btn" data-page="' + Math.min(total, curr + 1) + '" ' + (curr >= total ? 'disabled' : '') + ' title="Página siguiente">›</button>';
+            html += '<button type="button" class="prensa-page-btn" data-page="' + total + '" ' + (curr >= total ? 'disabled' : '') + ' title="Última página">»</button>';
+
+            paginationBar.innerHTML = html;
+            $$('.prensa-page-btn', paginationBar).forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    if (this.disabled) return;
+                    var targetP = parseInt(this.getAttribute('data-page') || '1', 10);
+                    if (targetP === currentPage) return;
+                    currentPage = targetP;
+                    try {
+                        var u = new URL(window.location.href);
+                        u.searchParams.set('page', String(currentPage));
+                        window.history.pushState({}, '', u.toString());
+                    } catch (e) {}
+                    cargarListaNoticias(false);
+                    var topBox = $('.page-header-box') || gridEl;
+                    if (topBox) topBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
         }
 
         function cargarListaNoticias(forzarSinCache) {
+            if (isPaginatedMode) {
+                if (counterEl) {
+                    counterEl.innerHTML = '<i class="fas fa-spinner fa-spin" style="color: var(--alcasa-accent);"></i> <span>Cargando página ' + currentPage + ' de noticias oficiales de CVG Alcasa...</span>';
+                }
+                var pageUrl = CFG.noticias + '?page=' + currentPage + (forzarSinCache ? '&nocache=' + Date.now() : '');
+                return getJSON(pageUrl)
+                    .catch(function () {
+                        return getJSON(CFG.respaldo).then(function (arr) {
+                            var perPage = 10;
+                            var totP = Math.max(1, Math.ceil(arr.length / perPage));
+                            return {
+                                page: currentPage,
+                                total_pages: totP,
+                                noticias: arr.slice((currentPage - 1) * perPage, currentPage * perPage)
+                            };
+                        });
+                    })
+                    .then(function (resp) {
+                        var arr = Array.isArray(resp) ? resp : (resp && Array.isArray(resp.noticias) ? resp.noticias : []);
+                        if (resp && resp.total_pages) totalPages = parseInt(resp.total_pages, 10) || 72;
+                        todas = arr.map(normNoticia).filter(function (n) { return !!n.titulo; });
+                        if (!todas.length) throw new Error('Sin noticias');
+                        if (iframeFallback) iframeFallback.classList.remove('active');
+                        dibujar();
+                        renderPaginacion(currentPage, totalPages);
+                    })
+                    .catch(function () {
+                        if (counterEl) {
+                            counterEl.innerHTML = '<i class="fas fa-newspaper" style="color: var(--alcasa-accent);"></i> <span>Periódico Digital de CVG Alcasa en línea</span>';
+                        }
+                        gridEl.innerHTML = '';
+                        if (iframeFallback && iframeEl) {
+                            if (!iframeEl.getAttribute('src')) {
+                                iframeEl.setAttribute('src', iframeEl.getAttribute('data-src') || '/minimal.html');
+                            }
+                            iframeFallback.classList.add('active');
+                        }
+                    });
+            }
+
             var urlApi = CFG.noticias + (forzarSinCache ? '?nocache=' + Date.now() : '');
             return getJSON(urlApi)
                 .catch(function () { return getJSON(CFG.respaldo); })
@@ -1379,6 +1796,12 @@
             }
         }
 
+        function cerrarDetalleNoticia() {
+            if (!detailPanel) return;
+            detailPanel.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
         function abrirDetalleNoticia(idx, startSlide) {
             var n = todas[idx];
             if (!n || !detailPanel) return;
@@ -1399,13 +1822,24 @@
 
             renderDetailSlide();
 
-            detailPanel.style.display = 'block';
-            detailPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            detailPanel.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         if (detailCloseBtn && detailPanel) {
-            detailCloseBtn.addEventListener('click', function () {
-                detailPanel.style.display = 'none';
+            detailCloseBtn.addEventListener('click', cerrarDetalleNoticia);
+        }
+        if (detailFooterCloseBtn && detailPanel) {
+            detailFooterCloseBtn.addEventListener('click', cerrarDetalleNoticia);
+        }
+        if (detailPanel) {
+            detailPanel.addEventListener('click', function (e) {
+                if (e.target === detailPanel) cerrarDetalleNoticia();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && detailPanel.style.display !== 'none') {
+                    cerrarDetalleNoticia();
+                }
             });
         }
 
@@ -1441,7 +1875,7 @@
                     cambiarSlideCard(card, curr + 1);
                 });
 
-                if (detailPanel && detailPanel.style.display === 'block' && detailPanel.dataset.hovered !== '1') {
+                if (detailPanel && detailPanel.style.display !== 'none' && detailPanel.dataset.hovered !== '1') {
                     var nDet = todas[detailNoticiaIdx];
                     if (nDet && Array.isArray(nDet.imagenes) && nDet.imagenes.length > 1) {
                         detailSlideIdx++;
@@ -1534,12 +1968,17 @@
         }
 
         function dibujar() {
-            var limite = mostrandoTodas ? Math.min(todas.length, 18) : initialVisible;
+            var limite = isPaginatedMode ? todas.length : (mostrandoTodas ? todas.length : initialVisible);
             var visibles = todas.slice(0, limite);
 
             if (counterEl) {
-                counterEl.innerHTML = '<i class="fas fa-bolt" style="color: var(--alcasa-accent);"></i> ' +
-                    '<span>Mostrando <strong>' + visibles.length + '</strong> de <strong>' + todas.length + ' noticias publicadas</strong> en <strong>CVG Aluminio del Caroní, S.A. (CVG Alcasa)</strong></span>';
+                if (isPaginatedMode) {
+                    counterEl.innerHTML = '<i class="fas fa-bolt" style="color: var(--alcasa-accent);"></i> ' +
+                        '<span>Página <strong>' + currentPage + '</strong> de <strong>' + totalPages + '</strong> · Mostrando <strong>' + visibles.length + ' noticias oficiales</strong> de <strong>CVG Aluminio del Caroní, S.A. (CVG Alcasa)</strong></span>';
+                } else {
+                    counterEl.innerHTML = '<i class="fas fa-bolt" style="color: var(--alcasa-accent);"></i> ' +
+                        '<span>Mostrando <strong>' + visibles.length + '</strong> de <strong>' + todas.length + ' noticias publicadas</strong> en <strong>CVG Aluminio del Caroní, S.A. (CVG Alcasa)</strong></span>';
+                }
             }
 
             if (!visibles.length) {
@@ -1556,7 +1995,7 @@
             bindNoticiaEvents();
 
             if (btnMasEl) {
-                if (todas.length > initialVisible) {
+                if (!isPaginatedMode && todas.length > initialVisible) {
                     btnMasEl.style.display = 'inline-flex';
                     btnMasEl.hidden = false;
                     btnMasEl.innerHTML = mostrandoTodas
@@ -1574,145 +2013,6 @@
                 mostrandoTodas = !mostrandoTodas;
                 dibujar();
             });
-        }
-
-        // Eventos del Panel Editorial en prensa.html
-        if (btnToggleLogin && loginPanel) {
-            btnToggleLogin.addEventListener('click', function () {
-                loginPanel.style.display = loginPanel.style.display === 'none' ? 'block' : 'none';
-            });
-        }
-        if (btnCloseLogin && loginPanel) {
-            btnCloseLogin.addEventListener('click', function () { loginPanel.style.display = 'none'; });
-        }
-        if (btnNuevaNoticia && editorPanel) {
-            btnNuevaNoticia.addEventListener('click', function () {
-                resetEditorForm();
-                editorPanel.style.display = editorPanel.style.display === 'none' ? 'block' : 'none';
-                if (editorPanel.style.display === 'block') {
-                    editorPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-            });
-        }
-        if (btnCloseEditor && editorPanel) {
-            btnCloseEditor.addEventListener('click', function () { editorPanel.style.display = 'none'; });
-        }
-        if (btnLimpiarEditor) {
-            btnLimpiarEditor.addEventListener('click', resetEditorForm);
-        }
-        if (formLogin) {
-            formLogin.addEventListener('submit', function (e) {
-                e.preventDefault();
-                if (loginMsg) {
-                    loginMsg.textContent = 'Verificando credenciales...';
-                    loginMsg.className = 'contacto-mensaje';
-                }
-                fetch('/api/prensa_admin.php?action=login', {
-                    method: 'POST',
-                    body: new FormData(formLogin)
-                })
-                .then(function (r) { return r.json(); })
-                .then(function (res) {
-                    if (res && res.success && res.user) {
-                        prensaAuthUser = res.user;
-                        if (loginPanel) loginPanel.style.display = 'none';
-                        if (editorPanel) editorPanel.style.display = 'block';
-                        formLogin.reset();
-                        if (loginMsg) loginMsg.textContent = '';
-                        actualizarUIEditorial();
-                    } else {
-                        if (loginMsg) {
-                            loginMsg.textContent = (res && res.error) || 'Credenciales inválidas.';
-                            loginMsg.className = 'contacto-mensaje error';
-                        }
-                    }
-                })
-                .catch(function () {
-                    if (loginMsg) {
-                        loginMsg.textContent = 'Error de conexión con el servidor PHP.';
-                        loginMsg.className = 'contacto-mensaje error';
-                    }
-                });
-            });
-        }
-        if (btnLogout) {
-            btnLogout.addEventListener('click', function () {
-                fetch('/api/prensa_admin.php?action=logout', { method: 'POST' })
-                    .then(function () {
-                        prensaAuthUser = null;
-                        actualizarUIEditorial();
-                    });
-            });
-        }
-        if (formEditor) {
-            formEditor.addEventListener('submit', function (e) {
-                e.preventDefault();
-                var act = ($('#notiEditId') && $('#notiEditId').value) ? 'update' : 'create';
-                if (editorMsg) {
-                    editorMsg.textContent = 'Publicando noticia...';
-                    editorMsg.className = 'contacto-mensaje';
-                }
-                fetch('/api/prensa_admin.php?action=' + act, {
-                    method: 'POST',
-                    body: new FormData(formEditor)
-                })
-                .then(function (r) { return r.json(); })
-                .then(function (res) {
-                    if (res && res.success) {
-                        if (editorMsg) {
-                            editorMsg.textContent = res.mensaje || 'Noticia guardada correctamente.';
-                            editorMsg.className = 'contacto-mensaje exito';
-                        }
-                        resetEditorForm();
-                        cargarListaNoticias(true);
-                    } else {
-                        if (editorMsg) {
-                            editorMsg.textContent = (res && res.error) || 'Error al guardar la noticia.';
-                            editorMsg.className = 'contacto-mensaje error';
-                        }
-                    }
-                })
-                .catch(function () {
-                    if (editorMsg) {
-                        editorMsg.textContent = 'Error de conexión con el servidor PHP.';
-                        editorMsg.className = 'contacto-mensaje error';
-                    }
-                });
-            });
-        }
-
-        // Consultar sesión activa si estamos en prensa.html
-        if (btnToggleLogin || $('#prensaAdminBar')) {
-            getJSON('/api/prensa_admin.php?action=status')
-                .then(function (st) {
-                    if (st && st.authenticated && st.user) {
-                        prensaAuthUser = st.user;
-                        actualizarUIEditorial();
-                    }
-                })
-                .catch(function () {});
-
-            var quickList = $('#prensaQuickAccountsList');
-            if (quickList) {
-                getJSON('/api/prensa_admin.php?action=accounts')
-                    .then(function (res) {
-                        var accs = (res && Array.isArray(res.accounts)) ? res.accounts : [];
-                        quickList.innerHTML = accs.map(function (a, i) {
-                            return '<button type="button" class="btn-outline-corp btn-quick-acc" data-acc-idx="' + i + '" style="padding:5px 10px;font-size:0.78rem;">' +
-                                '<i class="fas fa-user-check"></i> <strong>' + esc(a.usuario) + '</strong> / <code>' + esc(a.password) + '</code> <span style="opacity:0.75;">(' + esc(a.rol) + ')</span>' +
-                            '</button>';
-                        }).join('');
-                        $$('.btn-quick-acc', quickList).forEach(function (b) {
-                            b.addEventListener('click', function () {
-                                var a = accs[parseInt(this.getAttribute('data-acc-idx') || '0', 10)];
-                                if (!a) return;
-                                if ($('#prensaLoginUser')) $('#prensaLoginUser').value = a.usuario;
-                                if ($('#prensaLoginPass')) $('#prensaLoginPass').value = a.password;
-                            });
-                        });
-                    })
-                    .catch(function () {});
-            }
         }
 
         cargarListaNoticias(false);
@@ -1919,6 +2219,8 @@
     }
 
     function boot() {
+        renderHeader();
+        renderFooter();
         getJSON(CFG.contenido)
             .then(function (d) { C = d || {}; })
             .catch(function () { C = {}; })
@@ -1931,6 +2233,7 @@
                 initProductosCatalogo();
                 initFAQ();
                 initGaleriaVideos();
+                initPaginaGaleria();
                 initNoticias();
                 initFormularios();
                 initFoldReveal();

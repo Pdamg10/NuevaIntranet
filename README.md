@@ -8,7 +8,7 @@ El detalle técnico completo de la arquitectura y evolución del proyecto se enc
 
 ## Ejecución en Entorno Local
 
-### 1. Servidor completo con PHP (Formularios, Sala de Prensa, Redacción, Contactos y CV)
+### 1. Servidor completo con PHP (Formularios, Sala de Prensa Paginada, Galería, Redacción, Contactos y CV)
 ```bash
 php -d upload_max_filesize=12M -d post_max_size=25M -S localhost:8000
 # Abrir http://localhost:8000/index.html
@@ -17,7 +17,7 @@ php -d upload_max_filesize=12M -d post_max_size=25M -S localhost:8000
 ### 2. Solo vista estática (sin PHP)
 ```bash
 python3 -m http.server 8000
-# Las noticias cargan desde el respaldo local data/noticias.json
+# Las noticias y catálogo cargan desde los respaldos locales data/noticias.json y data/contenido.json
 ```
 
 ---
@@ -26,11 +26,12 @@ python3 -m http.server 8000
 
 | Archivo | Descripción |
 | :--- | :--- |
-| `/index.html` | Portal principal (Hero 3D, Empresa, Catálogo Destacado, Sala de Prensa con carrusel en miniatura, Oportunidades Laborales — Envía tu CV, Clientes, Galería de Videos, OAC y Contacto). |
-| `/productos.html` | Catálogo Oficial de Productos 2025 completo (32 productos de Fundición, Extrusión y Laminación con ficha técnica interactiva y descarga de PDF). |
-| `/prensa.html` | **Pulso Industrial CVG Alcasa** — Sala de Prensa con las 10 noticias más importantes en tiempo real y carrusel automático de imágenes en miniatura. |
-| `/redaccion.html` | **Sala de Redacción** — Panel editorial en 3 zonas para crear/editar noticias nuevas o anteriores, carrusel de hasta 20 fotos por noticia, borradores e historial de versiones. |
-| `/contactos.html` | **Panel Administrativo de Contactos y Postulaciones (CV)** — Bandejas separadas por nivel de usuario con visor de detalle, copia para WhatsApp/Correo y descarga de CV. |
+| `/index.html` | Portal principal (Barra superior inteligente con los 3 logos institucionales que se oculta al deslizar, Hero 3D, Empresa, Catálogo Destacado con Ficha Técnica flotante, Sala de Prensa con vista previa emergente, Oportunidades Laborales — Envía tu CV, Clientes, Galería Multimedia con miniaturas GIF animadas, OAC y Contacto). |
+| `/productos.html` | Catálogo Oficial de Productos 2025 completo (32 productos de Fundición, Extrusión y Laminación con ventana emergente flotante de Ficha Técnica detallada y descarga de PDF). |
+| `/galeria.html` | **Galería Multimedia Institucional** — Sección dedicada con todos los videos industriales completos (`.mp4` con previsualización `.gif`) y fotografías clasificadas por área (*Fundición*, *Extrusión*, *Laminación*, *Planta y Operaciones*, *Gestión Social*), buscador y reproductor/visor emergente. |
+| `/prensa.html` | **Pulso Industrial CVG Alcasa** — Sala de Prensa pública (sin barra de login administrativo) conectada a `http://alcasa.com.ve:5001/?page=1` (páginas 1 a 72), con carrusel automático en miniatura y ventana emergente flotante de **Vista rápida**. |
+| `/redaccion.html` | **Sala de Redacción (Intranet Independiente)** — Aplicación administrativa separada del portal público (sin menú principal) con diseño en 3 zonas para crear/editar noticias, carrusel de hasta 20 fotos por noticia, borradores e historial de versiones. |
+| `/contactos.html` | **Panel Administrativo de Contactos y Postulaciones (CV)** — Aplicación administrativa independiente con bandejas separadas por nivel de usuario, visor de detalle, copia para WhatsApp/Correo y descarga de CV. |
 | `/minimal.html` | Vista compacta embebible de Pulso Industrial CVG Alcasa. |
 
 ---
