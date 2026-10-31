@@ -1278,22 +1278,24 @@
         var currentQuery = '';
         var currentFilteredFotos = fotosList.slice();
 
-        // Leer parámetros ?cat=... o ?tipo=videos|fotos de la URL
-        try {
-            var params = new URLSearchParams(window.location.search);
-            var catParam = params.get('cat');
-            var tipoParam = params.get('tipo');
-            if (tipoParam === 'videos' || tipoParam === 'fotos') {
-                activeFilter = tipoParam;
-            } else if (catParam) {
-                activeFilter = catParam;
-            }
-            if (activeFilter !== 'all') {
-                filterBtns.forEach(function (b) {
-                    b.classList.toggle('active', b.getAttribute('data-filter') === activeFilter);
-                });
-            }
-        } catch (e) {}
+        // Mostrar siempre toda la galería completa salvo que exista barra de filtros activa
+        if (filterBtns.length) {
+            try {
+                var params = new URLSearchParams(window.location.search);
+                var catParam = params.get('cat');
+                var tipoParam = params.get('tipo');
+                if (tipoParam === 'videos' || tipoParam === 'fotos') {
+                    activeFilter = tipoParam;
+                } else if (catParam) {
+                    activeFilter = catParam;
+                }
+                if (activeFilter !== 'all') {
+                    filterBtns.forEach(function (b) {
+                        b.classList.toggle('active', b.getAttribute('data-filter') === activeFilter);
+                    });
+                }
+            } catch (e) {}
+        }
 
         // Lightbox de fotografías
         var lbModal = $('#galeriaLightboxModal');
