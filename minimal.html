@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pulso Industrial CVG Alcasa — Vista Compacta</title>
+    <title>Noticias CVG Alcasa — Vista Minimal con Miniaturas</title>
     <link rel="icon" type="image/png" href="/assets/img/favicon.png">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="/assets/img/favicon.png">
@@ -11,81 +11,337 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/main.css?v=2026m">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026r">
     <style>
         body {
-            background: #f4f7fb;
-            padding: 18px 16px;
+            background: #f0f4f8;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            color: #0f172a;
+            margin: 0;
+            padding: 22px 16px 40px;
         }
         .minimal-shell {
-            max-width: 1040px;
+            max-width: 1120px;
             margin: 0 auto;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 8px 28px rgba(0, 34, 68, 0.08);
+            border: 1px solid #dce4ee;
+            padding: 24px 26px 30px;
         }
         .minimal-topbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--alcasa-blue);
+            gap: 14px;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 3px solid #003366;
         }
-        .minimal-topbar h2 {
-            font-size: 1.3rem;
-            color: var(--alcasa-blue);
+        .minimal-topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .minimal-topbar h1 {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: #003366;
             margin: 0;
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+        .minimal-topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .minimal-search-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding: 14px 16px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #cbd5e1;
+            align-items: center;
+        }
+        .minimal-search-bar input[type="text"] {
+            flex: 2 1 220px;
+            padding: 9px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            color: #0f172a;
+            background: #ffffff;
+        }
+        .minimal-search-bar input[type="date"],
+        .minimal-search-bar select {
+            padding: 9px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 0.88rem;
+            font-family: inherit;
+            color: #0f172a;
+            background: #ffffff;
+        }
+        .minimal-search-bar .btn-buscar {
+            background: #003366;
+            color: #ffffff;
+            border: 1px solid #002244;
+            padding: 9px 20px;
+            border-radius: 7px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.2s ease;
+        }
+        .minimal-search-bar .btn-buscar:hover {
+            background: #ff6b1a;
+            border-color: #e05500;
+        }
+        .minimal-search-bar .btn-limpiar {
+            background: #475569;
+            color: #ffffff;
+            border: 1px solid #334155;
+            padding: 9px 16px;
+            border-radius: 7px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .minimal-search-bar .btn-limpiar:hover {
+            background: #334155;
+        }
+        .minimal-filtro-info {
+            padding: 10px 14px;
+            background: #e0f2fe;
+            border-left: 4px solid #0284c7;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #0369a1;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .minimal-shell {
+                padding: 16px 14px 24px;
+            }
+            .minimal-search-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .minimal-search-bar input,
+            .minimal-search-bar select,
+            .minimal-search-bar button,
+            .minimal-search-bar a {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="minimal-shell">
         <div class="minimal-topbar">
-            <h2><i class="fas fa-bolt" style="color: var(--alcasa-accent);"></i> Pulso Industrial CVG Alcasa</h2>
-            <div class="prensa-api-status" id="prensaApiCounter" style="margin: 0;">
-                <i class="fas fa-spinner fa-spin" style="color: var(--alcasa-accent);"></i>
-                <span>Cargando noticias oficiales...</span>
+            <div class="minimal-topbar-left">
+                <h1>
+                    <i class="fas fa-newspaper" style="color: var(--alcasa-accent, #ff6b1a);"></i>
+                    Últimas Noticias — CVG Alcasa
+                </h1>
+            </div>
+            <div class="minimal-topbar-actions">
+                <a href="/prensa.html" class="btn-outline-corp" style="padding: 7px 14px; font-size: 0.84rem; text-decoration: none;">
+                    <i class="fas fa-bolt"></i> Sala de Prensa
+                </a>
+                <a href="/index.html" class="btn-primary-corp" style="padding: 7px 14px; font-size: 0.84rem; text-decoration: none;">
+                    <i class="fas fa-home"></i> Portal Principal
+                </a>
             </div>
         </div>
 
-        <div class="noticia-detail-panel" id="noticiaDetailPanel" style="display: none;">
-            <div class="noticia-detail-header">
-                <div class="noticia-detail-meta">
-                    <span class="noticia-detail-cat" id="noticiaDetailCat">Gestión Industrial</span>
-                    <span class="noticia-detail-datetime" id="noticiaDetailDatetime"></span>
-                </div>
-                <button type="button" class="ficha-close-btn" id="noticiaDetailCloseBtn" aria-label="Cerrar noticia">
-                    <i class="fas fa-times"></i>
-                </button>
+        <!-- Barra de búsqueda y filtros (compatible con http://alcasa.com.ve:5001/minimal) -->
+        <div class="minimal-search-bar" id="filtros">
+            <input type="text" id="txtBuscar" placeholder="🔍 Buscar por título, categoría o resumen..." value="">
+            <input type="date" id="fechaBuscar" value="" title="Filtrar por fecha exacta">
+            <select id="mesBuscar" title="Filtrar por mes">
+                <option value="">-- Mes --</option>
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+            <select id="anioBuscar" title="Filtrar por año">
+                <option value="">-- Año --</option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+            </select>
+            <button type="button" class="btn-buscar" id="btnBuscarMinimal">
+                <i class="fas fa-search"></i> Buscar
+            </button>
+            <a href="#filtros" class="btn-limpiar" id="btnLimpiarMinimal">
+                <i class="fas fa-rotate-left"></i> Limpiar
+            </a>
+        </div>
+
+        <div id="filtroInfo" class="minimal-filtro-info"></div>
+
+        <!-- Contador de estado estilo Sala de Prensa -->
+        <div class="prensa-toolbar-row" style="margin-bottom: 14px;">
+            <div class="prensa-api-status" id="prensaApiCounter" style="margin: 0; width: 100%;">
+                <i class="fas fa-spinner fa-spin" style="color: var(--alcasa-accent, #ff6b1a);"></i>
+                <span>Sincronizando noticias oficiales con miniatura...</span>
             </div>
-            <div class="noticia-detail-body">
-                <div class="noticia-detail-img-wrap">
-                    <img src="/assets/img/placeholder.svg" alt="Miniatura de noticia CVG Alcasa" id="noticiaDetailImg">
+        </div>
+
+        <!-- Ventana Flotante (Modal) de Vista Previa de Noticia (idéntica a Sala de Prensa) -->
+        <div class="ficha-modal-backdrop" id="noticiaDetailPanel" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="noticiaDetailTitle">
+            <div class="ficha-modal-dialog noticia-modal-dialog">
+                <div class="ficha-header">
+                    <div>
+                        <div class="ficha-kicker-row">
+                            <span class="ficha-kicker-badge" id="noticiaDetailCat">Gestión Industrial</span>
+                            <span class="ficha-kicker-en" id="noticiaDetailDatetime"></span>
+                        </div>
+                        <h4><i class="fas fa-newspaper" style="color: var(--alcasa-accent);"></i> <span id="noticiaDetailTitle">Título de la noticia</span></h4>
+                    </div>
+                    <button type="button" class="ficha-close-btn" id="noticiaDetailCloseBtn" aria-label="Cerrar noticia">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
-                <div class="noticia-detail-content">
-                    <h4 id="noticiaDetailTitle">Título de la noticia</h4>
-                    <p id="noticiaDetailText">Descripción completa del comunicado oficial de CVG Aluminio del Caroní, S.A. (CVG Alcasa).</p>
-                    <div class="noticia-detail-actions">
-                        <a href="http://alcasa.com.ve:5001/" target="_blank" rel="noopener noreferrer" class="btn-ver-todos-productos" id="noticiaDetailExternalLink">
-                            <i class="fas fa-up-right-from-square"></i> Abrir Comunicado Oficial Completo
-                        </a>
+                <div class="ficha-modal-body">
+                    <div class="noticia-detail-body">
+                        <div class="noticia-detail-img-wrap">
+                            <img src="/assets/img/noticias/noticia-761.jpg" alt="Miniatura de noticia CVG Alcasa" id="noticiaDetailImg">
+                        </div>
+                        <div class="noticia-detail-content">
+                            <div class="ficha-overview-label" style="margin-bottom: 8px;"><i class="fas fa-file-lines"></i> Resumen del Comunicado Oficial</div>
+                            <p id="noticiaDetailText">Descripción completa del comunicado oficial de CVG Aluminio del Caroní, S.A. (CVG Alcasa).</p>
+                        </div>
                     </div>
                 </div>
+                <div class="ficha-actions">
+                    <a href="http://alcasa.com.ve:5001/?page=1" target="_blank" rel="noopener noreferrer" class="btn-ver-todos-productos" id="noticiaDetailExternalLink">
+                        <i class="fas fa-up-right-from-square"></i> Abrir Comunicado Oficial Completo
+                    </a>
+                    <button type="button" class="btn-modal-close" id="noticiaModalCloseFooterBtn" style="margin-left: auto;">
+                        <i class="fas fa-times"></i> Cerrar Vista Previa
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div class="prensa-layout-wrapper" id="noticias" data-max="10"></div>
+        <!-- Listado de Noticias con Miniatura (Mismo diseño horizontal de Sala de Prensa) -->
+        <div class="prensa-layout-wrapper" id="noticias" data-max="12" data-paginated="true"></div>
 
-        <div style="display: flex; justify-content: center; margin-top: 18px;">
-            <button class="btn-outline-corp" id="mas" hidden>
-                <i class="fas fa-plus-circle"></i> Ver archivo adicional de noticias
-            </button>
-        </div>
+        <!-- Paginación de Noticias (Páginas 1 a 72) -->
+        <div class="prensa-pagination-bar" id="prensaPaginationBar" style="display: none;"></div>
     </div>
 
-    <script src="/assets/js/app.js?v=2026m"></script>
+    <script src="/assets/js/app.js?v=2026r"></script>
+    <script>
+    /* Fallback autónomo si este archivo se despliega directamente dentro del servidor Flask :5001 (/minimal) */
+    window.addEventListener('DOMContentLoaded', function () {
+        setTimeout(function () {
+            var grid = document.getElementById('noticias');
+            if (!grid || grid.children.length > 0) return;
+            /* Si tras 900ms app.js no está presente (por estar corriendo directo en :5001), activar motor autónomo con miniaturas */
+            var st = document.createElement('style');
+            st.textContent = '' +
+                '.prensa-list-horizontal{display:flex;flex-direction:column;gap:14px;}' +
+                '.prensa-card-horizontal{display:grid;grid-template-columns:230px minmax(0,1fr) auto;gap:18px;align-items:center;background:#fff;border:1px solid #dce4ee;border-radius:12px;padding:12px 16px;box-shadow:0 4px 14px rgba(0,34,68,0.06);}' +
+                '.prensa-api-thumb-wrap{width:230px;height:142px;border-radius:9px;overflow:hidden;position:relative;background:#0f294a;flex-shrink:0;}' +
+                '.prensa-api-thumb{width:100%;height:100%;object-fit:cover;display:block;}' +
+                '.prensa-row-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:0.78rem;color:#475569;margin-bottom:6px;}' +
+                '.prensa-cat-badge{background:#e0f2fe;color:#0369a1;font-weight:700;padding:3px 9px;border-radius:999px;font-size:0.74rem;}' +
+                '.prensa-api-title{font-size:1.08rem;font-weight:800;color:#003366;margin:0 0 6px;line-height:1.3;}' +
+                '.prensa-api-excerpt{font-size:0.88rem;color:#334155;margin:0;line-height:1.5;}' +
+                '.prensa-api-footer{display:flex;flex-direction:column;gap:8px;min-width:140px;}' +
+                '.btn-prensa-card{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 14px;background:#003366;color:#fff;text-decoration:none;border-radius:7px;font-weight:700;font-size:0.82rem;}' +
+                '@media(max-width:768px){.prensa-card-horizontal{grid-template-columns:1fr;}.prensa-api-thumb-wrap{width:100%;height:190px;}}';
+            document.head.appendChild(st);
+
+            function cargarDirecto5001(page) {
+                var q = (document.getElementById('txtBuscar') || {}).value || '';
+                var fecha = (document.getElementById('fechaBuscar') || {}).value || '';
+                var mes = (document.getElementById('mesBuscar') || {}).value || '';
+                var anio = (document.getElementById('anioBuscar') || {}).value || '';
+                var params = new URLSearchParams({ page: String(page || 1) });
+                if (q) params.set('q', q);
+                if (fecha) params.set('fecha', fecha);
+                if (mes) params.set('mes', mes);
+                if (anio) params.set('anio', anio);
+
+                fetch('/?' + params.toString())
+                    .then(function (r) { return r.text(); })
+                    .then(function (html) {
+                        var doc = new DOMParser().parseFromString(html, 'text/html');
+                        var cards = doc.querySelectorAll('article.noticia-card');
+                        var itemsHtml = [];
+                        cards.forEach(function (c) {
+                            var a = c.querySelector('h2 a');
+                            var titulo = a ? a.textContent.trim() : 'Comunicado Oficial';
+                            var url = a ? a.getAttribute('href') : '#';
+                            var imgEl = c.querySelector('img.noticia-imagen');
+                            var img = imgEl ? imgEl.getAttribute('src') : '/static/Alcasa.png';
+                            var catEl = c.querySelector('.categoria');
+                            var cat = catEl ? catEl.textContent.trim() : 'Institucional';
+                            var resEl = c.querySelector('.resumen');
+                            var res = resEl ? resEl.textContent.trim() : '';
+                            var metaText = (c.querySelector('.meta') || {}).textContent || '';
+                            var fecMatch = metaText.match(/(\d{2}\/\d{2}\/\d{4}\s+\d{2}:\d{2})/);
+                            var fec = fecMatch ? fecMatch[1] : '';
+                            itemsHtml.push(
+                                '<article class="prensa-api-card prensa-card-horizontal">' +
+                                    '<div class="prensa-api-thumb-wrap">' +
+                                        '<img class="prensa-api-thumb" src="' + img + '" alt="' + titulo.replace(/"/g, '&quot;') + '">' +
+                                    '</div>' +
+                                    '<div class="prensa-api-card-body">' +
+                                        '<div class="prensa-row-meta">' +
+                                            '<span class="prensa-cat-badge">' + cat + '</span>' +
+                                            '<span>📅 ' + fec + '</span>' +
+                                        '</div>' +
+                                        '<h3 class="prensa-api-title">' + titulo + '</h3>' +
+                                        '<p class="prensa-api-excerpt">' + res + '</p>' +
+                                    '</div>' +
+                                    '<div class="prensa-api-footer">' +
+                                        '<a href="' + url + '" target="_blank" class="btn-prensa-card">Leer nota →</a>' +
+                                    '</div>' +
+                                '</article>'
+                            );
+                        });
+                        grid.innerHTML = '<div class="prensa-list-horizontal">' + itemsHtml.join('') + '</div>';
+                        var counter = document.getElementById('prensaApiCounter');
+                        if (counter) counter.innerHTML = '<span>Mostrando <strong>' + itemsHtml.length + ' noticias con miniatura</strong></span>';
+                    });
+            }
+            cargarDirecto5001(1);
+        }, 900);
+    });
+    </script>
 </body>
 </html>

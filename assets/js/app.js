@@ -401,7 +401,7 @@
                                     '<ul class="dropdown-menu">' +
                                         '<li><a href="/index.html#prensa">Pulso Industrial (Top 10 Noticias)</a></li>' +
                                         '<li><a href="/prensa.html">Portal Pulso Industrial CVG Alcasa</a></li>' +
-                                        '<li><a href="http://alcasa.com.ve:5001/minimal" target="_blank" rel="noopener noreferrer">Periódico Digital CVG Alcasa</a></li>' +
+                                        '<li><a href="/minimal.html">Periódico Digital CVG Alcasa (Vista Minimal)</a></li>' +
                                     '</ul>' +
                                 '</li>' +
                                 '<li class="nav-item-has-dropdown ' + (isGaleria ? 'active' : '') + '">' +
@@ -1680,12 +1680,58 @@
             });
         }
 
+        var filterQInput = $('#txtBuscar');
+        var filterFechaInput = $('#fechaBuscar');
+        var filterMesSelect = $('#mesBuscar');
+        var filterAnioSelect = $('#anioBuscar');
+        var btnBuscarMinimal = $('#btnBuscarMinimal');
+        var btnLimpiarMinimal = $('#btnLimpiarMinimal');
+        var filtroInfoEl = $('#filtroInfo');
+
+        function obtenerFiltrosActivos() {
+            return {
+                q: filterQInput ? filterQInput.value.trim() : '',
+                fecha: filterFechaInput ? filterFechaInput.value.trim() : '',
+                mes: filterMesSelect ? filterMesSelect.value.trim() : '',
+                anio: filterAnioSelect ? filterAnioSelect.value.trim() : ''
+            };
+        }
+
+        function actualizarBannerFiltros(f) {
+            if (!filtroInfoEl) return;
+            var partes = [];
+            if (f.q) partes.push('🔍 "' + f.q + '"');
+            if (f.fecha) partes.push('📅 Fecha: ' + f.fecha);
+            if (f.mes) {
+                var mesesNombres = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                partes.push('📆 Mes: ' + (mesesNombres[parseInt(f.mes, 10) - 1] || f.mes));
+            }
+            if (f.anio) partes.push('📅 Año: ' + f.anio);
+            if (partes.length) {
+                filtroInfoEl.textContent = '🔎 Filtros activos: ' + partes.join(' · ');
+                filtroInfoEl.style.display = 'block';
+            } else {
+                filtroInfoEl.style.display = 'none';
+            }
+        }
+
         function cargarListaNoticias(forzarSinCache) {
             if (isPaginatedMode) {
+                var fAct = obtenerFiltrosActivos();
+                var hayFiltro = !!(fAct.q || fAct.fecha || fAct.mes || fAct.anio);
+                actualizarBannerFiltros(fAct);
+
                 if (counterEl) {
                     counterEl.innerHTML = '<i class="fas fa-spinner fa-spin" style="color: var(--alcasa-accent);"></i> <span>Cargando página ' + currentPage + ' de noticias oficiales de CVG Alcasa...</span>';
                 }
-                var pageUrl = CFG.noticias + '?page=' + currentPage + (forzarSinCache ? '&nocache=' + Date.now() : '');
+                var qs = ['page=' + currentPage];
+                if (fAct.q) qs.push('q=' + encodeURIComponent(fAct.q));
+                if (fAct.fecha) qs.push('fecha=' + encodeURIComponent(fAct.fecha));
+                if (fAct.mes) qs.push('mes=' + encodeURIComponent(fAct.mes));
+                if (fAct.anio) qs.push('anio=' + encodeURIComponent(fAct.anio));
+                if (forzarSinCache) qs.push('nocache=' + Date.now());
+
+                var pageUrl = CFG.noticias + '?' + qs.join('&');
                 return getJSON(pageUrl)
                     .catch(function () {
                         return getJSON(CFG.respaldo).then(function (arr) {
@@ -1700,9 +1746,9 @@
                     })
                     .then(function (resp) {
                         var arr = Array.isArray(resp) ? resp : (resp && Array.isArray(resp.noticias) ? resp.noticias : []);
-                        if (resp && resp.total_pages) totalPages = parseInt(resp.total_pages, 10) || 72;
+                        if (resp && resp.total_pages) totalPages = parseInt(resp.total_pages, 10) || (hayFiltro ? 1 : 72);
                         todas = arr.map(normNoticia).filter(function (n) { return !!n.titulo; });
-                        if (!todas.length) throw new Error('Sin noticias');
+                        if (!todas.length && !hayFiltro) throw new Error('Sin noticias');
                         if (iframeFallback) iframeFallback.classList.remove('active');
                         dibujar();
                         renderPaginacion(currentPage, totalPages);
@@ -2014,6 +2060,34 @@
             btnMasEl.addEventListener('click', function () {
                 mostrandoTodas = !mostrandoTodas;
                 dibujar();
+            });
+        }
+
+        if (btnBuscarMinimal) {
+            btnBuscarMinimal.addEventListener('click', function (e) {
+                e.preventDefault();
+                currentPage = 1;
+                cargarListaNoticias(false);
+            });
+        }
+        if (filterQInput) {
+            filterQInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    currentPage = 1;
+                    cargarListaNoticias(false);
+                }
+            });
+        }
+        if (btnLimpiarMinimal) {
+            btnLimpiarMinimal.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (filterQInput) filterQInput.value = '';
+                if (filterFechaInput) filterFechaInput.value = '';
+                if (filterMesSelect) filterMesSelect.value = '';
+                if (filterAnioSelect) filterAnioSelect.value = '';
+                currentPage = 1;
+                cargarListaNoticias(false);
             });
         }
 

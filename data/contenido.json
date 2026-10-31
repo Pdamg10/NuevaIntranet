@@ -1083,7 +1083,7 @@
     "email_proveedores": "atencion.proveedores@alcasa.com.ve",
     "email_webmaster": "webmaster@alcasa.com.ve",
     "rif": "G-20110929-0",
-    "periodico": "http://alcasa.com.ve:5001/minimal",
+    "periodico": "/minimal.html",
     "oac": "http://190.202.49.114:5050/",
     "whatsapp": "https://wa.me/584122522272?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20web%20de%20CVG%20Alcasa%20y%20quisiera%20informaci%C3%B3n%20sobre%20sus%20productos."
   },

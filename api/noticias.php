@@ -11,7 +11,13 @@ const TTL = 120;
 
 $includeAll = !empty($_GET['include_all']);
 $reqPage = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 0;
-$cache = sys_get_temp_dir() . '/cvg_alcasa_noticias_v5' . ($includeAll ? '_all' : '') . ($reqPage > 0 ? '_p' . $reqPage : '') . '.json';
+$qFilter = isset($_GET['q']) ? trim((string)$_GET['q']) : '';
+$fechaFilter = isset($_GET['fecha']) ? trim((string)$_GET['fecha']) : '';
+$mesFilter = isset($_GET['mes']) ? trim((string)$_GET['mes']) : '';
+$anioFilter = isset($_GET['anio']) ? trim((string)$_GET['anio']) : '';
+$hasFilters = ($qFilter !== '' || $fechaFilter !== '' || $mesFilter !== '' || $anioFilter !== '');
+$filterHash = $hasFilters ? '_' . substr(md5($qFilter . '|' . $fechaFilter . '|' . $mesFilter . '|' . $anioFilter), 0, 8) : '';
+$cache = sys_get_temp_dir() . '/cvg_alcasa_noticias_v5' . ($includeAll ? '_all' : '') . ($reqPage > 0 ? '_p' . $reqPage : '') . $filterHash . '.json';
 $fallbackLocal = __DIR__ . '/../data/noticias.json';
 
 if (is_file($cache) && time() - filemtime($cache) < TTL && !isset($_GET['nocache'])) {
@@ -85,19 +91,26 @@ $fallbackPool = [
     '/assets/img/noticias/noticia-739.jpg'
 ];
 
-// Modo paginado directo desde http://alcasa.com.ve:5001/?page=N (para Sala de Prensa prensa.html)
-if ($reqPage > 0) {
-    $pageHtml = httpGet(BASE . '/?page=' . $reqPage, 6);
-    $totalPages = 72;
+// Modo paginado o filtrado directo desde http://alcasa.com.ve:5001/?page=N (para Sala de Prensa prensa.html y minimal.html)
+if ($reqPage > 0 || $hasFilters) {
+    $effPage = $reqPage > 0 ? $reqPage : 1;
+    $queryParams = ['page' => $effPage];
+    if ($qFilter !== '') $queryParams['q'] = $qFilter;
+    if ($fechaFilter !== '') $queryParams['fecha'] = $fechaFilter;
+    if ($mesFilter !== '') $queryParams['mes'] = $mesFilter;
+    if ($anioFilter !== '') $queryParams['anio'] = $anioFilter;
+
+    $pageHtml = httpGet(BASE . '/?' . http_build_query($queryParams), 6);
+    $totalPages = $hasFilters ? 1 : 72;
     $pageItems = [];
 
     if ($pageHtml !== '') {
-        if (preg_match_all('/\?page=(\d+)/', $pageHtml, $pm) && !empty($pm[1])) {
+        if (preg_match_all('/[?&]page=(\d+)/', $pageHtml, $pm) && !empty($pm[1])) {
             $maxP = max(array_map('intval', $pm[1]));
-            if ($maxP > 0) $totalPages = max($reqPage, $maxP);
+            if ($maxP > 0) $totalPages = max($effPage, $maxP);
         }
 
-        if ($reqPage === 1 && !empty($localCustomNew)) {
+        if ($effPage === 1 && !$hasFilters && !empty($localCustomNew)) {
             foreach ($localCustomNew as $lid => $ln) {
                 $estado = strtolower(trim((string)($ln['estado'] ?? 'publicada')));
                 if ($estado !== 'publicada') continue;
@@ -187,15 +200,37 @@ if ($reqPage > 0) {
         }
     }
 
-    if (empty($pageItems) && !empty($localBackupMap)) {
+    if ($pageHtml === '' && empty($pageItems) && !empty($localBackupMap)) {
         $allLocal = array_values($localBackupMap);
+        if ($hasFilters) {
+            $allLocal = array_values(array_filter($allLocal, function ($it) use ($qFilter, $fechaFilter, $mesFilter, $anioFilter) {
+                if ($qFilter !== '') {
+                    $hay = mb_strtolower(($it['titulo'] ?? '') . ' ' . ($it['resumen'] ?? '') . ' ' . ($it['categoria'] ?? '') . ' ' . ($it['autor'] ?? ''), 'UTF-8');
+                    if (mb_strpos($hay, mb_strtolower($qFilter, 'UTF-8')) === false) return false;
+                }
+                $fSolo = (string)($it['fecha_solo'] ?? ($it['fecha'] ?? ''));
+                if ($fechaFilter !== '') {
+                    // Convertir YYYY-MM-DD a DD/MM/YYYY
+                    $pF = explode('-', $fechaFilter);
+                    $fTarget = count($pF) === 3 ? ($pF[2] . '/' . $pF[1] . '/' . $pF[0]) : $fechaFilter;
+                    if (strpos($fSolo, $fTarget) === false) return false;
+                }
+                if ($mesFilter !== '' && !preg_match('/^\d{2}\/' . preg_quote($mesFilter, '/') . '\//', $fSolo)) {
+                    return false;
+                }
+                if ($anioFilter !== '' && strpos($fSolo, $anioFilter) === false) {
+                    return false;
+                }
+                return true;
+            }));
+        }
         $perPage = 10;
         $totalPages = max(1, (int)ceil(count($allLocal) / $perPage));
-        $pageItems = array_slice($allLocal, ($reqPage - 1) * $perPage, $perPage);
+        $pageItems = array_slice($allLocal, ($effPage - 1) * $perPage, $perPage);
     }
 
     $respJson = json_encode([
-        'page'        => $reqPage,
+        'page'        => $effPage,
         'total_pages' => $totalPages,
         'noticias'    => $pageItems
     ], JSON_UNESCAPED_UNICODE);
