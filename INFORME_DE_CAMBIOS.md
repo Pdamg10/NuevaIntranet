@@ -59,7 +59,7 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 - **Vista Previa de Noticias en Ventana Flotante (`#noticiaDetailPanel`):**
   - Tanto en `index.html` como en `prensa.html`, al hacer clic en cualquier tarjeta de noticia o en el botón **Vista rápida**, se abre una ventana emergente centrada (`.noticia-modal-dialog`) con la fotografía o galería interactiva, categoría, fecha, autor, resumen ejecutivo, cuerpo completo y enlace a la fuente original.
 - **Contraste de Botones Mejorado a Simple Vista:**
-  - Se crearon y aplicaron clases con alto contraste cromático: `.btn-primary-corp` (azul institucional con texto blanco), `.btn-modal-secondary` (azul marino `#13325b` con borde celeste `#60a5fa` y texto blanco), `.btn-modal-close` (gris pizarra `#334155` con texto blanco y hover rojo `#dc2626`), `.btn-cta-banner-white` (fondo blanco puro con letras azul marino `#002b59`) y `.btn-prensa-quickview-sm` (azul oscuro `#0f294a` con texto blanco).
+  - Se crearon y aplicaron clases con alto contraste cromático: `.btn-primary-corp` (azul institucional con texto blanco), `.btn-modal-secondary` (azul marino `#054a91` con borde celeste `#60a5fa` y texto blanco), `.btn-modal-close` (gris pizarra `#334155` con texto blanco y hover rojo `#dc2626`), `.btn-cta-banner-white` (fondo blanco puro con letras azul marino `#054a91`) y `.btn-prensa-quickview-sm` (azul oscuro `#054a91` con texto blanco).
 
 ### 3.2. Barra de Navegación Inteligente y Visibilidad Permanente de Logos (`assets/js/app.js`, `assets/css/main.css`)
 - **Ocultamiento suave al deslizar:** En `initStickyHeader()`, la barra superior (`#site-header`) se oculta suavemente hacia arriba (`header-hidden`) cuando el usuario desliza hacia abajo para dar mayor espacio de lectura, y reaparece de inmediato al deslizar hacia arriba o volver al inicio.
@@ -88,3 +88,14 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 - **Nivel 2 (`comunicacion`):** Acceso exclusivo a Redacción de Sala de Prensa (`/redaccion.html`).
 - **Nivel 3 (`comercializacion`):** Acceso exclusivo a la Bandeja de Contactos Comerciales en `/contactos.html`.
 - **Nivel 4 (`talento`):** Acceso exclusivo a la Bandeja de Postulaciones de Síntesis Curricular (CV) en `/contactos.html`, conectada directamente al formulario único **Envía tu Síntesis Curricular (CV)** de `index.html`.
+
+### 3.7. Actualización de la Paleta Azul Institucional (`assets/css/main.css`, `index.html`, `productos.html`, `prensa.html`, `galeria.html`, `contactos.html`, `redaccion.html`, `minimal.html`)
+- **Nuevo azul base:** Se reemplazó la paleta azul anterior (`#003366` / `#002244` / `#0056a3`) por el azul de la cabecera y pie de `http://alcasa.com.ve:8070/`:
+  - Azul principal: `#367EC6` (`--alcasa-blue` y `--alcoa-blue`).
+  - Azul oscuro: `#236EB8` (`--alcasa-blue-dark`).
+  - Azul claro de apoyo: `#5B9BD5` (`--alcasa-light-blue`).
+  - Azul profundo complementario: `#054A91` (menús, modales y botones secundarios).
+  - Azul institucional profundo: `#002285` (barra de idiomas y cabecera del menú móvil).
+- **Cabecera y pie:** Los degradados de `#site-header`, la cabecera al hacer scroll y el pie de página se recalcularon sobre los nuevos tonos; la cabecera conserva el acento naranja institucional.
+- **Componentes secundarios:** Se actualizaron sombras, bordes, insignias, tooltips, paneles de noticias, modales y botones que tenían azules fijos, manteniendo el texto blanco y el contraste.
+- **Caché:** Se actualizó la versión de `main.css` a `?v=2026s` en todas las páginas para forzar la recarga de estilos.

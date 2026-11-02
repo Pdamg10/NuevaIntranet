@@ -387,7 +387,7 @@
                                         '<li><a href="/productos.html?linea=Laminación">Laminados / Laminación (6)</a></li>' +
                                         '<li><a href="/index.html#faq">Preguntas Frecuentes (FAQ)</a></li>' +
                                         '<li class="dropdown-divider"></li>' +
-                                        '<li><a href="/assets/media/CATALOGO_CVG_ALCASA_2025.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf" style="margin-right:6px;color:#ff6b1a;"></i>Descargar Catálogo CVG Alcasa 2025 (PDF)</a></li>' +
+                                        '<li><a href="/assets/media/CATALOGO_CVG_ALCASA_2025.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf" style="margin-right:6px;color:var(--alcasa-accent-light);"></i>Descargar Catálogo CVG Alcasa 2025 (PDF)</a></li>' +
                                     '</ul>' +
                                 '</li>' +
                                 '<li>' +
@@ -1208,15 +1208,15 @@
 
                     if (bodyEl) {
                         if (src) {
-                            bodyEl.innerHTML = '<video controls autoplay playsinline poster="' + esc(poster) + '" src="' + esc(src) + '" style="width:100%;max-height:500px;border-radius:12px;background:#000;display:block;"></video>';
+                            bodyEl.innerHTML = '<video controls autoplay playsinline poster="' + esc(poster) + '" src="' + esc(src) + '" style="width:100%;max-height:500px;border-radius:12px;background:#000;border:1px solid #cfe0f0;display:block;"></video>';
                         } else {
                             bodyEl.innerHTML = '' +
-                                '<div style="position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.15);background:#000;">' +
+                                '<div style="position:relative;border-radius:12px;overflow:hidden;border:1px solid #cfe0f0;background:#000;">' +
                                     '<img src="' + esc(poster) + '" alt="' + esc(titulo) + '" style="width:100%;max-height:420px;object-fit:cover;opacity:0.55;">' +
-                                    '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;background:rgba(2,12,27,0.45);">' +
-                                        '<i class="fas fa-film" style="font-size:3rem;color:var(--alcasa-accent);margin-bottom:12px;"></i>' +
+                                    '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;background:rgba(2,34,133,0.45);">' +
+                                        '<i class="fas fa-film" style="font-size:3rem;color:var(--alcasa-accent-light);margin-bottom:12px;"></i>' +
                                         '<strong style="color:#fff;font-size:1.2rem;margin-bottom:6px;">' + esc(titulo) + '</strong>' +
-                                        '<span style="color:#cbd5e1;font-size:0.92rem;max-width:520px;">Archivo audiovisual del proceso productivo.</span>' +
+                                        '<span style="color:#c7d1da;font-size:0.92rem;max-width:520px;">Archivo audiovisual del proceso productivo.</span>' +
                                     '</div>' +
                                 '</div>';
                         }
