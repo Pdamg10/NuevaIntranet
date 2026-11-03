@@ -5,3 +5,4 @@ storage/cv/
 Thumbs.db
 .DS_Store
 *.suo
+data/cumpleaneros.json
