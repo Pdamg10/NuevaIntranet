@@ -370,6 +370,7 @@
                                         '<li><a href="/index.html#empresa" data-tab-target="tab-mision-vision">Misión y Visión</a></li>' +
                                         '<li><a href="/index.html#empresa" data-tab-target="tab-valores">Nuestros Valores</a></li>' +
                                         '<li><a href="/index.html#empresa" data-tab-target="tab-pilares">Pilares de Gestión</a></li>' +
+                                        '<li><a href="/sitio/Empresa/CA/index.html">Cumpleañeros</a></li>' +
                                         '<li class="dropdown-divider"></li>' +
                                         '<li><a href="http://190.202.49.114:5050/" target="_blank" rel="noopener noreferrer">Oficina de Atención al Ciudadano</a></li>' +
                                     '</ul>' +

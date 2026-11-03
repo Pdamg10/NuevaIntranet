@@ -14,6 +14,7 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 ├── prensa.html                 # Sala de Prensa "Pulso Industrial CVG Alcasa" (Paginación :5001 + Modal de vista previa)
 ├── redaccion.html              # Aplicación administrativa independiente de Redacción (3 zonas, hasta 20 fotos)
 ├── contactos.html              # Aplicación administrativa independiente de Contactos Comerciales y Postulaciones CV
+├── sitio/Empresa/CA/index.html # Página «Cumpleañeros» (fichas con plantilla, filtros día/mes; datos en data/cumpleaneros.json)
 ├── minimal.html                # Vista compacta de noticias
 ├── favicon.ico                 # Favicon multirresolución con el logo metálico de CVG Alcasa
 ├── INFORME_DE_CAMBIOS.md       # Documentación técnica detallada de cambios
@@ -29,8 +30,10 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 │   └── prensa_admin.php        # Autenticación por niveles, CRUD de noticias, carrusel (20 fotos) e historial
 ├── assets/
 │   ├── css/
+│   │   ├── cumpleanos.css      # Estilos de las fichas de cumpleañeros (reutiliza variables de main.css)
 │   │   └── main.css            # Sistema de diseño corporativo unificado y modales flotantes de alto contraste
 │   ├── js/
+│   │   ├── cumpleanos.js       # Renderiza las fichas desde data/cumpleaneros.json
 │   │   └── app.js              # Motor interactivo del portal (catálogo, galería, noticias, modales, header scroll)
 │   ├── img/
 │   │   ├── galeria/            # Miniaturas animadas (.gif) para los videos industriales
@@ -39,6 +42,7 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 │       ├── videos/             # Videos institucionales completos en MP4 (Laminación, Fundición, Extrusión, Gestión Social)
 │       └── ...                 # Catálogos PDF oficiales (2023 y 2025)
 ├── data/
+│   ├── cumpleaneros.json       # Datos editables de cumpleañeros (marcadores de posición)
 │   ├── contenido.json          # Datos institucionales, 32 productos con fichas técnicas, galería multimedia y FAQ
 │   └── noticias.json           # Almacén y respaldo local con las 50 noticias más recientes del servidor :5001
 └── storage/
@@ -99,3 +103,12 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 - **Cabecera y pie:** Los degradados de `#site-header`, la cabecera al hacer scroll y el pie de página se recalcularon sobre los nuevos tonos; la cabecera conserva el acento naranja institucional.
 - **Componentes secundarios:** Se actualizaron sombras, bordes, insignias, tooltips, paneles de noticias, modales y botones que tenían azules fijos, manteniendo el texto blanco y el contraste.
 - **Caché:** Se actualizó la versión de `main.css` a `?v=2026s` en todas las páginas para forzar la recarga de estilos.
+
+### 3.8. Página «Cumpleañeros» — `sitio/Empresa/CA/index.html` (nuevos archivos y modificaciones)
+- **`sitio/Empresa/CA/index.html` (reemplaza `Index.html`):** La versión anterior (`Index.html`, con estilos propios, `DATA.csv`, `/components/header.html` y `/js/translator.js`, inexistentes en la nueva estructura) se renombró con `git mv` y se reescribió con la estructura actual: `#site-header` y `#site-footer` (los renderiza `assets/js/app.js`), `main.css` compartido, hero `productos-page-hero` y `content-wrapper`. La versión previa sigue en el historial de git (commit `a0ff640`). Textos de la página original: no se pudo descargar `http://alcasa.com.ve/sitio/Empresa/CA/index.html` desde el entorno de trabajo (el dominio no resuelve), por lo que se reutilizaron los textos de la versión anterior del repo y marcadores de posición.
+- **`data/cumpleaneros.json` (nuevo):** Datos editables: `titulo`, `mensaje` y la lista `cumpleaneros` (`nombre`, `cargo`, `departamento`, `dia`, `mes`, `foto`). Contiene 6 registros de ejemplo.
+- **`assets/js/cumpleanos.js` (nuevo):** Carga el JSON, llena los filtros de día/mes (mes actual por defecto), ordena por día, marca «¡Hoy!» y ajusta la proporción de la ficha a la de la plantilla. Usa `textContent` (los datos nunca se interpretan como HTML).
+- **`assets/css/cumpleanos.css` (nuevo):** Solo estilos específicos de las fichas; usa las variables `--alcasa-*` de `main.css`. Fondo: `assets/img/plantilla-cumpleanos.png` con degradado de respaldo si la imagen falta. La foto se recorta dentro del círculo plateado de la plantilla y el nombre, cargo, departamento y fecha van en blanco sobre la zona azul; todo se posiciona en porcentajes y `cqw`, así escala con el ancho de la ficha.
+- **`assets/img/plantilla-cumpleanos.png` (nuevo):** `PLANTILLA.png` (2560×4551, 6,4 MB) optimizada a 810×1440 px (~0,9 MB), misma proporción 9:16. Es el fondo de cada ficha.
+- **`assets/js/app.js` (modificado):** Se agregó el enlace «Cumpleañeros» (`/sitio/Empresa/CA/index.html`) al menú desplegable **Empresa**, antes del separador.
+- **Migración a PHP/WordPress:** El JSON puede sustituirse por un endpoint/`WP_Query` con el mismo formato; el HTML ya separa datos y presentación.

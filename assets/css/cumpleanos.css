@@ -1,0 +1,133 @@
+/* =========================================================
+   Cumpleañeros — estilos propios de la sección (sitio/Empresa/CA)
+   Reutiliza variables, tipografía, header y footer de main.css.
+   ========================================================= */
+
+.cumple-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.cumple-filtros select {
+    padding: 10px 14px;
+    border: 1px solid var(--alcasa-accent-light);
+    border-radius: 8px;
+    background: #fff;
+    font: inherit;
+    color: var(--alcasa-accent);
+    min-width: 160px;
+}
+
+.cumple-filtros select:focus-visible {
+    outline: 2px solid var(--alcasa-blue);
+    outline-offset: 2px;
+}
+
+.cumple-mensaje {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.cumple-mensaje h2 { color: var(--alcasa-blue-dark); margin-bottom: 10px; }
+.cumple-mensaje p  { color: var(--alcasa-accent); font-style: italic; }
+
+.cumple-resumen {
+    text-align: center;
+    color: var(--alcasa-accent);
+    font-weight: 600;
+}
+
+/* --- Rejilla de fichas --- */
+.cumple-grid {
+    --cumple-ratio: 9 / 16; /* proporción de PLANTILLA; el JS la corrige si la imagen cambia */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 300px));
+    justify-content: center;
+    gap: 28px;
+}
+
+/* --- Ficha: la plantilla es el fondo; todo se posiciona en % y escala con el ancho (cqw) --- */
+.cumple-card {
+    container-type: inline-size;
+    position: relative;
+    aspect-ratio: var(--cumple-ratio);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+    color: #fff;
+    background-image:
+        url('../img/plantilla-cumpleanos.png'),
+        linear-gradient(160deg, var(--alcasa-light-blue), var(--alcasa-blue-dark)); /* respaldo si falta la imagen */
+    background-size: 100% 100%, cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cumple-card.es-hoy { box-shadow: 0 0 0 3px #ffb703, 0 8px 24px rgba(0, 0, 0, .25); }
+
+/* Foto dentro del círculo plateado de la plantilla */
+.cumple-foto {
+    position: absolute;
+    left: 31.2%;
+    top: 24.9%;
+    width: 37.6%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e9eef4;
+}
+
+/* Texto sobre la zona azul libre bajo el círculo */
+.cumple-contenido {
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 49.5%;
+    text-align: center;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, .55);
+}
+
+.cumple-nombre { margin: 0 0 2.5cqw; font-size: 8cqw; font-weight: 800; line-height: 1.15; color: #fff; }
+.cumple-cargo  { margin: 0 0 1cqw;  font-size: 5.4cqw; font-weight: 600; line-height: 1.25; color: #fff; }
+.cumple-depto  { margin: 0 0 4cqw;  font-size: 4.6cqw; line-height: 1.25; color: #dce9f8; }
+
+.cumple-fecha {
+    display: inline-block;
+    margin: 0;
+    padding: 1.8cqw 5cqw;
+    font-size: 5.4cqw;
+    font-weight: 700;
+    color: #0b2a5b;
+    background: rgba(255, 255, 255, .92);
+    border-radius: 999px;
+    text-shadow: none;
+}
+.cumple-fecha i { margin-right: 2cqw; color: var(--alcasa-blue); }
+
+.cumple-badge-hoy {
+    display: block;
+    width: max-content;
+    margin: 3cqw auto 0;
+    background: #ffb703;
+    color: #1a1a1a;
+    font-size: 4.2cqw;
+    font-weight: 800;
+    padding: 1cqw 4cqw;
+    border-radius: 999px;
+    text-shadow: none;
+}
+
+.cumple-vacio {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 16px;
+    color: var(--alcasa-accent);
+}
+
+@media (max-width: 600px) {
+    .cumple-grid { grid-template-columns: minmax(240px, 320px); }
+}

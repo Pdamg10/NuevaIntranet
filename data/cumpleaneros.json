@@ -1,0 +1,12 @@
+{
+  "titulo": "¡Feliz Cumpleaños te desea CVG Alcasa!",
+  "mensaje": "En tu día especial, te deseamos lo mejor. Tu positividad y compromiso hacen que trabajar contigo sea un placer. ¡Por otro año de grandes logros juntos!",
+  "cumpleaneros": [
+    { "nombre": "Nombre Apellido (ejemplo 1)", "cargo": "Cargo (ejemplo)", "departamento": "Departamento (ejemplo)", "dia": 2,  "mes": 11, "foto": "/assets/img/placeholder.svg" },
+    { "nombre": "Nombre Apellido (ejemplo 2)", "cargo": "Cargo (ejemplo)", "departamento": "Departamento (ejemplo)", "dia": 15, "mes": 11, "foto": "/assets/img/placeholder.svg" },
+    { "nombre": "Nombre Apellido (ejemplo 3)", "cargo": "Cargo (ejemplo)", "departamento": "Departamento (ejemplo)", "dia": 28, "mes": 11, "foto": "/assets/img/placeholder.svg" },
+    { "nombre": "Nombre Apellido (ejemplo 4)", "cargo": "Cargo (ejemplo)", "departamento": "Departamento (ejemplo)", "dia": 9,  "mes": 12, "foto": "/assets/img/placeholder.svg" },
+    { "nombre": "Nombre Apellido (ejemplo 5)", "cargo": "Cargo (ejemplo)", "departamento": "Departamento (ejemplo)", "dia": 20, "mes": 12, "foto": "/assets/img/placeholder.svg" },
+    { "nombre": "Nombre Apellido (ejemplo 6)", "cargo": "Cargo (ejemplo)", "departamento": "Departamento (ejemplo)", "dia": 5,  "mes": 1,  "foto": "/assets/img/placeholder.svg" }
+  ]
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cumpleañeros | CVG Alcasa</title>
+    <meta name="description" content="Felicitaciones de cumpleaños de los trabajadores de CVG Aluminio del Caroní, S.A. (CVG Alcasa).">
+
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/assets/img/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026t">
+    <link rel="stylesheet" href="/assets/css/cumpleanos.css?v=1">
+</head>
+<body id="pagina-cumpleanos">
+
+    <!-- HEADER CORPORATIVO (renderizado por /assets/js/app.js) -->
+    <div id="site-header"></div>
+
+    <main class="content-wrapper">
+
+        <!-- HERO -->
+        <section class="productos-page-hero">
+            <div class="productos-page-hero-top">
+                <div class="productos-page-hero-text">
+                    <span class="productos-page-kicker"><i class="fas fa-cake-candles"></i> Empresa · CVG Alcasa</span>
+                    <h1>Cumpleañeros</h1>
+                    <p>Consulta los cumpleaños por día y mes. Celebramos con cada trabajador de CVG Aluminio del Caroní, S.A.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENSAJE (texto editable desde data/cumpleaneros.json) -->
+        <section class="cumple-mensaje">
+            <h2 id="cumple-titulo">¡Feliz Cumpleaños te desea CVG Alcasa!</h2>
+            <p id="cumple-texto">Texto de felicitación (marcador de posición).</p>
+        </section>
+
+        <!-- FILTROS -->
+        <section class="cumple-filtros" aria-label="Filtrar cumpleañeros">
+            <select id="cumple-dia" aria-label="Día"></select>
+            <select id="cumple-mes" aria-label="Mes"></select>
+        </section>
+
+        <p id="cumple-resumen" class="cumple-resumen" aria-live="polite"></p>
+
+        <!-- FICHAS (renderizadas por /assets/js/cumpleanos.js) -->
+        <section id="cumple-grid" class="cumple-grid" aria-label="Fichas de cumpleañeros"></section>
+
+    </main>
+
+    <!-- FOOTER INSTITUCIONAL (renderizado por /assets/js/app.js) -->
+    <div id="site-footer"></div>
+
+    <script src="/assets/js/app.js?v=2026s"></script>
+    <script src="/assets/js/cumpleanos.js?v=1"></script>
+</body>
+</html>
