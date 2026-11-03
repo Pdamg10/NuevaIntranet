@@ -14,7 +14,8 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 ├── prensa.html                 # Sala de Prensa "Pulso Industrial CVG Alcasa" (Paginación :5001 + Modal de vista previa)
 ├── redaccion.html              # Aplicación administrativa independiente de Redacción (3 zonas, hasta 20 fotos)
 ├── contactos.html              # Aplicación administrativa independiente de Contactos Comerciales y Postulaciones CV
-├── sitio/Empresa/CA/index.html # Página «Cumpleañeros» (fichas con plantilla, filtros día/mes; datos en data/cumpleaneros.json)
+├── sitio/Empresa/CA/index.html # Página «Cumpleañeros» (filtro día/mes, tarjetas y ventana emergente con plantilla)
+├── tools/generar_cumpleaneros.py # Genera data/cumpleaneros.json y las fotos desde DATA.csv + BMP
 ├── minimal.html                # Vista compacta de noticias
 ├── favicon.ico                 # Favicon multirresolución con el logo metálico de CVG Alcasa
 ├── INFORME_DE_CAMBIOS.md       # Documentación técnica detallada de cambios
@@ -42,7 +43,7 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 │       ├── videos/             # Videos institucionales completos en MP4 (Laminación, Fundición, Extrusión, Gestión Social)
 │       └── ...                 # Catálogos PDF oficiales (2023 y 2025)
 ├── data/
-│   ├── cumpleaneros.json       # Datos editables de cumpleañeros (marcadores de posición)
+│   ├── cumpleaneros.json       # Cumpleañeros (3.543 trabajadores, generado desde DATA.csv)
 │   ├── contenido.json          # Datos institucionales, 32 productos con fichas técnicas, galería multimedia y FAQ
 │   └── noticias.json           # Almacén y respaldo local con las 50 noticias más recientes del servidor :5001
 └── storage/
@@ -105,10 +106,14 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 - **Caché:** Se actualizó la versión de `main.css` a `?v=2026s` en todas las páginas para forzar la recarga de estilos.
 
 ### 3.8. Página «Cumpleañeros» — `sitio/Empresa/CA/index.html` (nuevos archivos y modificaciones)
-- **`sitio/Empresa/CA/index.html` (reemplaza `Index.html`):** La versión anterior (`Index.html`, con estilos propios, `DATA.csv`, `/components/header.html` y `/js/translator.js`, inexistentes en la nueva estructura) se renombró con `git mv` y se reescribió con la estructura actual: `#site-header` y `#site-footer` (los renderiza `assets/js/app.js`), `main.css` compartido, hero `productos-page-hero` y `content-wrapper`. La versión previa sigue en el historial de git (commit `a0ff640`). Textos de la página original: no se pudo descargar `http://alcasa.com.ve/sitio/Empresa/CA/index.html` desde el entorno de trabajo (el dominio no resuelve), por lo que se reutilizaron los textos de la versión anterior del repo y marcadores de posición.
-- **`data/cumpleaneros.json` (nuevo):** Datos editables: `titulo`, `mensaje` y la lista `cumpleaneros` (`nombre`, `cargo`, `departamento`, `dia`, `mes`, `foto`). Contiene 6 registros de ejemplo.
-- **`assets/js/cumpleanos.js` (nuevo):** Carga el JSON, llena los filtros de día/mes (mes actual por defecto), ordena por día, marca «¡Hoy!» y ajusta la proporción de la ficha a la de la plantilla. Usa `textContent` (los datos nunca se interpretan como HTML).
-- **`assets/css/cumpleanos.css` (nuevo):** Solo estilos específicos de las fichas; usa las variables `--alcasa-*` de `main.css`. Fondo: `assets/img/plantilla-cumpleanos.png` con degradado de respaldo si la imagen falta. La foto se recorta dentro del círculo plateado de la plantilla y el nombre, cargo, departamento y fecha van en blanco sobre la zona azul; todo se posiciona en porcentajes y `cqw`, así escala con el ancho de la ficha.
-- **`assets/img/plantilla-cumpleanos.png` (nuevo):** `PLANTILLA.png` (2560×4551, 6,4 MB) optimizada a 810×1440 px (~0,9 MB), misma proporción 9:16. Es el fondo de cada ficha.
-- **`assets/js/app.js` e `index.html` (modificados):** Se agregó el enlace «Cumpleañeros» (`/sitio/Empresa/CA/index.html`) al menú desplegable **Extranet**, después de «Sistema OAC» (en el header renderizado por `app.js` y en el header estático de `index.html`).
+- **`sitio/Empresa/CA/index.html` (reemplaza `Index.html`):** La versión anterior (`Index.html`, con estilos propios, `DATA.csv`, `/components/header.html` y `/js/translator.js`, inexistentes en la nueva estructura) se renombró y se reescribió con la estructura actual: `#site-header` y `#site-footer` (los renderiza `assets/js/app.js`), `main.css` compartido y `content-wrapper`. Incluye filtro día/mes con botón «Consultar», cuadro de felicitación, tarjetas pequeñas (foto, ficha, nombre, departamento, gerencia) y una ventana emergente con la tarjeta sobre la plantilla. La versión previa sigue en el historial de git (commit `a0ff640`).
+- **`data/cumpleaneros.json` (nuevo):** 3.543 trabajadores tomados de `DATA.csv` (rama `main`): `ficha`, `nombre`, `departamento`, `gerencia`, `dia`, `mes`. Además `titulo` y `mensaje` del cuadro de felicitación. No incluye el año de nacimiento. Campo opcional `foto` para forzar otra imagen.
+- **`assets/img/cumpleaneros/` (nuevo):** 3.422 fotos `<ficha>.jpg` (recorte cuadrado, ~22 MB en total) convertidas desde los BMP de `FotosAdabas/` (200 px; de respaldo `FotoBmp2/`, 100 px), más `silueta_masculina.png` y `silueta_femenina.png` para los 121 trabajadores sin foto.
+- **Encabezado y confeti (conservados de la página original en `main`):** cuadro «🎂 ¡Feliz Cumpleaños te desea CVG Alcasa! 🎂» con título en degradado, mensaje entre comillas y la indicación «Haz clic en cualquier tarjeta…»; al mostrar cumpleañeros se lanza la animación de confeti (`canvas-confetti` 1.5.1 desde jsDelivr; se omite si el usuario prefiere menos movimiento).
+- **`assets/js/cumpleanos.js` (nuevo):** Carga el JSON, filtra por día/mes (hoy por defecto; «Todos los días» lista el mes completo), pinta las tarjetas con `textContent` (los datos nunca se interpretan como HTML), abre la ventana emergente y genera la descarga en PNG (810×1440) o PDF con html2canvas y jsPDF (cargados bajo demanda desde cdnjs).
+- **`assets/css/cumpleanos.css` (nuevo):** Estilos de la sección. La tarjeta emergente usa `assets/img/plantilla-cumpleanos.png` como fondo y se dimensiona con una variable `--u` (1 % del ancho), de modo que la pantalla, la imagen y el PDF salen iguales.
+- **`assets/img/plantilla-cumpleanos.png` (nuevo):** `PLANTILLA.png` (2560×4551, 6,4 MB) optimizada a 810×1440 px (~0,9 MB), proporción 9:16.
+- **`tools/generar_cumpleaneros.py` (nuevo):** Regenera el JSON y las fotos desde `DATA.csv` y los BMP (`python tools/generar_cumpleaneros.py --csv ... --fotos ...`). Conserva `titulo` y `mensaje` del JSON existente.
+- **`assets/js/app.js` e `index.html` (modificados):** Se agregó el enlace «Cumpleañeros» (`/sitio/Empresa/CA/index.html`) al menú desplegable **Extranet**, después de «Sistema OAC» (header renderizado por `app.js` y header estático de `index.html`).
+- **Datos personales:** el JSON y las fotos contienen datos de trabajadores. Si el repositorio es público, conviene hacerlo privado o publicar estos datos solo en el servidor interno.
 - **Migración a PHP/WordPress:** El JSON puede sustituirse por un endpoint/`WP_Query` con el mismo formato; el HTML ya separa datos y presentación.

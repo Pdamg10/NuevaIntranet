@@ -15,49 +15,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/main.css?v=2026t">
-    <link rel="stylesheet" href="/assets/css/cumpleanos.css?v=1">
+    <link rel="stylesheet" href="/assets/css/cumpleanos.css?v=3">
 </head>
 <body id="pagina-cumpleanos">
 
     <!-- HEADER CORPORATIVO (renderizado por /assets/js/app.js) -->
     <div id="site-header"></div>
 
-    <main class="content-wrapper">
+    <main class="content-wrapper cumple-main">
+        <h1 class="cumple-sr">Cumpleañeros CVG Alcasa</h1>
 
-        <!-- HERO -->
-        <section class="productos-page-hero">
-            <div class="productos-page-hero-top">
-                <div class="productos-page-hero-text">
-                    <span class="productos-page-kicker"><i class="fas fa-cake-candles"></i> Empresa · CVG Alcasa</span>
-                    <h1>Cumpleañeros</h1>
-                    <p>Consulta los cumpleaños por día y mes. Celebramos con cada trabajador de CVG Aluminio del Caroní, S.A.</p>
-                </div>
-            </div>
+        <!-- FILTROS -->
+        <section class="cumple-filtros" aria-label="Buscar cumpleañeros">
+            <select id="cumple-dia" aria-label="Día"></select>
+            <select id="cumple-mes" aria-label="Mes"></select>
+            <button type="button" id="cumple-consultar" class="cumple-btn-consultar">Consultar</button>
         </section>
 
         <!-- MENSAJE (texto editable desde data/cumpleaneros.json) -->
-        <section class="cumple-mensaje">
-            <h2 id="cumple-titulo">¡Feliz Cumpleaños te desea CVG Alcasa!</h2>
-            <p id="cumple-texto">Texto de felicitación (marcador de posición).</p>
+        <section class="cumple-mensaje" id="cumple-mensaje" hidden>
+            <h2>
+                <span class="cumple-emoji">🎂</span>
+                <span class="cumple-titulo-grad" id="cumple-titulo">¡Feliz Cumpleaños te desea CVG Alcasa!</span>
+                <span class="cumple-emoji">🎂</span>
+            </h2>
+            <p class="cumple-msg-personal" id="cumple-texto"></p>
+            <p class="cumple-hint"><i class="fas fa-hand-pointer"></i> Haz clic en cualquier tarjeta para generar la felicitación personalizada y descargarla.</p>
         </section>
-
-        <!-- FILTROS -->
-        <section class="cumple-filtros" aria-label="Filtrar cumpleañeros">
-            <select id="cumple-dia" aria-label="Día"></select>
-            <select id="cumple-mes" aria-label="Mes"></select>
-        </section>
-
-        <p id="cumple-resumen" class="cumple-resumen" aria-live="polite"></p>
 
         <!-- FICHAS (renderizadas por /assets/js/cumpleanos.js) -->
-        <section id="cumple-grid" class="cumple-grid" aria-label="Fichas de cumpleañeros"></section>
-
+        <section id="cumple-grid" class="cumple-grid" aria-live="polite" aria-label="Cumpleañeros"></section>
     </main>
+
+    <!-- VENTANA EMERGENTE: tarjeta sobre la plantilla -->
+    <div class="cumple-modal" id="cumple-modal" role="dialog" aria-modal="true" aria-label="Tarjeta de cumpleaños" aria-hidden="true">
+        <div class="cumple-modal-caja">
+            <button type="button" class="cumple-modal-cerrar" id="cumple-cerrar" aria-label="Cerrar"><i class="fas fa-xmark"></i></button>
+
+            <div class="cumple-tarjeta" id="cumple-tarjeta">
+                <img class="ct-fondo" src="/assets/img/plantilla-cumpleanos.png" alt="">
+                <img class="ct-foto" id="ct-foto" alt="">
+                <div class="ct-texto">
+                    <h2 class="ct-nombre" id="ct-nombre"></h2>
+                    <span class="ct-ficha" id="ct-ficha"></span>
+                    <div class="ct-info">
+                        <div><b>DEPARTAMENTO</b><span id="ct-depto"></span></div>
+                        <div><b>GERENCIA</b><span id="ct-gcia"></span></div>
+                    </div>
+                    <p class="ct-msg">En este día tan especial, <strong id="ct-fecha"></strong>, CVG Aluminio del Caroní, S.A. se une a la celebración de tu cumpleaños y te desea un año lleno de salud, éxitos y bendiciones. ¡Gracias por tu valiosa labor y compromiso!</p>
+                </div>
+            </div>
+
+            <div class="cumple-modal-acciones">
+                <button type="button" class="cumple-btn-descarga" id="cumple-btn-img"><i class="fas fa-image"></i> Descargar imagen</button>
+                <button type="button" class="cumple-btn-descarga cumple-btn-pdf" id="cumple-btn-pdf"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
+            </div>
+        </div>
+    </div>
 
     <!-- FOOTER INSTITUCIONAL (renderizado por /assets/js/app.js) -->
     <div id="site-footer"></div>
 
     <script src="/assets/js/app.js?v=2026s"></script>
-    <script src="/assets/js/cumpleanos.js?v=1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="/assets/js/cumpleanos.js?v=3"></script>
 </body>
 </html>
