@@ -89,8 +89,8 @@
 /* --- Tarjeta (plantilla 9:16). El JS fija el ancho y la variable --u (= 1% del ancho),
        así todo escala igual en pantalla y en la imagen/PDF descargados. --- */
 .cumple-tarjeta {
-    --u: 4.05px;
-    position: relative; width: 405px; height: 720px; overflow: hidden;
+    --u: 4.8px;
+    position: relative; width: 480px; height: 853px; overflow: hidden;
     border-radius: 14px; background: #0b3a8c; color: #fff;
     box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
 }

@@ -109,7 +109,7 @@
 
     /* ---------- Ventana emergente ---------- */
     function ajustarTarjeta() {
-        var w = Math.min(405, (window.innerHeight - 140) * 9 / 16, window.innerWidth * 0.92);
+        var w = Math.min(480, (window.innerHeight - 116) * 9 / 16, window.innerWidth * 0.94);
         w = Math.max(220, Math.floor(w));
         var t = $('cumple-tarjeta');
         t.style.width = w + 'px';
