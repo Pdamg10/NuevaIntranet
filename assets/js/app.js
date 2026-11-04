@@ -427,9 +427,9 @@
                                     '</a>' +
                                     '<ul class="dropdown-menu dropdown-menu-right">' +
                                         '<li><a href="http://alcasa.com.ve/sitio/buscador_embedido.html" target="_blank" rel="noopener noreferrer">Consulta clave ARI</a></li>' +
+                                        '<li><a href="/sitio/Empresa/CA/index.html">Nuestros Cumpleañeros</a></li>' +
                                         '<li><a href="http://alcasa.com.ve:5002" target="_blank" rel="noopener noreferrer">Acceso a la mensajería institucional</a></li>' +
-                                        '<li><a href="http://190.202.49.114:5050/" target="_blank" rel="noopener noreferrer">Sistema OAC</a></li>' +
-                                        '<li><a href="/sitio/Empresa/CA/index.html">Cumpleañeros</a></li>' +
+                                        '<li><a href="/contactos.html" target="_blank" rel="noopener noreferrer">Panel de Contactos</a></li>' +
                                     '</ul>' +
                                 '</li>' +
                                 '<li class="nav-item-cta">' +
