@@ -14,255 +14,401 @@
     <link rel="stylesheet" href="/assets/css/main.css?v=2026t">
     <style>
         body.admin-standalone-body {
+            margin: 0;
             background: #f1f5f9;
             min-height: 100vh;
-            margin: 0;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #1e293b;
         }
-        .admin-wrap {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 24px 22px 54px;
+        body.login-mode {
+            background: linear-gradient(135deg, #0a3567 0%, #12579b 52%, #2a7fd4 100%);
         }
-        .admin-topbar-shell {
+
+        /* =================== LOGIN (como la página viva, paleta copia) =================== */
+        #adminLoginBox {
+            min-height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 36px 18px;
+        }
+        .lg-card {
+            width: 100%;
+            max-width: 432px;
             background: #ffffff;
-            border: 1px solid #cbd5e1;
-            border-radius: 14px;
-            padding: 14px 22px;
-            margin-bottom: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 14px;
-            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+            border-radius: 18px;
+            padding: 40px 42px 28px;
+            text-align: center;
+            box-shadow: 0 26px 60px rgba(3, 17, 38, 0.4);
         }
-        .admin-brand-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
+        .lg-badge {
+            width: 74px; height: 74px; border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(140deg, #1d529b, #0c376c);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1.75rem;
+            box-shadow: 0 12px 26px rgba(9, 44, 92, 0.38);
         }
-        .admin-brand-title {
-            font-size: 1.18rem;
-            font-weight: 800;
-            color: var(--alcasa-blue);
-            letter-spacing: -0.02em;
+        .lg-title { margin: 0 0 7px; color: #1c4d8f; font-size: 1.52rem; font-weight: 800; letter-spacing: -0.01em; }
+        .lg-sub { margin: 0 0 24px; color: #5f7188; font-size: 0.95rem; }
+        .lg-form { text-align: left; }
+        .lg-label {
+            display: block; margin: 0 0 6px;
+            font-size: 0.74rem; font-weight: 800; letter-spacing: 0.09em;
+            color: #173e6e; text-transform: uppercase;
         }
-        .admin-user-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 12px;
-            border-radius: 999px;
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #0f172a;
+        .lg-field { position: relative; margin-bottom: 15px; }
+        .lg-field .lg-icon {
+            position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+            color: #8ba0b5; font-size: 0.9rem; pointer-events: none;
         }
-        .btn-adm {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            padding: 8px 14px;
-            border-radius: 9px;
-            border: 1px solid #cbd5e1;
-            background: #ffffff;
-            color: #1e293b;
-            font-size: 0.84rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.15s ease;
+        .lg-input {
+            width: 100%; padding: 12px 12px 12px 38px;
+            border: 1px solid #cdd9e5; border-radius: 9px;
+            font-size: 0.95rem; color: #1e293b; background: #fff;
+            font-family: inherit; box-sizing: border-box;
         }
-        .btn-adm:hover {
-            background: #f8fafc;
-            border-color: var(--alcasa-blue);
-            color: var(--alcasa-blue);
+        .lg-input::placeholder { color: #9fb0c0; }
+        .lg-input:focus { outline: 2px solid var(--alcasa-blue); outline-offset: 1px; border-color: var(--alcasa-blue); }
+        .lg-pass { padding-right: 42px; }
+        .lg-eye {
+            position: absolute; right: 7px; top: 50%; transform: translateY(-50%);
+            width: 30px; height: 30px; border: 0; border-radius: 6px;
+            background: transparent; color: #8ba0b5; cursor: pointer;
         }
-        .btn-adm-primary {
-            background: var(--alcasa-blue);
-            border-color: var(--alcasa-blue);
-            color: #ffffff;
-        }
-        .btn-adm-primary:hover {
-            background: #236eb8;
-            color: #ffffff;
-        }
-        .btn-adm-danger {
-            color: #dc2626;
-            border-color: #fecaca;
-            background: #fff5f5;
-        }
-        .btn-adm-danger:hover {
-            background: #fee2e2;
-            border-color: #f87171;
-            color: #b91c1c;
-        }
-        .admin-box {
-            background: #ffffff;
-            border-radius: 14px;
-            border: 1px solid #cbd5e1;
-            border-top: 4px solid var(--alcasa-blue);
-            box-shadow: 0 10px 30px rgba(0, 25, 55, 0.06);
-            padding: 26px 28px;
-        }
-        .admin-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 14px;
-            padding-bottom: 16px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .admin-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .admin-tab-btn {
-            padding: 10px 20px;
-            border-radius: 8px;
-            border: 1px solid var(--medium-gray);
-            background: #f8fafc;
-            color: var(--alcasa-blue);
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
+        .lg-eye:hover { color: var(--alcasa-blue); background: #eaf3fb; }
+        .lg-btn {
+            width: 100%; margin-top: 4px; padding: 13px;
+            border: 0; border-radius: 9px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 9px;
+            background: linear-gradient(135deg, #0a3f7c, #1c72c0);
+            color: #ffffff; font: inherit; font-weight: 700; font-size: 1rem;
+            box-shadow: 0 7px 16px rgba(10, 63, 124, 0.28);
             transition: var(--transition);
         }
-        .admin-tab-btn.active {
-            background: var(--alcasa-blue);
+        .lg-btn:hover { filter: brightness(1.09); }
+        .lg-msg {
+            display: none; margin-top: 12px; padding: 9px 12px;
+            border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+        }
+        .lg-msg.error { display: block; background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+        .lg-msg.info { display: block; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+        .lg-foot { margin: 22px 0 0; font-size: 0.85rem; color: #64748b; }
+        .lg-foot i { color: var(--alcasa-accent); }
+        .lg-accounts {
+            margin-top: 16px; padding-top: 12px;
+            border-top: 1px dashed #dbe4ee; text-align: left;
+        }
+        .lg-accounts summary {
+            cursor: pointer; font-size: 0.82rem; font-weight: 700;
+            color: #334155; list-style-position: outside;
+        }
+        .lg-accounts summary i { color: var(--alcasa-accent); }
+        .lg-accounts .lg-portal { margin-top: 12px; }
+        .lg-acc-btn {
+            width: 100%; display: flex; justify-content: space-between; gap: 8px; align-items: center;
+            margin-top: 6px; padding: 6px 10px; cursor: pointer;
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+            font-size: 0.78rem; font-weight: 600; color: #0f172a; text-align: left;
+        }
+        .lg-acc-btn:hover { border-color: var(--alcasa-blue); }
+        .lg-acc-btn span.nivel { color: #64748b; font-weight: 700; font-size: 0.72rem; }
+
+        /* =================== BARRA SUPERIOR DEL PANEL =================== */
+        .adm-topbar {
+            background: linear-gradient(90deg, #054A91 0%, #236EB8 100%);
             color: #ffffff;
-            border-color: var(--alcasa-blue);
+            box-shadow: 0 6px 18px rgba(4, 25, 55, 0.18);
         }
-        .admin-row-card {
-            background: #ffffff;
-            border: 1px solid var(--medium-gray);
-            border-left: 4px solid var(--alcasa-blue);
-            border-radius: 10px;
-            padding: 14px 18px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
+        .adm-topbar-inner {
+            max-width: 1320px; margin: 0 auto; padding: 13px 22px;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 14px; flex-wrap: wrap;
         }
-        .admin-row-card:hover {
-            border-left-color: var(--alcasa-accent);
-            background: #f8fbff;
+        .adm-brand { display: flex; align-items: center; gap: 11px; font-size: 1.16rem; font-weight: 800; letter-spacing: -0.01em; flex-wrap: wrap; }
+        .adm-brand > i { font-size: 1.3rem; color: var(--alcasa-accent-light); }
+        .adm-chip {
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 12px; border-radius: 999px;
+            font-size: 0.74rem; font-weight: 600; letter-spacing: 0.02em;
         }
-        .admin-row-info h4 {
-            color: var(--alcasa-blue);
-            margin: 0 0 4px 0;
-            font-size: 1rem;
+        .adm-pills { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; }
+        .adm-count {
+            display: inline-flex; gap: 7px; align-items: center;
+            background: rgba(240, 248, 255, 0.95); color: #12325e;
+            border-radius: 999px; padding: 7px 15px;
+            font-size: 0.85rem; font-weight: 700;
         }
-        .admin-row-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            font-size: 0.82rem;
-            color: var(--text-gray);
-            margin-bottom: 6px;
+        .adm-count b { font-weight: 800; }
+        .adm-top-mini {
+            display: inline-flex; gap: 7px; align-items: center;
+            background: rgba(255, 255, 255, 0.16); color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            border-radius: 999px; padding: 7px 14px;
+            font-size: 0.82rem; font-weight: 700; cursor: pointer; text-decoration: none;
         }
-        .admin-row-desc {
-            font-size: 0.88rem;
-            color: #334155;
-            margin: 0;
+        .adm-top-mini:hover { background: rgba(255, 255, 255, 0.28); }
+        .adm-top-mini:hidden { display: none; }
+        .adm-exit {
+            display: inline-flex; gap: 7px; align-items: center;
+            background: #ffffff; color: #0d4a91; border: 0;
+            border-radius: 999px; padding: 8px 17px;
+            font: inherit; font-weight: 700; font-size: 0.85rem; cursor: pointer;
+        }
+        .adm-exit:hover { background: #e6eff9; }
+
+        /* =================== FILTROS + PESTAÑAS + LISTADO =================== */
+        .admin-wrap { max-width: 1320px; margin: 0 auto; padding: 22px 22px 54px; }
+        .adm-filters {
+            display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+            margin-top: 22px;
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px;
+            padding: 12px 14px; box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+        }
+        .adm-search { position: relative; flex: 1; min-width: 250px; }
+        .adm-search > i {
+            position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+            color: #7b8ca1; font-size: 0.92rem; pointer-events: none;
+        }
+        .adm-search input {
+            width: 100%; padding: 10px 12px 10px 37px;
+            border: 1px solid #cbd5e1; border-radius: 8px;
+            font-size: 0.9rem; color: #1e293b; font-family: inherit;
+        }
+        .adm-search input::placeholder { color: #94a3b8; }
+        .adm-search input:focus { outline: 2px solid var(--alcasa-blue); outline-offset: 1px; }
+        .adm-sel {
+            min-width: 215px; padding: 10px 12px;
+            border: 1px solid #cbd5e1; border-radius: 8px;
+            font-weight: 700; font-size: 0.88rem; color: #16365c;
+            background: #fff; font-family: inherit; cursor: pointer;
+        }
+        .adm-recargar {
+            display: inline-flex; gap: 8px; align-items: center;
+            background: linear-gradient(135deg, #0a3f7c, #1c72c0);
+            color: #fff; border: 0; border-radius: 9px; padding: 10px 18px;
+            font: inherit; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(10, 63, 124, 0.25);
+        }
+        .adm-recargar:hover { filter: brightness(1.09); }
+        .adm-tabs { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+        .adm-tab {
+            padding: 9px 16px; border-radius: 9px; cursor: pointer;
+            border: 1px solid #cbd5e1; background: #f1f5f9; color: #12325e;
+            font: inherit; font-weight: 700; font-size: 0.85rem;
+        }
+        .adm-tab.active { background: var(--alcasa-blue); color: #fff; border-color: var(--alcasa-blue); }
+
+        .adm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 16px; margin-top: 16px;
+        }
+        .c-card {
+            position: relative; display: flex; flex-direction: column; overflow: hidden;
+            background: #fff; border: 1px solid #e4eaf1; border-top: 4px solid var(--alcasa-blue);
+            border-radius: 10px; box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+        }
+        .c-head { padding: 14px 16px 6px; display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+        .c-nombre {
+            margin: 0; font-size: 1.02rem; font-weight: 800; color: #16365c;
+            text-transform: uppercase; line-height: 1.3; overflow-wrap: anywhere;
+        }
+        .c-nombre small { display: block; font-size: 0.78rem; font-weight: 600; color: #64748b; }
+        .c-badge {
+            flex-shrink: 0; background: var(--alcasa-accent); color: #fff;
+            border-radius: 999px; padding: 4px 11px;
+            font-size: 0.66rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
+            max-width: 40%; text-align: center;
+        }
+        .c-meta { padding: 4px 16px 8px; }
+        .c-line { display: flex; gap: 9px; align-items: center; margin: 5px 0; font-size: 0.86rem; color: #334155; overflow-wrap: anywhere; }
+        .c-line i { width: 16px; text-align: center; color: var(--alcasa-accent); font-size: 0.82rem; flex-shrink: 0; }
+        .c-line a { color: var(--alcasa-blue); font-weight: 600; text-decoration: none; }
+        .c-line a:hover { text-decoration: underline; }
+        .c-quote {
+            margin: 2px 16px 14px;
+            background: #f1f5f9; border-left: 4px solid var(--alcasa-accent);
+            border-radius: 9px; padding: 10px 14px;
+            font-style: italic; color: #3b4859; font-size: 0.85rem; line-height: 1.5;
+            max-height: 6.4em; overflow: hidden;
+        }
+        .c-actions {
+            margin-top: auto; border-top: 1px solid #eef2f7;
+            padding: 10px; display: grid; gap: 8px;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .c-actions.three { grid-template-columns: repeat(3, 1fr) 1.2fr; }
+        .c-btn {
+            display: inline-flex; justify-content: center; align-items: center; gap: 6px;
+            border: 0; border-radius: 8px; padding: 9px 6px;
+            font: inherit; font-weight: 700; font-size: 0.82rem; color: #fff; cursor: pointer;
+        }
+        .c-btn:hover { filter: brightness(1.08); }
+        .c-btn-ver { background: linear-gradient(135deg, #0a3f7c, #1c72c0); }
+        .c-btn-wa { background: #22c55e; }
+        .c-btn-copy { background: #64748b; }
+        .c-btn-del { background: #dc2626; }
+        .c-btn-cv { background: var(--alcasa-blue); text-decoration: none; }
+        .c-card.marcada::before {
+            content: 'Marcado para eliminar';
+            position: absolute; inset: 0; z-index: 2;
+            background: rgba(254, 242, 242, 0.88);
+            display: flex; align-items: center; justify-content: center;
+            color: #b91c1c; font-weight: 800; font-size: 1.05rem;
+        }
+        .adm-marcados {
+            display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;
+            background: #fef2f2; border: 1px solid #fca5a5; color: #b91c1c;
+            border-radius: 10px; padding: 10px 14px; margin-top: 16px;
+            font-size: 0.88rem; font-weight: 600;
+        }
+        .adm-marcados button {
+            background: #fff; border: 1px solid #fca5a5; color: #b91c1c;
+            border-radius: 8px; padding: 7px 12px; cursor: pointer;
+            font: inherit; font-size: 0.8rem; font-weight: 700;
+        }
+        .c-empty {
+            grid-column: 1 / -1;
+            color: #64748b; padding: 26px 8px; text-align: center;
+            background: #fff; border: 1px dashed #cbd5e1; border-radius: 10px;
+            font-size: 0.92rem;
+        }
+
+        /* =================== MODAL (estilo ventanas copia) =================== */
+        #admDetailModal {
+            display: none; position: fixed; inset: 0;
+            background: rgba(2, 12, 27, 0.72); z-index: 9999;
+            align-items: center; justify-content: center; padding: 18px;
+        }
+        .adm-modal-box {
+            background: #ffffff; border-radius: 14px; max-width: 620px; width: 100%;
+            overflow: hidden; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+            display: flex; flex-direction: column; max-height: 88vh;
+        }
+        .adm-modal-head {
+            background: linear-gradient(135deg, #054A91, #236EB8 60%, #367EC6);
+            color: #ffffff; padding: 15px 22px;
+            display: flex; justify-content: space-between; align-items: center; gap: 10px;
+        }
+        .adm-modal-head h3 { margin: 0; font-size: 1.05rem; color: #fff; overflow-wrap: anywhere; }
+        #admModalCloseBtn {
+            background: rgba(255, 255, 255, 0.15); border: none; color: #fff;
+            width: 32px; height: 32px; border-radius: 50%; cursor: pointer; flex-shrink: 0;
+        }
+        #admModalCloseBtn:hover { background: rgba(255, 255, 255, 0.3); }
+        #admModalBody { padding: 20px 22px; font-size: 0.92rem; line-height: 1.65; color: #1e293b; overflow-y: auto; }
+        #admModalBody .ficha-quote {
+            background: #f1f5f9; border-left: 4px solid var(--alcasa-accent); border-radius: 8px;
+            padding: 10px 12px; margin-top: 4px;
+        }
+        #admModalActions {
+            padding: 14px 22px; background: #f8fafc; border-top: 1px solid #e2e8f0;
+            display: flex; gap: 10px; flex-wrap: wrap;
+        }
+
+        @media (max-width: 700px) {
+            .lg-card { padding: 30px 24px 22px; }
+            .adm-grid { grid-template-columns: 1fr; }
+            .adm-topbar-inner { padding: 12px 16px; }
+            .admin-wrap { padding: 18px 14px 44px; }
         }
     </style>
 </head>
-<body class="admin-standalone-body">
+<body class="admin-standalone-body login-mode">
 
-    <main class="admin-wrap">
-        <!-- Pantalla de Login si no hay sesión -->
-        <div class="admin-box" id="adminLoginBox" style="max-width: 500px; margin: 48px auto;">
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;">
-                <span class="admin-user-pill"><i class="fas fa-lock" style="color: var(--alcasa-accent);"></i> Sistema Interno</span>
-                <a href="/index.html" class="btn-adm" style="padding: 5px 11px; font-size: 0.78rem;">
-                    <i class="fas fa-arrow-left"></i> Portal Principal
-                </a>
-            </div>
-            <h2 style="color: var(--alcasa-blue); margin-bottom: 6px;"><i class="fas fa-user-shield" style="color: var(--alcasa-accent);"></i> Gestión de Contactos y CV</h2>
-            <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 18px;">Acceso exclusivo por niveles para Comercialización, Talento Humano y Administración.</p>
-            <form id="formAdminDatosLogin" autocomplete="off">
-                <div class="cv-field" style="margin-bottom: 12px;">
-                    <label for="admUser">Usuario *</label>
-                    <input type="text" id="admUser" name="usuario" required placeholder="admin / talento / comercializacion">
+    <!-- ==================== LOGIN (imagen 1) ==================== -->
+    <div id="adminLoginBox">
+        <div class="lg-card">
+            <div class="lg-badge"><i class="fas fa-lock"></i></div>
+            <h2 class="lg-title">Acceso Restringido</h2>
+            <p class="lg-sub">Administrador de Contactos · CVG ALCASA</p>
+            <form id="formAdminDatosLogin" class="lg-form" autocomplete="off">
+                <label class="lg-label" for="admUser">Usuario</label>
+                <div class="lg-field">
+                    <i class="fas fa-user lg-icon"></i>
+                    <input type="text" id="admUser" name="usuario" class="lg-input" required placeholder="Ingrese su usuario" autocomplete="username">
                 </div>
-                <div class="cv-field" style="margin-bottom: 16px;">
-                    <label for="admPass">Contraseña *</label>
-                    <input type="password" id="admPass" name="password" required placeholder="••••••••">
+                <label class="lg-label" for="admPass">Contraseña</label>
+                <div class="lg-field">
+                    <i class="fas fa-key lg-icon"></i>
+                    <input type="password" id="admPass" name="password" class="lg-input lg-pass" required placeholder="Ingrese su contraseña" autocomplete="current-password">
+                    <button type="button" class="lg-eye" id="admPassToggle" aria-label="Mostrar u ocultar contraseña"><i class="fas fa-eye"></i></button>
                 </div>
-                <button type="submit" class="btn-adm btn-adm-primary" style="width: 100%; justify-content: center; padding: 11px;">
-                    <i class="fas fa-right-to-bracket"></i> Ingresar al Panel
-                </button>
-                <div class="contacto-mensaje" id="admLoginMsg" style="margin-top: 10px; text-align: center;"></div>
-                <div id="admQuickAccounts" style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed rgba(14,165,233,0.28); font-size: 0.82rem;">
-                    <div style="margin-bottom: 6px; font-weight: 600; color: #0f172a;">
-                        <i class="fas fa-key" style="color: var(--alcasa-accent);"></i> Cuentas configuradas (clic para autocompletar):
-                    </div>
-                    <div id="admQuickAccountsList" style="display: flex; flex-direction: column; gap: 6px;"></div>
-                </div>
+                <button type="submit" class="lg-btn"><i class="fas fa-right-to-bracket"></i> Ingresar</button>
+                <div class="lg-msg" id="admLoginMsg"></div>
             </form>
+            <p class="lg-foot"><i class="fas fa-user-shield"></i> Acceso solo para personal autorizado</p>
+            <details class="lg-accounts">
+                <summary><i class="fas fa-key"></i> Cuentas configuradas (niveles) · Portal Principal</summary>
+                <a href="/index.html" class="lg-acc-btn lg-portal"><span><i class="fas fa-arrow-left"></i> <strong>Volver al Portal Principal</strong></span><span class="nivel">Inicio</span></a>
+                <div id="admQuickAccountsList"></div>
+            </details>
         </div>
+    </div>
 
-        <!-- Panel Principal de Contactos y Postulaciones de CV -->
-        <div id="adminMainBox" style="display: none;">
-            <header class="admin-topbar-shell">
-                <div class="admin-brand-left">
-                    <img src="/assets/img/favicon.png" alt="CVG Alcasa" style="width: 34px; height: 34px; object-fit: contain; flex-shrink: 0;">
-                    <div>
-                        <div class="admin-brand-title" id="admPanelHeading">Bandeja de Contactos y Postulaciones (CV)</div>
-                    </div>
-                    <span id="admUserInfo" class="admin-user-pill"></span>
+    <!-- ==================== PANEL (imagen 2) ==================== -->
+    <div id="adminMainBox" style="display: none;">
+        <header class="adm-topbar">
+            <div class="adm-topbar-inner">
+                <div class="adm-brand">
+                    <i class="fas fa-address-book"></i>
+                    <span>Administrador de Contactos</span>
+                    <span id="admUserInfo" class="adm-chip"></span>
                 </div>
-                <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                    <button type="button" class="btn-adm" id="btnRecargarDatos"><i class="fas fa-rotate"></i> Actualizar</button>
-                    <a href="/redaccion.html" class="btn-adm" id="btnIrEditorPrensa" style="display: none;"><i class="fas fa-pen-to-square"></i> Redacción Prensa</a>
-                    <a href="/index.html" class="btn-adm"><i class="fas fa-globe"></i> Portal Principal</a>
-                    <button type="button" class="btn-adm btn-adm-danger" id="btnSalirDatos"><i class="fas fa-power-off"></i> Salir</button>
+                <div class="adm-pills">
+                    <span class="adm-count"><i class="fas fa-users"></i> <b id="pillTotal">0</b> <span id="pillTotalTxt">contactos</span></span>
+                    <span class="adm-count"><i class="fas fa-filter"></i> <b id="pillMostrados">0</b> mostrados</span>
+                    <a href="/redaccion.html" class="adm-top-mini" id="btnIrEditorPrensa" style="display: none;"><i class="fas fa-pen-to-square"></i> Redacción</a>
+                    <a href="/index.html" class="adm-top-mini"><i class="fas fa-globe"></i> Portal</a>
+                    <button type="button" class="adm-exit" id="btnSalirDatos"><i class="fas fa-sign-out-alt"></i> Salir</button>
                 </div>
-            </header>
+            </div>
+        </header>
 
-            <div class="admin-box">
-                <div class="admin-tabs" id="adminTabsBar" style="justify-content: space-between; align-items: center;">
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button type="button" class="admin-tab-btn active" id="tabBtnContactos">
-                            <i class="fas fa-envelope-open-text"></i> Contactos Comerciales (<span id="countContactos">0</span>)
-                        </button>
-                        <button type="button" class="admin-tab-btn" id="tabBtnCV">
-                            <i class="fas fa-file-pdf"></i> Postulaciones de CV / Empleo (<span id="countCV">0</span>)
-                        </button>
-                    </div>
-                    <div style="flex: 1; max-width: 340px; min-width: 220px;">
-                        <input type="search" id="admSearchInput" placeholder="Buscar por nombre, cédula, correo, área o empresa..." style="width: 100%; padding: 9px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.88rem;">
-                    </div>
+        <div class="admin-wrap">
+            <div class="adm-filters">
+                <div class="adm-search">
+                    <i class="fas fa-search"></i>
+                    <input type="search" id="admSearchInput" placeholder="Buscar por nombre, correo, empresa o comentario...">
                 </div>
+                <select id="admFiltroInteres" class="adm-sel">
+                    <option value="">Todos los intereses</option>
+                </select>
+                <button type="button" class="adm-recargar" id="btnRecargarDatos"><i class="fas fa-sync-alt"></i> Recargar</button>
+            </div>
 
-                <div id="paneContactos"></div>
-                <div id="paneCV" style="display: none;"></div>
+            <div class="adm-tabs" id="adminTabsBar" style="display: none;">
+                <button type="button" class="adm-tab active" id="tabBtnContactos">
+                    <i class="fas fa-envelope-open-text"></i> Contactos Comerciales (<span id="countContactos">0</span>)
+                </button>
+                <button type="button" class="adm-tab" id="tabBtnCV">
+                    <i class="fas fa-file-pdf"></i> Postulaciones de CV / Empleo (<span id="countCV">0</span>)
+                </button>
+            </div>
+
+            <div id="paneContactos" class="adm-grid"></div>
+            <div id="paneCV" class="adm-grid" style="display: none;"></div>
+
+            <div class="adm-marcados" id="admMarcadosBar" style="display: none;">
+                <span><i class="fas fa-trash-can"></i> <b id="marcadosCount">0</b> contacto(s) marcado(s) para eliminar (marca local de trabajo, igual que en la página viva)</span>
+                <button type="button" id="btnDesmarcarTodos">Desmarcar todos</button>
             </div>
         </div>
+    </div>
 
-        <!-- Modal de Detalle (Formato Contactos.html) -->
-        <div id="admDetailModal" style="display: none; position: fixed; inset: 0; background: rgba(2,12,27,0.68); z-index: 9999; align-items: center; justify-content: center; padding: 18px;">
-            <div style="background: #ffffff; border-radius: 14px; max-width: 600px; width: 100%; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
-                <div style="background: var(--alcasa-blue); color: #ffffff; padding: 16px 22px; display: flex; justify-content: space-between; align-items: center;">
-                    <h3 style="margin: 0; font-size: 1.08rem; color: #ffffff;"><i class="fas fa-id-card" style="color: var(--alcasa-accent-light);"></i> <span id="admModalTitle">Detalle del Registro</span></h3>
-                    <button type="button" id="admModalCloseBtn" style="background: rgba(255,255,255,0.15); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;"><i class="fas fa-times"></i></button>
-                </div>
-                <div id="admModalBody" style="padding: 20px 22px; font-size: 0.92rem; line-height: 1.65; color: #1e293b; max-height: 68vh; overflow-y: auto;"></div>
-                <div id="admModalActions" style="padding: 14px 22px; background: #f8fafc; border-top: 1px solid var(--medium-gray); display: flex; gap: 10px; flex-wrap: wrap;"></div>
+    <!-- ==================== MODAL DE DETALLE ==================== -->
+    <div id="admDetailModal">
+        <div class="adm-modal-box">
+            <div class="adm-modal-head">
+                <h3><i class="fas fa-id-card" style="opacity:.85;"></i> <span id="admModalTitle">Detalle del Registro</span></h3>
+                <button type="button" id="admModalCloseBtn" aria-label="Cerrar"><i class="fas fa-times"></i></button>
             </div>
+            <div id="admModalBody"></div>
+            <div id="admModalActions"></div>
         </div>
-    </main>
+    </div>
 
     <script>
     (function () {
@@ -271,13 +417,20 @@
         var formLogin = document.getElementById('formAdminDatosLogin');
         var msgEl = document.getElementById('admLoginMsg');
         var userInfo = document.getElementById('admUserInfo');
-        var panelHeading = document.getElementById('admPanelHeading');
         var btnIrEditorPrensa = document.getElementById('btnIrEditorPrensa');
         var paneContactos = document.getElementById('paneContactos');
         var paneCV = document.getElementById('paneCV');
         var tabBtnContactos = document.getElementById('tabBtnContactos');
         var tabBtnCV = document.getElementById('tabBtnCV');
+        var tabsBar = document.getElementById('adminTabsBar');
         var searchInput = document.getElementById('admSearchInput');
+        var interesSel = document.getElementById('admFiltroInteres');
+        var pillTotal = document.getElementById('pillTotal');
+        var pillTotalTxt = document.getElementById('pillTotalTxt');
+        var pillMostrados = document.getElementById('pillMostrados');
+        var marcadosBar = document.getElementById('admMarcadosBar');
+        var marcadosCountEl = document.getElementById('marcadosCount');
+        var marcados = { c: {}, cv: {} }; // marca local «eliminar» (igual que la página viva)
         var detailModal = document.getElementById('admDetailModal');
         var modalTitle = document.getElementById('admModalTitle');
         var modalBody = document.getElementById('admModalBody');
@@ -288,6 +441,10 @@
             return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
                 return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
             });
+        }
+
+        function setBodyMode(modo) {
+            document.body.classList.toggle('login-mode', modo === 'login');
         }
 
         function copiarTexto(txt, aviso) {
@@ -322,8 +479,23 @@
             };
         }
 
+        function textosRegistro(reg, esCV) {
+            var detalle = esCV ? reg.resumen : reg.comentario;
+            return {
+                wa: '*Nombre:* ' + reg.nombre + '\n' +
+                    (reg.empresa ? '*Empresa / Nivel:* ' + reg.empresa + '\n' : '') +
+                    '*Correo:* ' + reg.correo + '\n' +
+                    (reg.telefono ? '*Teléfono:* ' + reg.telefono + '\n' : '') +
+                    '*Interés / Área:* ' + reg.interes + '\n' +
+                    '*Fecha:* ' + reg.fecha + '\n\n*Detalle:*\n' + detalle,
+                correo: 'Asunto: ' + (reg.interes || 'Contacto CVG Alcasa') + '\nPara: ' + reg.correo + '\n\nEstimado/a ' + reg.nombre + ',\nHemos recibido su registro en el portal oficial de CVG Aluminio del Caroní, S.A. (CVG Alcasa).\n\nDetalle recibido:\n"' + detalle + '"\n\nSaludos cordiales,\nCVG ALCASA',
+                todo: 'Fecha: ' + reg.fecha + '\nNombre: ' + reg.nombre + '\nCorreo: ' + reg.correo + '\nEmpresa/Nivel: ' + (reg.empresa || '') + '\nInterés/Área: ' + (reg.interes || '') + (reg.telefono ? '\nTeléfono: ' + reg.telefono : '') + '\nDetalle: ' + detalle + (reg.ip ? '\nIP: ' + reg.ip : '')
+            };
+        }
+
         function abrirModalRegistro(item, esCV) {
             var reg = esCV ? formatoNormalizadoCV(item) : item;
+            var t = textosRegistro(reg, esCV);
             modalTitle.textContent = reg.nombre || 'Detalle';
             var linkCV = reg.archivo ? ('/api/admin_datos.php?tipo=descargar_cv&archivo=' + encodeURIComponent(reg.archivo)) : '';
             modalBody.innerHTML =
@@ -333,7 +505,7 @@
                 (reg.telefono ? '<div style="margin-bottom:10px;"><strong><i class="fas fa-phone"></i> Teléfono / WhatsApp:</strong> ' + esc(reg.telefono) + '</div>' : '') +
                 '<div style="margin-bottom:10px;"><strong><i class="fas fa-building"></i> ' + (esCV ? 'Nivel Académico' : 'Empresa') + ':</strong> ' + esc(reg.empresa || '—') + '</div>' +
                 '<div style="margin-bottom:10px;"><strong><i class="fas fa-tag"></i> ' + (esCV ? 'Área de Postulación' : 'Interés') + ':</strong> ' + esc(reg.interes || '—') + '</div>' +
-                '<div style="margin-bottom:10px;"><strong><i class="fas fa-comment-dots"></i> ' + (esCV ? 'Resumen Profesional' : 'Comentario') + ':</strong><div style="background:#f8fafc;padding:10px 12px;border-radius:8px;border:1px solid #e2e8f0;margin-top:4px;">' + esc(esCV ? reg.resumen : reg.comentario) + '</div></div>' +
+                '<div style="margin-bottom:10px;"><strong><i class="fas fa-comment-dots"></i> ' + (esCV ? 'Resumen Profesional' : 'Comentario') + ':</strong><div class="ficha-quote">' + esc(esCV ? reg.resumen : reg.comentario) + '</div></div>' +
                 (reg.ip ? '<div style="font-size:0.8rem;color:#64748b;"><strong><i class="fas fa-globe"></i> IP:</strong> ' + esc(reg.ip) + '</div>' : '');
 
             modalActions.innerHTML =
@@ -342,20 +514,9 @@
                 '<button type="button" class="btn-outline-corp" id="btnModalCopyAll"><i class="fas fa-copy"></i> Copiar Todo</button>' +
                 (linkCV ? '<a href="' + linkCV + '" target="_blank" class="btn-prensa-card"><i class="fas fa-file-arrow-down"></i> Descargar CV Adjunto</a>' : '');
 
-            var txtWA = '*Nombre:* ' + reg.nombre + '\n' +
-                (reg.empresa ? '*Empresa / Nivel:* ' + reg.empresa + '\n' : '') +
-                '*Correo:* ' + reg.correo + '\n' +
-                (reg.telefono ? '*Teléfono:* ' + reg.telefono + '\n' : '') +
-                '*Interés / Área:* ' + reg.interes + '\n' +
-                '*Fecha:* ' + reg.fecha + '\n\n*Detalle:*\n' + (esCV ? reg.resumen : reg.comentario);
-
-            var txtMail = 'Asunto: ' + (reg.interes || 'Contacto CVG Alcasa') + '\nPara: ' + reg.correo + '\n\nEstimado/a ' + reg.nombre + ',\nHemos recibido su registro en el portal oficial de CVG Aluminio del Caroní, S.A. (CVG Alcasa).\n\nDetalle recibido:\n"' + (esCV ? reg.resumen : reg.comentario) + '"\n\nSaludos cordiales,\nCVG ALCASA';
-
-            var txtAll = 'Fecha: ' + reg.fecha + '\nNombre: ' + reg.nombre + '\nCorreo: ' + reg.correo + '\nEmpresa/Nivel: ' + (reg.empresa || '') + '\nInterés/Área: ' + (reg.interes || '') + '\nDetalle: ' + (reg.comentario || '');
-
-            document.getElementById('btnModalWA').onclick = function () { copiarTexto(txtWA, 'Formato WhatsApp copiado.'); };
-            document.getElementById('btnModalMail').onclick = function () { copiarTexto(txtMail, 'Formato de correo copiado.'); };
-            document.getElementById('btnModalCopyAll').onclick = function () { copiarTexto(txtAll, 'Registro completo copiado.'); };
+            document.getElementById('btnModalWA').onclick = function () { copiarTexto(t.wa, 'Formato WhatsApp copiado.'); };
+            document.getElementById('btnModalMail').onclick = function () { copiarTexto(t.correo, 'Formato de correo copiado.'); };
+            document.getElementById('btnModalCopyAll').onclick = function () { copiarTexto(t.todo, 'Registro completo copiado.'); };
 
             detailModal.style.display = 'flex';
         }
@@ -367,10 +528,56 @@
             if (e.target === detailModal) detailModal.style.display = 'none';
         });
 
+        /* ---------- Tarjetas estilo página viva (paleta copia) ---------- */
+        function accionesContacto(c) {
+            var reg = c, esCV = false;
+            var t = textosRegistro(reg, esCV);
+            var key = 'c:' + (c.fecha || '') + '|' + (c.correo || '') + '|' + (c.nombre || '');
+            var esMarcado = !!marcados.c[key];
+            return {
+                key: key, marcado: esMarcado,
+                ver: function () { abrirModalRegistro(c, false); },
+                wa: function () { copiarTexto(t.wa, 'Formato WhatsApp copiado.'); },
+                copiar: function () { copiarTexto(t.todo, 'Registro completo copiado.'); }
+            };
+        }
+
+        function pintarMarcados(esContactos) {
+            var n = 0;
+            Object.keys(esContactos ? marcados.c : marcados.cv).forEach(function (k) { if (marcados[esContactos ? 'c' : 'cv'][k]) n++; });
+            marcadosCountEl.textContent = n;
+            marcadosBar.style.display = (esContactos && n > 0) ? 'flex' : 'none';
+        }
+
+        function filtrar(list, campos, filtroInteres, campoInteres) {
+            var q = ((searchInput && searchInput.value) || '').toLowerCase().trim();
+            return (list || []).filter(function (o) {
+                if (filtroInteres && (o[campoInteres] || '').toLowerCase() !== filtroInteres.toLowerCase()) return false;
+                if (!q) return true;
+                var blob = campos.map(function (f) { return o[f] || ''; }).join(' ').toLowerCase();
+                return blob.indexOf(q) !== -1;
+            });
+        }
+
+        function actualizarFiltroInteres(fullList, campo, esCV) {
+            var previo = interesSel.value;
+            var valores = [];
+            (fullList || []).forEach(function (o) {
+                var v = (o[campo] || '').trim();
+                if (v) valores.push(v);
+            });
+            valores.sort();
+            var unicos = valores.filter(function (v, i) { return i === 0 || valores[i - 1].toLowerCase() !== v.toLowerCase(); });
+            interesSel.innerHTML = '<option value="">' + (esCV ? 'Todas las áreas' : 'Todos los intereses') + '</option>' +
+                unicos.map(function (v) { return '<option value="' + esc(v) + '">' + esc(v) + '</option>'; }).join('');
+            if (previo && unicos.some(function (v) { return v.toLowerCase() === previo.toLowerCase(); })) interesSel.value = previo;
+        }
+
         function renderBandejas(data, mantenerTab) {
             lastData = data;
             loginBox.style.display = 'none';
             mainBox.style.display = 'block';
+            setBodyMode('panel');
             var u = data.user || {};
             var perms = Array.isArray(u.permisos) ? u.permisos : [];
             var esAdmin = u.rol === 'admin';
@@ -379,115 +586,127 @@
             var puedeCV = pv.cv !== undefined ? !!pv.cv : (esAdmin || perms.indexOf('cv') !== -1);
             var puedePrensa = pv.prensa !== undefined ? !!pv.prensa : (esAdmin || perms.indexOf('prensa') !== -1);
 
-            if (u.nombre || u.usuario) {
-                userInfo.textContent = (u.nombre || u.usuario) + ' · ' + (u.nivel || u.rol);
-            }
-            if (btnIrEditorPrensa) {
-                btnIrEditorPrensa.style.display = puedePrensa ? 'inline-flex' : 'none';
-            }
+            userInfo.textContent = '';
+            if (u.nombre || u.usuario) userInfo.textContent = (u.nombre || u.usuario) + ' · ' + (u.nivel || u.rol);
+            if (btnIrEditorPrensa) btnIrEditorPrensa.style.display = puedePrensa ? 'inline-flex' : 'none';
 
             if (!mantenerTab) {
-                if (puedeContactos && puedeCV) {
-                    if (panelHeading) panelHeading.innerHTML = '<i class="fas fa-folder-tree" style="color: var(--alcasa-accent);"></i> Bandeja General de Contactos y Postulaciones (CV)';
-                    tabBtnContactos.style.display = 'inline-flex';
-                    tabBtnCV.style.display = 'inline-flex';
-                    tabBtnContactos.classList.add('active');
-                    tabBtnCV.classList.remove('active');
-                    paneContactos.style.display = 'block';
-                    paneCV.style.display = 'none';
-                } else if (puedeContactos) {
-                    if (panelHeading) panelHeading.innerHTML = '<i class="fas fa-envelope-open-text" style="color: var(--alcasa-accent);"></i> Bandeja Exclusiva de Contactos Comerciales y Cotizaciones';
-                    tabBtnContactos.style.display = 'inline-flex';
-                    tabBtnContactos.classList.add('active');
-                    tabBtnCV.style.display = 'none';
-                    tabBtnCV.classList.remove('active');
-                    paneContactos.style.display = 'block';
-                    paneCV.style.display = 'none';
-                } else if (puedeCV) {
-                    if (panelHeading) panelHeading.innerHTML = '<i class="fas fa-file-pdf" style="color: var(--alcasa-accent);"></i> Bandeja Exclusiva de Postulaciones de Empleo y CV';
-                    tabBtnContactos.style.display = 'none';
-                    tabBtnContactos.classList.remove('active');
-                    tabBtnCV.style.display = 'inline-flex';
-                    tabBtnCV.classList.add('active');
-                    paneContactos.style.display = 'none';
-                    paneCV.style.display = 'block';
-                }
+                var ambos = puedeContactos && puedeCV;
+                tabsBar.style.display = ambos ? 'flex' : 'none';
+                tabBtnContactos.style.display = ambos ? 'inline-flex' : 'none';
+                tabBtnCV.style.display = ambos ? 'inline-flex' : 'none';
+                paneContactos.style.display = puedeContactos ? 'grid' : 'none';
+                paneCV.style.display = (!puedeContactos && puedeCV) ? 'grid' : 'none';
+                tabBtnContactos.classList.toggle('active', !(!puedeContactos && puedeCV));
+                tabBtnCV.classList.toggle('active', !puedeContactos && puedeCV);
             }
 
-            var q = ((searchInput && searchInput.value) || '').toLowerCase().trim();
-            var contactos = (data.contactos || []).filter(function (c) {
-                if (!q) return true;
-                var blob = [c.nombre, c.correo, c.empresa, c.interes, c.comentario].join(' ').toLowerCase();
-                return blob.indexOf(q) !== -1;
-            });
-            var cvs = (data.postulaciones || []).filter(function (p) {
-                if (!q) return true;
-                var blob = [p.nombre, p.cedula, p.correo, p.telefono, p.nivel, p.area, p.resumen].join(' ').toLowerCase();
-                return blob.indexOf(q) !== -1;
-            });
+            var esCVActiva = (paneCV.style.display !== 'none');
+            var filtroPrevio = interesSel.value;
 
-            document.getElementById('countContactos').textContent = contactos.length;
-            document.getElementById('countCV').textContent = cvs.length;
+            if (esCVActiva) actualizarFiltroInteres(puedeCV ? data.postulaciones : null, 'area', true);
+            else actualizarFiltroInteres(puedeContactos ? data.contactos : null, 'interes', false);
 
+            var filtroInteres = '';
+            if (filtroPrevio) {
+                var existe = false;
+                Array.prototype.forEach.call(interesSel.options, function (o) {
+                    if (o.value.toLowerCase() === filtroPrevio.toLowerCase()) existe = true;
+                });
+                filtroInteres = existe ? filtroPrevio : '';
+                interesSel.value = filtroInteres;
+            }
+            var contactos = filtrar(data.contactos, ['nombre', 'correo', 'empresa', 'interes', 'comentario'], puedeContactos ? filtroInteres : '', 'interes');
+            var cvs = filtrar(data.postulaciones, ['nombre', 'cedula', 'correo', 'telefono', 'nivel', 'area', 'resumen'], puedeCV ? filtroInteres : '', 'area');
+
+            document.getElementById('countContactos').textContent = (data.contactos || []).length;
+            document.getElementById('countCV').textContent = (data.postulaciones || []).length;
+
+            var activos = esCVActiva ? cvs : contactos;
+            pillTotal.textContent = esCVActiva ? (data.postulaciones || []).length : (data.contactos || []).length;
+            pillTotalTxt.textContent = esCVActiva ? 'CV' : 'contactos';
+            pillMostrados.textContent = activos.length;
+
+            /* ---------- CONTACTOS ---------- */
             if (puedeContactos) {
                 if (!contactos.length) {
-                    paneContactos.innerHTML = '<p style="color:#64748b;padding:18px 0;">No hay mensajes de contacto que coincidan con la vista actual.</p>';
+                    paneContactos.innerHTML = '<div class="c-empty">No hay mensajes de contacto que coincidan.</div>';
                 } else {
-                    paneContactos.innerHTML = contactos.map(function (c, idx) {
-                        return '<div class="admin-row-card">' +
-                            '<div class="admin-row-info" style="flex:1;">' +
-                                '<h4>' + esc(c.nombre) + ' <span class="prensa-cat-badge">' + esc(c.interes || 'General') + '</span></h4>' +
-                                '<div class="admin-row-meta">' +
-                                    '<span><i class="fas fa-calendar"></i> ' + esc(c.fecha) + '</span>' +
-                                    '<span><i class="fas fa-envelope"></i> <a href="mailto:' + esc(c.correo) + '">' + esc(c.correo) + '</a></span>' +
-                                    (c.empresa ? '<span><i class="fas fa-building"></i> ' + esc(c.empresa) + '</span>' : '') +
-                                '</div>' +
-                                '<p class="admin-row-desc">' + esc(c.comentario) + '</p>' +
+                    paneContactos.innerHTML = contactos.map(function (c) {
+                        var a = accionesContacto(c);
+                        return '<article class="c-card' + (a.marcado ? ' marcada' : '') + '">' +
+                            '<div class="c-head">' +
+                                '<h4 class="c-nombre">' + esc(c.nombre) + '</h4>' +
+                                '<span class="c-badge">' + esc(c.interes || 'General') + '</span>' +
                             '</div>' +
-                            '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
-                                '<button type="button" class="btn-outline-corp" data-ver-c="' + idx + '" style="padding:7px 12px;font-size:0.8rem;"><i class="fas fa-eye"></i> Ver</button>' +
+                            '<div class="c-meta">' +
+                                '<div class="c-line"><i class="fas fa-clock"></i> ' + esc(c.fecha) + '</div>' +
+                                '<div class="c-line"><i class="fas fa-envelope"></i> <a href="mailto:' + esc(c.correo) + '">' + esc(c.correo) + '</a></div>' +
+                                (c.empresa ? '<div class="c-line"><i class="fas fa-building"></i> ' + esc(c.empresa) + '</div>' : '') +
                             '</div>' +
-                        '</div>';
+                            '<div class="c-quote">' + esc(c.comentario) + '</div>' +
+                            '<div class="c-actions">' +
+                                '<button type="button" class="c-btn c-btn-ver"><i class="fas fa-eye"></i> Ver</button>' +
+                                '<button type="button" class="c-btn c-btn-wa"><i class="fab fa-whatsapp"></i> WA</button>' +
+                                '<button type="button" class="c-btn c-btn-copy"><i class="fas fa-copy"></i> Copiar</button>' +
+                                '<button type="button" class="c-btn c-btn-del"><i class="fas fa-trash"></i> Eliminar</button>' +
+                            '</div>' +
+                        '</article>';
                     }).join('');
-                    Array.prototype.forEach.call(paneContactos.querySelectorAll('button[data-ver-c]'), function (btn) {
-                        btn.addEventListener('click', function () {
-                            var item = contactos[parseInt(this.getAttribute('data-ver-c') || '0', 10)];
-                            if (item) abrirModalRegistro(item, false);
+                    Array.prototype.forEach.call(paneContactos.querySelectorAll('.c-card'), function (card, idx) {
+                        var a = accionesContacto(contactos[idx]);
+                        var botones = card.querySelectorAll('.c-btn');
+                        botones[0].addEventListener('click', a.ver);
+                        botones[1].addEventListener('click', a.wa);
+                        botones[2].addEventListener('click', a.copiar);
+                        botones[3].addEventListener('click', function () {
+                            marcados.c[a.key] = !marcados.c[a.key];
+                            renderBandejas(lastData, true);
                         });
                     });
                 }
             } else {
                 paneContactos.innerHTML = '';
             }
+            pintarMarcados(!esCVActiva);
 
+            /* ---------- CV ---------- */
             if (puedeCV) {
                 if (!cvs.length) {
-                    paneCV.innerHTML = '<p style="color:#64748b;padding:18px 0;">No hay postulaciones de Síntesis Curricular que coincidan con la vista actual.</p>';
+                    paneCV.innerHTML = '<div class="c-empty">No hay postulaciones de Síntesis Curricular que coincidan.</div>';
                 } else {
-                    paneCV.innerHTML = cvs.map(function (p, idx) {
-                        var linkCV = p.archivo ? '/api/admin_datos.php?tipo=descargar_cv&archivo=' + encodeURIComponent(p.archivo) : '#';
-                        return '<div class="admin-row-card">' +
-                            '<div class="admin-row-info" style="flex:1;">' +
-                                '<h4>' + esc(p.nombre) + ' · <small>C.I: ' + esc(p.cedula) + '</small> <span class="prensa-cat-badge">Oportunidad Laboral: ' + esc(p.area) + '</span></h4>' +
-                                '<div class="admin-row-meta">' +
-                                    '<span><i class="fas fa-calendar"></i> ' + esc(p.fecha) + '</span>' +
-                                    '<span><i class="fas fa-graduation-cap"></i> Postulación CV — ' + esc(p.nivel) + '</span>' +
-                                    '<span><i class="fas fa-phone"></i> ' + esc(p.telefono) + '</span>' +
-                                    '<span><i class="fas fa-envelope"></i> <a href="mailto:' + esc(p.correo) + '">' + esc(p.correo) + '</a></span>' +
-                                '</div>' +
-                                '<p class="admin-row-desc">' + esc(p.resumen || 'Sin resumen adicional.') + '</p>' +
+                    paneCV.innerHTML = cvs.map(function (p) {
+                        var reg = formatoNormalizadoCV(p);
+                        var t = textosRegistro(reg, true);
+                        var key = 'cv:' + (p.fecha || '') + '|' + (p.correo || '') + '|' + (p.nombre || '') + '|' + (p.cedula || '');
+                        return '<article class="c-card">' +
+                            '<div class="c-head">' +
+                                '<h4 class="c-nombre">' + esc(p.nombre) + ' <small>C.I: ' + esc(p.cedula) + '</small></h4>' +
+                                '<span class="c-badge">' + esc(p.area || 'General') + '</span>' +
                             '</div>' +
-                            '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">' +
-                                '<button type="button" class="btn-outline-corp" data-ver-cv="' + idx + '" style="padding:7px 12px;font-size:0.8rem;"><i class="fas fa-eye"></i> Ver ficha</button>' +
-                                (p.archivo ? '<a href="' + linkCV + '" target="_blank" class="btn-prensa-card"><i class="fas fa-file-arrow-down"></i> Descargar CV</a>' : '') +
+                            '<div class="c-meta">' +
+                                '<div class="c-line"><i class="fas fa-clock"></i> ' + esc(p.fecha) + '</div>' +
+                                (p.nivel ? '<div class="c-line"><i class="fas fa-graduation-cap"></i> ' + esc(p.nivel) + '</div>' : '') +
+                                '<div class="c-line"><i class="fas fa-envelope"></i> <a href="mailto:' + esc(p.correo) + '">' + esc(p.correo) + '</a></div>' +
+                                (p.telefono ? '<div class="c-line"><i class="fas fa-phone"></i> ' + esc(p.telefono) + '</div>' : '') +
                             '</div>' +
-                        '</div>';
+                            '<div class="c-quote">' + esc(p.resumen || 'Sin resumen adicional.') + '</div>' +
+                            '<div class="c-actions three">' +
+                                '<button type="button" class="c-btn c-btn-ver"><i class="fas fa-eye"></i> Ver</button>' +
+                                '<button type="button" class="c-btn c-btn-wa"><i class="fab fa-whatsapp"></i> WA</button>' +
+                                '<button type="button" class="c-btn c-btn-copy"><i class="fas fa-copy"></i> Copiar</button>' +
+                                (p.archivo ? '<a class="c-btn c-btn-cv" target="_blank" href="/api/admin_datos.php?tipo=descargar_cv&archivo=' + encodeURIComponent(p.archivo) + '"><i class="fas fa-file-arrow-down"></i> CV</a>' : '<span></span>') +
+                            '</div>' +
+                        '</article>';
                     }).join('');
-                    Array.prototype.forEach.call(paneCV.querySelectorAll('button[data-ver-cv]'), function (btn) {
-                        btn.addEventListener('click', function () {
-                            var item = cvs[parseInt(this.getAttribute('data-ver-cv') || '0', 10)];
-                            if (item) abrirModalRegistro(item, true);
-                        });
+                    Array.prototype.forEach.call(paneCV.querySelectorAll('.c-card'), function (card, idx) {
+                        var p = cvs[idx];
+                        var reg = formatoNormalizadoCV(p);
+                        var t = textosRegistro(reg, true);
+                        var botones = card.querySelectorAll('.c-btn');
+                        botones[0].addEventListener('click', function () { abrirModalRegistro(p, true); });
+                        botones[1].addEventListener('click', function () { copiarTexto(t.wa, 'Formato WhatsApp copiado.'); });
+                        botones[2].addEventListener('click', function () { copiarTexto(t.todo, 'Registro completo copiado.'); });
                     });
                 }
             } else {
@@ -495,11 +714,24 @@
             }
         }
 
+        /* ---------- Controles ---------- */
         if (searchInput) {
             searchInput.addEventListener('input', function () {
                 if (lastData) renderBandejas(lastData, true);
             });
         }
+        interesSel.addEventListener('change', function () {
+            if (lastData) renderBandejas(lastData, true);
+        });
+
+        var eyeBtn = document.getElementById('admPassToggle');
+        eyeBtn.addEventListener('click', function () {
+            var inp = document.getElementById('admPass');
+            var mostrar = inp.type === 'password';
+            inp.type = mostrar ? 'text' : 'password';
+            eyeBtn.innerHTML = mostrar ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+            inp.focus();
+        });
 
         function cargarDatos() {
             fetch('/api/admin_datos.php')
@@ -508,7 +740,7 @@
                     if (res && res.success) {
                         renderBandejas(res);
                     } else {
-                        // Verificar si tiene sesión activa pero es usuario exclusivo de Prensa (Nivel 2)
+                        // ¿Sesión activa pero usuario exclusivo de Prensa (Nivel 2)?
                         fetch('/api/prensa_admin.php?action=status')
                             .then(function (r2) { return r2.json(); })
                             .then(function (st) {
@@ -519,21 +751,28 @@
                                         return;
                                     }
                                 }
-                                loginBox.style.display = 'block';
+                                loginBox.style.display = 'flex';
+                                setBodyMode('login');
                                 mainBox.style.display = 'none';
                             })
                             .catch(function () {
-                                loginBox.style.display = 'block';
+                                loginBox.style.display = 'flex';
+                                setBodyMode('login');
                                 mainBox.style.display = 'none';
                             });
                     }
                 })
-                .catch(function () {});
+                .catch(function () {
+                    loginBox.style.display = 'flex';
+                    setBodyMode('login');
+                    mainBox.style.display = 'none';
+                });
         }
 
         formLogin.addEventListener('submit', function (e) {
             e.preventDefault();
             msgEl.textContent = 'Verificando...';
+            msgEl.className = 'lg-msg info';
             fetch('/api/prensa_admin.php?action=login', {
                 method: 'POST',
                 body: new FormData(formLogin)
@@ -542,6 +781,7 @@
             .then(function (res) {
                 if (res && res.success && res.user) {
                     msgEl.textContent = '';
+                    msgEl.className = 'lg-msg';
                     var perms = Array.isArray(res.user.permisos) ? res.user.permisos : [];
                     var esAdmin = res.user.rol === 'admin';
                     if (!esAdmin && perms.indexOf('contactos') === -1 && perms.indexOf('cv') === -1 && perms.indexOf('prensa') !== -1) {
@@ -551,7 +791,7 @@
                     cargarDatos();
                 } else {
                     msgEl.textContent = (res && res.error) || 'Credenciales inválidas.';
-                    msgEl.className = 'contacto-mensaje error';
+                    msgEl.className = 'lg-msg error';
                 }
             });
         });
@@ -559,22 +799,31 @@
         tabBtnContactos.addEventListener('click', function () {
             tabBtnContactos.classList.add('active');
             tabBtnCV.classList.remove('active');
-            paneContactos.style.display = 'block';
+            paneContactos.style.display = 'grid';
             paneCV.style.display = 'none';
+            if (lastData) renderBandejas(lastData, true);
         });
 
         tabBtnCV.addEventListener('click', function () {
             tabBtnCV.classList.add('active');
             tabBtnContactos.classList.remove('active');
-            paneCV.style.display = 'block';
+            paneCV.style.display = 'grid';
             paneContactos.style.display = 'none';
+            if (lastData) renderBandejas(lastData, true);
         });
 
         document.getElementById('btnRecargarDatos').addEventListener('click', cargarDatos);
+
+        document.getElementById('btnDesmarcarTodos').addEventListener('click', function () {
+            marcados.c = {};
+            if (lastData) renderBandejas(lastData, true);
+        });
+
         document.getElementById('btnSalirDatos').addEventListener('click', function () {
             fetch('/api/prensa_admin.php?action=logout', { method: 'POST' }).then(function () {
-                loginBox.style.display = 'block';
                 mainBox.style.display = 'none';
+                loginBox.style.display = 'flex';
+                setBodyMode('login');
             });
         });
 
@@ -585,9 +834,9 @@
                 .then(function (res) {
                     var accs = (res && Array.isArray(res.accounts)) ? res.accounts : [];
                     qList.innerHTML = accs.map(function (a, i) {
-                        return '<button type="button" class="btn-outline-corp" data-idx="' + i + '" style="justify-content:space-between;padding:6px 10px;font-size:0.78rem;text-align:left;">' +
-                            '<span><i class="fas fa-user-check"></i> <strong>' + esc(a.usuario) + '</strong> / <code>' + esc(a.password) + '</code></span>' +
-                            '<span style="opacity:0.75;">' + esc(a.nivel) + '</span>' +
+                        return '<button type="button" class="lg-acc-btn" data-idx="' + i + '">' +
+                            '<span><i class="fas fa-user-check" style="color:var(--alcasa-accent);"></i> <strong>' + esc(a.usuario) + '</strong> / <code>' + esc(a.password) + '</code></span>' +
+                            '<span class="nivel">' + esc(a.nivel || a.rol || '') + '</span>' +
                         '</button>';
                     }).join('');
                     Array.prototype.forEach.call(qList.querySelectorAll('button[data-idx]'), function (b) {
