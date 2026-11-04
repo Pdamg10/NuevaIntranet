@@ -1,7 +1,7 @@
 # Informe Detallado de Cambios — Portal CVG Alcasa v2 (Rama `copia`)
 
 ## 1. Resumen Ejecutivo
-Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CVG Alcasa)** en la rama `copia`, integrando una experiencia interactiva moderna (ventanas emergentes flotantes para fichas técnicas, noticias, videos y fotografías; barra de navegación inteligente que se oculta al deslizar; galería multimedia dedicada con previsualizaciones en GIF; y conexión paginada con el servidor de noticias `:5001`), junto con paneles administrativos independientes por nivel de usuario.
+Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CVG Alcasa)** en la rama `copia`, integrando una experiencia interactiva moderna (ventanas emergentes flotantes para fichas técnicas, noticias, videos y fotografías; barra de navegación inteligente que se oculta al deslizar; galería multimedia dedicada con previsualizaciones en GIF; y conexión paginada con el servidor de noticias `:5001`), el módulo **«Nuestros Cumpleañeros»** con las fotos reales del personal (silueta por género cuando no hay retrato y tarjeta de felicitación ampliada), y paneles administrativos independientes por nivel de usuario: la Redacción de Sala de Prensa y el **Panel de Contactos, exclusivo de los mensajes del formulario de contacto**.
 
 ---
 
@@ -13,8 +13,8 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 ├── galeria.html                # Galería Multimedia dedicada (Videos completos + Fotografías clasificadas)
 ├── prensa.html                 # Sala de Prensa "Pulso Industrial CVG Alcasa" (Paginación :5001 + Modal de vista previa)
 ├── redaccion.html              # Aplicación administrativa independiente de Redacción (3 zonas, hasta 20 fotos)
-├── contactos.html              # Aplicación administrativa independiente de Contactos Comerciales y Postulaciones CV
-├── sitio/Empresa/CA/index.html # Página «Cumpleañeros» (filtro día/mes, tarjetas y ventana emergente con plantilla)
+├── contactos.html              # Panel exclusivo de Contactos (login «Acceso Restringido», intereses fijos, tarjetas Ver·WA·Copiar·Eliminar)
+├── sitio/Empresa/CA/index.html # Página «Nuestros Cumpleañeros» (filtro día/mes, tarjetas con silueta por género y ventana emergente con plantilla)
 ├── tools/generar_cumpleaneros.py # Genera data/cumpleaneros.json y las fotos desde DATA.csv + BMP
 ├── minimal.html                # Vista compacta de noticias
 ├── favicon.ico                 # Favicon multirresolución con el logo metálico de CVG Alcasa
@@ -24,7 +24,7 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 ├── .gitignore                  # Exclusión de datos personales generados (storage/*.csv, storage/cv/)
 ├── api/                        # Backend modular en PHP
 │   ├── _lib.php                # Utilidades compartidas (sanitización CSV, JSON/FormData, correo)
-│   ├── admin_datos.php         # API protegida por rol para Contactos Comerciales y Postulaciones CV
+│   ├── admin_datos.php         # API protegida por rol: contactos y postulaciones (solo lectura) + descarga de CV
 │   ├── contacto.php            # Recepción de formulario de contacto comercial (storage/contactos.csv)
 │   ├── cv.php                  # Recepción de Síntesis Curricular (PDF/DOC/DOCX) y registro estructurado
 │   ├── noticias.php            # Feed paginado de noticias (locales + servidor http://alcasa.com.ve:5001/?page=N)
@@ -89,10 +89,10 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 - **Eliminación de Líneas Cuadriculadas sobre Imágenes:** Se eliminaron los fondos CSS `repeating-linear-gradient` en contenedores de imágenes y tarjetas para evitar que aparezcan tramas o líneas cuadriculadas durante la carga o visualización de fotografías.
 
 ### 3.6. Separación de los 4 Niveles de Usuario y Formulario de CV (`storage/usuarios_config.json`, `api/cv.php`)
-- **Nivel 1 (`admin`):** Control total de Redacción (incluyendo eliminación permanente) + Bandejas de Contactos Comerciales y Postulaciones CV.
+- **Nivel 1 (`admin`):** Control total de Redacción (incluyendo eliminación permanente) + Panel de Contactos en `/contactos.html` (exclusivo de contactos desde 3.12). Conserva además el permiso `cv`.
 - **Nivel 2 (`comunicacion`):** Acceso exclusivo a Redacción de Sala de Prensa (`/redaccion.html`).
-- **Nivel 3 (`comercializacion`):** Acceso exclusivo a la Bandeja de Contactos Comerciales en `/contactos.html`.
-- **Nivel 4 (`talento`):** Acceso exclusivo a la Bandeja de Postulaciones de Síntesis Curricular (CV) en `/contactos.html`, conectada directamente al formulario único **Envía tu Síntesis Curricular (CV)** de `index.html`.
+- **Nivel 3 (`comercializacion`):** Acceso exclusivo al Panel de Contactos en `/contactos.html` (módulo exclusivo de contactos desde 3.12).
+- **Nivel 4 (`talento`):** Permiso `cv` de la Bandeja de Postulaciones de Síntesis Curricular conectada al formulario único **Envía tu Síntesis Curricular (CV)** de `index.html`. En la copia actual esa bandeja ya no vive en `contactos.html` (ver 3.12): las postulaciones siguen recibiendo y archivando (`storage/postulaciones.csv` + PDF en `storage/cv/`) vía `api/cv.php` y `admin_datos.php` puede servirlas (solo lectura), pero la página de gestión con acceso exclusivo para `talento` queda pendiente como módulo propio.
 
 ### 3.7. Actualización de la Paleta Azul Institucional (`assets/css/main.css`, `index.html`, `productos.html`, `prensa.html`, `galeria.html`, `contactos.html`, `redaccion.html`, `minimal.html`)
 - **Nuevo azul base:** Se reemplazó la paleta azul anterior (`#003366` / `#002244` / `#0056a3`) por el azul de la cabecera y pie de `http://alcasa.com.ve:8070/`:
@@ -124,6 +124,12 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 - **Ventanas flotantes (fichas técnicas, noticias, video y lightbox) en tema claro:** fondo blanco del diálogo, bloque del cuerpo blanco, cabecera con degradado azul (`#054A91 → #236EB8 → #367EC6`) y acentos en acero claro; backdrop azul (`rgba(2, 26, 58, 0.78)`). Se restylearon los botones primarios (degradado azul), secundarios (blanco con borde `#B9D4EC`) y de cierre (hover en azul claro); texto y tablas con la paleta clara (`#334155`, cabecera `#EAF3FB`).
 - **Caché:** se subió `main.css` a `?v=2026t` y `app.js` a `?v=2026s` en todas las páginas.
 
+### 3.10. Siluetas en Cumpleañeros: se eliminaron las fichas con «X» dibujada (`assets/img/cumpleaneros/`, `tools/generar_cumpleaneros.py`)
+- **Diagnóstico:** 67 fotos generadas desde el respaldo `FotoBmp2/` eran en realidad ampliaciones idénticas de un BMP «vacío» con una «X» dibujada (mismo hash MD5, `d297f361…`), por lo que sus tarjetas mostraban esa «X» en lugar del retrato. La página original del sitio (servida desde `FotosAdabas/`) las considera sin foto y muestra la silueta.
+- **Solución:** se borraron esas 67 imágenes (`assets/img/cumpleaneros/25***.jpg` y otros de 26***), de modo que `cumpleanos.js` cae por `onerror` a la silueta del género estimada (`silueta_masculina.png` / `silueta_femenina.png`), igual que en la página de referencia. Se conservó `24790.jpg` (MARLIS DEL VALLE CAMPOS ACOSTA), la única foto real extraíble del respaldo. Balances: 3.355 fotos reales y 188 trabajadores con silueta sobre un total de 3.543.
+- **`tools/generar_cumpleaneros.py`:** ahora descarta automáticamente cualquier BMP «vacío» (menos del 15 % de píxeles oscuros al recortar al cuadrado), evitando reintroducir fichas con la «X». Las futuras regeneraciones con `--fotos … --fotos FotoBmp2` salen ya limpias.
+- **Ventana emergente más grande:** la tarjeta de la plantilla pasó de 405 px a 480 px de ancho (al máximo que permita el viewport, proporción 9:16 intacta; `--u` y el JS de ajuste escalan todo automáticamente). La imagen/PDF descargados siguen saliendo a 810 px. Caché: `cumpleanos.css/js` a `?v=4`.
+
 ### 3.11. Menú «Extranet» alineado con la rama `main` (`assets/js/app.js`, `index.html`)
 - **Corrección:** el submenú «Extranet» del portal `copia` tenía otro orden, el rótulo corto «Cumpleañeros» y una entrada extra «Sistema OAC» (`190.202.49.114:5050`) que no existe en `main`; además faltaba «Panel de Contactos». Se dejó idéntico al de `main:components/header.html`: 1) Consulta clave ARI · 2) Nuestros Cumpleañeros (`/sitio/Empresa/CA/index.html`) · 3) Acceso a la mensajería institucional (`alcasa.com.ve:5002`) · 4) Panel de Contactos (`/contactos.html`, la versión rediseñada de la rama `copia`).
 - **Aplicado en ambos puntos de renderizado:** el menú estático de `index.html` y el inyectado por `assets/js/app.js` (galería, prensa, productos, etc.).
@@ -136,8 +142,7 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 - **«Eliminar»:** marca la tarjeta localmente con superposición «Marcado para eliminar» y barra roja con conteo y «Desmarcar todos»; la marca se recuerda en `localStorage` (misma mecánica que la página viva) y no borra del servidor (la API de datos es de solo lectura).
 - **Conservado:** modal de detalle con formatos de copia (WhatsApp/correo/todo) para responder al remitente.
 
-### 3.10. Siluetas en Cumpleañeros: se eliminaron las fichas con «X» dibujada (`assets/img/cumpleaneros/`, `tools/generar_cumpleaneros.py`)
-- **Diagnóstico:** 67 fotos generadas desde el respaldo `FotoBmp2/` eran en realidad ampliaciones idénticas de un BMP «vacío» con una «X» dibujada (mismo hash MD5, `d297f361…`), por lo que sus tarjetas mostraban esa «X» en lugar del retrato. La página original del sitio (servida desde `FotosAdabas/`) las considera sin foto y muestra la silueta.
-- **Solución:** se borraron esas 67 imágenes (`assets/img/cumpleaneros/25***.jpg` y otros de 26***), de modo que `cumpleanos.js` cae por `onerror` a la silueta del género estimada (`silueta_masculina.png` / `silueta_femenina.png`), igual que en la página de referencia. Se conservó `24790.jpg` (MARLIS DEL VALLE CAMPOS ACOSTA), la única foto real extraíble del respaldo. Balances: 3.355 fotos reales y 188 trabajadores con silueta Sobre un total de 3.543.
-- **`tools/generar_cumpleaneros.py`:** ahora descarta automáticamente cualquier BMP «vacío» (menos del 15 % de píxeles oscuros al recortar al cuadrado), evitando reintroducir fichas con la «X». Las futuras regeneraciones con `--fotos … --fotos FotoBmp2` salen ya limpias.
-- **Ventana emergente más grande:** la tarjeta de la plantilla pasó de 405 px a 480 px de ancho (al máximo que permita el viewport, proporción 9:16 intacta; `--u` y el JS de ajuste escalan todo automáticamente). La imagen/PDF descargados siguen saliendo a 810 px. Caché: `cumpleanos.css/js` a `?v=4`.
+### 3.13. Documentación alineada con el estado del proyecto (`README.md`, `INFORME_DE_CAMBIOS.md`)
+- **`README.md`:** descripción de `/contactos.html` como panel exclusivo de contactos (login restringido, tarjetas y marca local); se añadió la página `/sitio/Empresa/CA/index.html` de «Nuestros Cumpleañeros» a la tabla de páginas; la matriz de niveles refleja la distribución vigente (Nivel 4 con permiso `cv` reservado mientras no exista bandeja dedicada en `copia`); nota de datos personales.
+- **`INFORME_DE_CAMBIOS.md`:** árbol de proyecto actualizado (`contactos.html`, `admin_datos.php`, cumpleañeros); sección 3.6 ajustada a los módulos vigentes; secciones 3.10/3.11/3.12 quedaron en orden cronológico; documentado el estado de la bandeja de CV (pendiente de módulo propio, sin perder su recepción y archivo).
+
