@@ -48,6 +48,16 @@ def cuadrada(im):
     x, y = (w - lado) // 2, (h - lado) // 2
     return im.crop((x, y, x + lado, y + lado))
 
+def parece_placeholder(im):
+    """BMP «vacía» (ampliada con una X dibujada, típica del respaldo FotoBmp2).
+
+    Una foto real siempre es más oscura que eso (mínimo observado ~22 %);
+    los BMP con solo la X quedan por debajo del 8 %."""
+    gris = im.convert("L")
+    px = list(gris.getdata())
+    oscuras = sum(1 for v in px if v < 150)
+    return oscuras / len(px) < 0.15
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--csv", required=True)
@@ -69,9 +79,11 @@ def main():
             origen = os.path.join(carpeta, f["ficha"] + ".bmp")
             if os.path.exists(origen):
                 with Image.open(origen) as im:
-                    cuadrada(im.convert("RGB")).save(
-                        os.path.join(a.salida_fotos, f["ficha"] + ".jpg"),
-                        "JPEG", quality=82, optimize=True, progressive=True)
+                    rgb = cuadrada(im.convert("RGB"))
+                    if parece_placeholder(rgb):
+                        break  # BMP con solo la X dibujada: no hay foto real; se usará silueta
+                    rgb.save(os.path.join(a.salida_fotos, f["ficha"] + ".jpg"),
+                             "JPEG", quality=82, optimize=True, progressive=True)
                 con_foto += 1
                 break
 
