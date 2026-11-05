@@ -10,6 +10,7 @@ const BASE = 'http://alcasa.com.ve:5001';
 const TTL = 120;
 
 $includeAll = !empty($_GET['include_all']);
+$reqId = isset($_GET['id']) ? trim((string)$_GET['id']) : '';
 $reqPage = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 0;
 $qFilter = isset($_GET['q']) ? trim((string)$_GET['q']) : '';
 $fechaFilter = isset($_GET['fecha']) ? trim((string)$_GET['fecha']) : '';
@@ -17,7 +18,7 @@ $mesFilter = isset($_GET['mes']) ? trim((string)$_GET['mes']) : '';
 $anioFilter = isset($_GET['anio']) ? trim((string)$_GET['anio']) : '';
 $hasFilters = ($qFilter !== '' || $fechaFilter !== '' || $mesFilter !== '' || $anioFilter !== '');
 $filterHash = $hasFilters ? '_' . substr(md5($qFilter . '|' . $fechaFilter . '|' . $mesFilter . '|' . $anioFilter), 0, 8) : '';
-$cache = sys_get_temp_dir() . '/cvg_alcasa_noticias_v5' . ($includeAll ? '_all' : '') . ($reqPage > 0 ? '_p' . $reqPage : '') . $filterHash . '.json';
+$cache = sys_get_temp_dir() . '/cvg_alcasa_noticias_v5' . ($reqId !== '' ? '_id_' . preg_replace('/[^a-zA-Z0-9_-]/', '', $reqId) : (($includeAll ? '_all' : '') . ($reqPage > 0 ? '_p' . $reqPage : '') . $filterHash)) . '.json';
 $fallbackLocal = __DIR__ . '/../data/noticias.json';
 
 if (is_file($cache) && time() - filemtime($cache) < TTL && !isset($_GET['nocache'])) {
@@ -90,6 +91,131 @@ $fallbackPool = [
     '/assets/img/noticias/noticia-748.jpg',
     '/assets/img/noticias/noticia-739.jpg'
 ];
+
+// Modo detalle individual (?id=N) para minimal.html
+if ($reqId !== '') {
+    if (in_array($reqId, $ocultasIds, true)) {
+        http_response_code(404);
+        echo json_encode(['error' => 'Noticia no disponible'], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    if (isset($localCustomNew[$reqId])) {
+        $ln = $localCustomNew[$reqId];
+        $imgs = (!empty($ln['imagenes']) && is_array($ln['imagenes'])) ? $ln['imagenes'] : [['url' => $ln['imagen'] ?? '']];
+        $imgUrl = (string)($imgs[0]['url'] ?? ($ln['imagen'] ?? '/assets/img/noticias/noticia-761.jpg'));
+        $cuerpoTxt = (string)($ln['cuerpo'] ?? ($ln['resumen'] ?? ''));
+        $cuerpoHtml = (strpos($cuerpoTxt, '<p') !== false || strpos($cuerpoTxt, '<div') !== false)
+            ? $cuerpoTxt
+            : ('<p>' . nl2br(htmlspecialchars($cuerpoTxt, ENT_QUOTES | ENT_HTML5, 'UTF-8')) . '</p>');
+        $detJson = json_encode([
+            'id'            => $reqId,
+            'esVivo'        => false,
+            'url'           => BASE . '/noticia/' . rawurlencode($reqId),
+            'titulo'        => $normalizarTextoCVG((string)($ln['titulo'] ?? 'Comunicado')),
+            'subtitulo'     => $normalizarTextoCVG((string)($ln['subtitulo'] ?? '')),
+            'categoria'     => $normalizarTextoCVG((string)($ln['categoria'] ?? 'Institucional')),
+            'autor'         => (string)($ln['autor'] ?? 'Comunicación Estratégica'),
+            'fecha'         => trim(((string)($ln['fecha_solo'] ?? '')) . ' ' . ((string)($ln['hora_solo'] ?? ''))),
+            'imagen'        => $imgUrl,
+            'nombreArchivo' => basename($imgUrl),
+            'cuerpo'        => $cuerpoHtml
+        ], JSON_UNESCAPED_UNICODE);
+        @file_put_contents($cache, $detJson);
+        echo $detJson;
+        exit;
+    }
+
+    $detHtml = httpGet(BASE . '/noticia/' . rawurlencode($reqId), 6);
+    if ($detHtml !== '' && preg_match('/<article class="detalle-noticia">(.*?)<\/article>/s', $detHtml, $artM)) {
+        $artHtml = $artM[1];
+        $tit = '';
+        if (preg_match('/<h1>(.*?)<\/h1>/s', $artHtml, $m)) {
+            $tit = trim(html_entity_decode(strip_tags($m[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+        }
+        $sub = '';
+        if (preg_match('/<h2 class="subtitulo-detalle">(.*?)<\/h2>/s', $artHtml, $m)) {
+            $sub = trim(html_entity_decode(strip_tags($m[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+        }
+        $aut = 'Comunicación Estratégica';
+        if (preg_match('/👤\s*([^<]+)/u', $artHtml, $m)) {
+            $aut = trim(html_entity_decode($m[1], ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+        }
+        $fec = '';
+        if (preg_match('/📅\s*([0-9\/]+\s*[0-9:]*)/u', $artHtml, $m)) {
+            $fec = trim($m[1]);
+        }
+        $cat = 'Institucional';
+        if (preg_match('/<span class="categoria">(.*?)<\/span>/s', $artHtml, $m)) {
+            $cat = trim(html_entity_decode(strip_tags($m[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+        }
+        $img = '';
+        if (preg_match('/<div class="imagen-principal">.*?<img\s+src="([^"]+)"/s', $artHtml, $m)) {
+            $img = trim($m[1]);
+            if ($img !== '' && $img[0] === '/') {
+                $img = BASE . $img;
+            }
+        }
+        $nomArchivo = '';
+        if (preg_match('/<div class="nombre-archivo"[^>]*>(.*?)<\/div>/s', $artHtml, $m)) {
+            $nomArchivo = trim(str_replace('📎', '', html_entity_decode(strip_tags($m[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8')));
+        }
+        $cuerpo = '';
+        if (preg_match('/<div class="texto-principal">(.*?)<\/div>\s*<\/div>\s*<div class="acciones-detalle">/s', $artHtml, $m) ||
+            preg_match('/<div class="texto-principal">(.*?)<\/div>/s', $artHtml, $m)) {
+            $cuerpo = trim($m[1]);
+            $cuerpo = preg_replace_callback('/\b(src|href)="(\/[^"]+)"/i', function ($mm) {
+                return $mm[1] . '="' . BASE . $mm[2] . '"';
+            }, $cuerpo);
+        }
+
+        $detJson = json_encode([
+            'id'            => $reqId,
+            'esVivo'        => true,
+            'url'           => BASE . '/noticia/' . rawurlencode($reqId),
+            'titulo'        => $tit ?: ('Comunicado #' . $reqId),
+            'subtitulo'     => $sub,
+            'categoria'     => $cat,
+            'autor'         => $aut,
+            'fecha'         => $fec,
+            'imagen'        => $img,
+            'nombreArchivo' => $nomArchivo,
+            'cuerpo'        => $cuerpo
+        ], JSON_UNESCAPED_UNICODE);
+        @file_put_contents($cache, $detJson);
+        echo $detJson;
+        exit;
+    }
+
+    if (isset($localBackupMap[$reqId])) {
+        $bk = $localBackupMap[$reqId];
+        $imgs = (!empty($bk['imagenes']) && is_array($bk['imagenes'])) ? $bk['imagenes'] : [['url' => $bk['imagen'] ?? '']];
+        $imgUrl = (string)($imgs[0]['url'] ?? ($bk['imagen'] ?? '/assets/img/noticias/noticia-761.jpg'));
+        $cuerpoTxt = (string)($bk['cuerpo'] ?? ($bk['resumen'] ?? ''));
+        $cuerpoHtml = (strpos($cuerpoTxt, '<p') !== false || strpos($cuerpoTxt, '<div') !== false)
+            ? $cuerpoTxt
+            : ('<p>' . nl2br(htmlspecialchars($cuerpoTxt, ENT_QUOTES | ENT_HTML5, 'UTF-8')) . '</p>');
+        $detJson = json_encode([
+            'id'            => $reqId,
+            'esVivo'        => false,
+            'url'           => BASE . '/noticia/' . rawurlencode($reqId),
+            'titulo'        => $normalizarTextoCVG((string)($bk['titulo'] ?? 'Comunicado')),
+            'subtitulo'     => $normalizarTextoCVG((string)($bk['subtitulo'] ?? '')),
+            'categoria'     => $normalizarTextoCVG((string)($bk['categoria'] ?? 'Institucional')),
+            'autor'         => (string)($bk['autor'] ?? 'Comunicación Estratégica'),
+            'fecha'         => trim(((string)($bk['fecha_solo'] ?? ($bk['fecha'] ?? ''))) . ' ' . ((string)($bk['hora_solo'] ?? ''))),
+            'imagen'        => $imgUrl,
+            'nombreArchivo' => basename($imgUrl),
+            'cuerpo'        => $cuerpoHtml
+        ], JSON_UNESCAPED_UNICODE);
+        echo $detJson;
+        exit;
+    }
+
+    http_response_code(404);
+    echo json_encode(['error' => 'Noticia no encontrada'], JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
 // Modo paginado o filtrado directo desde http://alcasa.com.ve:5001/?page=N (para Sala de Prensa prensa.html y minimal.html)
 if ($reqPage > 0 || $hasFilters) {

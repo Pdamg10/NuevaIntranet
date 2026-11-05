@@ -51,6 +51,17 @@ function csv_append($file, $head, $row) {
     }
     $f = STORAGE . '/' . $file;
     $new = !is_file($f);
+    if ($new) {
+        $seed = __DIR__ . '/../data/' . pathinfo($file, PATHINFO_FILENAME) . '-semilla.csv';
+        if (is_file($seed)) {
+            $rawSeed = (string)file_get_contents($seed);
+            if ($rawSeed !== '' && substr($rawSeed, -1) !== "\n") {
+                $rawSeed .= "\n";
+            }
+            @file_put_contents($f, $rawSeed, LOCK_EX);
+            $new = !is_file($f) || filesize($f) === 0;
+        }
+    }
     $h = fopen($f, 'a');
     if ($h) {
         flock($h, LOCK_EX);

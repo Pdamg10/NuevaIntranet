@@ -737,8 +737,11 @@
                 <span class="redaccion-autosave" id="autosaveStatus">
                     <i class="fas fa-check-circle" style="color: #16a34a;"></i> Guardado hace 1 min
                 </span>
-                <a href="/contactos.html" id="linkPanelContactosCV" class="btn-ed" style="display: none; text-decoration: none;" title="Ir a la bandeja de Contactos y CV">
-                    <i class="fas fa-address-book"></i> Contactos y CV
+                <a href="/contactos.html" id="linkPanelContactos" class="btn-ed" style="display: none; text-decoration: none;" title="Ir al Panel de Contactos">
+                    <i class="fas fa-address-book"></i> Contactos
+                </a>
+                <a href="/cv.html" id="linkPanelCV" class="btn-ed" style="display: none; text-decoration: none;" title="Ir al Panel de Postulaciones (CV)">
+                    <i class="fas fa-file-pdf"></i> Postulaciones (CV)
                 </a>
                 <a href="/prensa.html" class="btn-ed" style="text-decoration: none;" title="Ver Sala de Prensa pública">
                     <i class="fas fa-newspaper"></i> Ver Sala de Prensa
@@ -1624,6 +1627,7 @@
                         var tienePrensa = esAdmin || perms.indexOf('prensa') !== -1;
                         var tieneContactos = esAdmin || perms.indexOf('contactos') !== -1;
                         var tieneCV = esAdmin || perms.indexOf('cv') !== -1;
+                        var tieneContactosOCV = tieneContactos || tieneCV;
 
                         if (!tienePrensa) {
                             // Comercialización (Nivel 3) → su panel de Contactos; Talento (Nivel 4) → su panel de CV
@@ -1643,9 +1647,13 @@
                         }
 
                         usuarioPuedeEliminar = esAdmin || perms.indexOf('prensa_eliminar') !== -1;
-                        var linkContactosEl = document.getElementById('linkPanelContactosCV');
+                        var linkContactosEl = document.getElementById('linkPanelContactos');
                         if (linkContactosEl) {
-                            linkContactosEl.style.display = tieneContactosOCV ? 'inline-flex' : 'none';
+                            linkContactosEl.style.display = tieneContactos ? 'inline-flex' : 'none';
+                        }
+                        var linkCVEl = document.getElementById('linkPanelCV');
+                        if (linkCVEl) {
+                            linkCVEl.style.display = tieneCV ? 'inline-flex' : 'none';
                         }
 
                         loginView.style.display = 'none';

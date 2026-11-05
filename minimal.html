@@ -23,6 +23,7 @@
         body.login-mode {
             background: linear-gradient(135deg, #0a3567 0%, #12579b 52%, #2a7fd4 100%);
         }
+        .pd-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
         /* =================== LOGIN (shell igual que cv/contactos) =================== */
         #vistaLogin {
@@ -112,79 +113,79 @@
         }
         .lg-acc-btn:hover { border-color: var(--alcasa-blue); }
 
-        /* =================== BARRA SUPERIOR (degradada, como panel de contactos/CV) =================== */
-        .pd-topbar {
+        /* =================== FRANJA SUPERIOR (distribución :5001, estilo copia) =================== */
+        .pd-top {
             background: linear-gradient(90deg, #054A91 0%, #236EB8 100%);
-            color: #ffffff;
-            box-shadow: 0 6px 18px rgba(4, 25, 55, 0.18);
+            color: #ffffff; padding: 0.5rem 0;
+            font-size: 0.8rem; text-align: center; letter-spacing: 1px;
+            border-bottom: 3px solid var(--alcasa-accent-light);
+            box-shadow: 0 4px 14px rgba(0, 15, 35, 0.16);
         }
-        .pd-topbar-inner {
-            max-width: 1320px; margin: 0 auto; padding: 13px 22px;
-            display: flex; align-items: center; justify-content: space-between;
-            gap: 14px; flex-wrap: wrap;
-        }
-        .pd-brand { display: flex; align-items: center; gap: 11px; font-size: 1.16rem; font-weight: 800; letter-spacing: -0.01em; flex-wrap: wrap; }
-        .pd-brand > i { font-size: 1.3rem; color: var(--alcasa-accent-light); }
-        .pd-chip {
-            background: rgba(255, 255, 255, 0.16);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 4px 12px; border-radius: 999px;
-            font-size: 0.74rem; font-weight: 600; letter-spacing: 0.02em;
-            display: inline-flex; gap: 6px; align-items: center;
-        }
-        .pd-chip b { font-weight: 800; }
-        .pd-pills { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; }
-        .pd-mini {
-            display: inline-flex; gap: 7px; align-items: center;
-            background: rgba(255, 255, 255, 0.16); color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.32);
-            border-radius: 999px; padding: 7px 14px;
-            font-size: 0.82rem; font-weight: 700; cursor: pointer; text-decoration: none;
-            transition: var(--transition);
-        }
-        .pd-mini:hover { background: rgba(255, 255, 255, 0.28); }
+        .pd-top span { margin: 0 15px; }
+        .pd-top .pd-top-sep { margin: 0 2px; opacity: 0.6; }
 
-        /* =================== CABECERA EDITORIAL (blanca, logo + edición) =================== */
-        .pd-hero {
+        /* =================== CABECERA EDITORIAL (blanca como el portal vivo) =================== */
+        .pd-cabecera {
             background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 18px 0;
+            padding: 1.5rem 0 0.5rem;
+            border-bottom: 3px solid var(--alcasa-blue);
             box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
         }
-        .pd-hero-in {
-            max-width: 1320px; margin: 0 auto; padding: 0 22px;
-            display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+        .pd-cabecera-in {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 18px; flex-wrap: wrap;
         }
-        .pd-hero img { height: 76px; width: auto; }
-        .pd-hero-title h1 { margin: 0; color: #1c4d8f; font-size: 2rem; letter-spacing: -0.5px; line-height: 1.1; }
-        .pd-hero-title small {
-            display: block; color: #64748b; letter-spacing: 2.5px;
-            text-transform: uppercase; font-size: 0.72rem; font-weight: 600; margin-top: 2px;
+        .pd-logo-area { display: flex; align-items: center; gap: 20px; min-width: 0; }
+        .pd-logo-area img { height: 78px; width: auto; }
+        .pd-titulo-peri h1 {
+            margin: 0; font-size: 2.1rem; font-weight: 800;
+            color: #1c4d8f; letter-spacing: -0.5px; line-height: 1.1;
         }
-        .pd-edicion {
-            margin-left: auto; text-align: right;
-            background: #f1f5f9; border: 1px solid #e2e8f0; border-left: 4px solid var(--alcasa-blue);
-            border-radius: 10px; padding: 9px 14px;
-            font-size: 0.85rem; color: #334155;
+        .pd-titulo-peri small {
+            display: block; font-size: 0.75rem; color: #64748b;
+            letter-spacing: 2.5px; font-weight: 600; text-transform: uppercase; margin-top: 2px;
         }
-        .pd-edicion b { display: block; color: #1c4d8f; font-size: 0.95rem; }
+        .pd-fecha-edicion {
+            text-align: right; font-size: 0.9rem; color: #334155;
+            background: #f1f5f9; border-left: 4px solid var(--alcasa-blue);
+            border-radius: 10px; padding: 8px 15px; margin: 5px 0;
+        }
+        .pd-fecha-edicion .pd-edicion-b { font-weight: 800; color: #1c4d8f; font-size: 0.98rem; }
+
+        /* =================== BARRA DE NAVEGACIÓN (como el portal vivo) =================== */
+        .pd-navbar {
+            background: linear-gradient(90deg, #054A91 0%, #236EB8 100%);
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 14px rgba(0, 15, 35, 0.16);
+        }
+        .pd-nav-links {
+            list-style: none; margin: 0; padding: 0;
+            display: flex; gap: 1.8rem;
+        }
+        .pd-nav-links li a {
+            color: #ffffff; text-decoration: none; font-size: 0.95rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            transition: color 0.2s; display: inline-flex; gap: 7px; align-items: center;
+        }
+        .pd-nav-links li a:hover { color: #FFD700; }
 
         /* =================== CONTENIDO =================== */
-        .pd-wrap { max-width: 1320px; margin: 0 auto; padding: 22px 22px 54px; }
-        .pd-flash { display: flex; flex-direction: column; gap: 8px; margin-bottom: 4px; }
+        .pd-main { padding: 0 20px 30px; }
+        .pd-flash { display: flex; flex-direction: column; gap: 8px; margin: 1.2rem 0 0; }
         .pd-alert {
-            padding: 11px 15px; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
-            display: flex; gap: 9px; align-items: center;
+            padding: 0.75rem 1.25rem; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
+            display: flex; gap: 9px; align-items: center; background: #fff;
         }
-        .pd-alert.ok { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
-        .pd-alert.danger { background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+        .pd-alert.ok { color: #155724; border-left: 5px solid #28a745; border-top: 1px solid #d9f5e2; border-right: 1px solid #d9f5e2; border-bottom: 1px solid #d9f5e2; }
+        .pd-alert.danger { color: #721c24; border-left: 5px solid #dc3545; border-top: 1px solid #fbe3e6; border-right: 1px solid #fbe3e6; border-bottom: 1px solid #fbe3e6; }
 
         .pd-filters {
             display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px;
             padding: 12px 14px; box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+            margin: 1.2rem 0 0.5rem;
         }
-        .pd-search { position: relative; flex: 1; min-width: 220px; }
+        .pd-search { position: relative; flex: 2 1 250px; }
         .pd-search > i {
             position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
             color: #7b8ca1; font-size: 0.92rem; pointer-events: none;
@@ -228,16 +229,9 @@
         }
         .pd-btn-limpiar:hover { filter: brightness(1.12); }
 
-        .pd-titulo-seccion {
-            margin: 22px 2px 12px;
-            font-size: 1.25rem; color: #16365c;
-            display: flex; align-items: center; gap: 9px; font-weight: 800;
-        }
-        .pd-titulo-seccion i { color: var(--alcasa-blue); font-size: 1.1rem; }
-
         .paginacion {
             display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
-            gap: 6px; margin: 0 0 14px;
+            gap: 6px; margin: 0.6rem 0;
         }
         .paginacion a, .paginacion span {
             min-width: 32px; padding: 6px 10px; border-radius: 999px;
@@ -253,74 +247,167 @@
         .paginacion .disabled { opacity: 0.45; cursor: not-allowed; background: #f8fafc; pointer-events: none; }
         .paginacion .separador { border: none; background: transparent; color: #64748b; padding: 0 2px; min-width: auto; }
 
-        /* =================== TARJETAS DE NOTICIAS (estilo copia) =================== */
+        .pd-titulo-seccion {
+            font-size: 1.5rem; font-weight: 800; color: #1c4d8f;
+            margin: 1.2rem 0 0.5rem;
+            border-bottom: 3px double var(--alcasa-blue);
+            padding-bottom: 0.3rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .pd-titulo-seccion i { color: var(--alcasa-blue); font-size: 1.2rem; }
+
+        /* =================== TARJETAS (distribución :5001, estilo copia) =================== */
         .pd-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 16px; margin: 0 0 16px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.4rem; margin: 1.2rem 0;
         }
         .pd-card {
             position: relative; display: flex; flex-direction: column; overflow: hidden;
             background: #fff; border: 1px solid #e4eaf1; border-top: 4px solid var(--alcasa-blue);
-            border-radius: 10px; box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+            border-radius: 12px; box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
             transition: var(--transition);
         }
         .pd-card:hover { box-shadow: 0 10px 24px rgba(10, 63, 124, 0.14); }
-        .pd-img { width: 100%; height: 185px; object-fit: cover; object-position: top; display: block; }
+        .pd-img { width: 100%; height: 180px; object-fit: cover; object-position: top; display: block; border-bottom: 3px solid var(--alcasa-blue); }
         .pd-img-ph {
-            width: 100%; height: 185px; display: flex; align-items: center; justify-content: center;
-            background: #e8eef4; color: #9fb0c0; font-size: 2.4rem;
+            width: 100%; height: 180px; display: flex; align-items: center; justify-content: center;
+            background: #e8eef4; color: #9fb0c0; font-size: 2.4rem; border-bottom: 3px solid var(--alcasa-blue);
         }
+        .pd-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; }
         .pd-titulo-nota {
-            margin: 13px 16px 4px; font-size: 0.98rem; font-weight: 800;
-            color: #16365c; line-height: 1.35; overflow-wrap: anywhere;
+            margin: 0 0 0.2rem; font-size: 1.08rem; font-weight: 800;
+            color: #1c4d8f; line-height: 1.25; overflow-wrap: anywhere;
         }
         .pd-titulo-nota a { color: inherit; text-decoration: none; }
-        .pd-titulo-nota a:hover { color: var(--alcasa-blue); text-decoration: underline; }
-        .pd-sub { margin: 0 16px 6px; color: #64748b; font-style: italic; font-size: 0.86rem; }
+        .pd-titulo-nota a:hover { text-decoration: underline; }
+        .pd-sub { margin: 0 0 0.4rem; color: #55677a; font-style: italic; font-size: 0.86rem; }
         .pd-meta {
-            display: flex; flex-wrap: wrap; gap: 5px 15px;
-            padding: 2px 16px 7px; font-size: 0.8rem; color: #475569;
+            font-size: 0.78rem; color: #5a6c7d;
+            display: flex; flex-wrap: wrap; gap: 0.35rem 0.7rem;
+            margin-bottom: 0.6rem; padding-top: 0.4rem; border-top: 1px dotted #dbe4ee;
         }
-        .pd-line { display: inline-flex; gap: 6px; align-items: center; }
-        .pd-line i { width: 14px; text-align: center; color: var(--alcasa-accent); font-size: 0.78rem; flex-shrink: 0; }
+        .pd-line { display: inline-flex; gap: 5px; align-items: center; }
+        .pd-line i { color: var(--alcasa-accent); font-size: 0.75rem; flex-shrink: 0; width: 12px; text-align: center; }
         .pd-badge {
             flex-shrink: 0; align-self: center;
             background: var(--alcasa-accent); color: #fff;
-            border-radius: 999px; padding: 3px 10px;
-            font-size: 0.62rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
+            border-radius: 999px; padding: 2px 9px;
+            font-size: 0.6rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
         }
         .pd-resumen {
-            margin: 2px 16px 12px;
-            background: #f1f5f9; border-left: 4px solid var(--alcasa-accent);
-            border-radius: 9px; padding: 10px 14px;
-            font-style: italic; color: #3b4859; font-size: 0.84rem; line-height: 1.55;
-            max-height: 6.9em; overflow: hidden;
+            flex: 1; color: #3b4859; margin: 0 0 0.8rem;
+            font-size: 0.88rem; line-height: 1.5; display: -webkit-box;
+            -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
         }
-        .pd-acciones { margin-top: auto; border-top: 1px solid #eef2f7; padding: 10px; display: grid; gap: 8px; grid-template-columns: 1fr; }
+        .pd-acciones { display: flex; justify-content: flex-start; }
         .pd-btn-leer {
-            display: inline-flex; justify-content: center; align-items: center; gap: 7px;
-            border: 0; border-radius: 8px; padding: 10px 6px;
-            font: inherit; font-weight: 700; font-size: 0.86rem; color: #fff; cursor: pointer;
-            text-decoration: none;
+            display: inline-flex; gap: 7px; align-items: center;
+            border: 0; border-radius: 8px; padding: 8px 16px;
+            font: inherit; font-weight: 700; font-size: 0.78rem; color: #fff; cursor: pointer;
+            text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px;
             background: linear-gradient(135deg, #0a3f7c, #1c72c0);
             box-shadow: 0 4px 12px rgba(10, 63, 124, 0.25);
         }
         .pd-btn-leer:hover { filter: brightness(1.08); }
-        .pd-adm { border-top: 1px solid #eef2f7; padding: 9px 10px; background: #f8fafc; }
+        .pd-adm { border-top: 1px solid #eef2f7; padding: 8px 12px; background: #f8fafc; }
         .pd-btn-editar {
             display: inline-flex; gap: 7px; align-items: center;
             background: linear-gradient(135deg, #b45309, #f59e0b);
-            color: #fff; border: 0; border-radius: 8px; padding: 9px 14px;
-            font: inherit; font-weight: 700; font-size: 0.82rem; text-decoration: none;
+            color: #fff; border: 0; border-radius: 8px; padding: 7px 14px;
+            font: inherit; font-weight: 700; font-size: 0.78rem; text-decoration: none;
+            text-transform: uppercase; letter-spacing: 0.5px;
             box-shadow: 0 4px 12px rgba(180, 83, 9, 0.28);
         }
         .pd-btn-editar:hover { filter: brightness(1.08); }
         .pd-empty {
             color: #64748b; padding: 30px 10px; text-align: center;
-            background: #fff; border: 1px dashed #cbd5e1; border-radius: 10px;
+            background: #fff; border: 1px dashed #cbd5e1; border-radius: 12px;
             font-size: 0.95rem; grid-column: 1 / -1;
         }
+
+        /* =================== NOTICIA INDIVIDUAL (distribución /noticia/761, estilo copia) =================== */
+        .pd-detalle { margin: 1.2rem 0 1.5rem; }
+        .pd-detalle-titulo {
+            font-size: 1.65rem; font-weight: 800; color: #1c4d8f;
+            line-height: 1.25; margin: 0 0 0.2rem; overflow-wrap: anywhere;
+        }
+        .pd-subtitulo-detalle {
+            font-size: 0.98rem; color: #55677a; font-style: italic;
+            margin: 0 0 0.4rem; font-weight: 600;
+        }
+        .pd-meta-detalle {
+            font-size: 0.85rem; color: #5a6c7d;
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1.1rem;
+            margin: 0 0 0.9rem; padding: 0.55rem 0;
+            border-top: 1px dotted #dbe4ee; border-bottom: 1px dotted #dbe4ee;
+        }
+        .pd-meta-detalle .pd-line i { font-size: 0.8rem; }
+
+        .pd-compartir {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+            padding: 0.7rem 0.9rem; margin-bottom: 0.9rem;
+            background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+        }
+        .pd-compartir > span { font-weight: 700; font-size: 0.82rem; color: #334e68; margin-right: 4px; }
+        .pd-sh {
+            display: inline-flex; gap: 5px; align-items: center;
+            padding: 4px 11px; border-radius: 8px;
+            color: #fff; font-size: 0.72rem; font-weight: 700; text-decoration: none;
+        }
+        .pd-sh:hover { filter: brightness(1.12); }
+        .pd-sh.fb { background: #3b5998; }
+        .pd-sh.tw { background: #000000; }
+        .pd-sh.wa { background: #25D366; }
+        .pd-sh.li { background: #0077b5; }
+        .pd-sh.email { background: #cc0000; }
+        .pd-sh.cp { background: #64748b; cursor: pointer; }
+
+        .pd-tabloide { display: flex; gap: 18px; align-items: flex-start; }
+        .pd-imagen-principal {
+            width: 300px; flex-shrink: 0;
+            background: #fff; border: 1px solid #e2e8f0; border-top: 4px solid var(--alcasa-blue);
+            border-radius: 12px; padding: 12px; box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+        }
+        .pd-imagen-principal img { width: 100%; height: auto; border-radius: 8px; display: block; }
+        .pd-nombre-archivo {
+            font-size: 0.75rem; color: #64748b; margin-top: 7px;
+            font-style: italic; word-break: break-all;
+        }
+        .pd-img-btns { display: flex; gap: 7px; margin-top: 7px; flex-wrap: wrap; }
+        .pd-mini-btn {
+            display: inline-flex; gap: 5px; align-items: center;
+            background: linear-gradient(135deg, #0a3f7c, #1c72c0);
+            color: #fff; border-radius: 8px; padding: 6px 12px;
+            font-size: 0.72rem; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 0.4px;
+        }
+        .pd-mini-btn:hover { filter: brightness(1.09); }
+        .pd-texto { flex: 1; min-width: 0; background: #fff; border: 1px solid #e2e8f0; border-left: 4px solid var(--alcasa-blue); border-radius: 12px; padding: 18px 22px; font-size: 0.95rem; line-height: 1.7; color: #263243; }
+        .pd-texto p { margin: 0 0 0.8rem; }
+        .pd-texto p:last-child { margin-bottom: 0; }
+        .pd-texto h3 { margin: 1rem 0 0.4rem; color: #1c4d8f; font-size: 1.05rem; }
+        .pd-texto ul { margin: 0.3rem 0 0.8rem 1.3rem; list-style: disc; }
+        .pd-texto ul li { margin: 0.25rem 0; }
+        .pd-texto a { color: var(--alcasa-blue); font-weight: 600; }
+        .pd-texto img { max-width: 100%; border-radius: 8px; }
+        .pd-acciones-detalle {
+            display: flex; gap: 10px; flex-wrap: wrap;
+            margin-top: 1.4rem; padding-top: 0.9rem; border-top: 1px solid #dfe6ee;
+        }
+        .btn-volver {
+            display: inline-flex; gap: 8px; align-items: center;
+            background: #64748b; color: #fff; border: 0; border-radius: 9px; padding: 10px 18px;
+            font: inherit; font-weight: 700; font-size: 0.88rem; cursor: pointer;
+        }
+        .btn-volver:hover { filter: brightness(1.12); }
+        .pd-mini-btn-sec {
+            display: inline-flex; gap: 7px; align-items: center;
+            background: linear-gradient(135deg, #0a3f7c, #1c72c0);
+            color: #fff; border-radius: 9px; padding: 10px 16px;
+            font: inherit; font-weight: 700; font-size: 0.85rem; text-decoration: none;
+            box-shadow: 0 4px 12px rgba(10, 63, 124, 0.25);
+        }
+        .pd-mini-btn-sec:hover { filter: brightness(1.09); }
 
         /* =================== MODALES (estilo ventanas copia) =================== */
         .pd-modal { display: none; position: fixed; inset: 0; background: rgba(2, 12, 27, 0.72); z-index: 9999; align-items: center; justify-content: center; padding: 18px; }
@@ -358,24 +445,29 @@
         }
         .nav-botones button:hover { filter: brightness(1.09); }
         body.login-mode .nav-botones { display: none !important; }
-        /* =================== PIE =================== */
+
+        /* =================== PIE (distribución :5001, estilo copia) =================== */
         .pd-footer {
-            margin-top: 34px;
+            margin-top: 2.4rem;
             background: linear-gradient(90deg, #052a52, #054A91);
-            color: #dbe8f6; padding: 20px 22px; text-align: center;
-            font-size: 0.85rem; border-top: 4px solid var(--alcasa-blue);
+            color: #dbe8f6; padding: 1rem 0;
+            text-align: center; font-size: 0.85rem;
+            border-top: 3px solid var(--alcasa-accent-light);
         }
         .pd-footer a { color: #9fd4ff; font-weight: 700; cursor: pointer; }
         .pd-footer a:hover { color: #fff; text-decoration: underline; }
 
         /* =================== MÓVIL =================== */
         @media (max-width: 760px) {
-            .pd-topbar-inner { padding: 12px 16px; }
-            .pd-hero-in { padding: 0 16px; justify-content: center; text-align: center; }
-            .pd-hero img { height: 62px; }
-            .pd-edicion { margin-left: 0; }
-            .pd-wrap { padding: 18px 14px 44px; }
+            .pd-top span { margin: 0 6px; font-size: 0.72rem; }
+            .pd-cabecera-in { justify-content: center; text-align: center; }
+            .pd-logo-area { flex-direction: column; gap: 8px; }
+            .pd-logo-area img { height: 60px; }
+            .pd-fecha-edicion { margin-left: 0; }
+            .pd-nav-links { flex-wrap: wrap; justify-content: center; gap: 0.9rem; }
             .pd-grid { grid-template-columns: 1fr; }
+            .pd-tabloide { flex-direction: column; }
+            .pd-imagen-principal { width: 100%; }
             .lg-card { padding: 30px 24px 22px; }
         }
     </style>
@@ -412,77 +504,85 @@
         </div>
     </section>
 
-    <!-- ==================== PERIÓDICO DIGITAL ==================== -->
+    <!-- ==================== PERIÓDICO DIGITAL (distribución del portal :5001) ==================== -->
     <div id="vistaPd">
-        <header class="pd-topbar">
-            <div class="pd-topbar-inner">
-                <div class="pd-brand">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Periódico Digital CVG ALCASA</span>
-                    <span class="pd-chip"><i class="fas fa-circle-info"></i> Información institucional</span>
+        <div class="pd-top">
+            <div class="pd-container">
+                <span>📢 CVG Alcasa - Periódico Digital</span><span class="pd-top-sep">|</span>
+                <span>📅 <span id="fechaActual">—</span></span><span class="pd-top-sep">|</span>
+                <span>📍 Puerto Ordaz, Venezuela</span>
+            </div>
+        </div>
+
+        <div class="pd-cabecera">
+            <div class="pd-container pd-cabecera-in">
+                <div class="pd-logo-area">
+                    <img src="/assets/img/logo-alcasa.png?v=2026m" alt="Logo CVG Alcasa">
+                    <div class="pd-titulo-peri">
+                        <h1>Periódico Digital</h1>
+                        <small>Información institucional</small>
+                    </div>
                 </div>
-                <div class="pd-pills">
-                    <span class="pd-chip"><i class="fas fa-calendar-day"></i> <span id="fechaActual">—</span></span>
-                    <span class="pd-chip"><i class="fas fa-location-dot"></i> Puerto Ordaz, Venezuela</span>
-                    <a href="/minimal.html" class="pd-mini"><i class="fas fa-house"></i> Inicio</a>
-                    <a href="/redaccion.html" id="navPublicar" style="display:none;" class="pd-mini"><i class="fas fa-pen-nib"></i> Publicar Nueva Noticia</a>
-                    <a href="/index.html" class="pd-mini"><i class="fas fa-globe"></i> Portal</a>
-                    <a href="#" id="loginLink" class="pd-mini"><i class="fas fa-right-to-bracket" id="navSesIcon"></i> <span id="navSessionTxt">Iniciar Sesión</span></a>
+                <div class="pd-fecha-edicion">
+                    <div class="pd-edicion-b">Edición N° 001</div>
+                    <div id="fechaEdicion">—</div>
                 </div>
             </div>
-        </header>
+        </div>
 
-        <section class="pd-hero">
-            <div class="pd-hero-in">
-                <img src="/assets/img/logo-alcasa.png?v=2026m" alt="Logo CVG Alcasa">
-                <div class="pd-hero-title">
-                    <h1>Periódico Digital</h1>
-                    <small>Información institucional</small>
-                </div>
-                <div class="pd-edicion">
-                    <b>Edición N° 001</b>
-                    <span id="fechaEdicion">—</span>
-                </div>
+        <nav class="pd-navbar">
+            <div class="pd-container">
+                <ul class="pd-nav-links">
+                    <li><a href="/minimal.html" id="navInicio"><i class="fas fa-house"></i> Inicio</a></li>
+                    <li id="navPublicar" style="display:none;"><a href="/redaccion.html"><i class="fas fa-pen-nib"></i> Publicar Nueva Noticia</a></li>
+                    <li><a href="/index.html"><i class="fas fa-globe"></i> Portal</a></li>
+                    <li><a href="#" id="loginLink"><i class="fas fa-right-to-bracket" id="navSesIcon"></i> <span id="navSessionTxt">Iniciar Sesión</span></a></li>
+                </ul>
             </div>
-        </section>
+        </nav>
 
-        <div class="pd-wrap">
+        <main class="pd-container pd-main">
             <div class="pd-flash" id="flashBox" style="display:none;"></div>
 
-            <!-- Barra de búsqueda (como tarjeta de filtros de los paneles) -->
-            <section class="pd-filters">
-                <div class="pd-search">
-                    <i class="fas fa-magnifying-glass"></i>
-                    <input type="search" id="txtBuscar" placeholder="Buscar noticias...">
+            <!-- VISTA LISTADO (como el home del portal :5001) -->
+            <section id="vistaLista">
+                <div class="pd-filters">
+                    <div class="pd-search">
+                        <i class="fas fa-magnifying-glass"></i>
+                        <input type="search" id="txtBuscar" placeholder="Buscar noticias...">
+                    </div>
+                    <div class="pd-date">
+                        <i class="fas fa-calendar"></i>
+                        <input type="date" id="fecha" value="">
+                    </div>
+                    <select id="mes" class="pd-sel">
+                        <option value="">-- Mes --</option>
+                        <option value="01">Enero</option><option value="02">Febrero</option><option value="03">Marzo</option>
+                        <option value="04">Abril</option><option value="05">Mayo</option><option value="06">Junio</option>
+                        <option value="07">Julio</option><option value="08">Agosto</option><option value="09">Septiembre</option>
+                        <option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
+                    </select>
+                    <select id="anio" class="pd-sel pd-sel-anio">
+                        <option value="">-- Año --</option>
+                        <option value="2026">2026</option>
+                        <option value="2025">2025</option>
+                    </select>
+                    <button type="button" class="pd-btn-buscar" id="btnBuscar"><i class="fas fa-magnifying-glass"></i> Buscar</button>
+                    <button type="button" class="pd-btn-limpiar" id="btnLimpiar"><i class="fas fa-eraser"></i> Limpiar</button>
                 </div>
-                <div class="pd-date">
-                    <i class="fas fa-calendar"></i>
-                    <input type="date" id="fecha" value="">
-                </div>
-                <select id="mes" class="pd-sel">
-                    <option value="">-- Mes --</option>
-                    <option value="01">Enero</option><option value="02">Febrero</option><option value="03">Marzo</option>
-                    <option value="04">Abril</option><option value="05">Mayo</option><option value="06">Junio</option>
-                    <option value="07">Julio</option><option value="08">Agosto</option><option value="09">Septiembre</option>
-                    <option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
-                </select>
-                <select id="anio" class="pd-sel pd-sel-anio">
-                    <option value="">-- Año --</option>
-                    <option value="2026">2026</option>
-                    <option value="2025">2025</option>
-                </select>
-                <button type="button" class="pd-btn-buscar" id="btnBuscar"><i class="fas fa-magnifying-glass"></i> Buscar</button>
-                <button type="button" class="pd-btn-limpiar" id="btnLimpiar"><i class="fas fa-eraser"></i> Limpiar</button>
+
+                <div class="paginacion" id="paginacionTop"><span class="disabled">‹</span><span class="active">1</span></div>
+
+                <h1 class="pd-titulo-seccion"><i class="fas fa-bookmark"></i> Últimas Noticias</h1>
+
+                <div class="pd-grid" id="noticiasGrid"></div>
+
+                <div class="paginacion" id="paginacionBottom"><span class="disabled">‹</span><span class="active">1</span></div>
             </section>
 
-            <div class="paginacion" id="paginacionTop"><span class="disabled">‹</span><span class="active">1</span></div>
-
-            <h2 class="pd-titulo-seccion"><i class="fas fa-newspaper"></i> Últimas Noticias</h2>
-
-            <div class="pd-grid" id="noticiasGrid"></div>
-
-            <div class="paginacion" id="paginacionBottom"><span class="disabled">‹</span><span class="active">1</span></div>
-        </div>
+            <!-- VISTA DETALLE (como /noticia/761 del portal :5001) -->
+            <section id="vistaNoticia" style="display:none;"></section>
+        </main>
     </div>
 
     <!-- ==================== MODALES LEGALES (textos del portal vivo) ==================== -->
@@ -546,31 +646,15 @@
         </div>
     </div>
 
-    <!-- Modal de detalle (comunicados gestionados en Redacción) -->
-    <div id="modal-noticia" class="pd-modal">
-        <div class="pd-modal-box">
-            <div class="pd-modal-head">
-                <h3 id="notLocalTitulo">Comunicado</h3>
-                <button class="pd-modal-x" onclick="closeModal('noticia')" aria-label="Cerrar"><i class="fas fa-xmark"></i></button>
-            </div>
-            <div class="pd-modal-body" id="notLocalBody">
-                <p style="font-size:0.8rem;color:#64748b;font-weight:600;" id="notLocalMeta"></p>
-                <img id="notLocalImg" src="" alt="Miniatura del comunicado" style="width:100%;max-height:250px;object-fit:cover;border-radius:10px;border:1px solid #e2e8f0;margin-bottom:0.7rem;">
-                <p style="white-space:pre-wrap;margin:0;" id="notLocalCuerpo"></p>
-            </div>
-            <div class="pd-modal-foot">
-                <button type="button" class="pd-btn-limpiar" onclick="closeModal('noticia')"><i class="fas fa-xmark"></i> Cerrar</button>
-            </div>
-        </div>
-    </div>
-
     <footer class="pd-footer">
-        <p>&copy; 2024 - CVG Alcasa - Gerencia de Comunicación Estratégica</p>
-        <p style="margin-top:0.3rem;font-size:0.78rem;">
-            <a onclick="openModal('aviso')">Aviso Legal</a> &nbsp;·&nbsp;
-            <a onclick="openModal('privacidad')">Política de Privacidad</a> &nbsp;·&nbsp;
-            <a onclick="openModal('contacto')">Contacto</a>
-        </p>
+        <div class="pd-container">
+            <p>&copy; 2024 - CVG Alcasa - Gerencia de Comunicación Estratégica</p>
+            <p style="font-size:0.75rem; margin-top:0.2rem;">
+                <a onclick="openModal('aviso')">Aviso Legal</a> &nbsp;|&nbsp;
+                <a onclick="openModal('privacidad')">Política de Privacidad</a> &nbsp;|&nbsp;
+                <a onclick="openModal('contacto')">Contacto</a>
+            </p>
+        </div>
     </footer>
 
     <!-- BOTONES FLOTANTES -->
@@ -583,10 +667,13 @@
     (function () {
         var API = '/api/noticias.php';
         var SESION_URL = '/api/prensa_admin.php';
+        var PORTAL = 'http://alcasa.com.ve:5001';
         var usuario = null;      /* usuario con sesión (prensa) */
         var pagActual = 1;
         var totalPaginas = 72;
         var filtros = { q: '', fecha: '', mes: '', anio: '' };
+        var detalleCache = {};   /* id → datos completos para la vista individual */
+        var empujamosHistorial = false; /* true si la app añadió la entrada del detalle al historial */
 
         /* ---------- Fechas de cabecera (formato del portal vivo) ---------- */
         (function fechas() {
@@ -616,6 +703,8 @@
 
         /* ---------- Estados de la página ---------- */
         function mostrarVistaLogin() {
+            document.getElementById('vistaNoticia').style.display = 'none';
+            closeModales();
             document.getElementById('vistaLogin').style.display = 'flex';
             document.getElementById('vistaPd').style.display = 'none';
             document.body.classList.add('login-mode');
@@ -626,12 +715,24 @@
             document.getElementById('vistaPd').style.display = 'block';
             document.body.classList.remove('login-mode');
         }
+        function verLista(visible) {
+            document.getElementById('vistaLista').style.display = visible === false ? 'none' : 'block';
+            document.getElementById('vistaNoticia').style.display = visible === false ? 'block' : 'none';
+            if (visible !== false) {
+                document.title = 'Periódico Digital CVG Alcasa';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function closeModales() {
+            Array.prototype.forEach.call(document.querySelectorAll('.pd-modal.active'), function (m) { m.classList.remove('active'); });
+        }
 
         function flash(tipo, texto) {
             var box = document.getElementById('flashBox');
             if (!box) return;
             var icono = tipo === 'ok' ? 'fa-circle-check' : 'fa-circle-exclamation';
-            box.innerHTML = '<div class="pd-alert ' + (tipo === 'ok' ? 'ok' : 'danger') + '"><i class="fas ' + icono + '"></i> ' + esc(texto) + '</div>';
+            box.innerHTML = '<div class="pd-alert ' + (tipo === 'ok' ? 'ok' : 'danger') + '"><i class="fas ' + icono + '"></i> <span>' + esc(texto) + '</span></div>';
             box.style.display = texto ? 'flex' : 'none';
         }
 
@@ -676,18 +777,19 @@
             return txt.slice(0, max).replace(/\s+\S*$/, '') + '...';
         }
 
-        function tarjeta(n) {
-            var esLocal = !/^\d+$/.test(String(n.id || ''));
-            var href = esLocal ? '#' : ('http://alcasa.com.ve:5001/noticia/' + encodeURIComponent(n.id));
-            var leerAttr = esLocal ? ' data-id="' + esc(n.id) + '"' : '';
-            var adminBar = (usuario && tienePrensa(usuario))
+        function barraAdmin() {
+            return (usuario && tienePrensa(usuario))
                 ? '<div class="pd-adm"><a class="pd-btn-editar" href="/redaccion.html"><i class="fas fa-edit"></i> Editar (Redacción)</a></div>'
                 : '';
+        }
+
+        function tarjeta(n) {
+            var href = '/minimal.html?noticia=' + encodeURIComponent(n.id);
             return '' +
                 '<article class="pd-card">' +
                     '<img src="' + esc(n.imagen || '/assets/img/noticias/noticia-761.jpg') + '" class="pd-img" alt="' + esc(n.titulo) + '" loading="lazy" decoding="async" onerror="this.onerror=null;this.outerHTML=\'<div class=&quot;pd-img-ph&quot;><i class=&quot;fas fa-image&quot;></i></div>\';">' +
                     '<div class="pd-body">' +
-                        '<h3 class="pd-titulo-nota"><a href="' + href + '" class="link-noticia"' + leerAttr + '>' + esc(n.titulo) + '</a></h3>' +
+                        '<h2 class="pd-titulo-nota"><a href="' + esc(href) + '" class="link-noticia" data-id="' + esc(n.id) + '">' + esc(n.titulo) + '</a></h2>' +
                         '<p class="pd-sub">' + esc(n.subtitulo || '') + '</p>' +
                         '<div class="pd-meta">' +
                             '<span class="pd-line"><i class="fas fa-user"></i> ' + esc(n.autor || 'Comunicación Estratégica') + '</span>' +
@@ -695,8 +797,8 @@
                             '<span class="pd-badge">' + esc(n.categoria || 'Institucional') + '</span>' +
                         '</div>' +
                         '<p class="pd-resumen">' + esc(recortar(n.resumen, 200)) + '</p>' +
-                        '<div class="pd-acciones"><a href="' + href + '" class="pd-btn-leer link-noticia"' + leerAttr + '><i class="fas fa-book-open"></i> Leer más</a></div>' +
-                    '</div>' + adminBar +
+                        '<div class="pd-acciones"><a href="' + esc(href) + '" class="pd-btn-leer link-noticia" data-id="' + esc(n.id) + '"><i class="fas fa-book-open"></i> Leer más</a></div>' +
+                    '</div>' + barraAdmin() +
                 '</article>';
         }
 
@@ -726,6 +828,13 @@
             c.innerHTML = html;
         }
 
+        function absPortalUrl(u) {
+            if (!u) return '';
+            u = String(u).trim();
+            if (/^https?:\/\//i.test(u) || u.indexOf('/assets/') === 0 || u.indexOf('data:') === 0) return u;
+            return u.charAt(0) === '/' ? (PORTAL + u) : (PORTAL + '/' + u);
+        }
+
         function cargarBusquedaDirecta(page) {
             /* Respaldo si la página se despliega dentro del servidor Flask :5001 (sin api/):
                se copian las tarjetas reales del HTML del propio portal. */
@@ -738,6 +847,7 @@
                     var a = c.querySelector('h2 a');
                     var metaTxt = (c.querySelector('.meta') || {}).textContent || '';
                     var fM = metaTxt.match(/(\d{2}\/\d{2}\/\d{4})\s*(\d{2}:\d{2})?/);
+                    var rawImg = (c.querySelector('img.noticia-imagen') || {}).getAttribute ? c.querySelector('img.noticia-imagen').getAttribute('src') : '';
                     out.push({
                         id: a ? (a.getAttribute('href') || '').split('/').pop() : '',
                         titulo: a ? a.textContent.trim() : 'Comunicado Oficial',
@@ -746,7 +856,7 @@
                         autor: (((metaTxt || '').match(/👤\s*([^📅]+)/) || [])[1] || 'Comunicación Estratégica').trim(),
                         fecha_solo: fM ? fM[1] : '', hora_solo: (fM && fM[2]) ? fM[2] : '',
                         resumen: (c.querySelector('.resumen') || {}).textContent || '',
-                        imagen: (c.querySelector('img.noticia-imagen') || {}).getAttribute ? c.querySelector('img.noticia-imagen').getAttribute('src') : ''
+                        imagen: absPortalUrl(rawImg)
                     });
                 });
                 var pagMax = 1;
@@ -766,9 +876,6 @@
                 grid.innerHTML = '<div class="pd-empty"><i class="fas fa-inbox"></i> No hay noticias disponibles con los criterios seleccionados.</div>';
             } else {
                 grid.innerHTML = items.map(tarjeta).join('');
-                Array.prototype.forEach.call(grid.querySelectorAll('.link-noticia[data-id]'), function (a) {
-                    a.addEventListener('click', function (e) { e.preventDefault(); verNoticiaLocal(a.getAttribute('data-id')); });
-                });
             }
             renderPaginacion('paginacionTop', pagActual, totalPaginas);
             renderPaginacion('paginacionBottom', pagActual, totalPaginas);
@@ -786,22 +893,181 @@
                 .catch(function () { cargarBusquedaDirecta(page); });
         }
 
-        /* Vista de detalle para comunicados gestionados localmente (Redacción) */
-        function verNoticiaLocal(id) {
-            fetch(API + '?nocache=' + Date.now())
-                .then(function (r) { return r.json(); })
-                .then(function (lista) {
-                    var arr = Array.isArray(lista) ? lista : lista.noticias || [];
-                    var n = arr.filter(function (x) { return String(x.id) === String(id); })[0];
-                    if (!n) return;
-                    var imgs = (n.imagenes || []).length ? n.imagenes : [{ url: n.imagen }];
-                    document.getElementById('notLocalTitulo').textContent = n.titulo || 'Comunicado';
-                    document.getElementById('notLocalMeta').textContent =
-                        '👤 ' + (n.autor || 'Comunicación Estratégica') + '   📅 ' + (n.fecha_solo || '') + (n.hora_solo ? ' ' + n.hora_solo : '') + '   · ' + (n.categoria || '');
-                    document.getElementById('notLocalImg').src = imgs[0].url || '/assets/img/noticias/noticia-761.jpg';
-                    document.getElementById('notLocalCuerpo').textContent = n.cuerpo || n.resumen || '';
-                    openModal('noticia');
+        /* ---------- NOTICIA INDIVIDUAL (como /noticia/N del portal vivo) ---------- */
+        function parseDetalleLive(html, id) {
+            var doc = new DOMParser().parseFromString(html, 'text/html');
+            var art = doc.querySelector('article.detalle-noticia');
+            if (!art) return null;
+            var h1 = art.querySelector('h1');
+            var sub = art.querySelector('.subtitulo-detalle');
+            var meta = art.querySelector('.meta-detalle');
+            var metaLines = meta ? meta.querySelectorAll('span') : [];
+            var imgBox = art.querySelector('.imagen-principal');
+            var img = imgBox ? imgBox.querySelector('img') : null;
+            var nombre = (imgBox ? (imgBox.querySelector('.nombre-archivo') || {}).textContent : '') || '';
+            var texto = art.querySelector('.texto-principal');
+            if (texto) {
+                Array.prototype.forEach.call(texto.querySelectorAll('img[src]'), function (im) {
+                    im.setAttribute('src', absPortalUrl(im.getAttribute('src')));
                 });
+                Array.prototype.forEach.call(texto.querySelectorAll('a[href]'), function (lk) {
+                    var hr = lk.getAttribute('href') || '';
+                    if (hr.charAt(0) === '/') lk.setAttribute('href', absPortalUrl(hr));
+                });
+            }
+            var url = PORTAL + '/noticia/' + encodeURIComponent(id);
+            return {
+                id: id,
+                esVivo: true,
+                url: url,
+                titulo: h1 ? h1.textContent.trim() : 'Comunicado',
+                subtitulo: sub ? sub.textContent.trim() : '',
+                autor: metaLines.length ? String(metaLines[0].textContent || '').replace('👤', '').trim() : 'Comunicación Estratégica',
+                fecha: metaLines.length ? String(metaLines[1].textContent || '').replace('📅', '').trim() : '',
+                categoria: (art.querySelector('.meta-detalle .categoria') || {}).textContent ? art.querySelector('.meta-detalle .categoria').textContent.trim() : 'Institucional',
+                imagen: img ? absPortalUrl(img.getAttribute('src')) : '',
+                nombreArchivo: nombre.replace('📎', '').trim(),
+                cuerpo: texto ? texto.innerHTML : ''
+            };
+        }
+
+        function pintarDetalle(d) {
+            detalleCache[String(d.id)] = d;
+            var esVivo = d.esVivo;
+            var urlDetalle = esVivo ? d.url : (location.origin + location.pathname + '?noticia=' + encodeURIComponent(d.id));
+            var tituloAttr = esc(d.titulo || 'Comunicado CVG Alcasa');
+            var admBar = (usuario && tienePrensa(usuario))
+                ? '<a class="pd-btn-editar" href="/redaccion.html"><i class="fas fa-edit"></i> Editar (Redacción)</a>' : '';
+            var seccion = document.getElementById('vistaNoticia');
+            seccion.innerHTML =
+                '<article class="pd-detalle">' +
+                    '<h1 class="pd-detalle-titulo">' + esc(d.titulo) + '</h1>' +
+                    '<h2 class="pd-subtitulo-detalle">' + esc(d.subtitulo || '') + '</h2>' +
+                    '<div class="pd-meta-detalle">' +
+                        '<span class="pd-line"><i class="fas fa-user"></i> ' + esc(d.autor || 'Comunicación Estratégica') + '</span>' +
+                        '<span class="pd-line"><i class="fas fa-calendar-day"></i> ' + esc(d.fecha || '') + '</span>' +
+                        '<span class="pd-badge">' + esc(d.categoria || 'Institucional') + '</span>' +
+                    '</div>' +
+                    '<div class="pd-compartir">' +
+                        '<span>Compartir:</span>' +
+                        '<a class="pd-sh fb" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(urlDetalle) + '"><i class="fab fa-facebook-f"></i> Facebook</a>' +
+                        '<a class="pd-sh tw" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=' + encodeURIComponent(urlDetalle) + '&text=' + encodeURIComponent(d.titulo || '') + '"><i class="fab fa-x-twitter"></i> Twitter</a>' +
+                        '<a class="pd-sh wa" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?text=' + encodeURIComponent((d.titulo || '') + ' - ' + urlDetalle) + '"><i class="fab fa-whatsapp"></i> WhatsApp</a>' +
+                        '<a class="pd-sh li" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(urlDetalle) + '"><i class="fab fa-linkedin-in"></i> LinkedIn</a>' +
+                        '<a class="pd-sh email" href="mailto:?subject=' + encodeURIComponent(d.titulo || 'Comunicado CVG Alcasa') + '&body=' + encodeURIComponent('Te comparto esta noticia: ' + urlDetalle) + '"><i class="fas fa-envelope"></i> Correo</a>' +
+                        '<button type="button" class="pd-sh cp" id="btnCopiarEnlace"><i class="fas fa-link"></i> Copiar</button>' +
+                    '</div>' +
+                    '<div class="pd-tabloide">' +
+                        (d.imagen
+                            ? '<div class="pd-imagen-principal">' +
+                                  '<a href="' + esc(d.imagen) + '" target="_blank" rel="noopener"><img src="' + esc(d.imagen) + '" alt="Imagen principal"></a>' +
+                                  (d.nombreArchivo ? '<div class="pd-nombre-archivo"><i class="fas fa-paperclip"></i> ' + esc(d.nombreArchivo) + '</div>' : '') +
+                                  '<div class="pd-img-btns">' +
+                                      '<a class="pd-mini-btn" href="' + esc(d.imagen) + '" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Ver</a>' +
+                                      '<a class="pd-mini-btn" href="' + esc(d.imagen) + '" download><i class="fas fa-download"></i> Descargar</a>' +
+                                  '</div>' +
+                              '</div>'
+                            : '') +
+                        '<div class="pd-texto">' + (d.cuerpo || ('<p>' + esc(d.resumen || '') + '</p>')) + '</div>' +
+                    '</div>' +
+                    '<div class="pd-acciones-detalle">' +
+                        '<button type="button" class="btn-volver" id="btnVolverDetalle"><i class="fas fa-arrow-left"></i> Volver</button>' +
+                        (esVivo ? '<a class="pd-mini-btn-sec" href="' + esc(urlDetalle) + '" target="_blank" rel="noopener"><i class="fas fa-globe"></i> Ver en el portal oficial</a>' : '') +
+                        admBar +
+                    '</div>' +
+                '</article>';
+            seccion.style.display = 'block';
+            document.getElementById('vistaLista').style.display = 'none';
+            document.title = (d.titulo || 'Comunicado') + ' — Periódico Digital CVG Alcasa';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            var btnV = document.getElementById('btnVolverDetalle');
+            btnV.addEventListener('click', function () {
+                if (empujamosHistorial && history.state && history.state.noticia) {
+                    history.back();
+                } else {
+                    verLista(true);
+                    history.replaceState(null, '', location.pathname);
+                    document.title = 'Periódico Digital CVG Alcasa';
+                }
+            });
+            var btnC = document.getElementById('btnCopiarEnlace');
+            btnC.addEventListener('click', function () {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(urlDetalle).then(function () {
+                        flash('ok', 'Enlace copiado: ' + urlDetalle);
+                    }, function () {
+                        flash('danger', 'No se pudo copiar el enlace.');
+                    });
+                } else {
+                    flash('ok', 'Enlace de la noticia: ' + urlDetalle);
+                }
+            });
+        }
+
+        function abrirDetalle(id, empujar) {
+            fetch(API + '?id=' + encodeURIComponent(id))
+                .then(function (r) { if (!r.ok) throw new Error('api-id'); return r.json(); })
+                .then(function (d) {
+                    if (!d || !d.id) throw new Error('vacio');
+                    pintarDetalle(d);
+                })
+                .catch(function () {
+                    fetch(PORTAL + '/noticia/' + encodeURIComponent(id))
+                        .then(function (r) { return r.text(); })
+                        .then(function (html) {
+                            var d = parseDetalleLive(html, id);
+                            if (!d) throw new Error('sin detalle');
+                            pintarDetalle(d);
+                        })
+                        .catch(function () {
+                            /* Respaldo: datos básicos desde nuestra API */
+                            fetch(API + '?nocache=' + Date.now())
+                                .then(function (r) { return r.json(); })
+                                .then(function (lista) {
+                                    var arr = Array.isArray(lista) ? lista : lista.noticias || [];
+                                    var n = arr.filter(function (x) { return String(x.id) === String(id); })[0];
+                                    if (!n) throw new Error('no encontrada');
+                                    var imgs = (n.imagenes || []).length ? n.imagenes : [{ url: n.imagen }];
+                                    pintarDetalle({
+                                        id: id, esVivo: false,
+                                        url: PORTAL + '/noticia/' + encodeURIComponent(id),
+                                        titulo: n.titulo || 'Comunicado',
+                                        subtitulo: n.subtitulo || '',
+                                        categoria: n.categoria || 'Institucional',
+                                        autor: n.autor || 'Comunicación Estratégica',
+                                        fecha: (n.fecha_solo || '') + (n.hora_solo ? ' ' + n.hora_solo : ''),
+                                        imagen: absPortalUrl(imgs[0].url || ''),
+                                        nombreArchivo: '',
+                                        cuerpo: n.cuerpo || n.resumen || ''
+                                    });
+                                })
+                                .catch(function () {
+                                    flash('danger', 'No se pudo cargar la noticia (' + id + ').');
+                                });
+                        });
+                });
+            /* Historial + título, para poder compartir la URL ?noticia=ID y volver con el botón atrás */
+            if (empujar !== false) {
+                var base = location.pathname;
+                history.pushState({ noticia: id }, '', base + '?noticia=' + encodeURIComponent(id));
+                empujamosHistorial = true;
+            }
+        }
+
+        window.addEventListener('popstate', function (e) {
+            var id = e.state && e.state.noticia;
+            if (id && detalleCache[String(id)]) {
+                pintarDetalle(detalleCache[String(id)]);
+            } else if (id) {
+                abrirDetalle(id, false);
+            } else {
+                abrirListado();
+            }
+        });
+
+        function abrirListado() {
+            verLista(true);
         }
 
         /* ---------- Modales genéricos ---------- */
@@ -819,9 +1085,7 @@
             });
         });
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                Array.prototype.forEach.call(document.querySelectorAll('.pd-modal.active'), function (m) { m.classList.remove('active'); });
-            }
+            if (e.key === 'Escape') closeModales();
         });
 
         window.irArriba = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
@@ -856,6 +1120,25 @@
         document.getElementById('txtBuscar').addEventListener('keydown', function (e) {
             if (e.key === 'Enter') { e.preventDefault(); aplicarFiltros(); }
         });
+
+        /* Apertura de noticias desde el listado (delegación: tarjetas y botón Leer más) */
+        document.getElementById('noticiasGrid').addEventListener('click', function (e) {
+            var a = e.target.closest('.link-noticia');
+            if (a) {
+                e.preventDefault();
+                abrirDetalle(a.getAttribute('data-id'));
+            }
+        });
+        var navInicioEl = document.getElementById('navInicio');
+        if (navInicioEl) {
+            navInicioEl.addEventListener('click', function (e) {
+                if (document.getElementById('vistaNoticia').style.display !== 'none') {
+                    e.preventDefault();
+                    verLista(true);
+                    history.pushState(null, '', location.pathname);
+                }
+            });
+        }
 
         /* ---------- Sesión (login del Periódico contra la intranet) ---------- */
         var formLogin = document.getElementById('formLoginPd');
@@ -918,7 +1201,8 @@
             });
         })();
 
-        /* Arranque: comprobar sesión existente y cargar página 1 */
+        /* Arranque: sesión existente, página 1 o noticia individual (?noticia=ID) */
+        var urlDetalle = new URLSearchParams(location.search).get('noticia');
         fetch(SESION_URL + '?action=status')
             .then(function (r) { return r.json(); })
             .then(function (res) {
@@ -928,7 +1212,13 @@
                 }
             })
             .catch(function () {})
-            .then(function () { cargarPagina(1); });
+            .then(function () {
+                cargarPagina(1);
+                if (urlDetalle) {
+                    history.replaceState({ noticia: urlDetalle }, '', location.href);
+                    abrirDetalle(urlDetalle, false);
+                }
+            });
     })();
     </script>
 </body>
