@@ -40,6 +40,15 @@ function leerCsvComoArray(string $path): array {
     return array_reverse($rows);
 }
 
+/* La tabla en vivo se guarda en storage/. Mientras no exista (o para entornos
+ * de prueba) se sirve la semilla versionada en data/ (copiada del servidor vivo / rama main). */
+function leerCsvDeFuente(string $archivo, string $semilla): array {
+    if (is_file(STORAGE . '/' . $archivo)) {
+        return leerCsvComoArray(STORAGE . '/' . $archivo);
+    }
+    return leerCsvComoArray(__DIR__ . '/../data/' . $semilla);
+}
+
 if ($tipo === 'descargar_cv') {
     if (!$esAdmin && !in_array('cv', $permisos, true)) {
         header('Content-Type: application/json; charset=utf-8');
@@ -71,8 +80,8 @@ if (!$puedeContactos && !$puedeCV) {
     fail('Tu cuenta no tiene permisos para acceder al módulo de Contactos Comerciales ni Postulaciones de CV.', 403);
 }
 
-$contactos = $puedeContactos ? leerCsvComoArray(STORAGE . '/contactos.csv') : [];
-$postulaciones = $puedeCV ? leerCsvComoArray(STORAGE . '/postulaciones.csv') : [];
+$contactos = $puedeContactos ? leerCsvDeFuente('contactos.csv', 'contactos-semilla.csv') : [];
+$postulaciones = $puedeCV ? leerCsvDeFuente('postulaciones.csv', 'postulaciones-semilla.csv') : [];
 
 echo json_encode([
     'success'        => true,

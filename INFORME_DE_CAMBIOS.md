@@ -1,7 +1,7 @@
 # Informe Detallado de Cambios — Portal CVG Alcasa v2 (Rama `copia`)
 
 ## 1. Resumen Ejecutivo
-Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CVG Alcasa)** en la rama `copia`, integrando una experiencia interactiva moderna (ventanas emergentes flotantes para fichas técnicas, noticias, videos y fotografías; barra de navegación inteligente que se oculta al deslizar; galería multimedia dedicada con previsualizaciones en GIF; y conexión paginada con el servidor de noticias `:5001`), el módulo **«Nuestros Cumpleañeros»** con las fotos reales del personal (silueta por género cuando no hay retrato y tarjeta de felicitación ampliada), y paneles administrativos independientes por nivel de usuario: la Redacción de Sala de Prensa y el **Panel de Contactos, exclusivo de los mensajes del formulario de contacto**.
+Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CVG Alcasa)** en la rama `copia`, integrando una experiencia interactiva moderna (ventanas emergentes flotantes para fichas técnicas, noticias, videos y fotografías; barra de navegación inteligente que se oculta al deslizar; galería multimedia dedicada con previsualizaciones en GIF; y conexión paginada con el servidor de noticias `:5001`), el módulo **«Nuestros Cumpleañeros»** con las fotos reales del personal (silueta por género cuando no hay retrato y tarjeta de felicitación ampliada), y paneles administrativos independientes por nivel de usuario: la Redacción de Sala de Prensa, el **Panel de Contactos, exclusivo de los mensajes del formulario de contacto**, y el **Panel de Postulaciones (CV), exclusivo de la bandeja de Síntesis Curricular** para `talento` (con visibilidad también para `admin`).
 
 ---
 
@@ -14,6 +14,7 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 ├── prensa.html                 # Sala de Prensa "Pulso Industrial CVG Alcasa" (Paginación :5001 + Modal de vista previa)
 ├── redaccion.html              # Aplicación administrativa independiente de Redacción (3 zonas, hasta 20 fotos)
 ├── contactos.html              # Panel exclusivo de Contactos (login «Acceso Restringido», intereses fijos, tarjetas Ver·WA·Copiar·Eliminar)
+├── cv.html                     # Panel exclusivo de Postulaciones (CV) (login «Acceso Restringido», áreas fijas, tarjetas Ver·WA·Copiar·CV)
 ├── sitio/Empresa/CA/index.html # Página «Nuestros Cumpleañeros» (filtro día/mes, tarjetas con silueta por género y ventana emergente con plantilla)
 ├── tools/generar_cumpleaneros.py # Genera data/cumpleaneros.json y las fotos desde DATA.csv + BMP
 ├── minimal.html                # Vista compacta de noticias
@@ -43,6 +44,8 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 │       ├── videos/             # Videos institucionales completos en MP4 (Laminación, Fundición, Extrusión, Gestión Social)
 │       └── ...                 # Catálogos PDF oficiales (2023 y 2025)
 ├── data/
+│   ├── contactos-semilla.csv   # Semilla versionada de la bandeja de contactos (8 registros copiados del servidor vivo alcasa.com.ve)
+│   ├── postulaciones-semilla.csv # Semilla versionada de la bandeja de postulaciones de CV (encabezados)
 │   ├── cumpleaneros.json       # Cumpleañeros (3.543 trabajadores, generado desde DATA.csv)
 │   ├── contenido.json          # Datos institucionales, 32 productos con fichas técnicas, galería multimedia y FAQ
 │   └── noticias.json           # Almacén y respaldo local con las 50 noticias más recientes del servidor :5001
@@ -89,10 +92,10 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 - **Eliminación de Líneas Cuadriculadas sobre Imágenes:** Se eliminaron los fondos CSS `repeating-linear-gradient` en contenedores de imágenes y tarjetas para evitar que aparezcan tramas o líneas cuadriculadas durante la carga o visualización de fotografías.
 
 ### 3.6. Separación de los 4 Niveles de Usuario y Formulario de CV (`storage/usuarios_config.json`, `api/cv.php`)
-- **Nivel 1 (`admin`):** Control total de Redacción (incluyendo eliminación permanente) + Panel de Contactos en `/contactos.html` (exclusivo de contactos desde 3.12). Conserva además el permiso `cv`.
+- **Nivel 1 (`admin`):** Control total: Redacción (incluyendo eliminación permanente) + Panel de Contactos (`/contactos.html`, exclusivo de contactos desde 3.12) + Panel de Postulaciones (CV) (`/cv.html`, nuevo desde 3.14).
 - **Nivel 2 (`comunicacion`):** Acceso exclusivo a Redacción de Sala de Prensa (`/redaccion.html`).
 - **Nivel 3 (`comercializacion`):** Acceso exclusivo al Panel de Contactos en `/contactos.html` (módulo exclusivo de contactos desde 3.12).
-- **Nivel 4 (`talento`):** Permiso `cv` de la Bandeja de Postulaciones de Síntesis Curricular conectada al formulario único **Envía tu Síntesis Curricular (CV)** de `index.html`. En la copia actual esa bandeja ya no vive en `contactos.html` (ver 3.12): las postulaciones siguen recibiendo y archivando (`storage/postulaciones.csv` + PDF en `storage/cv/`) vía `api/cv.php` y `admin_datos.php` puede servirlas (solo lectura), pero la página de gestión con acceso exclusivo para `talento` queda pendiente como módulo propio.
+- **Nivel 4 (`talento`):** Acceso exclusivo al **Panel de Postulaciones (CV)** (`/cv.html`, nuevo desde 3.14): gestiona la bandeja de Síntesis Curricular conectada al formulario único **Envía tu Síntesis Curricular (CV)** de `index.html` (recepción y archivo en `storage/postulaciones.csv` + PDF en `storage/cv/` vía `api/cv.php`).
 
 ### 3.7. Actualización de la Paleta Azul Institucional (`assets/css/main.css`, `index.html`, `productos.html`, `prensa.html`, `galeria.html`, `contactos.html`, `redaccion.html`, `minimal.html`)
 - **Nuevo azul base:** Se reemplazó la paleta azul anterior (`#003366` / `#002244` / `#0056a3`) por el azul de la cabecera y pie de `http://alcasa.com.ve:8070/`:
@@ -145,4 +148,15 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 ### 3.13. Documentación alineada con el estado del proyecto (`README.md`, `INFORME_DE_CAMBIOS.md`)
 - **`README.md`:** descripción de `/contactos.html` como panel exclusivo de contactos (login restringido, tarjetas y marca local); se añadió la página `/sitio/Empresa/CA/index.html` de «Nuestros Cumpleañeros» a la tabla de páginas; la matriz de niveles refleja la distribución vigente (Nivel 4 con permiso `cv` reservado mientras no exista bandeja dedicada en `copia`); nota de datos personales.
 - **`INFORME_DE_CAMBIOS.md`:** árbol de proyecto actualizado (`contactos.html`, `admin_datos.php`, cumpleañeros); sección 3.6 ajustada a los módulos vigentes; secciones 3.10/3.11/3.12 quedaron en orden cronológico; documentado el estado de la bandeja de CV (pendiente de módulo propio, sin perder su recepción y archivo).
+
+### 3.14. Panel de Postulaciones (CV) — `/cv.html` nuevo módulo exclusivo de `talento` + `admin` (`cv.html`, `api/admin_datos.php`, `redaccion.html`, `assets/js/app.js`, `index.html`, `contactos.html`, `data/*-semilla.csv`)
+- **Nueva página `/cv.html` (nuevo archivo):** módulo administrativo dedicado a las postulaciones del formulario *Envía tu Síntesis Curricular (CV)* de `index.html`, con el mismo lenguaje visual del panel de contactos (ver 3.12). Ya no queda «pendiente un módulo propio» para la bandeja de CV (ver 3.6 y 3.13): la recepción y el archivo siguen en `api/cv.php` (`storage/postulaciones.csv` + PDF en `storage/cv/`) y la gestión ahora tiene su propia página.
+- **Login restringido (pantalla completa):** reproducción del «Acceso Restringido» del panel de contactos (fondo azul degradado, tarjeta blanca, campos con icono y visor de contraseña), autenticado contra `api/prensa_admin.php`. Solo ingresan las cuentas con permiso `cv`: `admin` (Nivel 1) y `talento` (Nivel 4). El editor de prensa (`comunicacion`) es redirigido a `/redaccion.html`; el resto recibe «Esta cuenta no tiene permiso para el módulo de Postulaciones (CV).»
+- **Panel (sección privada):** barra superior azul «Administrador de Postulaciones (CV)» con cápsulas «X postulaciones / X mostrados», **barra de filtros** (búsqueda + desplegable «Todas las áreas» con la lista fija de las 7 áreas del formulario de CV de `index.html` + «Recargar») y **cuadrícula de tarjetas** con nombre en mayúsculas + C.I., insignia acero del área, fecha/correo/teléfono/nivel académico con iconos de acero, cita del resumen profesional y acciones **Ver · WA · Copiar · CV**. El botón «CV» descarga el PDF adjunto vía `admin_datos.php?tipo=descargar_cv` (solo lectura, sin escritura en el servidor) y queda deshabilitado si la postulación no tiene archivo.
+- **Modal de detalle** con los formatos de copia WhatsApp/Correo/Todo y el enlace «Descargar CV Adjunto», igual que en contactos.
+- **Semillas versionadas (`data/*-semilla.csv` + fallback en `api/admin_datos.php`):** nueva función `leerCsvDeFuente($archivo, $semilla)` que sirve `storage/*.csv` si existen y, si no (instalación limpia, sin datos personales generados), la semilla versionada de `data/`. `data/contactos-semilla.csv` trae los **8 registros copiados literalmente del servidor vivo `http://alcasa.com.ve/contactos.csv`** (incluye el mensaje de ANABELL JIMENEZ del 2026-11-02 que falta en la raíz de `main`); `data/postulaciones-semilla.csv` nace solo con los encabezados. Con esto el panel de contactos muestra exactamente la misma información que la página viva sin versionar datos personales generados en tiempo de ejecución (el `.gitignore` de `storage/` se mantiene intacto).
+- **Menú «Extranet» con «Panel de CV»:** entrada añadida después de «Panel de Contactos» en ambos puntos de renderizado (`assets/js/app.js` y el header estático de `index.html`). **Divergencia intencional respecto de `main`:** la rama `main` no tiene este panel; la fuente aquí es `copia`. Caché: `app.js` a `?v=2026v` en las cinco páginas que lo cargan.
+- **Redacción con redirección por nivel (`redaccion.html`):** el Login de la Redacción ya no manda a toda cuenta sin prensa al panel de contactos: `comercializacion` (Nivel 3) → `/contactos.html`; `talento` (Nivel 4) → `/cv.html`; las demás reciben el mensaje de «sin permisos».
+- **Enlaces cruzados entre paneles:** `contactos.html` muestra «Postulaciones (CV)» en su barra superior (si la sesión tiene permiso `cv`) y `cv.html` muestra «Contactos» (si la sesión tiene permiso de contactos), de modo que `admin` puede saltar entre los dos módulos; cada cuenta exclusiva solo ve su propio panel.
+- **`README.md` actualizado:** filas de páginas `/cv.html` y `/contactos.html`, matriz de niveles (admin con los tres módulos; talento con su panel exclusivo) y nota de datos personales que menciona las semillas versionadas.
 

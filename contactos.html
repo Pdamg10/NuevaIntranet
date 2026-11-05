@@ -349,6 +349,7 @@
                 <div class="adm-pills">
                     <span class="adm-count"><i class="fas fa-users"></i> <b id="pillTotal">0</b> contactos</span>
                     <span class="adm-count"><i class="fas fa-filter"></i> <b id="pillMostrados">0</b> mostrados</span>
+                    <a href="/cv.html" class="adm-top-mini" id="btnIrPanelCV" style="display: none;"><i class="fas fa-file-pdf"></i> Postulaciones (CV)</a>
                     <a href="/index.html" class="adm-top-mini"><i class="fas fa-globe"></i> Portal</a>
                     <button type="button" class="adm-exit" id="btnSalirDatos"><i class="fas fa-sign-out-alt"></i> Salir</button>
                 </div>
@@ -403,6 +404,7 @@
         var msgEl = document.getElementById('admLoginMsg');
         var userInfo = document.getElementById('admUserInfo');
         var paneContactos = document.getElementById('paneContactos');
+        var btnIrPanelCV = document.getElementById('btnIrPanelCV');
         var searchInput = document.getElementById('admSearchInput');
         var interesSel = document.getElementById('admFiltroInteres');
         var pillTotal = document.getElementById('pillTotal');
@@ -534,6 +536,9 @@
             var u = data.user || {};
             userInfo.textContent = '';
             if (u.nombre || u.usuario) userInfo.textContent = (u.nombre || u.usuario) + ' · ' + (u.nivel || u.rol);
+
+            var pv = data.permisos_vista || {};
+            if (btnIrPanelCV) btnIrPanelCV.style.display = pv.cv ? 'inline-flex' : 'none';
 
             var contactos = filtrar(data.contactos);
             pillTotal.textContent = (data.contactos || []).length;

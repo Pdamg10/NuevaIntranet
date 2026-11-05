@@ -1622,14 +1622,19 @@
                         var perms = Array.isArray(st.user.permisos) ? st.user.permisos : [];
                         var esAdmin = st.user.rol === 'admin';
                         var tienePrensa = esAdmin || perms.indexOf('prensa') !== -1;
-                        var tieneContactosOCV = esAdmin || perms.indexOf('contactos') !== -1 || perms.indexOf('cv') !== -1;
+                        var tieneContactos = esAdmin || perms.indexOf('contactos') !== -1;
+                        var tieneCV = esAdmin || perms.indexOf('cv') !== -1;
 
-                        // Si el usuario es de Comercialización (Nivel 3) o Talento Humano (Nivel 4), redirigir a su módulo exclusivo
-                        if (!tienePrensa && tieneContactosOCV) {
-                            window.location.href = '/contactos.html';
-                            return;
-                        }
                         if (!tienePrensa) {
+                            // Comercialización (Nivel 3) → su panel de Contactos; Talento (Nivel 4) → su panel de CV
+                            if (tieneContactos) {
+                                window.location.href = '/contactos.html';
+                                return;
+                            }
+                            if (tieneCV) {
+                                window.location.href = '/cv.html';
+                                return;
+                            }
                             loginView.style.display = 'block';
                             workspace.style.display = 'none';
                             loginMsg.textContent = 'Tu cuenta no tiene permisos para acceder al Editor de Sala de Prensa.';
