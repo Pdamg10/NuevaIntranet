@@ -7,882 +7,577 @@
     <link rel="icon" type="image/png" href="/assets/img/favicon.png">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="/assets/img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026t">
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Times New Roman', Georgia, serif;
-            background: #f2f0eb;
-            color: #1a1a1a;
-            line-height: 1.5;
+        body.admin-standalone-body {
+            margin: 0;
+            background: #f1f5f9;
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #1e293b;
         }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .header-top {
-            background: #003366;
-            color: white;
-            padding: 0.5rem 0;
-            font-size: 0.8rem;
-            border-bottom: 3px solid #CC0000;
-            text-align: center;
-            letter-spacing: 1px;
-        }
-        .header-top span { margin: 0 15px; }
-        .header-main {
-            background: white;
-            padding: 1.5rem 0 0.5rem;
-            border-bottom: 2px solid #003366;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            background-image: linear-gradient(90deg, #f5f4f1 0%, #e8e6e2 50%, #f5f4f1 100%), url('http://alcasa.com.ve:5001/static/cintillo_alcasa_600x80.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 100px;
-        }
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex: 1 1 auto;
-            min-width: 0;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 8px 15px;
-            border-radius: 6px;
-            margin: 5px 0;
-        }
-        .logo-area img {
-            height: 80px;
-            width: auto;
-        }
-        .titulo-periodico {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: #003366;
-            letter-spacing: -1px;
-            line-height: 1.1;
-        }
-        .titulo-periodico small {
-            display: block;
-            font-size: 0.8rem;
-            color: #666;
-            letter-spacing: 2px;
-            font-weight: normal;
-        }
-        .fecha-edicion {
-            text-align: right;
-            font-size: 0.9rem;
-            color: #333;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 5px 15px;
-            border-radius: 6px;
-            margin: 5px 0;
-            border-left: 2px solid #ccc;
-        }
-        .fecha-edicion .edicion {
-            font-weight: bold;
-            color: #003366;
-        }
-        .navbar {
-            background: #003366;
-            padding: 0.5rem 0;
-            border-bottom: 3px solid #CC0000;
-        }
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 1.8rem;
-        }
-        .nav-links li a {
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: color 0.2s;
-        }
-        .nav-links li a:hover { color: #FFD700; }
-        .flash-messages { margin: 1.5rem 0; }
-        .alert {
-            padding: 0.75rem 1.25rem;
-            border-left: 5px solid;
-            margin-bottom: 0.5rem;
-            background: white;
-        }
-        .alert-success { border-color: #28a745; color: #155724; }
-        .alert-danger { border-color: #dc3545; color: #721c24; }
-        .page-title {
-            font-size: 2rem;
-            margin: 1.5rem 0 0.5rem;
-            border-bottom: 3px double #003366;
-            padding-bottom: 0.3rem;
-            color: #003366;
-            font-weight: bold;
+        body.login-mode {
+            background: linear-gradient(135deg, #0a3567 0%, #12579b 52%, #2a7fd4 100%);
         }
 
-        /* ---------- BARRA DE BÚSQUEDA ---------- */
-        .search-container {
-            background: white;
-            padding: 0.8rem 1.2rem;
-            border: 1px solid #d6d2c9;
-            margin: 1.2rem 0 0.5rem;
-            display: flex;
-            flex-wrap: wrap;
+        /* =================== LOGIN (shell igual que cv/contactos) =================== */
+        #vistaLogin {
+            min-height: 100vh;
+            display: none;
             align-items: center;
-            gap: 10px;
-        }
-        .search-container .search-box {
-            flex: 2 1 250px;
-            display: flex;
-            align-items: center;
-            border: 1px solid #ccc;
-            background: #fafafa;
-            padding: 0 8px;
-        }
-        .search-container .search-box input[type="text"] {
-            border: none;
-            padding: 0.4rem 0;
-            font-family: inherit;
-            font-size: 0.95rem;
-            width: 100%;
-            background: transparent;
-            outline: none;
-        }
-        .search-container .search-box .lupa {
-            font-size: 1rem;
-            color: #666;
-            margin-right: 6px;
-        }
-        .search-container .search-date {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            border: 1px solid #ccc;
-            padding: 0 8px;
-            background: #fafafa;
-        }
-        .search-container .search-date input[type="date"] {
-            border: none;
-            padding: 0.4rem 0;
-            font-family: inherit;
-            font-size: 0.9rem;
-            background: transparent;
-            outline: none;
-            width: 140px;
-        }
-        .search-container .search-date label {
-            font-size: 0.8rem;
-            color: #555;
-        }
-        .search-container .filtros-mes-anio {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .search-container .filtros-mes-anio select {
-            padding: 0.4rem 0.4rem;
-            border: 1px solid #ccc;
-            background: #fafafa;
-            font-family: inherit;
-            font-size: 0.85rem;
-            outline: none;
-        }
-        .search-container .btn-buscar {
-            background: #003366;
-            color: white;
-            border: none;
-            padding: 0.4rem 1rem;
-            font-family: inherit;
-            font-size: 0.9rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .search-container .btn-buscar:hover { background: #CC0000; }
-        .search-container .btn-limpiar {
-            background: #6c757d;
-            color: white;
-            border: none;
-            padding: 0.4rem 1rem;
-            font-family: inherit;
-            font-size: 0.85rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-        .search-container .btn-limpiar:hover { background: #5a6268; }
-
-        /* ---------- PAGINACIÓN COMPACTA ---------- */
-        .paginacion {
-            display: flex;
-            flex-wrap: nowrap;
             justify-content: center;
-            align-items: center;
-            gap: 4px;
-            margin: 0.4rem 0 0.8rem;
-            padding: 4px 0;
-            overflow-x: auto;
+            padding: 36px 18px;
+        }
+        .lg-card {
+            width: 100%;
+            max-width: 432px;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 40px 42px 28px;
+            text-align: center;
+            box-shadow: 0 26px 60px rgba(3, 17, 38, 0.4);
+        }
+        .lg-badge {
+            width: 74px; height: 74px; border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(140deg, #1d529b, #0c376c);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1.75rem;
+            box-shadow: 0 12px 26px rgba(9, 44, 92, 0.38);
+        }
+        .lg-title { margin: 0 0 7px; color: #1c4d8f; font-size: 1.52rem; font-weight: 800; letter-spacing: -0.01em; }
+        .lg-sub { margin: 0 0 24px; color: #5f7188; font-size: 0.95rem; }
+        .lg-form { text-align: left; }
+        .lg-label {
+            display: block; margin: 0 0 6px;
+            font-size: 0.74rem; font-weight: 800; letter-spacing: 0.09em;
+            color: #173e6e; text-transform: uppercase;
+        }
+        .lg-field { position: relative; margin-bottom: 15px; }
+        .lg-field .lg-icon {
+            position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+            color: #8ba0b5; font-size: 0.9rem; pointer-events: none;
+        }
+        .lg-input {
+            width: 100%; padding: 12px 12px 12px 38px;
+            border: 1px solid #cdd9e5; border-radius: 9px;
+            font-size: 0.95rem; color: #1e293b; background: #fff;
+            font-family: inherit; box-sizing: border-box;
+        }
+        .lg-input::placeholder { color: #9fb0c0; }
+        .lg-input:focus { outline: 2px solid var(--alcasa-blue); outline-offset: 1px; border-color: var(--alcasa-blue); }
+        .lg-pass { padding-right: 42px; }
+        .lg-eye {
+            position: absolute; right: 7px; top: 50%; transform: translateY(-50%);
+            width: 30px; height: 30px; border: 0; border-radius: 6px;
+            background: transparent; color: #8ba0b5; cursor: pointer;
+        }
+        .lg-eye:hover { color: var(--alcasa-blue); background: #eaf3fb; }
+        .lg-btn {
+            width: 100%; margin-top: 4px; padding: 13px;
+            border: 0; border-radius: 9px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 9px;
+            background: linear-gradient(135deg, #0a3f7c, #1c72c0);
+            color: #ffffff; font: inherit; font-weight: 700; font-size: 1rem;
+            box-shadow: 0 7px 16px rgba(10, 63, 124, 0.28);
+            transition: var(--transition);
+        }
+        .lg-btn:hover { filter: brightness(1.09); }
+        .pd-msg {
+            display: none; margin-top: 12px; padding: 9px 12px;
+            border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+        }
+        .pd-msg.error { display: block; background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+        .pd-msg.info { display: block; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+        .lg-foot { margin: 22px 0 0; font-size: 0.85rem; color: #64748b; }
+        .lg-foot i { color: var(--alcasa-accent); }
+        .lg-accounts {
+            margin-top: 16px; padding-top: 12px;
+            border-top: 1px dashed #dbe4ee; text-align: left;
+        }
+        .lg-accounts summary {
+            cursor: pointer; font-size: 0.82rem; font-weight: 700;
+            color: #334155;
+        }
+        .lg-accounts summary i { color: var(--alcasa-accent); }
+        .lg-acc-btn {
+            width: 100%; display: flex; justify-content: space-between; gap: 8px; align-items: center;
+            margin-top: 6px; padding: 7px 10px; cursor: pointer;
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+            font-size: 0.78rem; font-weight: 600; color: #0f172a; text-align: left;
+        }
+        .lg-acc-btn:hover { border-color: var(--alcasa-blue); }
+
+        /* =================== BARRA SUPERIOR (degradada, como panel de contactos/CV) =================== */
+        .pd-topbar {
+            background: linear-gradient(90deg, #054A91 0%, #236EB8 100%);
+            color: #ffffff;
+            box-shadow: 0 6px 18px rgba(4, 25, 55, 0.18);
+        }
+        .pd-topbar-inner {
+            max-width: 1320px; margin: 0 auto; padding: 13px 22px;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 14px; flex-wrap: wrap;
+        }
+        .pd-brand { display: flex; align-items: center; gap: 11px; font-size: 1.16rem; font-weight: 800; letter-spacing: -0.01em; flex-wrap: wrap; }
+        .pd-brand > i { font-size: 1.3rem; color: var(--alcasa-accent-light); }
+        .pd-chip {
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 12px; border-radius: 999px;
+            font-size: 0.74rem; font-weight: 600; letter-spacing: 0.02em;
+            display: inline-flex; gap: 6px; align-items: center;
+        }
+        .pd-chip b { font-weight: 800; }
+        .pd-pills { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; }
+        .pd-mini {
+            display: inline-flex; gap: 7px; align-items: center;
+            background: rgba(255, 255, 255, 0.16); color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            border-radius: 999px; padding: 7px 14px;
+            font-size: 0.82rem; font-weight: 700; cursor: pointer; text-decoration: none;
+            transition: var(--transition);
+        }
+        .pd-mini:hover { background: rgba(255, 255, 255, 0.28); }
+
+        /* =================== CABECERA EDITORIAL (blanca, logo + edición) =================== */
+        .pd-hero {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 18px 0;
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+        }
+        .pd-hero-in {
+            max-width: 1320px; margin: 0 auto; padding: 0 22px;
+            display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+        }
+        .pd-hero img { height: 76px; width: auto; }
+        .pd-hero-title h1 { margin: 0; color: #1c4d8f; font-size: 2rem; letter-spacing: -0.5px; line-height: 1.1; }
+        .pd-hero-title small {
+            display: block; color: #64748b; letter-spacing: 2.5px;
+            text-transform: uppercase; font-size: 0.72rem; font-weight: 600; margin-top: 2px;
+        }
+        .pd-edicion {
+            margin-left: auto; text-align: right;
+            background: #f1f5f9; border: 1px solid #e2e8f0; border-left: 4px solid var(--alcasa-blue);
+            border-radius: 10px; padding: 9px 14px;
+            font-size: 0.85rem; color: #334155;
+        }
+        .pd-edicion b { display: block; color: #1c4d8f; font-size: 0.95rem; }
+
+        /* =================== CONTENIDO =================== */
+        .pd-wrap { max-width: 1320px; margin: 0 auto; padding: 22px 22px 54px; }
+        .pd-flash { display: flex; flex-direction: column; gap: 8px; margin-bottom: 4px; }
+        .pd-alert {
+            padding: 11px 15px; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
+            display: flex; gap: 9px; align-items: center;
+        }
+        .pd-alert.ok { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+        .pd-alert.danger { background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+
+        .pd-filters {
+            display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px;
+            padding: 12px 14px; box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+        }
+        .pd-search { position: relative; flex: 1; min-width: 220px; }
+        .pd-search > i {
+            position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+            color: #7b8ca1; font-size: 0.92rem; pointer-events: none;
+        }
+        .pd-search input {
+            width: 100%; padding: 10px 12px 10px 37px;
+            border: 1px solid #cbd5e1; border-radius: 8px;
+            font-size: 0.9rem; color: #1e293b; font-family: inherit; background: #fff;
+        }
+        .pd-search input::placeholder { color: #94a3b8; }
+        .pd-search input:focus { outline: 2px solid var(--alcasa-blue); outline-offset: 1px; }
+        .pd-date {
+            display: flex; align-items: center; gap: 7px;
+            border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 10px;
+            color: #7b8ca1; background: #fff;
+        }
+        .pd-date input {
+            border: none; outline: none; padding: 10px 0;
+            font: inherit; font-size: 0.9rem; color: #1e293b; width: 138px; background: transparent;
+        }
+        .pd-date:focus-within { outline: 2px solid var(--alcasa-blue); outline-offset: 1px; }
+        .pd-sel {
+            min-width: 128px; padding: 10px 12px;
+            border: 1px solid #cbd5e1; border-radius: 8px;
+            font-weight: 700; font-size: 0.88rem; color: #16365c;
+            background: #fff; font-family: inherit; cursor: pointer;
+        }
+        .pd-sel-anio { min-width: 100px; }
+        .pd-btn-buscar {
+            display: inline-flex; gap: 8px; align-items: center;
+            background: linear-gradient(135deg, #0a3f7c, #1c72c0);
+            color: #fff; border: 0; border-radius: 9px; padding: 10px 18px;
+            font: inherit; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(10, 63, 124, 0.25);
+        }
+        .pd-btn-buscar:hover { filter: brightness(1.09); }
+        .pd-btn-limpiar {
+            display: inline-flex; gap: 7px; align-items: center;
+            background: #64748b; color: #fff; border: 0; border-radius: 9px; padding: 10px 16px;
+            font: inherit; font-weight: 700; font-size: 0.88rem; text-decoration: none; cursor: pointer;
+        }
+        .pd-btn-limpiar:hover { filter: brightness(1.12); }
+
+        .pd-titulo-seccion {
+            margin: 22px 2px 12px;
+            font-size: 1.25rem; color: #16365c;
+            display: flex; align-items: center; gap: 9px; font-weight: 800;
+        }
+        .pd-titulo-seccion i { color: var(--alcasa-blue); font-size: 1.1rem; }
+
+        .paginacion {
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+            gap: 6px; margin: 0 0 14px;
         }
         .paginacion a, .paginacion span {
-            padding: 4px 8px;
-            border: 1px solid #ddd;
-            background: white;
-            text-decoration: none;
-            color: #003366;
-            font-weight: bold;
-            font-size: 0.85rem;
-            border-radius: 3px;
-            transition: all 0.2s;
-            min-width: 26px;
-            text-align: center;
-            white-space: nowrap;
+            min-width: 32px; padding: 6px 10px; border-radius: 999px;
+            background: #fff; border: 1px solid #dbe4ee;
+            color: #16365c; font-weight: 700; font-size: 0.82rem;
+            text-align: center; text-decoration: none; cursor: pointer;
         }
-        .paginacion a:hover {
-            background: #003366;
-            color: white;
-            border-color: #003366;
-        }
+        .paginacion a:hover { background: #eaf3fb; border-color: var(--alcasa-blue); }
         .paginacion .active {
-            background: #003366;
-            color: white;
-            border-color: #003366;
+            background: linear-gradient(135deg, #0a3f7c, #1c72c0);
+            border-color: transparent; color: #fff;
         }
-        .paginacion .disabled {
-            color: #ccc;
-            border-color: #eee;
-            pointer-events: none;
-            background: #f9f9f9;
-        }
-        .paginacion .separador {
-            border: none;
-            background: transparent;
-            color: #333;
-            padding: 4px 2px;
-            min-width: auto;
-            pointer-events: none;
-        }
-        @media (max-width: 600px) {
-            .paginacion a, .paginacion span {
-                padding: 3px 6px;
-                font-size: 0.75rem;
-                min-width: 22px;
-            }
-        }
+        .paginacion .disabled { opacity: 0.45; cursor: not-allowed; background: #f8fafc; pointer-events: none; }
+        .paginacion .separador { border: none; background: transparent; color: #64748b; padding: 0 2px; min-width: auto; }
 
-        /* ---------- LISTA DE NOTICIAS ---------- */
-        .noticias-grid {
+        /* =================== TARJETAS DE NOTICIAS (estilo copia) =================== */
+        .pd-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px; margin: 0 0 16px;
         }
-        .noticia-card {
-            background: white;
-            border: 1px solid #d6d2c9;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
+        .pd-card {
+            position: relative; display: flex; flex-direction: column; overflow: hidden;
+            background: #fff; border: 1px solid #e4eaf1; border-top: 4px solid var(--alcasa-blue);
+            border-radius: 10px; box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+            transition: var(--transition);
         }
-        .noticia-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .noticia-imagen {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            object-position: top;
-            border-bottom: 2px solid #003366;
+        .pd-card:hover { box-shadow: 0 10px 24px rgba(10, 63, 124, 0.14); }
+        .pd-img { width: 100%; height: 185px; object-fit: cover; object-position: top; display: block; }
+        .pd-img-ph {
+            width: 100%; height: 185px; display: flex; align-items: center; justify-content: center;
+            background: #e8eef4; color: #9fb0c0; font-size: 2.4rem;
         }
-        .noticia-imagen-placeholder {
-            width: 100%;
-            height: 180px;
-            background: #e9e7e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #aaa;
-            border-bottom: 2px solid #003366;
+        .pd-titulo-nota {
+            margin: 13px 16px 4px; font-size: 0.98rem; font-weight: 800;
+            color: #16365c; line-height: 1.35; overflow-wrap: anywhere;
         }
-        .noticia-contenido {
-            padding: 1rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+        .pd-titulo-nota a { color: inherit; text-decoration: none; }
+        .pd-titulo-nota a:hover { color: var(--alcasa-blue); text-decoration: underline; }
+        .pd-sub { margin: 0 16px 6px; color: #64748b; font-style: italic; font-size: 0.86rem; }
+        .pd-meta {
+            display: flex; flex-wrap: wrap; gap: 5px 15px;
+            padding: 2px 16px 7px; font-size: 0.8rem; color: #475569;
         }
-        .noticia-contenido h2 {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 0.2rem;
-            line-height: 1.2;
+        .pd-line { display: inline-flex; gap: 6px; align-items: center; }
+        .pd-line i { width: 14px; text-align: center; color: var(--alcasa-accent); font-size: 0.78rem; flex-shrink: 0; }
+        .pd-badge {
+            flex-shrink: 0; align-self: center;
+            background: var(--alcasa-accent); color: #fff;
+            border-radius: 999px; padding: 3px 10px;
+            font-size: 0.62rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
         }
-        .noticia-contenido h2 a {
-            color: #003366;
+        .pd-resumen {
+            margin: 2px 16px 12px;
+            background: #f1f5f9; border-left: 4px solid var(--alcasa-accent);
+            border-radius: 9px; padding: 10px 14px;
+            font-style: italic; color: #3b4859; font-size: 0.84rem; line-height: 1.55;
+            max-height: 6.9em; overflow: hidden;
+        }
+        .pd-acciones { margin-top: auto; border-top: 1px solid #eef2f7; padding: 10px; display: grid; gap: 8px; grid-template-columns: 1fr; }
+        .pd-btn-leer {
+            display: inline-flex; justify-content: center; align-items: center; gap: 7px;
+            border: 0; border-radius: 8px; padding: 10px 6px;
+            font: inherit; font-weight: 700; font-size: 0.86rem; color: #fff; cursor: pointer;
             text-decoration: none;
+            background: linear-gradient(135deg, #0a3f7c, #1c72c0);
+            box-shadow: 0 4px 12px rgba(10, 63, 124, 0.25);
         }
-        .noticia-contenido h2 a:hover { text-decoration: underline; }
-        .subtitulo {
-            font-size: 0.95rem;
-            color: #555;
-            margin-bottom: 0.4rem;
-            font-style: italic;
+        .pd-btn-leer:hover { filter: brightness(1.08); }
+        .pd-adm { border-top: 1px solid #eef2f7; padding: 9px 10px; background: #f8fafc; }
+        .pd-btn-editar {
+            display: inline-flex; gap: 7px; align-items: center;
+            background: linear-gradient(135deg, #b45309, #f59e0b);
+            color: #fff; border: 0; border-radius: 8px; padding: 9px 14px;
+            font: inherit; font-weight: 700; font-size: 0.82rem; text-decoration: none;
+            box-shadow: 0 4px 12px rgba(180, 83, 9, 0.28);
         }
-        .meta {
-            font-size: 0.8rem;
-            color: #666;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-bottom: 0.6rem;
-            border-top: 1px dotted #ddd;
-            padding-top: 0.4rem;
-        }
-        .categoria {
-            background: #CC0000;
-            color: white;
-            padding: 0.1rem 0.5rem;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .resumen {
-            flex: 1;
-            color: #333;
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-        }
-        .btn-leer {
-            background: #003366;
-            color: white;
-            padding: 0.3rem 1rem;
-            text-decoration: none;
-            font-weight: bold;
-            align-self: flex-start;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            transition: background 0.2s;
-        }
-        .btn-leer:hover { background: #CC0000; }
-        .adjunto-icono {
-            font-size: 0.8rem;
-            color: #CC0000;
-            margin-left: 3px;
-        }
-        .no-resultados {
-            font-size: 1.1rem;
-            margin: 1.5rem 0;
-            color: #666;
-        }
-        .acciones-admin {
-            padding: 0.5rem 1rem;
-            background: #f8f7f4;
-            border-top: 1px solid #ddd;
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-        }
-        .btn-editar {
-            padding: 0.2rem 0.6rem;
-            border: none;
-            cursor: pointer;
-            font-size: 0.75rem;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: background 0.2s;
-        }
-        .btn-editar { background: #17a2b8; color: white; }
-        .btn-editar:hover { background: #138496; }
-
-        /* ---------- FORMULARIO DE LOGIN ---------- */
-        .form-login {
-            max-width: 800px;
-            margin: 1.5rem auto;
-            background: white;
-            padding: 1.5rem;
-            border: 1px solid #d6d2c9;
-        }
-        .form-group { margin-bottom: 1rem; }
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 0.2rem;
-            color: #003366;
-            font-size: 0.95rem;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            font-family: inherit;
-            font-size: 0.95rem;
-        }
-        .btn-ingresar { background: #003366; color: white; width:100%; padding:0.6rem; font-size:0.95rem; border:none; cursor:pointer; font-family:inherit; font-weight:bold; text-transform:uppercase; letter-spacing:0.5px; transition: background 0.2s; }
-        .btn-ingresar:hover { background: #CC0000; }
-
-        /* ---------- CAMPO CON VISOR DE CONTRASEÑA ---------- */
-        .password-wrapper {
-            position: relative;
-            width: 100%;
-        }
-        .password-wrapper input[type="password"],
-        .password-wrapper input[type="text"] {
-            width: 100%;
-            padding-right: 36px;
-        }
-        .password-wrapper .toggle-password {
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            color: #666;
-            transition: color 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .password-wrapper .toggle-password:hover {
-            color: #003366;
-        }
-        .password-wrapper .toggle-password svg {
-            width: 20px;
-            height: 20px;
-            display: block;
-            fill: currentColor;
+        .pd-btn-editar:hover { filter: brightness(1.08); }
+        .pd-empty {
+            color: #64748b; padding: 30px 10px; text-align: center;
+            background: #fff; border: 1px dashed #cbd5e1; border-radius: 10px;
+            font-size: 0.95rem; grid-column: 1 / -1;
         }
 
-        /* ---------- LOGIN (página) ---------- */
-        .login-container {
-            max-width: 380px;
-            margin: 2.5rem auto;
-            background: white;
-            padding: 1.5rem;
-            border: 1px solid #d6d2c9;
-            text-align: center;
+        /* =================== MODALES (estilo ventanas copia) =================== */
+        .pd-modal { display: none; position: fixed; inset: 0; background: rgba(2, 12, 27, 0.72); z-index: 9999; align-items: center; justify-content: center; padding: 18px; }
+        .pd-modal.active { display: flex; }
+        .pd-modal-box {
+            background: #ffffff; border-radius: 14px; max-width: 640px; width: 100%;
+            overflow: hidden; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+            display: flex; flex-direction: column; max-height: 88vh;
         }
-        .login-container h1 {
-            color: #003366;
-            margin-bottom: 1.2rem;
-            font-size: 1.8rem;
+        .pd-modal-head {
+            background: linear-gradient(135deg, #054A91, #236EB8 60%, #367EC6);
+            color: #ffffff; padding: 15px 22px;
+            display: flex; justify-content: space-between; align-items: center; gap: 10px;
         }
-        .info-login {
-            margin-top: 0.8rem;
-            font-size: 0.85rem;
-            color: #666;
+        .pd-modal-head h3 { margin: 0; font-size: 1.02rem; color: #fff; overflow-wrap: anywhere; }
+        .pd-modal-x {
+            background: rgba(255, 255, 255, 0.15); border: none; color: #fff;
+            width: 32px; height: 32px; border-radius: 50%; cursor: pointer; flex-shrink: 0; font-size: 0.95rem;
         }
+        .pd-modal-x:hover { background: rgba(255, 255, 255, 0.3); }
+        .pd-modal-body { padding: 20px 22px; font-size: 0.92rem; line-height: 1.65; color: #1e293b; overflow-y: auto; }
+        .pd-modal-body p { margin: 0 0 0.7rem; }
+        .pd-modal-body ul { margin: 0.3rem 0 0.8rem 1.3rem; }
+        .pd-modal-body ul li { margin: 0.25rem 0; }
+        .pd-modal-body a { color: var(--alcasa-blue); font-weight: 700; }
+        .pd-modal-foot { padding: 12px 22px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
 
-        /* ---------- MODALES ---------- */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .modal-overlay.active {
-            display: flex;
-        }
-        .modal-box {
-            background: white;
-            max-width: 700px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            position: relative;
-            animation: fadeIn 0.3s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .modal-box .close-modal {
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #999;
-            cursor: pointer;
-            transition: color 0.2s;
-            background: none;
-            border: none;
-            line-height: 1;
-        }
-        .modal-box .close-modal:hover {
-            color: #CC0000;
-        }
-        .modal-box h2 {
-            color: #003366;
-            border-bottom: 2px solid #CC0000;
-            padding-bottom: 0.4rem;
-            margin-bottom: 0.8rem;
-            font-size: 1.4rem;
-        }
-        .modal-box p {
-            margin: 0.6rem 0;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-        .modal-box ul {
-            margin: 0.6rem 0 0.6rem 1.5rem;
-        }
-        .modal-box ul li {
-            margin: 0.2rem 0;
-        }
-
-        /* ---------- BOTONES FLOTANTES ---------- */
-        .nav-botones {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 9998;
-        }
+        /* =================== BOTONES FLOTANTES =================== */
+        .nav-botones { position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 9px; z-index: 9998; }
         .nav-botones button {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: none;
-            background: #003366;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
+            width: 46px; height: 46px; border-radius: 50%; border: 0;
+            background: linear-gradient(135deg, #0a3f7c, #1c72c0);
+            color: #fff; font-size: 1.15rem; cursor: pointer;
+            box-shadow: 0 7px 16px rgba(10, 63, 124, 0.3);
         }
-        .nav-botones button:hover {
-            background: #CC0000;
-            transform: scale(1.05);
+        .nav-botones button:hover { filter: brightness(1.09); }
+        body.login-mode .nav-botones { display: none !important; }
+        /* =================== PIE =================== */
+        .pd-footer {
+            margin-top: 34px;
+            background: linear-gradient(90deg, #052a52, #054A91);
+            color: #dbe8f6; padding: 20px 22px; text-align: center;
+            font-size: 0.85rem; border-top: 4px solid var(--alcasa-blue);
         }
-        @media (max-width: 600px) {
-            .nav-botones {
-                bottom: 15px;
-                right: 15px;
-                gap: 8px;
-            }
-            .nav-botones button {
-                width: 38px;
-                height: 38px;
-                font-size: 1.2rem;
-            }
-        }
+        .pd-footer a { color: #9fd4ff; font-weight: 700; cursor: pointer; }
+        .pd-footer a:hover { color: #fff; text-decoration: underline; }
 
-        /* ---------- PIE ---------- */
-        footer {
-            background: #003366;
-            color: #ddd;
-            padding: 1rem 0;
-            margin-top: 2.5rem;
-            border-top: 3px solid #CC0000;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-        footer a {
-            color: #FFD700;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* ======== BÚSQUEDA EN MÓVIL ======== */
-        .desktop-only {
-            display: flex;
-        }
-        .mobile-only {
-            display: none;
-        }
-
-        @media (max-width: 767px) {
-            .desktop-only {
-                display: none !important;
-            }
-            .mobile-only {
-                display: block;
-            }
-            .btn-lupa-movil {
-                position: fixed;
-                bottom: 120px;
-                right: 25px;
-                z-index: 9997;
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                background: #003366;
-                color: white;
-                border: none;
-                font-size: 1.8rem;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                cursor: pointer;
-                transition: all 0.3s ease;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .btn-lupa-movil:hover {
-                background: #CC0000;
-                transform: scale(1.05);
-            }
-            .modal-search .modal-box {
-                max-width: 95%;
-                max-height: 90vh;
-                padding: 1.2rem;
-            }
-            .modal-search .modal-box .search-container {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 0.5rem;
-                margin: 0;
-                border: none;
-            }
-            .modal-search .modal-box .search-container .search-box,
-            .modal-search .modal-box .search-container .search-date {
-                width: 100%;
-            }
-            .modal-search .modal-box .search-container .btn-buscar,
-            .modal-search .modal-box .search-container .btn-limpiar {
-                width: 100%;
-            }
-            .modal-search .modal-box .close-modal {
-                font-size: 1.5rem;
-            }
-            .modal-search .modal-box h2 {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .header-main { flex-direction: column; align-items: center; }
-            .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.8rem; }
+        /* =================== MÓVIL =================== */
+        @media (max-width: 760px) {
+            .pd-topbar-inner { padding: 12px 16px; }
+            .pd-hero-in { padding: 0 16px; justify-content: center; text-align: center; }
+            .pd-hero img { height: 62px; }
+            .pd-edicion { margin-left: 0; }
+            .pd-wrap { padding: 18px 14px 44px; }
+            .pd-grid { grid-template-columns: 1fr; }
+            .lg-card { padding: 30px 24px 22px; }
         }
     </style>
 </head>
-<body>
-    <div class="header-top">
-        <div class="container">
-            <span>📢 CVG Alcasa - Periódico Digital</span>
-            <span>|</span>
-            <span>📅 <span id="fechaActual">—</span></span>
-            <span>|</span>
-            <span>📍 Puerto Ordaz, Venezuela</span>
-        </div>
-    </div>
+<body class="admin-standalone-body">
 
-    <div class="header-main container">
-        <div class="logo-area">
-            <img src="/assets/img/logo-alcasa.png?v=2026m" alt="Logo CVG Alcasa">
-            <div class="titulo-periodico">
-                Periódico Digital
-                <small>Información institucional</small>
+    <!-- ==================== LOGIN (shell «Acceso Restringido», igual que Panel de CV/Contactos) ==================== -->
+    <section id="vistaLogin">
+        <div class="lg-card">
+            <div class="lg-badge"><i class="fas fa-newspaper"></i></div>
+            <h2 class="lg-title">Acceso Restringido</h2>
+            <p class="lg-sub">Periódico Digital · Gestión Editorial — CVG ALCASA</p>
+            <form id="formLoginPd" class="lg-form" autocomplete="off">
+                <label class="lg-label" for="username">Usuario</label>
+                <div class="lg-field">
+                    <i class="fas fa-user lg-icon"></i>
+                    <input type="text" id="username" name="usuario" class="lg-input" required placeholder="Ingrese su usuario" autocomplete="username">
+                </div>
+                <label class="lg-label" for="password">Contraseña</label>
+                <div class="lg-field">
+                    <i class="fas fa-key lg-icon"></i>
+                    <input type="password" id="password" name="password" class="lg-input lg-pass" required placeholder="Ingrese su contraseña" autocomplete="current-password">
+                    <button type="button" class="lg-eye" data-target="password" aria-label="Mostrar u ocultar contraseña"><i class="fas fa-eye"></i></button>
+                </div>
+                <button type="submit" class="lg-btn"><i class="fas fa-right-to-bracket"></i> Ingresar</button>
+                <div class="pd-msg" id="pdLoginMsg"></div>
+            </form>
+            <p class="lg-foot"><i class="fas fa-user-shield"></i> Credenciales por defecto: comunicacion / periodico2024</p>
+            <details class="lg-accounts">
+                <summary><i class="fas fa-key"></i> Volver al Periódico · Portal</summary>
+                <button type="button" id="btnVolverPd" class="lg-acc-btn"><span><i class="fas fa-arrow-left"></i> <strong>Periódico Digital</strong></span><span class="nivel" style="color:#64748b;font-weight:700;font-size:0.72rem;">Volver</span></button>
+                <a href="/index.html" class="lg-acc-btn"><span><i class="fas fa-globe"></i> <strong>Portal Principal</strong></span><span class="nivel" style="color:#64748b;font-weight:700;font-size:0.72rem;">Inicio</span></a>
+            </details>
+        </div>
+    </section>
+
+    <!-- ==================== PERIÓDICO DIGITAL ==================== -->
+    <div id="vistaPd">
+        <header class="pd-topbar">
+            <div class="pd-topbar-inner">
+                <div class="pd-brand">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Periódico Digital CVG ALCASA</span>
+                    <span class="pd-chip"><i class="fas fa-circle-info"></i> Información institucional</span>
+                </div>
+                <div class="pd-pills">
+                    <span class="pd-chip"><i class="fas fa-calendar-day"></i> <span id="fechaActual">—</span></span>
+                    <span class="pd-chip"><i class="fas fa-location-dot"></i> Puerto Ordaz, Venezuela</span>
+                    <a href="/minimal.html" class="pd-mini"><i class="fas fa-house"></i> Inicio</a>
+                    <a href="/redaccion.html" id="navPublicar" style="display:none;" class="pd-mini"><i class="fas fa-pen-nib"></i> Publicar Nueva Noticia</a>
+                    <a href="/index.html" class="pd-mini"><i class="fas fa-globe"></i> Portal</a>
+                    <a href="#" id="loginLink" class="pd-mini"><i class="fas fa-right-to-bracket" id="navSesIcon"></i> <span id="navSessionTxt">Iniciar Sesión</span></a>
+                </div>
             </div>
-        </div>
-        <div class="fecha-edicion">
-            <div class="edicion">Edición N° 001</div>
-            <div id="fechaEdicion">—</div>
-        </div>
-    </div>
+        </header>
 
-    <nav class="navbar">
-        <div class="container">
-            <ul class="nav-links" id="navLinks">
-                <li><a href="/minimal.html" title="Periódico Digital — Inicio">Inicio</a></li>
-                <li id="navPublicar" style="display:none;"><a href="/redaccion.html">📰 Publicar Nueva Noticia</a></li>
-                <li><a href="#" id="loginLink" class="sesion-link">🔑 <span class="sesion-texto">Iniciar Sesión</span></a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <main class="container">
-        <div class="flash-messages" id="flashBox" style="display:none;"></div>
-
-        <!-- Vista de login (aparece al pulsar Iniciar Sesión) -->
-        <section id="vistaLogin" style="display:none;">
-            <div class="login-container">
-                <h1>🔐 Iniciar Sesión</h1>
-                <form id="formLoginPd" class="form-login" style="max-width:100%; margin:0;">
-                    <div class="form-group">
-                        <label for="username">Usuario</label>
-                        <input type="text" id="username" name="usuario" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Contraseña</label>
-                        <div class="password-wrapper">
-                            <input type="password" id="password" name="password" required>
-                            <button type="button" class="toggle-password" data-target="password" aria-label="Mostrar u ocultar contraseña"></button>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-ingresar">Ingresar</button>
-                </form>
-                <p class="info-login">Credenciales por defecto: <strong>comunicacion</strong> / <strong>periodico2024</strong></p>
+        <section class="pd-hero">
+            <div class="pd-hero-in">
+                <img src="/assets/img/logo-alcasa.png?v=2026m" alt="Logo CVG Alcasa">
+                <div class="pd-hero-title">
+                    <h1>Periódico Digital</h1>
+                    <small>Información institucional</small>
+                </div>
+                <div class="pd-edicion">
+                    <b>Edición N° 001</b>
+                    <span id="fechaEdicion">—</span>
+                </div>
             </div>
         </section>
 
-        <!-- Vista del periódico -->
-        <section id="vistaPd">
-            <div class="desktop-only search-container">
-                <div class="search-container" style="margin:0; padding:0; border:none; background:transparent;">
-                    <div class="search-box">
-                        <span class="lupa">🔍</span>
-                        <input type="text" name="q" id="txtBuscar" placeholder="Buscar...">
-                    </div>
-                    <div class="search-date">
-                        <label for="fecha">📅</label>
-                        <input type="date" id="fecha" name="fecha" value="">
-                    </div>
-                    <div class="filtros-mes-anio">
-                        <select name="mes" id="mes"><option value="">-- Mes --</option><option value="01">Enero</option><option value="02">Febrero</option><option value="03">Marzo</option><option value="04">Abril</option><option value="05">Mayo</option><option value="06">Junio</option><option value="07">Julio</option><option value="08">Agosto</option><option value="09">Septiembre</option><option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option></select>
-                        <select name="anio" id="anio"><option value="">-- Año --</option><option value="2026">2026</option><option value="2025">2025</option></select>
-                    </div>
-                    <button type="button" class="btn-buscar" id="btnBuscar">Buscar</button>
-                    <a href="#" class="btn-limpiar" id="btnLimpiar">Limpiar</a>
+        <div class="pd-wrap">
+            <div class="pd-flash" id="flashBox" style="display:none;"></div>
+
+            <!-- Barra de búsqueda (como tarjeta de filtros de los paneles) -->
+            <section class="pd-filters">
+                <div class="pd-search">
+                    <i class="fas fa-magnifying-glass"></i>
+                    <input type="search" id="txtBuscar" placeholder="Buscar noticias...">
                 </div>
-            </div>
+                <div class="pd-date">
+                    <i class="fas fa-calendar"></i>
+                    <input type="date" id="fecha" value="">
+                </div>
+                <select id="mes" class="pd-sel">
+                    <option value="">-- Mes --</option>
+                    <option value="01">Enero</option><option value="02">Febrero</option><option value="03">Marzo</option>
+                    <option value="04">Abril</option><option value="05">Mayo</option><option value="06">Junio</option>
+                    <option value="07">Julio</option><option value="08">Agosto</option><option value="09">Septiembre</option>
+                    <option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
+                </select>
+                <select id="anio" class="pd-sel pd-sel-anio">
+                    <option value="">-- Año --</option>
+                    <option value="2026">2026</option>
+                    <option value="2025">2025</option>
+                </select>
+                <button type="button" class="pd-btn-buscar" id="btnBuscar"><i class="fas fa-magnifying-glass"></i> Buscar</button>
+                <button type="button" class="pd-btn-limpiar" id="btnLimpiar"><i class="fas fa-eraser"></i> Limpiar</button>
+            </section>
 
             <div class="paginacion" id="paginacionTop"><span class="disabled">‹</span><span class="active">1</span></div>
 
-            <h1 class="page-title">📌 Últimas Noticias</h1>
+            <h2 class="pd-titulo-seccion"><i class="fas fa-newspaper"></i> Últimas Noticias</h2>
 
-            <div class="noticias-grid" id="noticiasGrid"></div>
+            <div class="pd-grid" id="noticiasGrid"></div>
 
             <div class="paginacion" id="paginacionBottom"><span class="disabled">‹</span><span class="active">1</span></div>
-        </section>
-    </main>
-
-    <!-- MODALES -->
-    <div id="modal-aviso" class="modal-overlay">
-        <div class="modal-box">
-            <button class="close-modal" onclick="closeModal('aviso')">&times;</button>
-            <h2>Aviso Legal</h2>
-            <p><strong>CVG Alcasa</strong>, a través de su <strong>Gerencia de Comunicación Estratégica</strong>, pone a disposición de los usuarios este sitio web con el objetivo de informar sobre las actividades institucionales.</p>
-            <p>El acceso y uso de este portal implican la aceptación plena de las siguientes condiciones:</p>
-            <ul>
-                <li><strong>Propiedad intelectual:</strong> Todos los contenidos (textos, imágenes, logotipos, diseños) son propiedad de CVG Alcasa o de terceros que han autorizado su uso. Queda prohibida su reproducción, distribución o modificación sin autorización expresa.</li>
-                <li><strong>Responsabilidad:</strong> La información publicada es de carácter informativo. CVG Alcasa no se hace responsable del uso indebido que los usuarios puedan dar a la misma, ni de posibles errores u omisiones.</li>
-                <li><strong>Enlaces externos:</strong> Este sitio puede contener enlaces a páginas externas sobre cuya gestión y contenidos CVG Alcasa no asume responsabilidad alguna.</li>
-                <li><strong>Legislación aplicable:</strong> Las relaciones derivadas del uso de este portal se rigen por la legislación venezolana.</li>
-            </ul>
-            <p>Para cualquier consulta, puede dirigirse a la <strong>Gerencia de Comunicación Estratégica</strong> a través de los datos de contacto disponibles en este sitio.</p>
         </div>
     </div>
 
-    <div id="modal-privacidad" class="modal-overlay">
-        <div class="modal-box">
-            <button class="close-modal" onclick="closeModal('privacidad')">&times;</button>
-            <h2>Política de Privacidad</h2>
-            <p>En CVG Alcasa nos comprometemos a proteger la privacidad de los visitantes de nuestro sitio web. Esta política explica cómo tratamos la información personal que pudiera recopilarse.</p>
-            <ul>
-                <li><strong>Recogida de datos:</strong> No se recopilan datos personales a menos que el usuario los proporcione voluntariamente (por ejemplo, al enviar un formulario de contacto).</li>
-                <li><strong>Uso de la información:</strong> Los datos proporcionados se utilizarán exclusivamente para atender consultas, gestionar suscripciones o enviar información institucional, siempre con el consentimiento del usuario.</li>
-                <li><strong>Cookies:</strong> Este sitio utiliza cookies técnicas para mejorar la experiencia de navegación. No almacenamos cookies de seguimiento o publicitarias sin su autorización.</li>
-                <li><strong>Derechos de los usuarios:</strong> Puede solicitar la rectificación o eliminación de sus datos personales en cualquier momento, escribiendo a la Gerencia de Comunicación Estratégica.</li>
-                <li><strong>Seguridad:</strong> Aplicamos medidas técnicas y organizativas adecuadas para proteger sus datos contra accesos no autorizados.</li>
-            </ul>
-            <p>Si tiene dudas sobre nuestra política de privacidad, no dude en contactarnos.</p>
-        </div>
-    </div>
-
-    <div id="modal-contacto" class="modal-overlay">
-        <div class="modal-box">
-            <button class="close-modal" onclick="closeModal('contacto')">&times;</button>
-            <h2>Contacto</h2>
-            <p><strong>Gerencia de Comunicación Estratégica</strong><br>
-            CVG Alcasa</p>
-            <p><strong>Dirección:</strong><br>
-            Zona Industrial Matanzas, Puerto Ordaz, Estado Bolívar, Venezuela.</p>
-            <p><strong>Teléfonos:</strong><br>
-            Extensiones: 1394 (Gerencia de Sistemas y Organización)<br>
-            1028 (Gerencia de Comunicación Estratégica)</p>
-            <p><strong>Correo electrónico:</strong><br>
-            <a href="mailto:sebastian.marcano@alcasa.com.ve">sebastian.marcano@alcasa.com.ve</a></p>
-            <p><strong>Horario de atención:</strong><br>
-            Lunes a viernes de 7:00 a.m. a 3:00 p.m.</p>
-            <p>Estamos a su disposición para cualquier consulta o sugerencia.</p>
-        </div>
-    </div>
-
-    <!-- Modal para búsqueda en móvil -->
-    <div id="searchModal" class="modal-overlay modal-search">
-        <div class="modal-box">
-            <button class="close-modal" onclick="toggleSearchModal()">&times;</button>
-            <h2>🔍 Buscar noticias</h2>
-            <div class="search-container" style="margin:0; padding:0; border:none; background:transparent; flex-direction:column; align-items:stretch;">
-                <div class="search-box">
-                    <span class="lupa">🔍</span>
-                    <input type="text" name="q" id="txtBuscarM" placeholder="Buscar...">
-                </div>
-                <div class="search-date" style="margin-top:8px;">
-                    <label for="fechaM">📅</label>
-                    <input type="date" id="fechaM" name="fecha" value="">
-                </div>
-                <div class="filtros-mes-anio" style="margin-top:8px;">
-                    <select name="mes" id="mesM"><option value="">-- Mes --</option><option value="01">Enero</option><option value="02">Febrero</option><option value="03">Marzo</option><option value="04">Abril</option><option value="05">Mayo</option><option value="06">Junio</option><option value="07">Julio</option><option value="08">Agosto</option><option value="09">Septiembre</option><option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option></select>
-                    <select name="anio" id="anioM"><option value="">-- Año --</option><option value="2026">2026</option><option value="2025">2025</option></select>
-                </div>
-                <button type="button" class="btn-buscar" id="btnBuscarM" style="margin-top:8px;">Buscar</button>
-                <a href="#" class="btn-limpiar" id="btnLimpiarM" style="margin-top:6px;">Limpiar</a>
+    <!-- ==================== MODALES LEGALES (textos del portal vivo) ==================== -->
+    <div id="modal-aviso" class="pd-modal">
+        <div class="pd-modal-box">
+            <div class="pd-modal-head">
+                <h3><i class="fas fa-scale-balanced"></i> Aviso Legal</h3>
+                <button class="pd-modal-x" onclick="closeModal('aviso')" aria-label="Cerrar"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div class="pd-modal-body">
+                <p><strong>CVG Alcasa</strong>, a través de su <strong>Gerencia de Comunicación Estratégica</strong>, pone a disposición de los usuarios este sitio web con el objetivo de informar sobre las actividades institucionales.</p>
+                <p>El acceso y uso de este portal implican la aceptación plena de las siguientes condiciones:</p>
+                <ul>
+                    <li><strong>Propiedad intelectual:</strong> Todos los contenidos (textos, imágenes, logotipos, diseños) son propiedad de CVG Alcasa o de terceros que han autorizado su uso. Queda prohibida su reproducción, distribución o modificación sin autorización expresa.</li>
+                    <li><strong>Responsabilidad:</strong> La información publicada es de carácter informativo. CVG Alcasa no se hace responsable del uso indebido que los usuarios puedan dar a la misma, ni de posibles errores u omisiones.</li>
+                    <li><strong>Enlaces externos:</strong> Este sitio puede contener enlaces a páginas externas sobre cuya gestión y contenidos CVG Alcasa no asume responsabilidad alguna.</li>
+                    <li><strong>Legislación aplicable:</strong> Las relaciones derivadas del uso de este portal se rigen por la legislación venezolana.</li>
+                </ul>
+                <p>Para cualquier consulta, puede dirigirse a la <strong>Gerencia de Comunicación Estratégica</strong> a través de los datos de contacto disponibles en este sitio.</p>
             </div>
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 - CVG Alcasa - Gerencia de Comunicación Estratégica</p>
-            <p style="font-size:0.75rem; margin-top:0.2rem;">
-                <a onclick="openModal('aviso')" style="cursor:pointer;">Aviso Legal</a> |
-                <a onclick="openModal('privacidad')" style="cursor:pointer;">Política de Privacidad</a> |
-                <a onclick="openModal('contacto')" style="cursor:pointer;">Contacto</a>
-            </p>
+    <div id="modal-privacidad" class="pd-modal">
+        <div class="pd-modal-box">
+            <div class="pd-modal-head">
+                <h3><i class="fas fa-shield-halved"></i> Política de Privacidad</h3>
+                <button class="pd-modal-x" onclick="closeModal('privacidad')" aria-label="Cerrar"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div class="pd-modal-body">
+                <p>En CVG Alcasa nos comprometemos a proteger la privacidad de los visitantes de nuestro sitio web. Esta política explica cómo tratamos la información personal que pudiera recopilarse.</p>
+                <ul>
+                    <li><strong>Recogida de datos:</strong> No se recopilan datos personales a menos que el usuario los proporcione voluntariamente (por ejemplo, al enviar un formulario de contacto).</li>
+                    <li><strong>Uso de la información:</strong> Los datos proporcionados se utilizarán exclusivamente para atender consultas, gestionar suscripciones o enviar información institucional, siempre con el consentimiento del usuario.</li>
+                    <li><strong>Cookies:</strong> Este sitio utiliza cookies técnicas para mejorar la experiencia de navegación. No almacenamos cookies de seguimiento o publicitarias sin su autorización.</li>
+                    <li><strong>Derechos de los usuarios:</strong> Puede solicitar la rectificación o eliminación de sus datos personales en cualquier momento, escribiendo a la Gerencia de Comunicación Estratégica.</li>
+                    <li><strong>Seguridad:</strong> Aplicamos medidas técnicas y organizativas adecuadas para proteger sus datos contra accesos no autorizados.</li>
+                </ul>
+                <p>Si tiene dudas sobre nuestra política de privacidad, no dude en contactarnos.</p>
+            </div>
         </div>
+    </div>
+
+    <div id="modal-contacto" class="pd-modal">
+        <div class="pd-modal-box">
+            <div class="pd-modal-head">
+                <h3><i class="fas fa-envelope"></i> Contacto</h3>
+                <button class="pd-modal-x" onclick="closeModal('contacto')" aria-label="Cerrar"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div class="pd-modal-body">
+                <p><strong>Gerencia de Comunicación Estratégica</strong><br>CVG Alcasa</p>
+                <p><strong>Dirección:</strong><br>Zona Industrial Matanzas, Puerto Ordaz, Estado Bolívar, Venezuela.</p>
+                <p><strong>Teléfonos:</strong><br>Extensiones: 1394 (Gerencia de Sistemas y Organización)<br>1028 (Gerencia de Comunicación Estratégica)</p>
+                <p><strong>Correo electrónico:</strong><br><a href="mailto:sebastian.marcano@alcasa.com.ve">sebastian.marcano@alcasa.com.ve</a></p>
+                <p><strong>Horario de atención:</strong><br>Lunes a viernes de 7:00 a.m. a 3:00 p.m.</p>
+                <p>Estamos a su disposición para cualquier consulta o sugerencia.</p>
+            </div>
+            <div class="pd-modal-foot">
+                <button type="button" class="pd-btn-limpiar" onclick="closeModal('contacto')"><i class="fas fa-xmark"></i> Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de detalle (comunicados gestionados en Redacción) -->
+    <div id="modal-noticia" class="pd-modal">
+        <div class="pd-modal-box">
+            <div class="pd-modal-head">
+                <h3 id="notLocalTitulo">Comunicado</h3>
+                <button class="pd-modal-x" onclick="closeModal('noticia')" aria-label="Cerrar"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div class="pd-modal-body" id="notLocalBody">
+                <p style="font-size:0.8rem;color:#64748b;font-weight:600;" id="notLocalMeta"></p>
+                <img id="notLocalImg" src="" alt="Miniatura del comunicado" style="width:100%;max-height:250px;object-fit:cover;border-radius:10px;border:1px solid #e2e8f0;margin-bottom:0.7rem;">
+                <p style="white-space:pre-wrap;margin:0;" id="notLocalCuerpo"></p>
+            </div>
+            <div class="pd-modal-foot">
+                <button type="button" class="pd-btn-limpiar" onclick="closeModal('noticia')"><i class="fas fa-xmark"></i> Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="pd-footer">
+        <p>&copy; 2024 - CVG Alcasa - Gerencia de Comunicación Estratégica</p>
+        <p style="margin-top:0.3rem;font-size:0.78rem;">
+            <a onclick="openModal('aviso')">Aviso Legal</a> &nbsp;·&nbsp;
+            <a onclick="openModal('privacidad')">Política de Privacidad</a> &nbsp;·&nbsp;
+            <a onclick="openModal('contacto')">Contacto</a>
+        </p>
     </footer>
 
     <!-- BOTONES FLOTANTES -->
     <div class="nav-botones">
-        <button onclick="irArriba()" title="Ir al inicio de la página">⬆</button>
-        <button onclick="irAbajo()" title="Ir al final de la página">⬇</button>
+        <button onclick="irArriba()" title="Ir al inicio de la página"><i class="fas fa-arrow-up"></i></button>
+        <button onclick="irAbajo()" title="Ir al final de la página"><i class="fas fa-arrow-down"></i></button>
     </div>
-
-    <!-- Botón lupa para móviles -->
-    <button class="btn-lupa-movil mobile-only" onclick="toggleSearchModal()" title="Buscar">🔍</button>
 
     <script>
     (function () {
@@ -893,7 +588,7 @@
         var totalPaginas = 72;
         var filtros = { q: '', fecha: '', mes: '', anio: '' };
 
-        /* ---------- Fechas de cabecera (como el portal vivo) ---------- */
+        /* ---------- Fechas de cabecera (formato del portal vivo) ---------- */
         (function fechas() {
             var meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
             var dias = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
@@ -907,8 +602,8 @@
         })();
 
         function esc(s) {
-            return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+            return String(s == null ? '' : s).replace(/[&<>\"']/g, function (c) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', "'": '&#39;' }[c];
             });
         }
 
@@ -921,34 +616,51 @@
 
         /* ---------- Estados de la página ---------- */
         function mostrarVistaLogin() {
-            document.getElementById('vistaLogin').style.display = 'block';
+            document.getElementById('vistaLogin').style.display = 'flex';
             document.getElementById('vistaPd').style.display = 'none';
+            document.body.classList.add('login-mode');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         function mostrarVistaPd() {
             document.getElementById('vistaLogin').style.display = 'none';
             document.getElementById('vistaPd').style.display = 'block';
+            document.body.classList.remove('login-mode');
         }
 
         function flash(tipo, texto) {
             var box = document.getElementById('flashBox');
             if (!box) return;
-            box.innerHTML = '<div class="alert alert-' + (tipo === 'ok' ? 'success' : 'danger') + '">' + esc(texto) + '</div>';
-            box.style.display = texto ? 'block' : 'none';
+            var icono = tipo === 'ok' ? 'fa-circle-check' : 'fa-circle-exclamation';
+            box.innerHTML = '<div class="pd-alert ' + (tipo === 'ok' ? 'ok' : 'danger') + '"><i class="fas ' + icono + '"></i> ' + esc(texto) + '</div>';
+            box.style.display = texto ? 'flex' : 'none';
+        }
+
+        function loginMsg(tipo, texto) {
+            var m = document.getElementById('pdLoginMsg');
+            if (!m) return;
+            if (!texto) { m.className = 'pd-msg'; m.innerHTML = ''; return; }
+            m.className = 'pd-msg ' + (tipo || 'error');
+            m.innerHTML = '<i class="fas ' + (tipo === 'error' ? 'fa-circle-exclamation' : 'fa-circle-info') + '"></i> ' + esc(texto);
         }
 
         function actualizarNav() {
             var link = document.getElementById('loginLink');
+            var ico = document.getElementById('navSesIcon');
+            var txt = document.getElementById('navSessionTxt');
             var pub = document.getElementById('navPublicar');
+            if (!link || !ico || !txt || !pub) return;
             if (usuario && tienePrensa(usuario)) {
-                link.innerHTML = '🔒 Cerrar Sesión';
-                pub.style.display = 'inline';
+                ico.className = 'fas fa-sign-out-alt';
+                txt.textContent = 'Cerrar Sesión';
+                pub.style.display = 'inline-flex';
             } else {
-                link.innerHTML = '🔑 Iniciar Sesión';
+                ico.className = 'fas fa-right-to-bracket';
+                txt.textContent = 'Iniciar Sesión';
                 pub.style.display = 'none';
             }
         }
 
-        /* ---------- Carga de noticias (página estilo :5001) ---------- */
+        /* ---------- Carga de noticias (páginas del servidor vivo :5001) ---------- */
         function paramsFiltros(page) {
             var p = new URLSearchParams({ page: String(page || 1), nocache: String(Math.abs(new Date().getTime() % 1e8)) });
             if (filtros.q) p.set('q', filtros.q);
@@ -960,7 +672,7 @@
 
         function recortar(txt, max) {
             txt = String(txt || '');
-            if (txt.length <= max) return txt + (txt.length ? '' : '');
+            if (txt.length <= max) return txt;
             return txt.slice(0, max).replace(/\s+\S*$/, '') + '...';
         }
 
@@ -969,21 +681,21 @@
             var href = esLocal ? '#' : ('http://alcasa.com.ve:5001/noticia/' + encodeURIComponent(n.id));
             var leerAttr = esLocal ? ' data-id="' + esc(n.id) + '"' : '';
             var adminBar = (usuario && tienePrensa(usuario))
-                ? '<div class="acciones-admin"><a class="btn-editar" href="/redaccion.html">✏️ Editar (Redacción)</a></div>'
+                ? '<div class="pd-adm"><a class="pd-btn-editar" href="/redaccion.html"><i class="fas fa-edit"></i> Editar (Redacción)</a></div>'
                 : '';
             return '' +
-                '<article class="noticia-card">' +
-                    '<img src="' + esc(n.imagen || '/assets/img/noticias/noticia-761.jpg') + '" class="noticia-imagen" alt="' + esc(n.titulo) + '" loading="lazy" decoding="async" onerror="this.onerror=null;this.outerHTML=\'<div class=&quot;noticia-imagen-placeholder&quot;>📄</div>\';">' +
-                    '<div class="noticia-contenido">' +
-                        '<h2><a href="' + href + '" class="link-noticia"' + leerAttr + '>' + esc(n.titulo) + '</a></h2>' +
-                        '<p class="subtitulo">' + esc(n.subtitulo || '') + '</p>' +
-                        '<div class="meta">' +
-                            '<span>👤 ' + esc(n.autor || 'Comunicación Estratégica') + '</span>' +
-                            '<span>📅 ' + esc((n.fecha_solo || '') + (n.hora_solo ? ' ' + n.hora_solo : '')) + '</span>' +
-                            '<span class="categoria">' + esc(n.categoria || 'Institucional') + '</span>' +
+                '<article class="pd-card">' +
+                    '<img src="' + esc(n.imagen || '/assets/img/noticias/noticia-761.jpg') + '" class="pd-img" alt="' + esc(n.titulo) + '" loading="lazy" decoding="async" onerror="this.onerror=null;this.outerHTML=\'<div class=&quot;pd-img-ph&quot;><i class=&quot;fas fa-image&quot;></i></div>\';">' +
+                    '<div class="pd-body">' +
+                        '<h3 class="pd-titulo-nota"><a href="' + href + '" class="link-noticia"' + leerAttr + '>' + esc(n.titulo) + '</a></h3>' +
+                        '<p class="pd-sub">' + esc(n.subtitulo || '') + '</p>' +
+                        '<div class="pd-meta">' +
+                            '<span class="pd-line"><i class="fas fa-user"></i> ' + esc(n.autor || 'Comunicación Estratégica') + '</span>' +
+                            '<span class="pd-line"><i class="fas fa-calendar-day"></i> ' + esc((n.fecha_solo || '') + (n.hora_solo ? ' ' + n.hora_solo : '')) + '</span>' +
+                            '<span class="pd-badge">' + esc(n.categoria || 'Institucional') + '</span>' +
                         '</div>' +
-                        '<p class="resumen">' + esc(recortar(n.resumen, 200)) + '</p>' +
-                        '<a href="' + href + '" class="btn-leer link-noticia"' + leerAttr + '>Leer más</a>' +
+                        '<p class="pd-resumen">' + esc(recortar(n.resumen, 200)) + '</p>' +
+                        '<div class="pd-acciones"><a href="' + href + '" class="pd-btn-leer link-noticia"' + leerAttr + '><i class="fas fa-book-open"></i> Leer más</a></div>' +
                     '</div>' + adminBar +
                 '</article>';
         }
@@ -1018,7 +730,8 @@
             /* Respaldo si la página se despliega dentro del servidor Flask :5001 (sin api/):
                se copian las tarjetas reales del HTML del propio portal. */
             var consulta = '/?' + paramsFiltros(page);
-            fetch(consulta).then(function (r) { return r.text(); }).then(function (html) {                var doc = new DOMParser().parseFromString(html, 'text/html');
+            fetch(consulta).then(function (r) { return r.text(); }).then(function (html) {
+                var doc = new DOMParser().parseFromString(html, 'text/html');
                 var tarjetas = doc.querySelectorAll('article.noticia-card');
                 var out = [];
                 tarjetas.forEach(function (c) {
@@ -1050,7 +763,7 @@
         function pintar(items) {
             var grid = document.getElementById('noticiasGrid');
             if (!items.length) {
-                grid.innerHTML = '<p class="no-resultados">No hay noticias disponibles con los criterios seleccionados.</p>';
+                grid.innerHTML = '<div class="pd-empty"><i class="fas fa-inbox"></i> No hay noticias disponibles con los criterios seleccionados.</div>';
             } else {
                 grid.innerHTML = items.map(tarjeta).join('');
                 Array.prototype.forEach.call(grid.querySelectorAll('.link-noticia[data-id]'), function (a) {
@@ -1073,7 +786,7 @@
                 .catch(function () { cargarBusquedaDirecta(page); });
         }
 
-        /* Vista de detalle para comunicados gestionados localmente (Redacción), como modal del propio portal */
+        /* Vista de detalle para comunicados gestionados localmente (Redacción) */
         function verNoticiaLocal(id) {
             fetch(API + '?nocache=' + Date.now())
                 .then(function (r) { return r.json(); })
@@ -1091,7 +804,7 @@
                 });
         }
 
-        /* ---------- Modal genérico ---------- */
+        /* ---------- Modales genéricos ---------- */
         window.openModal = function (tipo) {
             var el = document.getElementById('modal-' + tipo);
             if (el) el.classList.add('active');
@@ -1100,85 +813,75 @@
             var el = document.getElementById('modal-' + tipo);
             if (el) el.classList.remove('active');
         };
-        Array.prototype.forEach.call(document.querySelectorAll('.modal-overlay'), function (ov) {
+        Array.prototype.forEach.call(document.querySelectorAll('.pd-modal'), function (ov) {
             ov.addEventListener('click', function (e) {
                 if (e.target === this) this.classList.remove('active');
             });
         });
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
-                Array.prototype.forEach.call(document.querySelectorAll('.modal-overlay.active'), function (m) { m.classList.remove('active'); });
+                Array.prototype.forEach.call(document.querySelectorAll('.pd-modal.active'), function (m) { m.classList.remove('active'); });
             }
         });
 
         window.irArriba = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
         window.irAbajo = function () { window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); };
 
-        window.toggleSearchModal = function () {
-            document.getElementById('searchModal').classList.toggle('active');
-        };
-
         /* ---------- Búsqueda / filtros / paginación ---------- */
-        function aplicarFiltros(desdeMovil) {
-            filtros.q = (document.getElementById(desdeMovil ? 'txtBuscarM' : 'txtBuscar').value || '').trim();
-            filtros.fecha = document.getElementById(desdeMovil ? 'fechaM' : 'fecha').value || '';
-            filtros.mes = document.getElementById(desdeMovil ? 'mesM' : 'mes').value || '';
-            filtros.anio = document.getElementById(desdeMovil ? 'anioM' : 'anio').value || '';
-            if (desdeMovil) toggleSearchModal();
+        function aplicarFiltros() {
+            filtros.q = (document.getElementById('txtBuscar').value || '').trim();
+            filtros.fecha = document.getElementById('fecha').value || '';
+            filtros.mes = document.getElementById('mes').value || '';
+            filtros.anio = document.getElementById('anio').value || '';
             cargarPagina(1);
         }
 
         function bienLimpiar() {
             filtros = { q: '', fecha: '', mes: '', anio: '' };
-            ['txtBuscar', 'fecha', 'mes', 'anio', 'txtBuscarM', 'fechaM', 'mesM', 'anioM'].forEach(function (id) {
+            ['txtBuscar', 'fecha', 'mes', 'anio'].forEach(function (id) {
                 var el = document.getElementById(id);
                 if (el) el.value = '';
             });
             cargarPagina(1);
         }
 
-        document.getElementById('btnBuscar').addEventListener('click', function () { aplicarFiltros(false); });
-        document.getElementById('btnBuscarM').addEventListener('click', function () { aplicarFiltros(true); });
-        document.getElementById('btnLimpiar').addEventListener('click', function (e) { e.preventDefault(); bienLimpiar(); });
-        document.getElementById('btnLimpiarM').addEventListener('click', function (e) { e.preventDefault(); bienLimpiar(); });
+        document.getElementById('btnBuscar').addEventListener('click', function () { aplicarFiltros(); });
+        document.getElementById('btnLimpiar').addEventListener('click', function () { bienLimpiar(); });
         ['paginacionTop', 'paginacionBottom'].forEach(function (con) {
             document.getElementById(con).addEventListener('click', function (e) {
                 var a = e.target.closest('.pag-link');
                 if (a) { e.preventDefault(); cargarPagina(parseInt(a.getAttribute('data-p'), 10) || 1); }
             });
         });
-        ['txtBuscar', 'txtBuscarM'].forEach(function (id) {
-            document.getElementById(id).addEventListener('keydown', function (e) {
-                if (e.key === 'Enter') { e.preventDefault(); aplicarFiltros(id === 'txtBuscarM'); }
-            });
+        document.getElementById('txtBuscar').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') { e.preventDefault(); aplicarFiltros(); }
         });
 
-        /* ---------- Sesión (login estilo :5001 contra la intranet) ---------- */
+        /* ---------- Sesión (login del Periódico contra la intranet) ---------- */
         var formLogin = document.getElementById('formLoginPd');
         formLogin.addEventListener('submit', function (e) {
             e.preventDefault();
             var data = new FormData(formLogin);
+            loginMsg('', '');
             fetch(SESION_URL + '?action=login', { method: 'POST', body: data })
                 .then(function (r) { return r.json(); })
                 .then(function (res) {
                     if (res && res.success && res.user && tienePrensa(res.user)) {
                         usuario = res.user;
+                        formLogin.reset();
                         var nombre = res.user.nombre || res.user.usuario || '';
                         mostrarVistaPd();
                         flash('ok', 'Sesión iniciada correctamente. Bienvenido/a, ' + nombre + '.');
                         actualizarNav();
                         cargarPagina(1);
                     } else if (res && res.success && res.user) {
-                        mostrarVistaPd();
-                        flash('danger', 'Esta cuenta no tiene permisos para la gestión editorial del Periódico Digital.');
-                        formLogin.reset();
+                        loginMsg('error', 'Esta cuenta no tiene permisos para la gestión editorial del Periódico Digital.');
                     } else {
-                        flash('danger', (res && res.error) || 'Usuario o contraseña incorrectos.');
-                        formLogin.reset();
+                        loginMsg('error', (res && res.error) || 'Usuario o contraseña incorrectos.');
                     }
                 })
                 .catch(function () {
-                    flash('danger', 'No se pudo conectar con el servidor de autenticación.');
+                    loginMsg('error', 'No se pudo conectar con el servidor de autenticación.');
                 });
         });
 
@@ -1193,43 +896,25 @@
                 });
                 return;
             }
+            loginMsg('', '');
             mostrarVistaLogin();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        /* Visor de contraseña (SVG como el portal vivo) */
+        document.getElementById('btnVolverPd').addEventListener('click', function () {
+            mostrarVistaPd();
+        });
+
+        /* Visor de contraseña (ojo, como en el login de cv/contactos) */
         (function visorContrasena() {
-            var eyeOpen = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path d="M12 5C4.5 5 1 12 1 12s3.5 7 11 7 11-7 11-7-3.5-7-11-7zm0 12c-4.1 0-7.3-3.3-8.7-5C4.7 10.3 7.9 7 12 7s7.3 3.3 8.7 5c-1.4 1.7-4.6 5-8.7 5z"/><circle cx="12" cy="12" r="3.5"/></svg>';
-            var eyeClosed = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path d="M12 5c-3.6 0-6.8 1.5-9.2 4L1 7.5l2.5 2.5c-1.2 1.5-1.8 3.2-1.8 5 0 3.5 3 7 11 7 3.2 0 5.8-1.3 7.8-3.4L23 16.5l-2.3-2.3C21.3 12.6 22 11 22 9c0-3.5-3-7-11-7zM12 19c-3.7 0-6-2.5-6-5 0-1.3.5-2.5 1.4-3.4l2.1 2.1c-.3.4-.5.8-.5 1.3 0 1.7 1.3 3 3 3 .5 0 .9-.2 1.3-.5l2.1 2.1c-.9.9-2.1 1.4-3.4 1.4zm-2-5.7l4.7 4.7c-1.2.6-2.7.6-4.7 0zM17.5 8.5L15 11c-.4-.8-1.2-1.5-2.2-1.7l2.4-2.4c1.2.3 2.2 1.2 2.3 2.6z"/><line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2"/></svg>';
-            Array.prototype.forEach.call(document.querySelectorAll('.toggle-password'), function (btn) {
-                btn.innerHTML = eyeOpen;
-                var abierto = true;
+            Array.prototype.forEach.call(document.querySelectorAll('.lg-eye'), function (btn) {
+                var visible = false;
                 btn.addEventListener('click', function () {
                     var input = document.getElementById(this.getAttribute('data-target'));
                     if (!input) return;
-                    abierto = !abierto;
-                    input.type = abierto ? 'text' : 'password';
-                    btn.innerHTML = abierto ? eyeOpen : eyeClosed;
+                    visible = !visible;
+                    input.type = visible ? 'text' : 'password';
+                    btn.innerHTML = visible ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
                 });
-            });
-        })();
-
-        /* Modal para el detalle de comunicados locales */
-        var modalAux = null;
-        (function crearModalNoticia() {
-            modalAux = document.createElement('div');
-            modalAux.id = 'modal-noticia';
-            modalAux.className = 'modal-overlay';
-            modalAux.innerHTML = '<div class="modal-box">' +
-                '<button class="close-modal" onclick="closeModal(\'noticia\')">&times;</button>' +
-                '<h2 id="notLocalTitulo">Comunicado</h2>' +
-                '<p style="font-size:0.85rem;color:#666;" id="notLocalMeta"></p>' +
-                '<img id="notLocalImg" src="" alt="Miniatura del comunicado" style="max-width:100%;max-height:280px;display:block;margin:0.6rem auto;">' +
-                '<p id="notLocalCuerpo" style="white-space:pre-wrap;"></p>' +
-                '</div>';
-            document.body.appendChild(modalAux);
-            modalAux.addEventListener('click', function (e) {
-                if (e.target === this) this.classList.remove('active');
             });
         })();
 
