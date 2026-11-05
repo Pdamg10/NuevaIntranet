@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador de Contactos — CVG Alcasa</title>
+    <title>Administrador de Contactos y Postulaciones (CV) — CVG Alcasa</title>
     <link rel="icon" type="image/png" href="/assets/img/favicon.png">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="/assets/img/favicon.png">
@@ -110,6 +110,7 @@
             margin-top: 6px; padding: 6px 10px; cursor: pointer;
             background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
             font-size: 0.78rem; font-weight: 600; color: #0f172a; text-align: left;
+            text-decoration: none; box-sizing: border-box;
         }
         .lg-acc-btn:hover { border-color: var(--alcasa-blue); }
         .lg-acc-btn .nivel { color: #64748b; font-weight: 700; font-size: 0.72rem; }
@@ -157,7 +158,7 @@
         }
         .adm-exit:hover { background: #e6eff9; }
 
-        /* =================== FILTROS + LISTADO =================== */
+        /* =================== FILTROS + PESTAÑAS + LISTADO =================== */
         .admin-wrap { max-width: 1320px; margin: 0 auto; padding: 22px 22px 54px; }
         .adm-filters {
             display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
@@ -178,7 +179,7 @@
         .adm-search input::placeholder { color: #94a3b8; }
         .adm-search input:focus { outline: 2px solid var(--alcasa-blue); outline-offset: 1px; }
         .adm-sel {
-            min-width: 215px; padding: 10px 12px;
+            min-width: 215px; max-width: 340px; padding: 10px 12px;
             border: 1px solid #cbd5e1; border-radius: 8px;
             font-weight: 700; font-size: 0.88rem; color: #16365c;
             background: #fff; font-family: inherit; cursor: pointer;
@@ -191,6 +192,21 @@
             box-shadow: 0 4px 12px rgba(10, 63, 124, 0.25);
         }
         .adm-recargar:hover { filter: brightness(1.09); }
+        .adm-tabs { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+        .adm-tab {
+            padding: 10px 18px; border-radius: 9px; cursor: pointer;
+            border: 1px solid #cbd5e1; background: #ffffff; color: #12325e;
+            font: inherit; font-weight: 700; font-size: 0.86rem;
+            display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+            transition: var(--transition);
+        }
+        .adm-tab:hover { border-color: var(--alcasa-blue); }
+        .adm-tab.active {
+            background: linear-gradient(135deg, #0a3f7c, #1c72c0);
+            color: #fff; border-color: transparent;
+            box-shadow: 0 6px 14px rgba(10, 63, 124, 0.25);
+        }
 
         .adm-grid {
             display: grid;
@@ -207,6 +223,7 @@
             margin: 0; font-size: 1.02rem; font-weight: 800; color: #16365c;
             text-transform: uppercase; line-height: 1.3; overflow-wrap: anywhere;
         }
+        .c-nombre small { display: block; font-size: 0.78rem; font-weight: 600; color: #64748b; }
         .c-badge {
             flex-shrink: 0; background: var(--alcasa-accent); color: #fff;
             border-radius: 999px; padding: 4px 11px;
@@ -234,12 +251,15 @@
             display: inline-flex; justify-content: center; align-items: center; gap: 6px;
             border: 0; border-radius: 8px; padding: 9px 6px;
             font: inherit; font-weight: 700; font-size: 0.82rem; color: #fff; cursor: pointer;
+            text-decoration: none;
         }
         .c-btn:hover { filter: brightness(1.08); }
         .c-btn-ver { background: linear-gradient(135deg, #0a3f7c, #1c72c0); }
         .c-btn-wa { background: #22c55e; }
         .c-btn-copy { background: #64748b; }
         .c-btn-del { background: #dc2626; }
+        .c-btn-cv { background: var(--alcasa-blue); }
+        .c-btn:disabled { opacity: 0.45; filter: grayscale(0.4); cursor: not-allowed; }
         .c-card.marcada::before {
             content: 'Marcado para eliminar';
             position: absolute; inset: 0; z-index: 2;
@@ -307,12 +327,12 @@
 </head>
 <body class="admin-standalone-body login-mode">
 
-    <!-- ==================== LOGIN (imagen 1: solo contactos) ==================== -->
+    <!-- ==================== LOGIN (Contactos y Postulaciones CV) ==================== -->
     <div id="adminLoginBox">
         <div class="lg-card">
             <div class="lg-badge"><i class="fas fa-lock"></i></div>
             <h2 class="lg-title">Acceso Restringido</h2>
-            <p class="lg-sub">Administrador de Contactos · CVG ALCASA</p>
+            <p class="lg-sub">Contactos y Postulaciones (CV) · CVG ALCASA</p>
             <form id="formAdminDatosLogin" class="lg-form" autocomplete="off">
                 <label class="lg-label" for="admUser">Usuario</label>
                 <div class="lg-field">
@@ -337,19 +357,19 @@
         </div>
     </div>
 
-    <!-- ==================== PANEL (imagen 2: exclusivo de contactos) ==================== -->
+    <!-- ==================== PANEL (Contactos Comerciales + Postulaciones de CV) ==================== -->
     <div id="adminMainBox" style="display: none;">
         <header class="adm-topbar">
             <div class="adm-topbar-inner">
                 <div class="adm-brand">
-                    <i class="fas fa-address-book"></i>
-                    <span>Administrador de Contactos</span>
+                    <i class="fas fa-address-book" id="admBrandIcon"></i>
+                    <span id="admBrandTitle">Administrador de Contactos</span>
                     <span id="admUserInfo" class="adm-chip"></span>
                 </div>
                 <div class="adm-pills">
-                    <span class="adm-count"><i class="fas fa-users"></i> <b id="pillTotal">0</b> contactos</span>
+                    <span class="adm-count"><i class="fas fa-users" id="pillTotalIcon"></i> <b id="pillTotal">0</b> <span id="pillTotalTxt">contactos</span></span>
                     <span class="adm-count"><i class="fas fa-filter"></i> <b id="pillMostrados">0</b> mostrados</span>
-                    <a href="/cv.html" class="adm-top-mini" id="btnIrPanelCV" style="display: none;"><i class="fas fa-file-pdf"></i> Postulaciones (CV)</a>
+                    <a href="/redaccion.html" class="adm-top-mini" id="btnIrEditorPrensa" style="display: none;"><i class="fas fa-pen-to-square"></i> Redacción</a>
                     <a href="/index.html" class="adm-top-mini"><i class="fas fa-globe"></i> Portal</a>
                     <button type="button" class="adm-exit" id="btnSalirDatos"><i class="fas fa-sign-out-alt"></i> Salir</button>
                 </div>
@@ -357,6 +377,15 @@
         </header>
 
         <div class="admin-wrap">
+            <div class="adm-tabs" id="adminTabsBar" style="display: none;">
+                <button type="button" class="adm-tab active" id="tabBtnContactos">
+                    <i class="fas fa-envelope-open-text"></i> Contactos Comerciales (<span id="countContactos">0</span>)
+                </button>
+                <button type="button" class="adm-tab" id="tabBtnCV">
+                    <i class="fas fa-file-pdf"></i> Postulaciones de CV / Empleo (<span id="countCV">0</span>)
+                </button>
+            </div>
+
             <div class="adm-filters">
                 <div class="adm-search">
                     <i class="fas fa-search"></i>
@@ -364,18 +393,12 @@
                 </div>
                 <select id="admFiltroInteres" class="adm-sel">
                     <option value="">Todos los intereses</option>
-                    <option value="Cotización">Cotización</option>
-                    <option value="Fundición">Fundición</option>
-                    <option value="Laminación">Laminación</option>
-                    <option value="Extrusión">Extrusión</option>
-                    <option value="Comercialización">Comercialización</option>
-                    <option value="Catálogo de productos">Catálogo de productos</option>
-                    <option value="Otro">Otro</option>
                 </select>
                 <button type="button" class="adm-recargar" id="btnRecargarDatos"><i class="fas fa-sync-alt"></i> Recargar</button>
             </div>
 
             <div id="paneContactos" class="adm-grid"></div>
+            <div id="paneCV" class="adm-grid" style="display: none;"></div>
 
             <div class="adm-marcados" id="admMarcadosBar">
                 <span><i class="fas fa-trash-can"></i> <b id="marcadosCount">0</b> contacto(s) marcado(s) para eliminar (marca local de trabajo, igual que en la página viva)</span>
@@ -398,16 +421,43 @@
 
     <script>
     (function () {
+        var INTERESES_FIJOS = [
+            'Cotización',
+            'Fundición',
+            'Laminación',
+            'Extrusión',
+            'Comercialización',
+            'Catálogo de productos',
+            'Otro'
+        ];
+        var AREAS_CV_FIJAS = [
+            'Operaciones de Planta (Fundición / Laminación / Extrusión)',
+            'Mantenimiento Industrial (Mecánico / Eléctrico / Instrumentación)',
+            'Ingeniería, Metalurgia y Control de Calidad',
+            'Seguridad Industrial, Ambiente y Salud (SIAHO)',
+            'Informática, Sistemas y Telecomunicaciones',
+            'Administración, Finanzas y Logística',
+            'Programa de Pasantías / Aprendices INCES'
+        ];
+
         var loginBox = document.getElementById('adminLoginBox');
         var mainBox = document.getElementById('adminMainBox');
         var formLogin = document.getElementById('formAdminDatosLogin');
         var msgEl = document.getElementById('admLoginMsg');
         var userInfo = document.getElementById('admUserInfo');
+        var brandIcon = document.getElementById('admBrandIcon');
+        var brandTitle = document.getElementById('admBrandTitle');
+        var btnIrEditorPrensa = document.getElementById('btnIrEditorPrensa');
         var paneContactos = document.getElementById('paneContactos');
-        var btnIrPanelCV = document.getElementById('btnIrPanelCV');
+        var paneCV = document.getElementById('paneCV');
+        var tabBtnContactos = document.getElementById('tabBtnContactos');
+        var tabBtnCV = document.getElementById('tabBtnCV');
+        var tabsBar = document.getElementById('adminTabsBar');
         var searchInput = document.getElementById('admSearchInput');
         var interesSel = document.getElementById('admFiltroInteres');
         var pillTotal = document.getElementById('pillTotal');
+        var pillTotalTxt = document.getElementById('pillTotalTxt');
+        var pillTotalIcon = document.getElementById('pillTotalIcon');
         var pillMostrados = document.getElementById('pillMostrados');
         var marcadosBar = document.getElementById('admMarcadosBar');
         var marcadosCountEl = document.getElementById('marcadosCount');
@@ -429,13 +479,6 @@
             return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
                 return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
             });
-        }
-
-        function tieneContactos(user) {
-            if (!user) return false;
-            if (user.rol === 'admin') return true;
-            var perms = Array.isArray(user.permisos) ? user.permisos : [];
-            return perms.indexOf('contactos') !== -1;
         }
 
         function setBodyMode(modo) {
@@ -468,7 +511,7 @@
             }
         }
 
-        function textosRegistro(c) {
+        function textosContacto(c) {
             return {
                 wa: '*Nombre:* ' + c.nombre + '\n' +
                     (c.empresa ? '*Empresa:* ' + c.empresa + '\n' : '') +
@@ -480,8 +523,21 @@
             };
         }
 
-        function abrirModalRegistro(c) {
-            var t = textosRegistro(c);
+        function textosCV(p) {
+            return {
+                wa: '*Nombre:* ' + p.nombre + (p.cedula ? ' (C.I: ' + p.cedula + ')' : '') + '\n' +
+                    (p.nivel ? '*Nivel académico:* ' + p.nivel + '\n' : '') +
+                    '*Área de postulación:* ' + (p.area || '—') + '\n' +
+                    '*Correo:* ' + p.correo + '\n' +
+                    (p.telefono ? '*Teléfono:* ' + p.telefono + '\n' : '') +
+                    '*Fecha:* ' + p.fecha + '\n\n*Resumen profesional:*\n' + (p.resumen || 'Sin resumen adicional.'),
+                correo: 'Asunto: Postulación de CV — ' + (p.area || 'CVG Alcasa') + '\nPara: ' + p.correo + '\n\nEstimado/a ' + p.nombre + ',\nHemos recibido su Síntesis Curricular en el portal oficial de CVG Aluminio del Caroní, S.A. (CVG Alcasa) para el área ' + (p.area || '—') + '.\n\nResumen recibido:\n"' + (p.resumen || 'Sin resumen adicional.') + '"\n\nSaludos cordiales,\nCVG ALCASA · Gerencia de Personal',
+                todo: 'Fecha: ' + p.fecha + '\nNombre: ' + p.nombre + (p.cedula ? ' (C.I: ' + p.cedula + ')' : '') + '\nCorreo: ' + p.correo + (p.telefono ? '\nTeléfono: ' + p.telefono : '') + (p.nivel ? '\nNivel académico: ' + p.nivel : '') + '\nÁrea de postulación: ' + (p.area || '') + '\nResumen: ' + (p.resumen || 'Sin resumen adicional.') + (p.archivo ? '\nArchivo CV: ' + p.archivo : '') + (p.ip ? '\nIP: ' + p.ip : '')
+            };
+        }
+
+        function abrirModalContacto(c) {
+            var t = textosContacto(c);
             modalTitle.textContent = c.nombre || 'Detalle';
             modalBody.innerHTML =
                 '<div style="margin-bottom:10px;"><strong><i class="fas fa-calendar-alt"></i> Fecha:</strong> ' + esc(c.fecha) + '</div>' +
@@ -504,6 +560,32 @@
             detailModal.style.display = 'flex';
         }
 
+        function abrirModalCV(p) {
+            var t = textosCV(p);
+            modalTitle.textContent = p.nombre || 'Detalle';
+            modalBody.innerHTML =
+                '<div style="margin-bottom:10px;"><strong><i class="fas fa-calendar-alt"></i> Fecha:</strong> ' + esc(p.fecha) + '</div>' +
+                '<div style="margin-bottom:10px;"><strong><i class="fas fa-user"></i> Nombre:</strong> ' + esc(p.nombre) + (p.cedula ? ' <small style="color:#64748b;">(C.I: ' + esc(p.cedula) + ')</small>' : '') + '</div>' +
+                '<div style="margin-bottom:10px;"><strong><i class="fas fa-envelope"></i> Correo:</strong> <a href="mailto:' + esc(p.correo) + '">' + esc(p.correo) + '</a></div>' +
+                (p.telefono ? '<div style="margin-bottom:10px;"><strong><i class="fas fa-phone"></i> Teléfono / WhatsApp:</strong> ' + esc(p.telefono) + '</div>' : '') +
+                (p.nivel ? '<div style="margin-bottom:10px;"><strong><i class="fas fa-graduation-cap"></i> Nivel Académico:</strong> ' + esc(p.nivel) + '</div>' : '') +
+                '<div style="margin-bottom:10px;"><strong><i class="fas fa-tag"></i> Área de Postulación:</strong> ' + esc(p.area || '—') + '</div>' +
+                '<div style="margin-bottom:10px;"><strong><i class="fas fa-comment-dots"></i> Resumen Profesional:</strong><div class="ficha-quote">' + esc(p.resumen || 'Sin resumen adicional.') + '</div></div>' +
+                (p.ip ? '<div style="font-size:0.8rem;color:#64748b;"><strong><i class="fas fa-globe"></i> IP:</strong> ' + esc(p.ip) + '</div>' : '');
+
+            modalActions.innerHTML =
+                '<button type="button" class="btn-outline-corp" id="btnModalWA" style="border-color:#16a34a;color:#16a34a;"><i class="fab fa-whatsapp"></i> Copiar WhatsApp</button>' +
+                '<button type="button" class="btn-outline-corp" id="btnModalMail"><i class="fas fa-envelope"></i> Copiar Correo</button>' +
+                '<button type="button" class="btn-outline-corp" id="btnModalCopyAll"><i class="fas fa-copy"></i> Copiar Todo</button>' +
+                (p.archivo ? '<a class="btn-prensa-card" href="/api/admin_datos.php?tipo=descargar_cv&archivo=' + encodeURIComponent(p.archivo) + '" target="_blank" rel="noopener"><i class="fas fa-file-arrow-down"></i> Descargar CV Adjunto</a>' : '');
+
+            document.getElementById('btnModalWA').onclick = function () { copiarTexto(t.wa, 'Formato WhatsApp copiado.'); };
+            document.getElementById('btnModalMail').onclick = function () { copiarTexto(t.correo, 'Formato de correo copiado.'); };
+            document.getElementById('btnModalCopyAll').onclick = function () { copiarTexto(t.todo, 'Registro completo copiado.'); };
+
+            detailModal.style.display = 'flex';
+        }
+
         document.getElementById('admModalCloseBtn').addEventListener('click', function () {
             detailModal.style.display = 'none';
         });
@@ -511,87 +593,203 @@
             if (e.target === detailModal) detailModal.style.display = 'none';
         });
 
-        /* ---------- Lista (solo contactos) ---------- */
-        function filtrar(list) {
+        function pintarMarcados(esContactos) {
+            var n = 0;
+            Object.keys(marcados).forEach(function (k) { if (marcados[k]) n++; });
+            marcadosCountEl.textContent = n;
+            marcadosBar.style.display = (esContactos && n > 0) ? 'flex' : 'none';
+        }
+
+        function poblarSelectorFiltro(esCV) {
+            var previo = interesSel.value;
+            var base = esCV ? AREAS_CV_FIJAS : INTERESES_FIJOS;
+            var labelTodos = esCV ? 'Todas las áreas' : 'Todos los intereses';
+            interesSel.innerHTML = '<option value="">' + labelTodos + '</option>' +
+                base.map(function (v) { return '<option value="' + esc(v) + '">' + esc(v) + '</option>'; }).join('');
+            if (previo && base.some(function (v) { return v.toLowerCase() === previo.toLowerCase(); })) {
+                interesSel.value = previo;
+            } else {
+                interesSel.value = '';
+            }
+        }
+
+        function filtrarLista(list, campos, campoFiltro) {
             var q = ((searchInput && searchInput.value) || '').toLowerCase().trim();
             var fi = (interesSel.value || '').toLowerCase();
             return (list || []).filter(function (o) {
-                if (fi && (o.interes || '').toLowerCase() !== fi) return false;
+                if (fi && (o[campoFiltro] || '').toLowerCase() !== fi) return false;
                 if (!q) return true;
-                var blob = [o.nombre, o.correo, o.empresa, o.interes, o.comentario].join(' ').toLowerCase();
+                var blob = campos.map(function (f) { return o[f] || ''; }).join(' ').toLowerCase();
                 return blob.indexOf(q) !== -1;
             });
         }
 
-        function pintarMarcados() {
-            var n = 0;
-            Object.keys(marcados).forEach(function (k) { if (marcados[k]) n++; });
-            marcadosCountEl.textContent = n;
-            marcadosBar.style.display = n > 0 ? 'flex' : 'none';
-        }
-
-        function renderContactos(data) {
+        function renderBandejas(data, mantenerTab) {
             lastData = data;
             mostrarPanel();
+
             var u = data.user || {};
+            var perms = Array.isArray(u.permisos) ? u.permisos : [];
+            var esAdmin = u.rol === 'admin';
+            var pv = data.permisos_vista || {};
+            var puedeContactos = pv.contactos !== undefined ? !!pv.contactos : (esAdmin || perms.indexOf('contactos') !== -1);
+            var puedeCV = pv.cv !== undefined ? !!pv.cv : (esAdmin || perms.indexOf('cv') !== -1);
+            var puedePrensa = pv.prensa !== undefined ? !!pv.prensa : (esAdmin || perms.indexOf('prensa') !== -1);
+
             userInfo.textContent = '';
             if (u.nombre || u.usuario) userInfo.textContent = (u.nombre || u.usuario) + ' · ' + (u.nivel || u.rol);
+            if (btnIrEditorPrensa) btnIrEditorPrensa.style.display = puedePrensa ? 'inline-flex' : 'none';
 
-            var pv = data.permisos_vista || {};
-            if (btnIrPanelCV) btnIrPanelCV.style.display = pv.cv ? 'inline-flex' : 'none';
-
-            var contactos = filtrar(data.contactos);
-            pillTotal.textContent = (data.contactos || []).length;
-            pillMostrados.textContent = contactos.length;
-
-            if (!contactos.length) {
-                paneContactos.innerHTML = '<div class="c-empty">No hay mensajes de contacto que coincidan.</div>';
-            } else {
-                paneContactos.innerHTML = contactos.map(function (c) {
-                    var key = (c.fecha || '') + '|' + (c.correo || '') + '|' + (c.nombre || '');
-                    return '<article class="c-card' + (marcados[key] ? ' marcada' : '') + '" data-key="' + esc(key) + '">' +
-                        '<div class="c-head">' +
-                            '<h4 class="c-nombre">' + esc(c.nombre) + '</h4>' +
-                            '<span class="c-badge">' + esc(c.interes || 'General') + '</span>' +
-                        '</div>' +
-                        '<div class="c-meta">' +
-                            '<div class="c-line"><i class="fas fa-clock"></i> ' + esc(c.fecha) + '</div>' +
-                            '<div class="c-line"><i class="fas fa-envelope"></i> <a href="mailto:' + esc(c.correo) + '">' + esc(c.correo) + '</a></div>' +
-                            (c.empresa ? '<div class="c-line"><i class="fas fa-building"></i> ' + esc(c.empresa) + '</div>' : '') +
-                        '</div>' +
-                        '<div class="c-quote">' + esc(c.comentario) + '</div>' +
-                        '<div class="c-actions">' +
-                            '<button type="button" class="c-btn c-btn-ver"><i class="fas fa-eye"></i> Ver</button>' +
-                            '<button type="button" class="c-btn c-btn-wa"><i class="fab fa-whatsapp"></i> WA</button>' +
-                            '<button type="button" class="c-btn c-btn-copy"><i class="fas fa-copy"></i> Copiar</button>' +
-                            '<button type="button" class="c-btn c-btn-del"><i class="fas fa-trash"></i> Eliminar</button>' +
-                        '</div>' +
-                    '</article>';
-                }).join('');
-                Array.prototype.forEach.call(paneContactos.querySelectorAll('.c-card'), function (card, idx) {
-                    var c = contactos[idx];
-                    var key = (c.fecha || '') + '|' + (c.correo || '') + '|' + (c.nombre || '');
-                    var t = textosRegistro(c);
-                    var botones = card.querySelectorAll('.c-btn');
-                    botones[0].addEventListener('click', function () { abrirModalRegistro(c); });
-                    botones[1].addEventListener('click', function () { copiarTexto(t.wa, 'Formato WhatsApp copiado.'); });
-                    botones[2].addEventListener('click', function () { copiarTexto(t.todo, 'Registro completo copiado.'); });
-                    botones[3].addEventListener('click', function () {
-                        marcados[key] = !marcados[key];
-                        guardarMarcados();
-                        renderContactos(lastData);
-                    });
-                });
+            if (!mantenerTab) {
+                var ambos = puedeContactos && puedeCV;
+                tabsBar.style.display = ambos ? 'flex' : 'none';
+                tabBtnContactos.style.display = ambos ? 'inline-flex' : 'none';
+                tabBtnCV.style.display = ambos ? 'inline-flex' : 'none';
+                paneContactos.style.display = puedeContactos ? 'grid' : 'none';
+                paneCV.style.display = (!puedeContactos && puedeCV) ? 'grid' : 'none';
+                tabBtnContactos.classList.toggle('active', !(!puedeContactos && puedeCV));
+                tabBtnCV.classList.toggle('active', !puedeContactos && puedeCV);
+                poblarSelectorFiltro(!puedeContactos && puedeCV);
             }
-            pintarMarcados();
+
+            var esCVActiva = (paneCV.style.display !== 'none');
+
+            if (brandIcon) brandIcon.className = esCVActiva ? 'fas fa-file-pdf' : 'fas fa-address-book';
+            if (brandTitle) {
+                brandTitle.textContent = (puedeContactos && puedeCV)
+                    ? 'Administrador de Contactos y Postulaciones (CV)'
+                    : (esCVActiva ? 'Administrador de Postulaciones (CV)' : 'Administrador de Contactos');
+            }
+            if (searchInput) {
+                searchInput.placeholder = esCVActiva
+                    ? 'Buscar por nombre, cédula, correo, teléfono, área o resumen...'
+                    : 'Buscar por nombre, correo, empresa o comentario...';
+            }
+
+            document.getElementById('countContactos').textContent = (data.contactos || []).length;
+            document.getElementById('countCV').textContent = (data.postulaciones || []).length;
+
+            var contactos = filtrarLista(data.contactos, ['nombre', 'correo', 'empresa', 'interes', 'comentario'], 'interes');
+            var postulaciones = filtrarLista(data.postulaciones, ['nombre', 'cedula', 'correo', 'telefono', 'nivel', 'area', 'resumen'], 'area');
+
+            var activos = esCVActiva ? postulaciones : contactos;
+            pillTotal.textContent = esCVActiva ? (data.postulaciones || []).length : (data.contactos || []).length;
+            pillTotalTxt.textContent = esCVActiva ? 'postulaciones' : 'contactos';
+            if (pillTotalIcon) pillTotalIcon.className = esCVActiva ? 'fas fa-file-lines' : 'fas fa-users';
+            pillMostrados.textContent = activos.length;
+
+            /* ---------- CONTACTOS ---------- */
+            if (puedeContactos) {
+                if (!contactos.length) {
+                    paneContactos.innerHTML = '<div class="c-empty">No hay mensajes de contacto que coincidan.</div>';
+                } else {
+                    paneContactos.innerHTML = contactos.map(function (c) {
+                        var key = (c.fecha || '') + '|' + (c.correo || '') + '|' + (c.nombre || '');
+                        return '<article class="c-card' + (marcados[key] ? ' marcada' : '') + '" data-key="' + esc(key) + '">' +
+                            '<div class="c-head">' +
+                                '<h4 class="c-nombre">' + esc(c.nombre) + '</h4>' +
+                                '<span class="c-badge">' + esc(c.interes || 'General') + '</span>' +
+                            '</div>' +
+                            '<div class="c-meta">' +
+                                '<div class="c-line"><i class="fas fa-clock"></i> ' + esc(c.fecha) + '</div>' +
+                                '<div class="c-line"><i class="fas fa-envelope"></i> <a href="mailto:' + esc(c.correo) + '">' + esc(c.correo) + '</a></div>' +
+                                (c.empresa ? '<div class="c-line"><i class="fas fa-building"></i> ' + esc(c.empresa) + '</div>' : '') +
+                            '</div>' +
+                            '<div class="c-quote">' + esc(c.comentario) + '</div>' +
+                            '<div class="c-actions">' +
+                                '<button type="button" class="c-btn c-btn-ver"><i class="fas fa-eye"></i> Ver</button>' +
+                                '<button type="button" class="c-btn c-btn-wa"><i class="fab fa-whatsapp"></i> WA</button>' +
+                                '<button type="button" class="c-btn c-btn-copy"><i class="fas fa-copy"></i> Copiar</button>' +
+                                '<button type="button" class="c-btn c-btn-del"><i class="fas fa-trash"></i> Eliminar</button>' +
+                            '</div>' +
+                        '</article>';
+                    }).join('');
+                    Array.prototype.forEach.call(paneContactos.querySelectorAll('.c-card'), function (card, idx) {
+                        var c = contactos[idx];
+                        var key = (c.fecha || '') + '|' + (c.correo || '') + '|' + (c.nombre || '');
+                        var t = textosContacto(c);
+                        var botones = card.querySelectorAll('.c-btn');
+                        botones[0].addEventListener('click', function () { abrirModalContacto(c); });
+                        botones[1].addEventListener('click', function () { copiarTexto(t.wa, 'Formato WhatsApp copiado.'); });
+                        botones[2].addEventListener('click', function () { copiarTexto(t.todo, 'Registro completo copiado.'); });
+                        botones[3].addEventListener('click', function () {
+                            marcados[key] = !marcados[key];
+                            guardarMarcados();
+                            renderBandejas(lastData, true);
+                        });
+                    });
+                }
+            } else {
+                paneContactos.innerHTML = '';
+            }
+
+            /* ---------- POSTULACIONES CV ---------- */
+            if (puedeCV) {
+                if (!postulaciones.length) {
+                    paneCV.innerHTML = '<div class="c-empty">No hay postulaciones de Síntesis Curricular que coincidan.</div>';
+                } else {
+                    paneCV.innerHTML = postulaciones.map(function (p) {
+                        var nombre = p.nombre || '';
+                        return '<article class="c-card">' +
+                            '<div class="c-head">' +
+                                '<h4 class="c-nombre">' + esc(nombre) + (p.cedula ? '<small>C.I: ' + esc(p.cedula) + '</small>' : '') + '</h4>' +
+                                '<span class="c-badge">' + esc(p.area || 'General') + '</span>' +
+                            '</div>' +
+                            '<div class="c-meta">' +
+                                '<div class="c-line"><i class="fas fa-clock"></i> ' + esc(p.fecha) + '</div>' +
+                                '<div class="c-line"><i class="fas fa-envelope"></i> <a href="mailto:' + esc(p.correo) + '">' + esc(p.correo) + '</a></div>' +
+                                (p.telefono ? '<div class="c-line"><i class="fas fa-phone"></i> ' + esc(p.telefono) + '</div>' : '') +
+                                (p.nivel ? '<div class="c-line"><i class="fas fa-graduation-cap"></i> ' + esc(p.nivel) + '</div>' : '') +
+                            '</div>' +
+                            '<div class="c-quote">' + esc(p.resumen || 'Sin resumen adicional.') + '</div>' +
+                            '<div class="c-actions">' +
+                                '<button type="button" class="c-btn c-btn-ver"><i class="fas fa-eye"></i> Ver</button>' +
+                                '<button type="button" class="c-btn c-btn-wa"><i class="fab fa-whatsapp"></i> WA</button>' +
+                                '<button type="button" class="c-btn c-btn-copy"><i class="fas fa-copy"></i> Copiar</button>' +
+                                (p.archivo ? '<a class="c-btn c-btn-cv" target="_blank" rel="noopener" href="/api/admin_datos.php?tipo=descargar_cv&archivo=' + encodeURIComponent(p.archivo) + '" title="Descargar CV adjunto"><i class="fas fa-file-arrow-down"></i> CV</a>' : '<button type="button" class="c-btn c-btn-cv" disabled title="Sin archivo adjunto"><i class="fas fa-file-arrow-down"></i> CV</button>') +
+                            '</div>' +
+                        '</article>';
+                    }).join('');
+                    Array.prototype.forEach.call(paneCV.querySelectorAll('.c-card'), function (card, idx) {
+                        var p = postulaciones[idx];
+                        var t = textosCV(p);
+                        var botones = card.querySelectorAll('.c-btn-ver, .c-btn-wa, .c-btn-copy');
+                        botones[0].addEventListener('click', function () { abrirModalCV(p); });
+                        botones[1].addEventListener('click', function () { copiarTexto(t.wa, 'Formato WhatsApp copiado.'); });
+                        botones[2].addEventListener('click', function () { copiarTexto(t.todo, 'Registro completo copiado.'); });
+                    });
+                }
+            } else {
+                paneCV.innerHTML = '';
+            }
+
+            pintarMarcados(!esCVActiva);
         }
 
         /* ---------- Controles ---------- */
         searchInput.addEventListener('input', function () {
-            if (lastData) renderContactos(lastData);
+            if (lastData) renderBandejas(lastData, true);
         });
         interesSel.addEventListener('change', function () {
-            if (lastData) renderContactos(lastData);
+            if (lastData) renderBandejas(lastData, true);
+        });
+
+        tabBtnContactos.addEventListener('click', function () {
+            tabBtnContactos.classList.add('active');
+            tabBtnCV.classList.remove('active');
+            paneContactos.style.display = 'grid';
+            paneCV.style.display = 'none';
+            poblarSelectorFiltro(false);
+            if (lastData) renderBandejas(lastData, true);
+        });
+
+        tabBtnCV.addEventListener('click', function () {
+            tabBtnCV.classList.add('active');
+            tabBtnContactos.classList.remove('active');
+            paneCV.style.display = 'grid';
+            paneContactos.style.display = 'none';
+            poblarSelectorFiltro(true);
+            if (lastData) renderBandejas(lastData, true);
         });
 
         var eyeBtn = document.getElementById('admPassToggle');
@@ -607,8 +805,8 @@
             fetch('/api/admin_datos.php')
                 .then(function (r) { return r.json(); })
                 .then(function (res) {
-                    if (res && res.success && tieneContactos(res.user)) {
-                        renderContactos(res);
+                    if (res && res.success) {
+                        renderBandejas(res, false);
                     } else {
                         mostrarLogin();
                     }
@@ -627,9 +825,16 @@
             .then(function (r) { return r.json(); })
             .then(function (res) {
                 if (res && res.success && res.user) {
-                    if (!tieneContactos(res.user)) {
-                        // Esta página es exclusiva de Contactos; solo admin y comercialización entran.
-                        msgEl.textContent = 'Esta cuenta no tiene permiso para el módulo de Contactos.';
+                    var u = res.user;
+                    var perms = Array.isArray(u.permisos) ? u.permisos : [];
+                    var esAdmin = u.rol === 'admin';
+                    var puedeModulo = esAdmin || perms.indexOf('contactos') !== -1 || perms.indexOf('cv') !== -1;
+                    if (!puedeModulo) {
+                        if (perms.indexOf('prensa') !== -1) {
+                            window.location.href = '/redaccion.html';
+                            return;
+                        }
+                        msgEl.textContent = 'Esta cuenta no tiene permiso para el módulo de Contactos y Postulaciones.';
                         msgEl.className = 'lg-msg error';
                         return;
                     }
@@ -648,23 +853,24 @@
         document.getElementById('btnDesmarcarTodos').addEventListener('click', function () {
             marcados = {};
             guardarMarcados();
-            if (lastData) renderContactos(lastData);
+            if (lastData) renderBandejas(lastData, true);
         });
 
         document.getElementById('btnSalirDatos').addEventListener('click', function () {
             fetch('/api/prensa_admin.php?action=logout', { method: 'POST' }).then(mostrarLogin);
         });
 
-        // Solo se ofrecen (autocompletado) las cuentas con permiso de Contactos
+        // Cuentas con permiso de Contactos o CV
         var qList = document.getElementById('admQuickAccountsList');
         fetch('/api/prensa_admin.php?action=accounts')
             .then(function (r) { return r.json(); })
             .then(function (res) {
                 var accs = (res && Array.isArray(res.accounts)) ? res.accounts : [];
-                var contactoAccs = accs.filter(function (a) {
-                    return a.rol === 'admin' || (Array.isArray(a.permisos) && a.permisos.indexOf('contactos') !== -1);
+                var panelAccs = accs.filter(function (a) {
+                    var p = Array.isArray(a.permisos) ? a.permisos : [];
+                    return a.rol === 'admin' || p.indexOf('contactos') !== -1 || p.indexOf('cv') !== -1;
                 });
-                qList.innerHTML = contactoAccs.map(function (a, i) {
+                qList.innerHTML = panelAccs.map(function (a, i) {
                     return '<button type="button" class="lg-acc-btn" data-idx="' + i + '">' +
                         '<span><i class="fas fa-user-check" style="color:var(--alcasa-accent);"></i> <strong>' + esc(a.usuario) + '</strong> / <code>' + esc(a.password) + '</code></span>' +
                         '<span class="nivel">' + esc(a.nombre || a.usuario) + '</span>' +
@@ -672,7 +878,7 @@
                 }).join('');
                 Array.prototype.forEach.call(qList.querySelectorAll('button[data-idx]'), function (b) {
                     b.addEventListener('click', function () {
-                        var a = contactoAccs[parseInt(this.getAttribute('data-idx') || '0', 10)];
+                        var a = panelAccs[parseInt(this.getAttribute('data-idx') || '0', 10)];
                         if (!a) return;
                         document.getElementById('admUser').value = a.usuario;
                         document.getElementById('admPass').value = a.password;

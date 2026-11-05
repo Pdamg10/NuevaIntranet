@@ -673,46 +673,139 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* =================== NUEVO LOGIN ACCESO RESTRINGIDO =================== */
+        body.redaccion-body.login-mode {
+            background: linear-gradient(135deg, #0a3567 0%, #12579b 52%, #2a7fd4 100%);
+        }
+        #redaccionLoginView {
+            min-height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 36px 18px;
+            box-sizing: border-box;
+        }
+        .lg-card {
+            width: 100%;
+            max-width: 432px;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 40px 42px 28px;
+            text-align: center;
+            box-shadow: 0 26px 60px rgba(3, 17, 38, 0.4);
+            box-sizing: border-box;
+        }
+        .lg-badge {
+            width: 74px; height: 74px; border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(140deg, #1d529b, #0c376c);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1.75rem;
+            box-shadow: 0 12px 26px rgba(9, 44, 92, 0.38);
+        }
+        .lg-title { margin: 0 0 7px; color: #1c4d8f; font-size: 1.52rem; font-weight: 800; letter-spacing: -0.01em; }
+        .lg-sub { margin: 0 0 24px; color: #5f7188; font-size: 0.95rem; }
+        .lg-form { text-align: left; }
+        .lg-label {
+            display: block; margin: 0 0 6px;
+            font-size: 0.74rem; font-weight: 800; letter-spacing: 0.09em;
+            color: #173e6e; text-transform: uppercase;
+        }
+        .lg-field { position: relative; margin-bottom: 15px; }
+        .lg-field .lg-icon {
+            position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+            color: #8ba0b5; font-size: 0.9rem; pointer-events: none;
+        }
+        .lg-input {
+            width: 100%; padding: 12px 12px 12px 38px;
+            border: 1px solid #cdd9e5; border-radius: 9px;
+            font-size: 0.95rem; color: #1e293b; background: #fff;
+            font-family: inherit; box-sizing: border-box;
+        }
+        .lg-input::placeholder { color: #9fb0c0; }
+        .lg-input:focus { outline: 2px solid var(--alcasa-blue); outline-offset: 1px; border-color: var(--alcasa-blue); }
+        .lg-pass { padding-right: 42px; }
+        .lg-eye {
+            position: absolute; right: 7px; top: 50%; transform: translateY(-50%);
+            width: 30px; height: 30px; border: 0; border-radius: 6px;
+            background: transparent; color: #8ba0b5; cursor: pointer;
+        }
+        .lg-eye:hover { color: var(--alcasa-blue); background: #eaf3fb; }
+        .lg-btn {
+            width: 100%; margin-top: 4px; padding: 13px;
+            border: 0; border-radius: 9px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 9px;
+            background: linear-gradient(135deg, #0a3f7c, #1c72c0);
+            color: #ffffff; font: inherit; font-weight: 700; font-size: 1rem;
+            box-shadow: 0 7px 16px rgba(10, 63, 124, 0.28);
+            transition: var(--transition);
+        }
+        .lg-btn:hover { filter: brightness(1.09); }
+        .lg-msg {
+            display: none; margin-top: 12px; padding: 9px 12px;
+            border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+        }
+        .lg-msg.error { display: block; background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+        .lg-msg.info { display: block; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+        .lg-foot { margin: 22px 0 0; font-size: 0.85rem; color: #64748b; }
+        .lg-foot i { color: var(--alcasa-accent); }
+        .lg-accounts {
+            margin-top: 16px; padding-top: 12px;
+            border-top: 1px dashed #dbe4ee; text-align: left;
+        }
+        .lg-accounts summary {
+            cursor: pointer; font-size: 0.82rem; font-weight: 700;
+            color: #334155; list-style-position: outside;
+        }
+        .lg-accounts summary i { color: var(--alcasa-accent); }
+        .lg-acc-btn {
+            width: 100%; display: flex; justify-content: space-between; gap: 8px; align-items: center;
+            margin-top: 6px; padding: 6px 10px; cursor: pointer;
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+            font-size: 0.78rem; font-weight: 600; color: #0f172a; text-align: left;
+            text-decoration: none; box-sizing: border-box;
+        }
+        .lg-acc-btn:hover { border-color: var(--alcasa-blue); }
+        .lg-acc-btn .nivel { color: #64748b; font-weight: 700; font-size: 0.72rem; }
+        @media (max-width: 700px) {
+            .lg-card { padding: 30px 24px 22px; }
+        }
     </style>
 </head>
-<body class="redaccion-body">
+<body class="redaccion-body login-mode">
 
-    <!-- VISTA 1: LOGIN EDITORIAL (SI NO HA INICIADO SESIÓN) -->
-    <section id="redaccionLoginView" style="max-width: 520px; margin: 56px auto; padding: 0 20px; display: none;">
-        <div class="redaccion-zone" style="padding: 28px 26px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;">
-                <span class="zone-pill" style="margin-bottom: 0;">Sistema Interno · Acceso Editorial</span>
-                <a href="/prensa.html" class="btn-ed" style="padding: 5px 11px; font-size: 0.78rem; text-decoration: none;">
-                    <i class="fas fa-arrow-left"></i> Sala de Prensa
-                </a>
-            </div>
-            <h2 style="margin: 6px 0 6px; color: var(--alcasa-blue); font-size: 1.45rem;">
-                <i class="fas fa-newspaper" style="color: var(--alcasa-accent);"></i> Redacción — Sala de Prensa
-            </h2>
-            <p style="margin: 0 0 18px; font-size: 0.9rem; color: var(--ed-muted);">
-                Inicia sesión para crear o editar noticias nuevas y anteriores, gestionar el carrusel de hasta 20 imágenes y controlar borradores o publicaciones.
-            </p>
-            <form id="formRedaccionLogin" autocomplete="off">
-                <label class="ed-field-label" for="redUser">Usuario *</label>
-                <input type="text" id="redUser" name="usuario" class="ed-bajada-input" required placeholder="comunicacion / admin">
-
-                <label class="ed-field-label" for="redPass">Contraseña *</label>
-                <input type="password" id="redPass" name="password" class="ed-bajada-input" required placeholder="••••••••">
-
-                <div style="margin-top: 16px; display: flex; align-items: center; gap: 12px;">
-                    <button type="submit" class="btn-ed btn-ed-primary" style="width: 100%; justify-content: center; padding: 11px;">
-                        <i class="fas fa-right-to-bracket"></i> Entrar a Redacción
-                    </button>
+    <!-- VISTA 1: NUEVO LOGIN «ACCESO RESTRINGIDO» (UNIFICADO CON PERIÓDICO DIGITAL / CONTACTOS) -->
+    <section id="redaccionLoginView">
+        <div class="lg-card">
+            <div class="lg-badge"><i class="fas fa-newspaper"></i></div>
+            <h2 class="lg-title">Acceso Restringido</h2>
+            <p class="lg-sub">Periódico Digital · Gestión Editorial — CVG ALCASA</p>
+            <form id="formRedaccionLogin" class="lg-form" autocomplete="off">
+                <label class="lg-label" for="redUser">Usuario</label>
+                <div class="lg-field">
+                    <i class="fas fa-user lg-icon"></i>
+                    <input type="text" id="redUser" name="usuario" class="lg-input" required placeholder="Ingrese su usuario" autocomplete="username">
                 </div>
-                <div id="redLoginMsg" class="contacto-mensaje" style="margin-top: 10px; text-align: center;"></div>
 
-                <div style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--ed-border-strong); font-size: 0.82rem;">
-                    <div style="font-weight: 700; margin-bottom: 8px; color: var(--ed-text);">
-                        <i class="fas fa-key" style="color: var(--alcasa-accent);"></i> Cuentas disponibles (clic para autocompletar):
-                    </div>
-                    <div id="redQuickAccounts" style="display: flex; flex-direction: column; gap: 6px;"></div>
+                <label class="lg-label" for="redPass">Contraseña</label>
+                <div class="lg-field">
+                    <i class="fas fa-key lg-icon"></i>
+                    <input type="password" id="redPass" name="password" class="lg-input lg-pass" required placeholder="Ingrese su contraseña" autocomplete="current-password">
+                    <button type="button" class="lg-eye" id="redPassToggle" aria-label="Mostrar u ocultar contraseña"><i class="fas fa-eye"></i></button>
                 </div>
+
+                <button type="submit" class="lg-btn"><i class="fas fa-right-to-bracket"></i> Ingresar</button>
+                <div id="redLoginMsg" class="lg-msg"></div>
             </form>
+            <p class="lg-foot"><i class="fas fa-user-shield"></i> Credenciales por defecto: comunicacion / periodico2024</p>
+            <details class="lg-accounts">
+                <summary><i class="fas fa-key"></i> Cuentas autorizadas · Volver al Periódico</summary>
+                <a href="/minimal.html" class="lg-acc-btn" style="margin-top:10px;"><span><i class="fas fa-arrow-left"></i> <strong>Periódico Digital</strong></span><span class="nivel">Volver</span></a>
+                <a href="/prensa.html" class="lg-acc-btn"><span><i class="fas fa-newspaper"></i> <strong>Sala de Prensa</strong></span><span class="nivel">Vista pública</span></a>
+                <a href="/index.html" class="lg-acc-btn"><span><i class="fas fa-globe"></i> <strong>Portal Principal</strong></span><span class="nivel">Inicio</span></a>
+                <div id="redQuickAccounts"></div>
+            </details>
         </div>
     </section>
 
@@ -737,14 +830,14 @@
                 <span class="redaccion-autosave" id="autosaveStatus">
                     <i class="fas fa-check-circle" style="color: #16a34a;"></i> Guardado hace 1 min
                 </span>
-                <a href="/contactos.html" id="linkPanelContactos" class="btn-ed" style="display: none; text-decoration: none;" title="Ir al Panel de Contactos">
-                    <i class="fas fa-address-book"></i> Contactos
+                <a href="/contactos.html" id="linkPanelContactos" class="btn-ed" style="display: none; text-decoration: none;" title="Ir al Panel de Contactos y Postulaciones (CV)">
+                    <i class="fas fa-address-book"></i> Contactos y CV
                 </a>
-                <a href="/cv.html" id="linkPanelCV" class="btn-ed" style="display: none; text-decoration: none;" title="Ir al Panel de Postulaciones (CV)">
-                    <i class="fas fa-file-pdf"></i> Postulaciones (CV)
+                <a href="/minimal.html" class="btn-ed" style="text-decoration: none;" title="Ver Periódico Digital">
+                    <i class="fas fa-book-open"></i> Periódico Digital
                 </a>
                 <a href="/prensa.html" class="btn-ed" style="text-decoration: none;" title="Ver Sala de Prensa pública">
-                    <i class="fas fa-newspaper"></i> Ver Sala de Prensa
+                    <i class="fas fa-newspaper"></i> Sala de Prensa
                 </a>
                 <span class="redaccion-divider"></span>
                 <button type="button" class="btn-ed" id="btnVistaPrevia">
@@ -1617,6 +1710,18 @@
                 });
         }
 
+        function mostrarLoginRedaccion() {
+            workspace.style.display = 'none';
+            loginView.style.display = 'flex';
+            document.body.classList.add('login-mode');
+        }
+
+        function mostrarWorkspaceRedaccion() {
+            loginView.style.display = 'none';
+            workspace.style.display = 'block';
+            document.body.classList.remove('login-mode');
+        }
+
         function verificarSesion() {
             fetch('/api/prensa_admin.php?action=status')
                 .then(function (r) { return r.json(); })
@@ -1630,41 +1735,33 @@
                         var tieneContactosOCV = tieneContactos || tieneCV;
 
                         if (!tienePrensa) {
-                            // Comercialización (Nivel 3) → su panel de Contactos; Talento (Nivel 4) → su panel de CV
-                            if (tieneContactos) {
+                            if (tieneContactosOCV) {
                                 window.location.href = '/contactos.html';
                                 return;
                             }
-                            if (tieneCV) {
-                                window.location.href = '/cv.html';
-                                return;
-                            }
-                            loginView.style.display = 'block';
-                            workspace.style.display = 'none';
+                            mostrarLoginRedaccion();
                             loginMsg.textContent = 'Tu cuenta no tiene permisos para acceder al Editor de Sala de Prensa.';
-                            loginMsg.className = 'contacto-mensaje error';
+                            loginMsg.className = 'lg-msg error';
                             return;
                         }
 
                         usuarioPuedeEliminar = esAdmin || perms.indexOf('prensa_eliminar') !== -1;
                         var linkContactosEl = document.getElementById('linkPanelContactos');
                         if (linkContactosEl) {
-                            linkContactosEl.style.display = tieneContactos ? 'inline-flex' : 'none';
-                        }
-                        var linkCVEl = document.getElementById('linkPanelCV');
-                        if (linkCVEl) {
-                            linkCVEl.style.display = tieneCV ? 'inline-flex' : 'none';
+                            linkContactosEl.style.display = tieneContactosOCV ? 'inline-flex' : 'none';
                         }
 
-                        loginView.style.display = 'none';
-                        workspace.style.display = 'block';
+                        mostrarWorkspaceRedaccion();
                         userActiveBadge.innerHTML = '<i class="fas fa-user-check" style="color:#16a34a;"></i> ' + esc(st.user.nombre || st.user.usuario) + ' · <span style="color:var(--alcasa-blue);">' + esc(st.user.nivel || st.user.rol) + '</span>';
                         cargarTodasLasNoticias();
                     } else {
-                        loginView.style.display = 'block';
-                        workspace.style.display = 'none';
+                        mostrarLoginRedaccion();
                         cargarBotonesCuentasRapidas();
                     }
+                })
+                .catch(function () {
+                    mostrarLoginRedaccion();
+                    cargarBotonesCuentasRapidas();
                 });
         }
 
@@ -1675,15 +1772,19 @@
                 .then(function (r) { return r.json(); })
                 .then(function (res) {
                     var accs = (res && Array.isArray(res.accounts)) ? res.accounts : [];
-                    box.innerHTML = accs.map(function (a, i) {
-                        return '<button type="button" class="btn-ed" data-acc="' + i + '" style="justify-content:space-between;width:100%;text-align:left;font-size:0.8rem;">' +
-                            '<span><i class="fas fa-user-shield" style="color:var(--alcasa-blue);"></i> <strong>' + esc(a.usuario) + '</strong> / <code>' + esc(a.password) + '</code></span>' +
-                            '<span style="color:var(--ed-muted);font-size:0.74rem;">' + esc(a.rol.toUpperCase()) + '</span>' +
+                    var prensaAccs = accs.filter(function (a) {
+                        var p = Array.isArray(a.permisos) ? a.permisos : [];
+                        return a.rol === 'admin' || p.indexOf('prensa') !== -1;
+                    });
+                    box.innerHTML = prensaAccs.map(function (a, i) {
+                        return '<button type="button" class="lg-acc-btn" data-acc="' + i + '">' +
+                            '<span><i class="fas fa-user-check" style="color:var(--alcasa-accent);"></i> <strong>' + esc(a.usuario) + '</strong> / <code>' + esc(a.password) + '</code></span>' +
+                            '<span class="nivel">' + esc(a.nombre || a.usuario) + '</span>' +
                         '</button>';
                     }).join('');
                     Array.prototype.forEach.call(box.querySelectorAll('button[data-acc]'), function (b) {
                         b.addEventListener('click', function () {
-                            var a = accs[parseInt(this.getAttribute('data-acc') || '0', 10)];
+                            var a = prensaAccs[parseInt(this.getAttribute('data-acc') || '0', 10)];
                             if (!a) return;
                             document.getElementById('redUser').value = a.usuario;
                             document.getElementById('redPass').value = a.password;
@@ -1692,10 +1793,21 @@
                 });
         }
 
+        var eyeBtnRed = document.getElementById('redPassToggle');
+        if (eyeBtnRed) {
+            eyeBtnRed.addEventListener('click', function () {
+                var inp = document.getElementById('redPass');
+                var mostrar = inp.type === 'password';
+                inp.type = mostrar ? 'text' : 'password';
+                eyeBtnRed.innerHTML = mostrar ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+                inp.focus();
+            });
+        }
+
         formLogin.addEventListener('submit', function (e) {
             e.preventDefault();
             loginMsg.textContent = 'Verificando credenciales...';
-            loginMsg.className = 'contacto-mensaje';
+            loginMsg.className = 'lg-msg info';
             fetch('/api/prensa_admin.php?action=login', {
                 method: 'POST',
                 body: new FormData(formLogin)
@@ -1704,17 +1816,23 @@
             .then(function (res) {
                 if (res && res.success) {
                     loginMsg.textContent = '';
+                    loginMsg.className = 'lg-msg';
                     verificarSesion();
                 } else {
                     loginMsg.textContent = (res && res.error) || 'Usuario o contraseña incorrectos.';
-                    loginMsg.className = 'contacto-mensaje error';
+                    loginMsg.className = 'lg-msg error';
                 }
             });
         });
 
         document.getElementById('btnRedLogout').addEventListener('click', function () {
             fetch('/api/prensa_admin.php?action=logout', { method: 'POST' })
-                .then(function () { verificarSesion(); });
+                .then(function () {
+                    formLogin.reset();
+                    loginMsg.textContent = '';
+                    loginMsg.className = 'lg-msg';
+                    verificarSesion();
+                });
         });
 
         verificarSesion();

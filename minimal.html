@@ -497,9 +497,10 @@
             </form>
             <p class="lg-foot"><i class="fas fa-user-shield"></i> Credenciales por defecto: comunicacion / periodico2024</p>
             <details class="lg-accounts">
-                <summary><i class="fas fa-key"></i> Volver al Periódico · Portal</summary>
-                <button type="button" id="btnVolverPd" class="lg-acc-btn"><span><i class="fas fa-arrow-left"></i> <strong>Periódico Digital</strong></span><span class="nivel" style="color:#64748b;font-weight:700;font-size:0.72rem;">Volver</span></button>
-                <a href="/index.html" class="lg-acc-btn"><span><i class="fas fa-globe"></i> <strong>Portal Principal</strong></span><span class="nivel" style="color:#64748b;font-weight:700;font-size:0.72rem;">Inicio</span></a>
+                <summary><i class="fas fa-key"></i> Cuentas autorizadas · Volver al Periódico</summary>
+                <button type="button" id="btnVolverPd" class="lg-acc-btn" style="margin-top:10px;"><span><i class="fas fa-arrow-left"></i> <strong>Periódico Digital</strong></span><span class="nivel" style="color:#64748b;font-weight:700;font-size:0.72rem;">Volver</span></button>
+                <a href="/index.html" class="lg-acc-btn" style="text-decoration:none;box-sizing:border-box;"><span><i class="fas fa-globe"></i> <strong>Portal Principal</strong></span><span class="nivel" style="color:#64748b;font-weight:700;font-size:0.72rem;">Inicio</span></a>
+                <div id="pdQuickAccountsList"></div>
             </details>
         </div>
     </section>
@@ -534,7 +535,6 @@
             <div class="pd-container">
                 <ul class="pd-nav-links">
                     <li><a href="/minimal.html" id="navInicio"><i class="fas fa-house"></i> Inicio</a></li>
-                    <li id="navPublicar" style="display:none;"><a href="/redaccion.html"><i class="fas fa-pen-nib"></i> Publicar Nueva Noticia</a></li>
                     <li><a href="/index.html"><i class="fas fa-globe"></i> Portal</a></li>
                     <li><a href="#" id="loginLink"><i class="fas fa-right-to-bracket" id="navSesIcon"></i> <span id="navSessionTxt">Iniciar Sesión</span></a></li>
                 </ul>
@@ -744,23 +744,6 @@
             m.innerHTML = '<i class="fas ' + (tipo === 'error' ? 'fa-circle-exclamation' : 'fa-circle-info') + '"></i> ' + esc(texto);
         }
 
-        function actualizarNav() {
-            var link = document.getElementById('loginLink');
-            var ico = document.getElementById('navSesIcon');
-            var txt = document.getElementById('navSessionTxt');
-            var pub = document.getElementById('navPublicar');
-            if (!link || !ico || !txt || !pub) return;
-            if (usuario && tienePrensa(usuario)) {
-                ico.className = 'fas fa-sign-out-alt';
-                txt.textContent = 'Cerrar Sesión';
-                pub.style.display = 'inline-flex';
-            } else {
-                ico.className = 'fas fa-right-to-bracket';
-                txt.textContent = 'Iniciar Sesión';
-                pub.style.display = 'none';
-            }
-        }
-
         /* ---------- Carga de noticias (páginas del servidor vivo :5001) ---------- */
         function paramsFiltros(page) {
             var p = new URLSearchParams({ page: String(page || 1), nocache: String(Math.abs(new Date().getTime() % 1e8)) });
@@ -775,12 +758,6 @@
             txt = String(txt || '');
             if (txt.length <= max) return txt;
             return txt.slice(0, max).replace(/\s+\S*$/, '') + '...';
-        }
-
-        function barraAdmin() {
-            return (usuario && tienePrensa(usuario))
-                ? '<div class="pd-adm"><a class="pd-btn-editar" href="/redaccion.html"><i class="fas fa-edit"></i> Editar (Redacción)</a></div>'
-                : '';
         }
 
         function tarjeta(n) {
@@ -798,7 +775,7 @@
                         '</div>' +
                         '<p class="pd-resumen">' + esc(recortar(n.resumen, 200)) + '</p>' +
                         '<div class="pd-acciones"><a href="' + esc(href) + '" class="pd-btn-leer link-noticia" data-id="' + esc(n.id) + '"><i class="fas fa-book-open"></i> Leer más</a></div>' +
-                    '</div>' + barraAdmin() +
+                    '</div>' +
                 '</article>';
         }
 
@@ -935,9 +912,6 @@
             detalleCache[String(d.id)] = d;
             var esVivo = d.esVivo;
             var urlDetalle = esVivo ? d.url : (location.origin + location.pathname + '?noticia=' + encodeURIComponent(d.id));
-            var tituloAttr = esc(d.titulo || 'Comunicado CVG Alcasa');
-            var admBar = (usuario && tienePrensa(usuario))
-                ? '<a class="pd-btn-editar" href="/redaccion.html"><i class="fas fa-edit"></i> Editar (Redacción)</a>' : '';
             var seccion = document.getElementById('vistaNoticia');
             seccion.innerHTML =
                 '<article class="pd-detalle">' +
@@ -973,7 +947,6 @@
                     '<div class="pd-acciones-detalle">' +
                         '<button type="button" class="btn-volver" id="btnVolverDetalle"><i class="fas fa-arrow-left"></i> Volver</button>' +
                         (esVivo ? '<a class="pd-mini-btn-sec" href="' + esc(urlDetalle) + '" target="_blank" rel="noopener"><i class="fas fa-globe"></i> Ver en el portal oficial</a>' : '') +
-                        admBar +
                     '</div>' +
                 '</article>';
             seccion.style.display = 'block';
@@ -1140,24 +1113,23 @@
             });
         }
 
-        /* ---------- Sesión (login del Periódico contra la intranet) ---------- */
+        /* ---------- Sesión (login del Periódico redirige al módulo aparte de Redacción) ---------- */
         var formLogin = document.getElementById('formLoginPd');
         formLogin.addEventListener('submit', function (e) {
             e.preventDefault();
             var data = new FormData(formLogin);
-            loginMsg('', '');
+            loginMsg('info', 'Verificando credenciales...');
             fetch(SESION_URL + '?action=login', { method: 'POST', body: data })
                 .then(function (r) { return r.json(); })
                 .then(function (res) {
                     if (res && res.success && res.user && tienePrensa(res.user)) {
-                        usuario = res.user;
-                        formLogin.reset();
-                        var nombre = res.user.nombre || res.user.usuario || '';
-                        mostrarVistaPd();
-                        flash('ok', 'Sesión iniciada correctamente. Bienvenido/a, ' + nombre + '.');
-                        actualizarNav();
-                        cargarPagina(1);
+                        window.location.href = '/redaccion.html';
                     } else if (res && res.success && res.user) {
+                        var perms = Array.isArray(res.user.permisos) ? res.user.permisos : [];
+                        if (perms.indexOf('contactos') !== -1 || perms.indexOf('cv') !== -1) {
+                            window.location.href = '/contactos.html';
+                            return;
+                        }
                         loginMsg('error', 'Esta cuenta no tiene permisos para la gestión editorial del Periódico Digital.');
                     } else {
                         loginMsg('error', (res && res.error) || 'Usuario o contraseña incorrectos.');
@@ -1170,15 +1142,6 @@
 
         document.getElementById('loginLink').addEventListener('click', function (e) {
             e.preventDefault();
-            if (usuario) {
-                fetch(SESION_URL + '?action=logout', { method: 'POST' }).then(function () {
-                    usuario = null;
-                    flash('ok', 'Sesión cerrada correctamente.');
-                    actualizarNav();
-                    cargarPagina(1);
-                });
-                return;
-            }
             loginMsg('', '');
             mostrarVistaLogin();
         });
@@ -1187,7 +1150,33 @@
             mostrarVistaPd();
         });
 
-        /* Visor de contraseña (ojo, como en el login de cv/contactos) */
+        /* Autocompletado de cuentas editoriales en el login */
+        var qListPd = document.getElementById('pdQuickAccountsList');
+        if (qListPd) {
+            fetch(SESION_URL + '?action=accounts')
+                .then(function (r) { return r.json(); })
+                .then(function (res) {
+                    var accs = (res && Array.isArray(res.accounts)) ? res.accounts : [];
+                    var prensaAccs = accs.filter(function (a) { return tienePrensa(a); });
+                    qListPd.innerHTML = prensaAccs.map(function (a, i) {
+                        return '<button type="button" class="lg-acc-btn" data-idx="' + i + '">' +
+                            '<span><i class="fas fa-user-check" style="color:var(--alcasa-accent);"></i> <strong>' + esc(a.usuario) + '</strong> / <code>' + esc(a.password) + '</code></span>' +
+                            '<span class="nivel" style="color:#64748b;font-weight:700;font-size:0.72rem;">' + esc(a.nombre || a.usuario) + '</span>' +
+                        '</button>';
+                    }).join('');
+                    Array.prototype.forEach.call(qListPd.querySelectorAll('button[data-idx]'), function (b) {
+                        b.addEventListener('click', function () {
+                            var a = prensaAccs[parseInt(this.getAttribute('data-idx') || '0', 10)];
+                            if (!a) return;
+                            document.getElementById('username').value = a.usuario;
+                            document.getElementById('password').value = a.password;
+                        });
+                    });
+                })
+                .catch(function () {});
+        }
+
+        /* Visor de contraseña (ojo, como en el login de contactos) */
         (function visorContrasena() {
             Array.prototype.forEach.call(document.querySelectorAll('.lg-eye'), function (btn) {
                 var visible = false;
@@ -1201,24 +1190,16 @@
             });
         })();
 
-        /* Arranque: sesión existente, página 1 o noticia individual (?noticia=ID) */
-        var urlDetalle = new URLSearchParams(location.search).get('noticia');
-        fetch(SESION_URL + '?action=status')
-            .then(function (r) { return r.json(); })
-            .then(function (res) {
-                if (res && res.user && tienePrensa(res.user)) {
-                    usuario = res.user;
-                    actualizarNav();
-                }
-            })
-            .catch(function () {})
-            .then(function () {
-                cargarPagina(1);
-                if (urlDetalle) {
-                    history.replaceState({ noticia: urlDetalle }, '', location.href);
-                    abrirDetalle(urlDetalle, false);
-                }
-            });
+        /* Arranque: página 1 o noticia individual (?noticia=ID) o vista login (?login=1) */
+        var qs = new URLSearchParams(location.search);
+        var urlDetalle = qs.get('noticia');
+        cargarPagina(1);
+        if (qs.get('login') === '1') {
+            mostrarVistaLogin();
+        } else if (urlDetalle) {
+            history.replaceState({ noticia: urlDetalle }, '', location.href);
+            abrirDetalle(urlDetalle, false);
+        }
     })();
     </script>
 </body>

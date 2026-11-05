@@ -430,7 +430,6 @@
                                         '<li><a href="/sitio/Empresa/CA/index.html">Nuestros Cumpleañeros</a></li>' +
                                         '<li><a href="http://alcasa.com.ve:5002" target="_blank" rel="noopener noreferrer">Acceso a la mensajería institucional</a></li>' +
                                         '<li><a href="/contactos.html" target="_blank" rel="noopener noreferrer">Panel de Contactos</a></li>' +
-                                        '<li><a href="/cv.html" target="_blank" rel="noopener noreferrer">Panel de CV</a></li>' +
                                     '</ul>' +
                                 '</li>' +
                                 '<li class="nav-item-cta">' +

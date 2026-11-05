@@ -12,9 +12,8 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 ├── productos.html              # Catálogo Oficial 2025 completo (32 productos con Ficha Técnica flotante)
 ├── galeria.html                # Galería Multimedia dedicada (Videos completos + Fotografías clasificadas)
 ├── prensa.html                 # Sala de Prensa "Pulso Industrial CVG Alcasa" (Paginación :5001 + Modal de vista previa)
-├── redaccion.html              # Aplicación administrativa independiente de Redacción (3 zonas, hasta 20 fotos)
-├── contactos.html              # Panel exclusivo de Contactos (login «Acceso Restringido», intereses fijos, tarjetas Ver·WA·Copiar·Eliminar)
-├── cv.html                     # Panel exclusivo de Postulaciones (CV) (login «Acceso Restringido», áreas fijas, tarjetas Ver·WA·Copiar·CV)
+├── redaccion.html              # Aplicación administrativa independiente de Redacción (login «Acceso Restringido», 3 zonas, hasta 20 fotos)
+├── contactos.html              # Panel unificado de Contactos Comerciales y Postulaciones (CV) (login «Acceso Restringido», pestañas por rol, tarjetas Ver·WA·Copiar·Eliminar/CV)
 ├── sitio/Empresa/CA/index.html # Página «Nuestros Cumpleañeros» (filtro día/mes, tarjetas con silueta por género y ventana emergente con plantilla)
 ├── tools/generar_cumpleaneros.py # Genera data/cumpleaneros.json y las fotos desde DATA.csv + BMP
 ├── minimal.html                  # Periódico Digital CVG Alcasa (estructura y funciones del portal :5001 con el diseño copia de la intranet, login integrado)
@@ -170,4 +169,15 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 - **Soporte de detalle individual en `api/noticias.php?id=N`:** el backend actúa como proxy enriquecido y caché del detalle `/noticia/N` de `:5001` (normalizando rutas `/uploads/...` y sirviendo también noticias creadas localmente en Redacción o desde el respaldo `data/noticias.json`), con fallback directo en el cliente si se ejecuta sin PHP.
 - **Login «Acceso Restringido» integrado (shell igual a Contactos/CV):** la opción «Iniciar Sesión» conmuta a la vista de candado con fondo degradado y tarjeta blanca «Acceso Restringido — Periódico Digital · Gestión Editorial», autenticando contra `api/prensa_admin.php`: con permiso de prensa muestra aviso de bienvenida, habilita **Publicar Nueva Noticia / Cerrar Sesión** y añade la franja **✏️ Editar (Redacción)** en cada tarjeta y en el detalle individual.
 - **Autónoma pero coherente:** funciona como página independiente y como respaldo dentro del `<iframe>` de `index.html` y `prensa.html`.
+
+### 3.16. Unificación de CV en el Panel de Contactos y Separación de Login/Redacción en el Periódico Digital (`contactos.html`, `minimal.html`, `redaccion.html`, `index.html`, `assets/js/app.js`)
+- **Eliminación de `/cv.html` e integración en `/contactos.html`:** se eliminó por completo la página redundante `/cv.html` y su entrada en el menú Extranet (`index.html` y `assets/js/app.js`). Ahora el **Panel de Contactos (`/contactos.html`)** maneja tanto **Contactos Comerciales** como **Postulaciones de CV / Empleo** en un único panel:
+  - Si ingresa `admin` (Nivel 1), dispone de pestañas conmutables **Contactos Comerciales** y **Postulaciones de CV / Empleo** con sus respectivos filtros fijos (intereses comerciales vs. áreas de postulación), tarjetas (**Ver · WA · Copiar · Eliminar** en contactos y **Ver · WA · Copiar · CV** con descarga del PDF adjunto en postulaciones) y enlace a **Redacción**.
+  - Si ingresa `comercializacion` (Nivel 3), visualiza directamente la bandeja de Contactos Comerciales.
+  - Si ingresa `talento` (Nivel 4), visualiza directamente la bandeja de Postulaciones de CV.
+- **Separación estricta entre el portal de noticias (`minimal.html`) y el módulo de edición (`redaccion.html`):**
+  - Al iniciar sesión desde el login «Acceso Restringido» de `minimal.html`, el usuario ya no se queda dentro del portal de noticias ni se mezclan botones administrativos en la vista pública: es redirigido de inmediato a la página independiente `/redaccion.html` (o a `/contactos.html` si su cuenta es de comercialización/talento).
+- **Nuevo login «Acceso Restringido» en `redaccion.html` al cerrar sesión o entrar sin autenticar:**
+  - Se reemplazó el antiguo formulario de login de `redaccion.html` por el nuevo diseño «Acceso Restringido» a pantalla completa (fondo degradado azul, tarjeta blanca `.lg-card`, visor de contraseña con icono de ojo y desplegable de cuentas autorizadas / retorno a `/minimal.html`, `/prensa.html` e `/index.html`). Al cerrar sesión desde `redaccion.html`, muestra este nuevo login en lugar del viejo.
+
 
