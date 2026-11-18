@@ -72,12 +72,11 @@ if ($tipo === 'descargar_cv') {
 
 header('Content-Type: application/json; charset=utf-8');
 
-$puedeContactos = $esAdmin || in_array('contactos', $permisos, true);
-$puedeCV = $esAdmin || in_array('cv', $permisos, true);
-$puedePrensa = $esAdmin || in_array('prensa', $permisos, true);
+$puedeContactos = $esAdmin;
+$puedeCV = $esAdmin;
 
-if (!$puedeContactos && !$puedeCV) {
-    fail('Tu cuenta no tiene permisos para acceder al módulo de Contactos Comerciales ni Postulaciones de CV.', 403);
+if (!$esAdmin) {
+    fail('Acceso restringido exclusivamente al Administrador General.', 403);
 }
 
 $contactos = $puedeContactos ? leerCsvDeFuente('contactos.csv', 'contactos-semilla.csv') : [];
@@ -88,8 +87,7 @@ echo json_encode([
     'user'           => $_SESSION['alcasa_user'],
     'permisos_vista' => [
         'contactos' => $puedeContactos,
-        'cv'        => $puedeCV,
-        'prensa'    => $puedePrensa
+        'cv'        => $puedeCV
     ],
     'contactos'      => $contactos,
     'postulaciones'  => $postulaciones

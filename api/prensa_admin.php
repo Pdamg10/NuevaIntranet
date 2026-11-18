@@ -31,40 +31,16 @@ function limpiarCachesNoticias(): void {
     }
 }
 
-// Inicializar archivo de cuentas y niveles de acceso si no existe
+// Inicializar archivo de cuentas si no existe (solo Administrador General)
 if (!is_file($usersFile)) {
     $defaultUsers = [
         [
             'usuario'  => 'admin',
             'password' => 'D10998$a*',
             'nombre'   => 'Administrador General CVG Alcasa',
-            'nivel'    => 'Nivel 1 — Super Administrador (Control Total: Prensa, Contactos y CV)',
+            'nivel'    => 'Administrador General (Contactos y Postulaciones de CV)',
             'rol'      => 'admin',
-            'permisos' => ['prensa', 'prensa_eliminar', 'contactos', 'cv']
-        ],
-        [
-            'usuario'  => 'comunicacion',
-            'password' => 'periodico2024',
-            'nombre'   => 'Gerencia de Comunicación Estratégica',
-            'nivel'    => 'Nivel 2 — Editor de Sala de Prensa (Redactar, Editar, Borradores y Publicar)',
-            'rol'      => 'prensa',
-            'permisos' => ['prensa']
-        ],
-        [
-            'usuario'  => 'comercializacion',
-            'password' => 'AlcasaCom2026*',
-            'nombre'   => 'Gerencia de Comercialización',
-            'nivel'    => 'Nivel 3 — Gestor Exclusivo de Contactos Comerciales y Cotizaciones',
-            'rol'      => 'contactos',
-            'permisos' => ['contactos']
-        ],
-        [
-            'usuario'  => 'talento',
-            'password' => 'AlcasaCV2026*',
-            'nombre'   => 'Gerencia de Personal / Talento Humano',
-            'nivel'    => 'Nivel 4 — Gestor Exclusivo de Postulaciones de Empleo y CV',
-            'rol'      => 'cv',
-            'permisos' => ['cv']
+            'permisos' => ['contactos', 'cv']
         ]
     ];
     @file_put_contents($usersFile, json_encode($defaultUsers, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));

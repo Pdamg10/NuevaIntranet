@@ -1245,39 +1245,64 @@
 
     function initPaginaGaleria() {
         var fotosGrid = $('#galeriaFotosGrid');
+        var coladaGrid = $('#galeriaColadaGrid');
+        var homeColadaGrid = $('#homeColadaGrid');
         var videosSection = $('#galeriaVideosSection');
         var fotosSection = $('#galeriaFotosSection');
+        var coladaSection = $('#galeriaColadaSection');
         var videosList = $('#galeriaVideosList');
         var filterBtns = $$('#galeriaFilterBar .catalogo-filter-btn');
         var searchInput = $('#galeriaSearchInput');
         var countBar = $('#galeriaCountBar');
         var videosBadge = $('#galeriaVideosCountBadge');
         var fotosBadge = $('#galeriaFotosCountBadge');
+        var coladaBadge = $('#galeriaColadaCountBadge');
 
-        if (!fotosGrid && !videosList) return;
+        if (!fotosGrid && !videosList && !coladaGrid && !homeColadaGrid) return;
 
-        var defaultFotos = [
-            { id: 'lam-1', categoria: 'Planta de Laminación', titulo: 'Bobinas de Aluminio Laminado Listas para Despacho', desc: 'Rollos de aluminio primario laminados en frío y caliente con acabado superficial de alta pureza para la industria nacional.', img: '/assets/img/galeria/laminacion-bobinas.jpg' },
-            { id: 'lam-2', categoria: 'Planta de Laminación', titulo: 'Línea de Colada Continua de Cintas de Aluminio', desc: 'Solidificación directa de aluminio fundido en cintas continuas para alimentación de los trenes de laminación.', img: '/assets/img/galeria/laminacion-colada-continua.jpg' },
-            { id: 'lam-3', categoria: 'Planta de Laminación', titulo: 'Tren de Laminación en Caliente Clecim-Cosim', desc: 'Reducción de espesor de planchones de aluminio mediante pases controlados de alta precisión.', img: '/assets/img/galeria/laminacion-tren-caliente.jpg' },
-            { id: 'lam-4', categoria: 'Planta de Laminación', titulo: 'Laminador en Frío de Alta Velocidad', desc: 'Operación del complejo laminador para bobinas delgadas y foil industrial.', img: '/assets/img/hero-laminacion.jpg' },
-            { id: 'fun-1', categoria: 'Planta de Fundición', titulo: 'Hornos de Fusión y Retención de Aluminio Primario', desc: 'Preparación metalúrgica de aleaciones serie 1000, 3000 y 6063 a temperaturas controladas.', img: '/assets/img/galeria/fundicion-horno.jpg' },
-            { id: 'fun-2', categoria: 'Planta de Fundición', titulo: 'Mesa de Colada Vertical de Cilindros Tochos', desc: 'Fundición semicontinua de cilindros de extrusión en aleación AA 6063.', img: '/assets/img/galeria/fundicion-colada.jpg' },
-            { id: 'fun-3', categoria: 'Planta de Fundición', titulo: 'Lotes de Cilindros Tochos Homogenizados 6063-T5', desc: 'Cilindros de 7 pulgadas inspeccionados por ultrasonido y listos para prensas de extrusión.', img: '/assets/img/galeria/fundicion-cilindros.jpg' },
-            { id: 'fun-4', categoria: 'Planta de Fundición', titulo: 'Operaciones en Nave de Fundición Matanzas', desc: 'Control de colada y aseguramiento de calidad metalúrgica por nuestra clase trabajadora.', img: '/assets/img/hero-fundicion.jpg' },
-            { id: 'ext-1', categoria: 'Planta de Extrusión', titulo: 'Prensa Extrusora de Perfilería Industrial', desc: 'Transformación termomecánica de cilindros tochos 6063 en perfiles estructurales y arquitectónicos.', img: '/assets/img/galeria/extrusion-prensa.jpg' },
-            { id: 'ext-2', categoria: 'Planta de Extrusión', titulo: 'Perfiles Tubulares y Estructurales Extruidos', desc: 'Lotes de tubería, ángulos y perfiles serie Caroní en mesa de enfriamiento y estirado.', img: '/assets/img/galeria/extrusion-perfiles-1.jpg' },
-            { id: 'ext-3', categoria: 'Planta de Extrusión', titulo: 'Control Dimensional de Perfilería de Aluminio', desc: 'Verificación de tolerancias milimétricas según normas COVENIN y catálogo técnico CVG Alcasa.', img: '/assets/img/galeria/extrusion-perfiles-2.jpg' },
-            { id: 'ext-4', categoria: 'Planta de Extrusión', titulo: 'Línea de Extrusión de 7 Pulgadas', desc: 'Capacidad instalada para abastecer al sector construcción, cerramientos y manufactura nacional.', img: '/assets/img/hero-extrusion.jpg' },
-            { id: 'soc-1', categoria: 'Compromiso Social', titulo: 'Clase Trabajadora de CVG Alcasa en Operaciones', desc: 'Talento humano técnico y obrero comprometido con la soberanía productiva del sector aluminio.', img: '/assets/img/galeria/social-trabajadores.jpg' },
-            { id: 'soc-2', categoria: 'Compromiso Social', titulo: 'Planta de Pintura y Acabados Industriales', desc: 'Instalaciones de recubrimiento y preparación superficial de láminas y perfiles de aluminio.', img: '/assets/img/galeria/social-planta-pintura.jpg' },
-            { id: 'soc-3', categoria: 'Compromiso Social', titulo: 'Jornadas de Atención Social y Bienestar Integral', desc: 'Despliegue de salud, recreación y dotación de ayudas técnicas para trabajadores y comunidades de Guayana.', img: '/assets/img/galeria/social-jornada.jpg' }
+        function getFotoFull(f) {
+            return (f && (f.imagen || f.img)) || PH;
+        }
+        function getFotoThumb(f) {
+            return (f && (f.thumb || f.imagen || f.img)) || PH;
+        }
+
+        var defaultColadaFotos = [
+            { id: 'cc-01', categoria: 'Planta de Laminación · Colada Continua', etapa: '01 · Alimentación y Fusión', titulo: 'Alimentación de Aluminio Líquido en Canal de Colada', desc: 'Operador con indumentaria aluminizada de protección térmica supervisando el flujo de aluminio fundido en el canal distribuidor hacia la boquilla de Colada Continua.', thumb: '/assets/img/galeria/colada-continua/thumbs/colada-continua-06-thumb.jpg', imagen: '/assets/img/galeria/colada-continua/colada-continua-06.jpg', orientacion: 'portrait', destacada: true },
+            { id: 'cc-02', categoria: 'Planta de Laminación · Colada Continua', etapa: '02 · Solidificación Directa', titulo: 'Salida de Banda Continua desde los Rodillos de Colada', desc: 'Trabajador con careta facial térmica guiando la salida de la cinta de aluminio recién solidificada desde los rodillos enfriados por agua de la máquina de Colada Continua.', thumb: '/assets/img/galeria/colada-continua/thumbs/colada-continua-01-thumb.jpg', imagen: '/assets/img/galeria/colada-continua/colada-continua-01.jpg', orientacion: 'portrait', destacada: false },
+            { id: 'cc-03', categoria: 'Planta de Laminación · Colada Continua', etapa: '03 · Control de Calidad', titulo: 'Inspección Visual de Acabado y Planitud Superficial', desc: 'Verificación directa en línea del acabado metálico, uniformidad superficial y espesor de la banda continua de aluminio a la salida de los rodillos.', thumb: '/assets/img/galeria/colada-continua/thumbs/colada-continua-02-thumb.jpg', imagen: '/assets/img/galeria/colada-continua/colada-continua-02.jpg', orientacion: 'portrait', destacada: false },
+            { id: 'cc-04', categoria: 'Planta de Laminación · Colada Continua', etapa: '04 · Avance de Banda', titulo: 'Cinta Continua de Aluminio en Tren de Colada', desc: 'Vista frontal de la banda brillante de aluminio primario avanzando desde los cilindros de colada continua hacia la estación de cizallado y bobinado.', thumb: '/assets/img/galeria/colada-continua/thumbs/colada-continua-07-thumb.jpg', imagen: '/assets/img/galeria/colada-continua/colada-continua-07.jpg', orientacion: 'portrait', destacada: true },
+            { id: 'cc-05', categoria: 'Planta de Laminación · Colada Continua', etapa: '05 · Cizalla y Guía', titulo: 'Alineación y Corte en Estación de Cizalla Industrial', desc: 'Operador con guantes térmicos y barra guía posicionando el cabezal de la lámina de aluminio en la estación de cizalla de la línea de Colada Continua.', thumb: '/assets/img/galeria/colada-continua/thumbs/colada-continua-08-thumb.jpg', imagen: '/assets/img/galeria/colada-continua/colada-continua-08.jpg', orientacion: 'portrait', destacada: false },
+            { id: 'cc-06', categoria: 'Planta de Laminación · Colada Continua', etapa: '06 · Automatización y Mando', titulo: 'Control Operativo desde Consola de Mando Eléctrico', desc: 'Supervisión en tiempo real de velocidad de rodillos, temperatura y parámetros electromecánicos desde el pupitre de control de la unidad de Colada Continua.', thumb: '/assets/img/galeria/colada-continua/thumbs/colada-continua-05-thumb.jpg', imagen: '/assets/img/galeria/colada-continua/colada-continua-05.jpg', orientacion: 'portrait', destacada: false },
+            { id: 'cc-07', categoria: 'Planta de Laminación · Colada Continua', etapa: '07 · Línea Integral', titulo: 'Vista Panorámica de la Línea de Colada Continua', desc: 'Recorrido completo del tren de Colada Continua: rodillos de solidificación, cizalla industrial, cinta de aluminio en tránsito y enrolladora de bobinas.', thumb: '/assets/img/galeria/colada-continua/thumbs/colada-continua-04-thumb.jpg', imagen: '/assets/img/galeria/colada-continua/colada-continua-04.jpg', orientacion: 'portrait', destacada: false },
+            { id: 'cc-08', categoria: 'Planta de Laminación · Colada Continua', etapa: '08 · Bobinado Industrial', titulo: 'Enrollado de Bobina Madre de Aluminio', desc: 'Formación de la bobina madre de aluminio en el mandril enrollador al final de la línea de Colada Continua, lista para reducción en los trenes de laminación.', thumb: '/assets/img/galeria/colada-continua/thumbs/colada-continua-09-thumb.jpg', imagen: '/assets/img/galeria/colada-continua/colada-continua-09.jpg', orientacion: 'portrait', destacada: true },
+            { id: 'cc-09', categoria: 'Planta de Laminación · Colada Continua', etapa: '09 · Talento Alcasiano', titulo: 'Clase Trabajadora de Colada Continua — Planta de Laminación', desc: 'Equipo operativo de CVG Alcasa en Planta de Laminación reafirmando el compromiso técnico y productivo en la línea de Colada Continua.', thumb: '/assets/img/galeria/colada-continua/thumbs/colada-continua-03-thumb.jpg', imagen: '/assets/img/galeria/colada-continua/colada-continua-03.jpg', orientacion: 'portrait', destacada: true }
         ];
 
+        var defaultFotos = [
+            { id: 'lam-1', categoria: 'Planta de Laminación', titulo: 'Bobinas de Aluminio Laminado Listas para Despacho', desc: 'Rollos de aluminio primario laminados en frío y caliente con acabado superficial de alta pureza para la industria nacional.', imagen: '/assets/img/galeria/laminacion-bobinas.jpg' },
+            { id: 'lam-2', categoria: 'Planta de Laminación', titulo: 'Línea de Colada Continua de Cintas de Aluminio', desc: 'Solidificación directa de aluminio fundido en cintas continuas para alimentación de los trenes de laminación.', imagen: '/assets/img/galeria/laminacion-colada-continua.jpg' },
+            { id: 'lam-3', categoria: 'Planta de Laminación', titulo: 'Tren de Laminación en Caliente Clecim-Cosim', desc: 'Reducción de espesor de planchones de aluminio mediante pases controlados de alta precisión.', imagen: '/assets/img/galeria/laminacion-tren-caliente.jpg' },
+            { id: 'lam-4', categoria: 'Planta de Laminación', titulo: 'Laminador en Frío de Alta Velocidad', desc: 'Operación del complejo laminador para bobinas delgadas y foil industrial.', imagen: '/assets/img/hero-laminacion.jpg' },
+            { id: 'fun-1', categoria: 'Planta de Fundición', titulo: 'Hornos de Fusión y Retención de Aluminio Primario', desc: 'Preparación metalúrgica de aleaciones serie 1000, 3000 y 6063 a temperaturas controladas.', imagen: '/assets/img/galeria/fundicion-horno.jpg' },
+            { id: 'fun-2', categoria: 'Planta de Fundición', titulo: 'Mesa de Colada Vertical de Cilindros Tochos', desc: 'Fundición semicontinua de cilindros de extrusión en aleación AA 6063.', imagen: '/assets/img/galeria/fundicion-colada.jpg' },
+            { id: 'fun-3', categoria: 'Planta de Fundición', titulo: 'Lotes de Cilindros Tochos Homogenizados 6063-T5', desc: 'Cilindros de 7 pulgadas inspeccionados por ultrasonido y listos para prensas de extrusión.', imagen: '/assets/img/galeria/fundicion-cilindros.jpg' },
+            { id: 'fun-4', categoria: 'Planta de Fundición', titulo: 'Operaciones en Nave de Fundición Matanzas', desc: 'Control de colada y aseguramiento de calidad metalúrgica por nuestra clase trabajadora.', imagen: '/assets/img/hero-fundicion.jpg' },
+            { id: 'ext-1', categoria: 'Planta de Extrusión', titulo: 'Prensa Extrusora de Perfilería Industrial', desc: 'Transformación termomecánica de cilindros tochos 6063 en perfiles estructurales y arquitectónicos.', imagen: '/assets/img/galeria/extrusion-prensa.jpg' },
+            { id: 'ext-2', categoria: 'Planta de Extrusión', titulo: 'Perfiles Tubulares y Estructurales Extruidos', desc: 'Lotes de tubería, ángulos y perfiles serie Caroní en mesa de enfriamiento y estirado.', imagen: '/assets/img/galeria/extrusion-perfiles-1.jpg' },
+            { id: 'ext-3', categoria: 'Planta de Extrusión', titulo: 'Control Dimensional de Perfilería de Aluminio', desc: 'Verificación de tolerancias milimétricas según normas COVENIN y catálogo técnico CVG Alcasa.', imagen: '/assets/img/galeria/extrusion-perfiles-2.jpg' },
+            { id: 'ext-4', categoria: 'Planta de Extrusión', titulo: 'Línea de Extrusión de 7 Pulgadas', desc: 'Capacidad instalada para abastecer al sector construcción, cerramientos y manufactura nacional.', imagen: '/assets/img/hero-extrusion.jpg' },
+            { id: 'soc-1', categoria: 'Compromiso Social', titulo: 'Clase Trabajadora de CVG Alcasa en Operaciones', desc: 'Talento humano técnico y obrero comprometido con la soberanía productiva del sector aluminio.', imagen: '/assets/img/galeria/social-trabajadores.jpg' },
+            { id: 'soc-2', categoria: 'Compromiso Social', titulo: 'Planta de Pintura y Acabados Industriales', desc: 'Instalaciones de recubrimiento y preparación superficial de láminas y perfiles de aluminio.', imagen: '/assets/img/galeria/social-planta-pintura.jpg' },
+            { id: 'soc-3', categoria: 'Compromiso Social', titulo: 'Jornadas de Atención Social y Bienestar Integral', desc: 'Despliegue de salud, recreación y dotación de ayudas técnicas para trabajadores y comunidades de Guayana.', imagen: '/assets/img/galeria/social-jornada.jpg' }
+        ];
+
+        var coladaList = (Array.isArray(C.galeria_colada_continua) && C.galeria_colada_continua.length) ? C.galeria_colada_continua : defaultColadaFotos;
         var fotosList = (Array.isArray(C.galeria_fotos) && C.galeria_fotos.length) ? C.galeria_fotos : defaultFotos;
         var activeFilter = 'all';
         var currentQuery = '';
         var currentFilteredFotos = fotosList.slice();
+        var activeLightboxList = coladaList;
 
         // Mostrar siempre toda la galería completa salvo que exista barra de filtros activa
         if (filterBtns.length) {
@@ -1298,7 +1323,7 @@
             } catch (e) {}
         }
 
-        // Lightbox de fotografías
+        // Lightbox de fotografías en alta resolución (unificado para Colada Continua y Galería General)
         var lbModal = $('#galeriaLightboxModal');
         if (lbModal && lbModal.parentElement !== document.body) {
             document.body.appendChild(lbModal);
@@ -1313,23 +1338,59 @@
         var lbCounter = $('#lightboxCounter');
         var lbDesc = $('#lightboxDesc');
         var lbRawBtn = $('#lightboxOpenRawBtn');
+        var lbThumbs = $('#lightboxThumbs');
         var currentPhotoIndex = 0;
 
-        function mostrarFotoLightbox(idx) {
-            if (!lbModal || !currentFilteredFotos.length) return;
-            if (idx < 0) idx = currentFilteredFotos.length - 1;
-            if (idx >= currentFilteredFotos.length) idx = 0;
-            currentPhotoIndex = idx;
-            var f = currentFilteredFotos[currentPhotoIndex];
-            if (lbImg) {
-                lbImg.src = f.img;
-                lbImg.alt = f.titulo;
+        function renderLightboxThumbs() {
+            if (!lbThumbs) return;
+            if (!activeLightboxList || activeLightboxList.length <= 1) {
+                lbThumbs.innerHTML = '';
+                lbThumbs.style.display = 'none';
+                return;
             }
-            if (lbTitle) lbTitle.textContent = f.titulo;
-            if (lbCat) lbCat.textContent = f.categoria;
-            if (lbCounter) lbCounter.textContent = 'Fotografía ' + (currentPhotoIndex + 1) + ' de ' + currentFilteredFotos.length;
-            if (lbDesc) lbDesc.textContent = f.desc;
-            if (lbRawBtn) lbRawBtn.href = f.img;
+            lbThumbs.style.display = 'flex';
+            lbThumbs.innerHTML = activeLightboxList.map(function (item, idx) {
+                var isActive = idx === currentPhotoIndex;
+                var isPortrait = item.orientacion === 'portrait';
+                return '' +
+                    '<button type="button" class="galeria-lightbox-thumb-btn' + (isActive ? ' is-active' : '') + (isPortrait ? ' is-portrait' : '') + '" data-lb-idx="' + idx + '" aria-label="' + esc(item.titulo) + '" title="' + esc(item.titulo) + '">' +
+                        '<img src="' + esc(getFotoThumb(item)) + '" alt="' + esc(item.titulo) + '" loading="lazy" decoding="async">' +
+                    '</button>';
+            }).join('');
+
+            $$('[data-lb-idx]', lbThumbs).forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var i = parseInt(this.getAttribute('data-lb-idx') || '0', 10);
+                    mostrarFotoLightbox(i, activeLightboxList);
+                });
+            });
+
+            var activeThumb = $('.galeria-lightbox-thumb-btn.is-active', lbThumbs);
+            if (activeThumb && activeThumb.scrollIntoView) {
+                activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        }
+
+        function mostrarFotoLightbox(idx, listaOverride) {
+            if (Array.isArray(listaOverride) && listaOverride.length) {
+                activeLightboxList = listaOverride;
+            }
+            if (!lbModal || !activeLightboxList || !activeLightboxList.length) return;
+            if (idx < 0) idx = activeLightboxList.length - 1;
+            if (idx >= activeLightboxList.length) idx = 0;
+            currentPhotoIndex = idx;
+            var f = activeLightboxList[currentPhotoIndex];
+            var fullSrc = getFotoFull(f);
+            if (lbImg) {
+                lbImg.src = fullSrc;
+                lbImg.alt = f.titulo || 'Fotografía CVG Alcasa';
+            }
+            if (lbTitle) lbTitle.textContent = f.titulo || 'Fotografía CVG Alcasa';
+            if (lbCat) lbCat.textContent = f.etapa ? (f.categoria + ' · ' + f.etapa) : (f.categoria || 'Galería CVG Alcasa');
+            if (lbCounter) lbCounter.textContent = 'Fotografía ' + (currentPhotoIndex + 1) + ' de ' + activeLightboxList.length;
+            if (lbDesc) lbDesc.textContent = f.desc || '';
+            if (lbRawBtn) lbRawBtn.href = fullSrc;
+            renderLightboxThumbs();
             lbModal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
@@ -1356,10 +1417,86 @@
             });
         }
 
+        // Renderizar Serie Fotográfica de Colada Continua en /galeria.html
+        function renderColadaGrid() {
+            if (coladaBadge) {
+                coladaBadge.textContent = coladaList.length + ' Fotografías · Planta de Laminación';
+            }
+            if (coladaGrid) {
+                coladaGrid.innerHTML = coladaList.map(function (f, idx) {
+                    return '' +
+                        '<article class="galeria-colada-card" data-colada-index="' + idx + '">' +
+                            '<div class="galeria-colada-thumb-wrap" data-colada-index="' + idx + '" title="Clic para ampliar fotografía">' +
+                                '<img src="' + esc(getFotoThumb(f)) + '" alt="' + esc(f.titulo) + '" class="galeria-colada-img" width="600" height="750" loading="lazy" decoding="async">' +
+                                '<span class="galeria-foto-cat-badge"><i class="fas fa-layer-group"></i> ' + esc(f.etapa || 'Colada Continua') + '</span>' +
+                                '<div class="galeria-foto-zoom-overlay"><i class="fas fa-magnifying-glass-plus"></i> Ver Fotografía</div>' +
+                            '</div>' +
+                            '<div class="galeria-foto-body">' +
+                                '<h4>' + esc(f.titulo) + '</h4>' +
+                                '<p>' + esc(f.desc) + '</p>' +
+                                '<button type="button" class="btn-galeria-ampliar" data-colada-index="' + idx + '">' +
+                                    '<i class="fas fa-expand"></i> Ampliar Fotografía' +
+                                '</button>' +
+                            '</div>' +
+                        '</article>';
+                }).join('');
+
+                $$('[data-colada-index]', coladaGrid).forEach(function (el) {
+                    el.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var i = parseInt(this.getAttribute('data-colada-index') || '0', 10);
+                        mostrarFotoLightbox(i, coladaList);
+                    });
+                });
+            }
+
+            // Renderizar vitrina destacada de 4 fotos en /index.html#galeria (abre el visor con las 9)
+            if (homeColadaGrid) {
+                var destacadas = [];
+                coladaList.forEach(function (f, origIdx) {
+                    if (f.destacada) destacadas.push({ item: f, idx: origIdx });
+                });
+                if (!destacadas.length) {
+                    destacadas = coladaList.slice(0, 4).map(function (f, i) { return { item: f, idx: i }; });
+                }
+
+                homeColadaGrid.innerHTML = destacadas.map(function (entry) {
+                    var f = entry.item;
+                    return '' +
+                        '<article class="galeria-colada-home-card" data-home-colada-index="' + entry.idx + '">' +
+                            '<div class="galeria-colada-thumb-wrap" data-home-colada-index="' + entry.idx + '" title="Clic para ampliar fotografía">' +
+                                '<img src="' + esc(getFotoThumb(f)) + '" alt="' + esc(f.titulo) + '" class="galeria-colada-img" width="600" height="750" loading="lazy" decoding="async">' +
+                                '<span class="galeria-foto-cat-badge"><i class="fas fa-layer-group"></i> ' + esc(f.etapa || 'Colada Continua') + '</span>' +
+                                '<div class="galeria-foto-zoom-overlay"><i class="fas fa-magnifying-glass-plus"></i> Ver Fotografía</div>' +
+                            '</div>' +
+                            '<div class="galeria-colada-home-caption">' +
+                                '<h4>' + esc(f.titulo) + '</h4>' +
+                                '<span><i class="fas fa-expand"></i> Ampliar fotografía</span>' +
+                            '</div>' +
+                        '</article>';
+                }).join('');
+
+                $$('[data-home-colada-index]', homeColadaGrid).forEach(function (el) {
+                    el.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var i = parseInt(this.getAttribute('data-home-colada-index') || '0', 10);
+                        mostrarFotoLightbox(i, coladaList);
+                    });
+                });
+            }
+        }
+
         function renderGaleriaCompleta() {
             var q = currentQuery.toLowerCase();
             var showVideosSection = (activeFilter !== 'fotos');
             var showFotosSection = (activeFilter !== 'videos');
+
+            if (coladaSection) {
+                var showColada = showFotosSection && (activeFilter === 'all' || activeFilter === 'fotos' || activeFilter === 'Planta de Laminación');
+                coladaSection.style.display = showColada ? '' : 'none';
+            }
 
             // 1. Filtrar tarjetas de video
             var videoCards = $$('.galeria-video-card', videosList || document);
@@ -1378,7 +1515,7 @@
                 videosSection.style.display = (showVideosSection && visibleVideos > 0) ? '' : 'none';
             }
             if (videosBadge) {
-                videosBadge.textContent = visibleVideos + (visibleVideos === 1 ? ' Video Disponible' : ' Videos Disponibles');
+                videosBadge.textContent = visibleVideos + (visibleVideos === 1 ? ' Video Institucional' : ' Videos Institucionales');
             }
 
             // 2. Filtrar y renderizar fotografías clasificadas
@@ -1395,7 +1532,7 @@
                 fotosSection.style.display = showFotosSection ? '' : 'none';
             }
             if (fotosBadge) {
-                fotosBadge.textContent = currentFilteredFotos.length + (currentFilteredFotos.length === 1 ? ' Fotografía Clasificada' : ' Fotografías Clasificadas');
+                fotosBadge.textContent = currentFilteredFotos.length + (currentFilteredFotos.length === 1 ? ' Fotografía' : ' Fotografías');
             }
 
             if (fotosGrid) {
@@ -1406,7 +1543,7 @@
                         return '' +
                             '<article class="galeria-foto-card" data-foto-index="' + idx + '">' +
                                 '<div class="galeria-foto-thumb-wrap" data-foto-index="' + idx + '" title="Clic para ampliar fotografía">' +
-                                    '<img src="' + esc(f.img) + '" alt="' + esc(f.titulo) + '" class="galeria-foto-img" loading="lazy">' +
+                                    '<img src="' + esc(getFotoThumb(f)) + '" alt="' + esc(f.titulo) + '" class="galeria-foto-img" loading="lazy" decoding="async">' +
                                     '<span class="galeria-foto-cat-badge"><i class="fas fa-tag"></i> ' + esc(f.categoria) + '</span>' +
                                     '<div class="galeria-foto-zoom-overlay"><i class="fas fa-magnifying-glass-plus"></i> Ver Foto Completa</div>' +
                                 '</div>' +
@@ -1425,7 +1562,7 @@
                             e.preventDefault();
                             e.stopPropagation();
                             var i = parseInt(this.getAttribute('data-foto-index') || '0', 10);
-                            mostrarFotoLightbox(i);
+                            mostrarFotoLightbox(i, currentFilteredFotos);
                         });
                     });
                 }
@@ -1452,6 +1589,7 @@
             });
         }
 
+        renderColadaGrid();
         renderGaleriaCompleta();
     }
 

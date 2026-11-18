@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/main.css?v=2026t">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026w">
     <style>
         body.admin-standalone-body {
             margin: 0;
@@ -350,7 +350,7 @@
             </form>
             <p class="lg-foot"><i class="fas fa-user-shield"></i> Acceso solo para personal autorizado</p>
             <details class="lg-accounts">
-                <summary><i class="fas fa-key"></i> Cuentas autorizadas · Volver al Portal</summary>
+                <summary><i class="fas fa-key"></i> Cuenta autorizada · Volver al Portal</summary>
                 <a href="/index.html" class="lg-acc-btn lg-portal"><span><i class="fas fa-arrow-left"></i> <strong>Portal Principal</strong></span><span class="nivel">Inicio</span></a>
                 <div id="admQuickAccountsList"></div>
             </details>
@@ -369,7 +369,6 @@
                 <div class="adm-pills">
                     <span class="adm-count"><i class="fas fa-users" id="pillTotalIcon"></i> <b id="pillTotal">0</b> <span id="pillTotalTxt">contactos</span></span>
                     <span class="adm-count"><i class="fas fa-filter"></i> <b id="pillMostrados">0</b> mostrados</span>
-                    <a href="/redaccion.html" class="adm-top-mini" id="btnIrEditorPrensa" style="display: none;"><i class="fas fa-pen-to-square"></i> Redacción</a>
                     <a href="/index.html" class="adm-top-mini"><i class="fas fa-globe"></i> Portal</a>
                     <button type="button" class="adm-exit" id="btnSalirDatos"><i class="fas fa-sign-out-alt"></i> Salir</button>
                 </div>
@@ -447,7 +446,6 @@
         var userInfo = document.getElementById('admUserInfo');
         var brandIcon = document.getElementById('admBrandIcon');
         var brandTitle = document.getElementById('admBrandTitle');
-        var btnIrEditorPrensa = document.getElementById('btnIrEditorPrensa');
         var paneContactos = document.getElementById('paneContactos');
         var paneCV = document.getElementById('paneCV');
         var tabBtnContactos = document.getElementById('tabBtnContactos');
@@ -634,11 +632,8 @@
             var pv = data.permisos_vista || {};
             var puedeContactos = pv.contactos !== undefined ? !!pv.contactos : (esAdmin || perms.indexOf('contactos') !== -1);
             var puedeCV = pv.cv !== undefined ? !!pv.cv : (esAdmin || perms.indexOf('cv') !== -1);
-            var puedePrensa = pv.prensa !== undefined ? !!pv.prensa : (esAdmin || perms.indexOf('prensa') !== -1);
-
             userInfo.textContent = '';
             if (u.nombre || u.usuario) userInfo.textContent = (u.nombre || u.usuario) + ' · ' + (u.nivel || u.rol);
-            if (btnIrEditorPrensa) btnIrEditorPrensa.style.display = puedePrensa ? 'inline-flex' : 'none';
 
             if (!mantenerTab) {
                 var ambos = puedeContactos && puedeCV;
@@ -826,15 +821,9 @@
             .then(function (res) {
                 if (res && res.success && res.user) {
                     var u = res.user;
-                    var perms = Array.isArray(u.permisos) ? u.permisos : [];
                     var esAdmin = u.rol === 'admin';
-                    var puedeModulo = esAdmin || perms.indexOf('contactos') !== -1 || perms.indexOf('cv') !== -1;
-                    if (!puedeModulo) {
-                        if (perms.indexOf('prensa') !== -1) {
-                            window.location.href = '/redaccion.html';
-                            return;
-                        }
-                        msgEl.textContent = 'Esta cuenta no tiene permiso para el módulo de Contactos y Postulaciones.';
+                    if (!esAdmin) {
+                        msgEl.textContent = 'Acceso restringido exclusivamente al Administrador General.';
                         msgEl.className = 'lg-msg error';
                         return;
                     }
@@ -860,15 +849,14 @@
             fetch('/api/prensa_admin.php?action=logout', { method: 'POST' }).then(mostrarLogin);
         });
 
-        // Cuentas con permiso de Contactos o CV
+        // Cuenta exclusiva del Administrador General
         var qList = document.getElementById('admQuickAccountsList');
         fetch('/api/prensa_admin.php?action=accounts')
             .then(function (r) { return r.json(); })
             .then(function (res) {
                 var accs = (res && Array.isArray(res.accounts)) ? res.accounts : [];
                 var panelAccs = accs.filter(function (a) {
-                    var p = Array.isArray(a.permisos) ? a.permisos : [];
-                    return a.rol === 'admin' || p.indexOf('contactos') !== -1 || p.indexOf('cv') !== -1;
+                    return a.rol === 'admin';
                 });
                 qList.innerHTML = panelAccs.map(function (a, i) {
                     return '<button type="button" class="lg-acc-btn" data-idx="' + i + '">' +

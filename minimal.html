@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/main.css?v=2026t">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026w">
     <style>
         body.admin-standalone-body {
             margin: 0;
@@ -20,98 +20,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #1e293b;
         }
-        body.login-mode {
-            background: linear-gradient(135deg, #0a3567 0%, #12579b 52%, #2a7fd4 100%);
-        }
         .pd-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-
-        /* =================== LOGIN (shell igual que cv/contactos) =================== */
-        #vistaLogin {
-            min-height: 100vh;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 36px 18px;
-        }
-        .lg-card {
-            width: 100%;
-            max-width: 432px;
-            background: #ffffff;
-            border-radius: 18px;
-            padding: 40px 42px 28px;
-            text-align: center;
-            box-shadow: 0 26px 60px rgba(3, 17, 38, 0.4);
-        }
-        .lg-badge {
-            width: 74px; height: 74px; border-radius: 50%;
-            margin: 0 auto 20px;
-            background: linear-gradient(140deg, #1d529b, #0c376c);
-            display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 1.75rem;
-            box-shadow: 0 12px 26px rgba(9, 44, 92, 0.38);
-        }
-        .lg-title { margin: 0 0 7px; color: #1c4d8f; font-size: 1.52rem; font-weight: 800; letter-spacing: -0.01em; }
-        .lg-sub { margin: 0 0 24px; color: #5f7188; font-size: 0.95rem; }
-        .lg-form { text-align: left; }
-        .lg-label {
-            display: block; margin: 0 0 6px;
-            font-size: 0.74rem; font-weight: 800; letter-spacing: 0.09em;
-            color: #173e6e; text-transform: uppercase;
-        }
-        .lg-field { position: relative; margin-bottom: 15px; }
-        .lg-field .lg-icon {
-            position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
-            color: #8ba0b5; font-size: 0.9rem; pointer-events: none;
-        }
-        .lg-input {
-            width: 100%; padding: 12px 12px 12px 38px;
-            border: 1px solid #cdd9e5; border-radius: 9px;
-            font-size: 0.95rem; color: #1e293b; background: #fff;
-            font-family: inherit; box-sizing: border-box;
-        }
-        .lg-input::placeholder { color: #9fb0c0; }
-        .lg-input:focus { outline: 2px solid var(--alcasa-blue); outline-offset: 1px; border-color: var(--alcasa-blue); }
-        .lg-pass { padding-right: 42px; }
-        .lg-eye {
-            position: absolute; right: 7px; top: 50%; transform: translateY(-50%);
-            width: 30px; height: 30px; border: 0; border-radius: 6px;
-            background: transparent; color: #8ba0b5; cursor: pointer;
-        }
-        .lg-eye:hover { color: var(--alcasa-blue); background: #eaf3fb; }
-        .lg-btn {
-            width: 100%; margin-top: 4px; padding: 13px;
-            border: 0; border-radius: 9px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 9px;
-            background: linear-gradient(135deg, #0a3f7c, #1c72c0);
-            color: #ffffff; font: inherit; font-weight: 700; font-size: 1rem;
-            box-shadow: 0 7px 16px rgba(10, 63, 124, 0.28);
-            transition: var(--transition);
-        }
-        .lg-btn:hover { filter: brightness(1.09); }
-        .pd-msg {
-            display: none; margin-top: 12px; padding: 9px 12px;
-            border-radius: 8px; font-size: 0.85rem; font-weight: 600;
-        }
-        .pd-msg.error { display: block; background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
-        .pd-msg.info { display: block; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
-        .lg-foot { margin: 22px 0 0; font-size: 0.85rem; color: #64748b; }
-        .lg-foot i { color: var(--alcasa-accent); }
-        .lg-accounts {
-            margin-top: 16px; padding-top: 12px;
-            border-top: 1px dashed #dbe4ee; text-align: left;
-        }
-        .lg-accounts summary {
-            cursor: pointer; font-size: 0.82rem; font-weight: 700;
-            color: #334155;
-        }
-        .lg-accounts summary i { color: var(--alcasa-accent); }
-        .lg-acc-btn {
-            width: 100%; display: flex; justify-content: space-between; gap: 8px; align-items: center;
-            margin-top: 6px; padding: 7px 10px; cursor: pointer;
-            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
-            font-size: 0.78rem; font-weight: 600; color: #0f172a; text-align: left;
-        }
-        .lg-acc-btn:hover { border-color: var(--alcasa-blue); }
 
         /* =================== FRANJA SUPERIOR (distribución :5001, estilo copia) =================== */
         .pd-top {
@@ -444,7 +353,6 @@
             box-shadow: 0 7px 16px rgba(10, 63, 124, 0.3);
         }
         .nav-botones button:hover { filter: brightness(1.09); }
-        body.login-mode .nav-botones { display: none !important; }
 
         /* =================== PIE (distribución :5001, estilo copia) =================== */
         .pd-footer {
@@ -468,42 +376,10 @@
             .pd-grid { grid-template-columns: 1fr; }
             .pd-tabloide { flex-direction: column; }
             .pd-imagen-principal { width: 100%; }
-            .lg-card { padding: 30px 24px 22px; }
         }
     </style>
 </head>
 <body class="admin-standalone-body">
-
-    <!-- ==================== LOGIN (shell «Acceso Restringido», igual que Panel de CV/Contactos) ==================== -->
-    <section id="vistaLogin">
-        <div class="lg-card">
-            <div class="lg-badge"><i class="fas fa-newspaper"></i></div>
-            <h2 class="lg-title">Acceso Restringido</h2>
-            <p class="lg-sub">Periódico Digital · Gestión Editorial — CVG ALCASA</p>
-            <form id="formLoginPd" class="lg-form" autocomplete="off">
-                <label class="lg-label" for="username">Usuario</label>
-                <div class="lg-field">
-                    <i class="fas fa-user lg-icon"></i>
-                    <input type="text" id="username" name="usuario" class="lg-input" required placeholder="Ingrese su usuario" autocomplete="username">
-                </div>
-                <label class="lg-label" for="password">Contraseña</label>
-                <div class="lg-field">
-                    <i class="fas fa-key lg-icon"></i>
-                    <input type="password" id="password" name="password" class="lg-input lg-pass" required placeholder="Ingrese su contraseña" autocomplete="current-password">
-                    <button type="button" class="lg-eye" data-target="password" aria-label="Mostrar u ocultar contraseña"><i class="fas fa-eye"></i></button>
-                </div>
-                <button type="submit" class="lg-btn"><i class="fas fa-right-to-bracket"></i> Ingresar</button>
-                <div class="pd-msg" id="pdLoginMsg"></div>
-            </form>
-            <p class="lg-foot"><i class="fas fa-user-shield"></i> Credenciales por defecto: comunicacion / periodico2024</p>
-            <details class="lg-accounts">
-                <summary><i class="fas fa-key"></i> Cuentas autorizadas · Volver al Periódico</summary>
-                <button type="button" id="btnVolverPd" class="lg-acc-btn" style="margin-top:10px;"><span><i class="fas fa-arrow-left"></i> <strong>Periódico Digital</strong></span><span class="nivel" style="color:#64748b;font-weight:700;font-size:0.72rem;">Volver</span></button>
-                <a href="/index.html" class="lg-acc-btn" style="text-decoration:none;box-sizing:border-box;"><span><i class="fas fa-globe"></i> <strong>Portal Principal</strong></span><span class="nivel" style="color:#64748b;font-weight:700;font-size:0.72rem;">Inicio</span></a>
-                <div id="pdQuickAccountsList"></div>
-            </details>
-        </div>
-    </section>
 
     <!-- ==================== PERIÓDICO DIGITAL (distribución del portal :5001) ==================== -->
     <div id="vistaPd">
@@ -536,7 +412,6 @@
                 <ul class="pd-nav-links">
                     <li><a href="/minimal.html" id="navInicio"><i class="fas fa-house"></i> Inicio</a></li>
                     <li><a href="/index.html"><i class="fas fa-globe"></i> Portal</a></li>
-                    <li><a href="#" id="loginLink"><i class="fas fa-right-to-bracket" id="navSesIcon"></i> <span id="navSessionTxt">Iniciar Sesión</span></a></li>
                 </ul>
             </div>
         </nav>
@@ -666,9 +541,7 @@
     <script>
     (function () {
         var API = '/api/noticias.php';
-        var SESION_URL = '/api/prensa_admin.php';
         var PORTAL = 'http://alcasa.com.ve:5001';
-        var usuario = null;      /* usuario con sesión (prensa) */
         var pagActual = 1;
         var totalPaginas = 72;
         var filtros = { q: '', fecha: '', mes: '', anio: '' };
@@ -694,27 +567,7 @@
             });
         }
 
-        function tienePrensa(u) {
-            if (!u) return false;
-            if (u.rol === 'admin') return true;
-            var p = Array.isArray(u.permisos) ? u.permisos : [];
-            return p.indexOf('prensa') !== -1;
-        }
-
         /* ---------- Estados de la página ---------- */
-        function mostrarVistaLogin() {
-            document.getElementById('vistaNoticia').style.display = 'none';
-            closeModales();
-            document.getElementById('vistaLogin').style.display = 'flex';
-            document.getElementById('vistaPd').style.display = 'none';
-            document.body.classList.add('login-mode');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        function mostrarVistaPd() {
-            document.getElementById('vistaLogin').style.display = 'none';
-            document.getElementById('vistaPd').style.display = 'block';
-            document.body.classList.remove('login-mode');
-        }
         function verLista(visible) {
             document.getElementById('vistaLista').style.display = visible === false ? 'none' : 'block';
             document.getElementById('vistaNoticia').style.display = visible === false ? 'block' : 'none';
@@ -734,14 +587,6 @@
             var icono = tipo === 'ok' ? 'fa-circle-check' : 'fa-circle-exclamation';
             box.innerHTML = '<div class="pd-alert ' + (tipo === 'ok' ? 'ok' : 'danger') + '"><i class="fas ' + icono + '"></i> <span>' + esc(texto) + '</span></div>';
             box.style.display = texto ? 'flex' : 'none';
-        }
-
-        function loginMsg(tipo, texto) {
-            var m = document.getElementById('pdLoginMsg');
-            if (!m) return;
-            if (!texto) { m.className = 'pd-msg'; m.innerHTML = ''; return; }
-            m.className = 'pd-msg ' + (tipo || 'error');
-            m.innerHTML = '<i class="fas ' + (tipo === 'error' ? 'fa-circle-exclamation' : 'fa-circle-info') + '"></i> ' + esc(texto);
         }
 
         /* ---------- Carga de noticias (páginas del servidor vivo :5001) ---------- */
@@ -1113,90 +958,11 @@
             });
         }
 
-        /* ---------- Sesión (login del Periódico redirige al módulo aparte de Redacción) ---------- */
-        var formLogin = document.getElementById('formLoginPd');
-        formLogin.addEventListener('submit', function (e) {
-            e.preventDefault();
-            var data = new FormData(formLogin);
-            loginMsg('info', 'Verificando credenciales...');
-            fetch(SESION_URL + '?action=login', { method: 'POST', body: data })
-                .then(function (r) { return r.json(); })
-                .then(function (res) {
-                    if (res && res.success && res.user && tienePrensa(res.user)) {
-                        window.location.href = '/redaccion.html';
-                    } else if (res && res.success && res.user) {
-                        var perms = Array.isArray(res.user.permisos) ? res.user.permisos : [];
-                        if (perms.indexOf('contactos') !== -1 || perms.indexOf('cv') !== -1) {
-                            window.location.href = '/contactos.html';
-                            return;
-                        }
-                        loginMsg('error', 'Esta cuenta no tiene permisos para la gestión editorial del Periódico Digital.');
-                    } else {
-                        loginMsg('error', (res && res.error) || 'Usuario o contraseña incorrectos.');
-                    }
-                })
-                .catch(function () {
-                    loginMsg('error', 'No se pudo conectar con el servidor de autenticación.');
-                });
-        });
-
-        document.getElementById('loginLink').addEventListener('click', function (e) {
-            e.preventDefault();
-            loginMsg('', '');
-            mostrarVistaLogin();
-        });
-
-        document.getElementById('btnVolverPd').addEventListener('click', function () {
-            mostrarVistaPd();
-        });
-
-        /* Autocompletado de cuentas editoriales en el login */
-        var qListPd = document.getElementById('pdQuickAccountsList');
-        if (qListPd) {
-            fetch(SESION_URL + '?action=accounts')
-                .then(function (r) { return r.json(); })
-                .then(function (res) {
-                    var accs = (res && Array.isArray(res.accounts)) ? res.accounts : [];
-                    var prensaAccs = accs.filter(function (a) { return tienePrensa(a); });
-                    qListPd.innerHTML = prensaAccs.map(function (a, i) {
-                        return '<button type="button" class="lg-acc-btn" data-idx="' + i + '">' +
-                            '<span><i class="fas fa-user-check" style="color:var(--alcasa-accent);"></i> <strong>' + esc(a.usuario) + '</strong> / <code>' + esc(a.password) + '</code></span>' +
-                            '<span class="nivel" style="color:#64748b;font-weight:700;font-size:0.72rem;">' + esc(a.nombre || a.usuario) + '</span>' +
-                        '</button>';
-                    }).join('');
-                    Array.prototype.forEach.call(qListPd.querySelectorAll('button[data-idx]'), function (b) {
-                        b.addEventListener('click', function () {
-                            var a = prensaAccs[parseInt(this.getAttribute('data-idx') || '0', 10)];
-                            if (!a) return;
-                            document.getElementById('username').value = a.usuario;
-                            document.getElementById('password').value = a.password;
-                        });
-                    });
-                })
-                .catch(function () {});
-        }
-
-        /* Visor de contraseña (ojo, como en el login de contactos) */
-        (function visorContrasena() {
-            Array.prototype.forEach.call(document.querySelectorAll('.lg-eye'), function (btn) {
-                var visible = false;
-                btn.addEventListener('click', function () {
-                    var input = document.getElementById(this.getAttribute('data-target'));
-                    if (!input) return;
-                    visible = !visible;
-                    input.type = visible ? 'text' : 'password';
-                    btn.innerHTML = visible ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
-                });
-            });
-        })();
-
-        /* Arranque: página 1 o noticia individual (?noticia=ID) o vista login (?login=1) */
+        /* Arranque: página 1 o noticia individual (?noticia=ID) */
         var qs = new URLSearchParams(location.search);
         var urlDetalle = qs.get('noticia');
         cargarPagina(1);
-        if (qs.get('login') === '1') {
-            mostrarVistaLogin();
-        } else if (urlDetalle) {
+        if (urlDetalle) {
             history.replaceState({ noticia: urlDetalle }, '', location.href);
             abrirDetalle(urlDetalle, false);
         }

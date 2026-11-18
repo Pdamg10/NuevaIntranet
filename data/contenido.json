@@ -1075,6 +1075,107 @@
       "imagen": "/assets/img/galeria/social-jornada.jpg"
     }
   ],
+  "galeria_colada_continua": [
+    {
+      "id": "cc-01",
+      "titulo": "Alimentación de Aluminio Líquido en Canal de Colada",
+      "categoria": "Planta de Laminación · Colada Continua",
+      "etapa": "01 · Alimentación y Fusión",
+      "desc": "Operador con indumentaria aluminizada de protección térmica supervisando el flujo de aluminio fundido en el canal distribuidor hacia la boquilla de Colada Continua.",
+      "thumb": "/assets/img/galeria/colada-continua/thumbs/colada-continua-06-thumb.jpg",
+      "imagen": "/assets/img/galeria/colada-continua/colada-continua-06.jpg",
+      "orientacion": "portrait",
+      "destacada": true
+    },
+    {
+      "id": "cc-02",
+      "titulo": "Salida de Banda Continua desde los Rodillos de Colada",
+      "categoria": "Planta de Laminación · Colada Continua",
+      "etapa": "02 · Solidificación Directa",
+      "desc": "Trabajador con careta facial térmica guiando la salida de la cinta de aluminio recién solidificada desde los rodillos enfriados por agua de la máquina de Colada Continua.",
+      "thumb": "/assets/img/galeria/colada-continua/thumbs/colada-continua-01-thumb.jpg",
+      "imagen": "/assets/img/galeria/colada-continua/colada-continua-01.jpg",
+      "orientacion": "portrait",
+      "destacada": false
+    },
+    {
+      "id": "cc-03",
+      "titulo": "Inspección Visual de Acabado y Planitud Superficial",
+      "categoria": "Planta de Laminación · Colada Continua",
+      "etapa": "03 · Control de Calidad",
+      "desc": "Verificación directa en línea del acabado metálico, uniformidad superficial y espesor de la banda continua de aluminio a la salida de los rodillos.",
+      "thumb": "/assets/img/galeria/colada-continua/thumbs/colada-continua-02-thumb.jpg",
+      "imagen": "/assets/img/galeria/colada-continua/colada-continua-02.jpg",
+      "orientacion": "portrait",
+      "destacada": false
+    },
+    {
+      "id": "cc-04",
+      "titulo": "Cinta Continua de Aluminio en Tren de Colada",
+      "categoria": "Planta de Laminación · Colada Continua",
+      "etapa": "04 · Avance de Banda",
+      "desc": "Vista frontal de la banda brillante de aluminio primario avanzando desde los cilindros de colada continua hacia la estación de cizallado y bobinado.",
+      "thumb": "/assets/img/galeria/colada-continua/thumbs/colada-continua-07-thumb.jpg",
+      "imagen": "/assets/img/galeria/colada-continua/colada-continua-07.jpg",
+      "orientacion": "portrait",
+      "destacada": true
+    },
+    {
+      "id": "cc-05",
+      "titulo": "Alineación y Corte en Estación de Cizalla Industrial",
+      "categoria": "Planta de Laminación · Colada Continua",
+      "etapa": "05 · Cizalla y Guía",
+      "desc": "Operador con guantes térmicos y barra guía posicionando el cabezal de la lámina de aluminio en la estación de cizalla de la línea de Colada Continua.",
+      "thumb": "/assets/img/galeria/colada-continua/thumbs/colada-continua-08-thumb.jpg",
+      "imagen": "/assets/img/galeria/colada-continua/colada-continua-08.jpg",
+      "orientacion": "portrait",
+      "destacada": false
+    },
+    {
+      "id": "cc-06",
+      "titulo": "Control Operativo desde Consola de Mando Eléctrico",
+      "categoria": "Planta de Laminación · Colada Continua",
+      "etapa": "06 · Automatización y Mando",
+      "desc": "Supervisión en tiempo real de velocidad de rodillos, temperatura y parámetros electromecánicos desde el pupitre de control de la unidad de Colada Continua.",
+      "thumb": "/assets/img/galeria/colada-continua/thumbs/colada-continua-05-thumb.jpg",
+      "imagen": "/assets/img/galeria/colada-continua/colada-continua-05.jpg",
+      "orientacion": "portrait",
+      "destacada": false
+    },
+    {
+      "id": "cc-07",
+      "titulo": "Vista Panorámica de la Línea de Colada Continua",
+      "categoria": "Planta de Laminación · Colada Continua",
+      "etapa": "07 · Línea Integral",
+      "desc": "Recorrido completo del tren de Colada Continua: rodillos de solidificación, cizalla industrial, cinta de aluminio en tránsito y enrolladora de bobinas.",
+      "thumb": "/assets/img/galeria/colada-continua/thumbs/colada-continua-04-thumb.jpg",
+      "imagen": "/assets/img/galeria/colada-continua/colada-continua-04.jpg",
+      "orientacion": "portrait",
+      "destacada": false
+    },
+    {
+      "id": "cc-08",
+      "titulo": "Enrollado de Bobina Madre de Aluminio",
+      "categoria": "Planta de Laminación · Colada Continua",
+      "etapa": "08 · Bobinado Industrial",
+      "desc": "Formación de la bobina madre de aluminio en el mandril enrollador al final de la línea de Colada Continua, lista para reducción en los trenes de laminación.",
+      "thumb": "/assets/img/galeria/colada-continua/thumbs/colada-continua-09-thumb.jpg",
+      "imagen": "/assets/img/galeria/colada-continua/colada-continua-09.jpg",
+      "orientacion": "portrait",
+      "destacada": true
+    },
+    {
+      "id": "cc-09",
+      "titulo": "Clase Trabajadora de Colada Continua — Planta de Laminación",
+      "categoria": "Planta de Laminación · Colada Continua",
+      "etapa": "09 · Talento Alcasiano",
+      "desc": "Equipo operativo de CVG Alcasa en Planta de Laminación reafirmando el compromiso técnico y productivo en la línea de Colada Continua.",
+      "thumb": "/assets/img/galeria/colada-continua/thumbs/colada-continua-03-thumb.jpg",
+      "imagen": "/assets/img/galeria/colada-continua/colada-continua-03.jpg",
+      "orientacion": "portrait",
+      "destacada": true
+    }
+  ],
   "contacto": {
     "direccion": "Zona Industrial Matanzas, Avenida Fuerzas Armadas, Ciudad Guayana, Estado Bolívar, Venezuela",
     "horario": "Lun - Vie: 7:00am – 4:00pm",

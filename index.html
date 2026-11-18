@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/main.css?v=2026t">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026w">
 </head>
 <body id="inicio">
 
@@ -737,22 +737,29 @@
              7. GALERÍA DE VIDEOS Y PROCESOS (ESTILO SALA DE PRENSA CON MINIATURA GIF)
              ========================================= -->
         <section id="galeria" class="fold-reveal">
-            <div class="section-header">
-                <span class="prensa-kicker-badge">
-                    <i class="fas fa-photo-film"></i> Galería Audiovisual y Fotográfica · CVG Alcasa
-                </span>
-                <h2 class="blur-text" data-delay="150" data-direction="top" data-animate-by="words">Galería de Procesos</h2>
-                <p>Conoce nuestras plantas en acción con vista previa animada (GIF) y accede a la galería clasificada de videos completos y fotografías</p>
+            <div class="galeria-dashboard-header is-main">
+                <div class="galeria-dashboard-top">
+                    <div class="galeria-dashboard-title-group">
+                        <span class="galeria-subblock-kicker">
+                            <i class="fas fa-photo-film"></i> Galería Audiovisual y Fotográfica · CVG Alcasa
+                        </span>
+                        <h2 class="blur-text" data-delay="150" data-direction="top" data-animate-by="words">Galería de Procesos</h2>
+                    </div>
+                    <span class="galeria-subblock-badge"><i class="fas fa-industry"></i> Videos y Fotografías</span>
+                </div>
+                <p class="galeria-dashboard-desc">
+                    Conoce nuestras plantas en acción a través de videos institucionales y el registro fotográfico de nuestras áreas productivas de <strong>Laminación</strong>, <strong>Fundición</strong>, <strong>Extrusión</strong> y <strong>Compromiso Social</strong>.
+                </p>
             </div>
 
-            <!-- Lista horizontal estilo Sala de Prensa con miniaturas GIF animadas de cada video -->
+            <!-- Lista horizontal de videos institucionales -->
             <div class="prensa-list-horizontal" id="galeriaPrensaStyleList">
 
                 <!-- Video 1: Planta de Laminación -->
                 <article class="prensa-api-card prensa-card-horizontal is-top-news" data-video-index="0">
-                    <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="0" data-video-title="Planta de Laminación en Frío y Caliente" data-video-badge="Planta de Laminación" data-video-poster="/assets/img/video-lami.jpg" data-video-src="/assets/media/videos/video-laminacion.mp4" data-video-desc="Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación Clecim-Cosim y Laminador en Frío." title="Clic para reproducir el video completo">
-                        <img src="/assets/img/galeria/gif-laminacion.gif" alt="GIF Planta de Laminación en Frío y Caliente" class="prensa-api-thumb">
-                        <span class="galeria-gif-badge"><i class="fas fa-film"></i> GIF · 00:41</span>
+                    <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="0" data-video-title="Planta de Laminación en Frío y Caliente" data-video-badge="Planta de Laminación" data-video-poster="/assets/img/video-lami.jpg" data-video-src="/assets/media/videos/video-laminacion.mp4" data-video-desc="Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación Clecim-Cosim y Laminador en Frío." title="Clic para reproducir el video">
+                        <img src="/assets/img/galeria/gif-laminacion.gif" alt="Planta de Laminación en Frío y Caliente" class="prensa-api-thumb">
+                        <span class="galeria-gif-badge"><i class="fas fa-play"></i> 00:41</span>
                     </div>
                     <div class="prensa-api-card-body">
                         <div class="prensa-row-meta">
@@ -779,9 +786,9 @@
 
                 <!-- Video 2: Planta de Fundición -->
                 <article class="prensa-api-card prensa-card-horizontal" data-video-index="1">
-                    <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="1" data-video-title="Planta de Fundición y Hornos de Fusión" data-video-badge="Planta de Fundición" data-video-poster="/assets/img/video-fund.jpg" data-video-src="/assets/media/videos/video-fundicion.mp4" data-video-desc="Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de cilindros tochos 6063 de calidad metalúrgica internacional." title="Clic para reproducir el video completo">
-                        <img src="/assets/img/galeria/gif-fundicion.gif" alt="GIF Planta de Fundición y Hornos de Fusión" class="prensa-api-thumb">
-                        <span class="galeria-gif-badge"><i class="fas fa-film"></i> GIF · 01:12</span>
+                    <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="1" data-video-title="Planta de Fundición y Hornos de Fusión" data-video-badge="Planta de Fundición" data-video-poster="/assets/img/video-fund.jpg" data-video-src="/assets/media/videos/video-fundicion.mp4" data-video-desc="Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de cilindros tochos 6063 de calidad metalúrgica internacional." title="Clic para reproducir el video">
+                        <img src="/assets/img/galeria/gif-fundicion.gif" alt="Planta de Fundición y Hornos de Fusión" class="prensa-api-thumb">
+                        <span class="galeria-gif-badge"><i class="fas fa-play"></i> 01:12</span>
                     </div>
                     <div class="prensa-api-card-body">
                         <div class="prensa-row-meta">
@@ -808,9 +815,9 @@
 
                 <!-- Video 3: Planta de Extrusión -->
                 <article class="prensa-api-card prensa-card-horizontal" data-video-index="2">
-                    <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="2" data-video-title="Planta de Extrusión y Prensas de Perfilería" data-video-badge="Planta de Extrusión" data-video-poster="/assets/img/video-ext.jpg" data-video-src="/assets/media/videos/video-extrusion.mp4" data-video-desc="Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida para la industria de la construcción y el transporte." title="Clic para reproducir el video completo">
-                        <img src="/assets/img/galeria/gif-extrusion.gif" alt="GIF Planta de Extrusión y Prensas de Perfilería" class="prensa-api-thumb">
-                        <span class="galeria-gif-badge"><i class="fas fa-film"></i> GIF · 01:00</span>
+                    <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="2" data-video-title="Planta de Extrusión y Prensas de Perfilería" data-video-badge="Planta de Extrusión" data-video-poster="/assets/img/video-ext.jpg" data-video-src="/assets/media/videos/video-extrusion.mp4" data-video-desc="Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida para la industria de la construcción y el transporte." title="Clic para reproducir el video">
+                        <img src="/assets/img/galeria/gif-extrusion.gif" alt="Planta de Extrusión y Prensas de Perfilería" class="prensa-api-thumb">
+                        <span class="galeria-gif-badge"><i class="fas fa-play"></i> 01:00</span>
                     </div>
                     <div class="prensa-api-card-body">
                         <div class="prensa-row-meta">
@@ -837,9 +844,9 @@
 
                 <!-- Video 4: Taller Soberano de Ayudas Técnicas -->
                 <article class="prensa-api-card prensa-card-horizontal" data-video-index="3">
-                    <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="3" data-video-title="Taller Soberano de Ayudas Técnicas" data-video-badge="Compromiso Social" data-video-poster="/assets/img/video-at.jpg" data-video-src="/assets/media/videos/video-ayudas-tecnicas.mp4" data-video-desc="Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables." title="Clic para reproducir el video completo">
-                        <img src="/assets/img/galeria/gif-ayudas.gif" alt="GIF Taller Soberano de Ayudas Técnicas" class="prensa-api-thumb">
-                        <span class="galeria-gif-badge"><i class="fas fa-film"></i> GIF · 00:25</span>
+                    <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="3" data-video-title="Taller Soberano de Ayudas Técnicas" data-video-badge="Compromiso Social" data-video-poster="/assets/img/video-at.jpg" data-video-src="/assets/media/videos/video-ayudas-tecnicas.mp4" data-video-desc="Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables." title="Clic para reproducir el video">
+                        <img src="/assets/img/galeria/gif-ayudas.gif" alt="Taller Soberano de Ayudas Técnicas" class="prensa-api-thumb">
+                        <span class="galeria-gif-badge"><i class="fas fa-play"></i> 00:25</span>
                     </div>
                     <div class="prensa-api-card-body">
                         <div class="prensa-row-meta">
@@ -866,11 +873,73 @@
 
             </div>
 
-            <!-- Botón de acceso a la Sección de Galería Completa (Videos + Fotografías clasificadas) -->
+            <!-- Vitrina Fotográfica Destacada: Línea de Colada Continua -->
+            <div class="galeria-home-colada-wrap" id="homeColadaSection">
+                <div class="galeria-dashboard-header">
+                    <div class="galeria-dashboard-top">
+                        <div class="galeria-dashboard-title-group">
+                            <span class="galeria-subblock-kicker"><i class="fas fa-camera-retro"></i> Planta de Laminación · Registro Fotográfico</span>
+                            <h3>Línea de Colada Continua en Acción</h3>
+                        </div>
+                        <span class="galeria-subblock-badge">9 Fotografías · Planta de Laminación</span>
+                    </div>
+                    <p class="galeria-dashboard-desc">
+                        Imágenes operativas del proceso de <strong>Colada Continua</strong> y de nuestra clase trabajadora transformando aluminio primario en bobinas para el sector industrial venezolano.
+                    </p>
+                </div>
+                <div class="galeria-colada-home-grid" id="homeColadaGrid"></div>
+            </div>
+
+            <!-- Botón de acceso a la Sección de Galería Completa (Videos + Fotografías) -->
             <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 26px;">
+                <a href="/galeria.html#galeriaColadaSection" class="btn-outline-corp">
+                    <i class="fas fa-images"></i> Ver Serie de Colada Continua
+                </a>
                 <a href="/galeria.html" class="btn-ver-todos-productos">
                     <i class="fas fa-photo-film"></i> Explorar Galería Completa <i class="fas fa-arrow-right"></i>
                 </a>
+            </div>
+
+            <!-- Ventana Flotante (Lightbox) de Fotografías -->
+            <div class="ficha-modal-backdrop" id="galeriaLightboxModal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+                <div class="ficha-modal-dialog galeria-lightbox-dialog">
+                    <div class="ficha-header">
+                        <div>
+                            <div class="ficha-kicker-row">
+                                <span class="ficha-kicker-badge" id="lightboxCatBadge">Planta de Laminación · Colada Continua</span>
+                                <span class="ficha-kicker-en" id="lightboxCounter">Fotografía 1 de 9</span>
+                            </div>
+                            <h4><i class="fas fa-camera" style="color: var(--alcasa-accent-light);"></i> <span id="lightboxTitle">Línea de Colada Continua</span></h4>
+                        </div>
+                        <button type="button" class="ficha-close-btn" id="lightboxCloseBtn" aria-label="Cerrar fotografía">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="ficha-modal-body galeria-lightbox-body">
+                        <div class="galeria-lightbox-stage">
+                            <button type="button" class="galeria-lightbox-nav prev" id="lightboxPrevBtn" aria-label="Fotografía anterior">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <img src="/assets/img/galeria/colada-continua/colada-continua-06.jpg" alt="Fotografía CVG Alcasa" id="lightboxImage" class="galeria-lightbox-img">
+                            <button type="button" class="galeria-lightbox-nav next" id="lightboxNextBtn" aria-label="Fotografía siguiente">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <p class="galeria-lightbox-desc" id="lightboxDesc"></p>
+                        <div class="galeria-lightbox-thumbs" id="lightboxThumbs" aria-label="Fotografías de la serie"></div>
+                    </div>
+                    <div class="ficha-actions">
+                        <a href="/assets/img/galeria/colada-continua/colada-continua-06.jpg" target="_blank" rel="noopener noreferrer" class="btn-modal-secondary" id="lightboxOpenRawBtn">
+                            <i class="fas fa-up-right-from-square"></i> Ver Imagen Completa
+                        </a>
+                        <a href="/galeria.html#galeriaColadaSection" class="btn-modal-secondary">
+                            <i class="fas fa-photo-film"></i> Ir a Galería
+                        </a>
+                        <button type="button" class="btn-modal-close" id="lightboxCloseFooterBtn" style="margin-left: auto;">
+                            <i class="fas fa-times"></i> Cerrar Vista
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <!-- Ventana Flotante (Modal) de Reproducción de Video -->
@@ -1046,6 +1115,6 @@
         </div>
     </footer>
 
-    <script src="/assets/js/app.js?v=2026v"></script>
+    <script src="/assets/js/app.js?v=2026y"></script>
 </body>
 </html>
