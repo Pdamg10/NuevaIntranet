@@ -212,6 +212,14 @@
     window.addEventListener('wheel', cancelSmoothScroll, { passive: true });
     window.addEventListener('touchstart', cancelSmoothScroll, { passive: true });
 
+    function setScrollYInstant(y) {
+        try {
+            window.scrollTo({ top: y, left: 0, behavior: 'instant' });
+        } catch (err) {
+            window.scrollTo(0, y);
+        }
+    }
+
     function smoothScrollTo(targetY, duration) {
         duration = duration || 500;
         cancelSmoothScroll();
@@ -219,7 +227,7 @@
         var destY = Math.max(0, targetY);
         var diff = destY - startY;
         if (Math.abs(diff) < 2) {
-            window.scrollTo(0, destY);
+            setScrollYInstant(destY);
             return;
         }
         var startTime = performance.now();
@@ -229,15 +237,33 @@
             var ease = progress < 0.5
                 ? 4 * progress * progress * progress
                 : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-            window.scrollTo(0, Math.round(startY + diff * ease));
+            setScrollYInstant(Math.round(startY + diff * ease));
             if (progress < 1) {
                 activeScrollRaf = requestAnimationFrame(step);
             } else {
-                window.scrollTo(0, destY);
+                setScrollYInstant(destY);
                 activeScrollRaf = null;
             }
         }
         activeScrollRaf = requestAnimationFrame(step);
+    }
+
+    function scrollToAnchorElement(targetElement, duration, forceHeaderOffset) {
+        if (!targetElement) return;
+        targetElement.classList.add('revealed');
+        var parentReveal = targetElement.closest('.fold-reveal');
+        if (parentReveal) parentReveal.classList.add('revealed');
+        $$('.fold-reveal', targetElement).forEach(function (el) {
+            el.classList.add('revealed');
+        });
+
+        var currentY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        var rawDest = targetElement.getBoundingClientRect().top + currentY;
+        var headerEl = $('#site-header') || $('#header-container');
+        var headerHeight = headerEl ? headerEl.offsetHeight : 105;
+        var goingUp = rawDest < currentY;
+        var offset = (forceHeaderOffset || goingUp) ? (headerHeight + 16) : 24;
+        smoothScrollTo(Math.max(0, rawDest - offset), duration || 520);
     }
 
     function bindSmoothScrollLinks(root) {
@@ -275,20 +301,24 @@
 
                 var hashIndex = rawHref.indexOf('#');
                 if (hashIndex === -1) return;
+                var linkPath = rawHref.slice(0, hashIndex);
+                var currentPath = (window.location.pathname || '/').toLowerCase();
+                var isCurrentHome = currentPath === '/' || currentPath.endsWith('/index.html');
+                var linkIsHome = linkPath === '/' || linkPath.toLowerCase() === '/index.html' || linkPath.toLowerCase() === 'index.html';
+                if (linkPath && !(linkIsHome && isCurrentHome) && linkPath.toLowerCase() !== currentPath) {
+                    return;
+                }
+
                 var targetId = rawHref.slice(hashIndex);
                 if (!targetId || targetId === '#') return;
 
                 var targetElement = $(targetId);
                 if (targetElement) {
                     e.preventDefault();
-                    targetElement.classList.add('revealed');
-                    var parentReveal = targetElement.closest('.fold-reveal');
-                    if (parentReveal) parentReveal.classList.add('revealed');
-
-                    var elementPosition = targetElement.getBoundingClientRect().top;
-                    var rawDest = elementPosition + (window.pageYOffset || document.documentElement.scrollTop || 0);
-                    var headerOffset = 105;
-                    smoothScrollTo(rawDest - headerOffset, 520);
+                    scrollToAnchorElement(targetElement, 520, false);
+                    if (window.history && window.history.replaceState) {
+                        try { window.history.replaceState(null, '', targetId); } catch (err) {}
+                    }
                 }
             });
         });
@@ -381,13 +411,11 @@
                                     '</a>' +
                                     '<ul class="dropdown-menu">' +
                                         '<li><a href="/index.html#productos">Destacados en Inicio (2)</a></li>' +
-                                        '<li><a href="/productos.html">Catálogo Completo 2025 (32)</a></li>' +
-                                        '<li><a href="/productos.html?linea=Fundición">Cilindros / Fundición (2)</a></li>' +
-                                        '<li><a href="/productos.html?linea=Extrusión">Perfilería / Extrusión (24)</a></li>' +
-                                        '<li><a href="/productos.html?linea=Laminación">Laminados / Laminación (6)</a></li>' +
+                                        '<li><a href="/productos.html">Catálogo Completo 2025 (33)</a></li>' +
+                                        '<li><a href="/productos.html?linea=Fundición">Productos de Fundición</a></li>' +
+                                        '<li><a href="/productos.html?linea=Extrusión">Productos de Extrusión</a></li>' +
+                                        '<li><a href="/productos.html?linea=Laminación">Productos de Laminación</a></li>' +
                                         '<li><a href="/index.html#faq">Preguntas Frecuentes (FAQ)</a></li>' +
-                                        '<li class="dropdown-divider"></li>' +
-                                        '<li><a href="/assets/media/CATALOGO_CVG_ALCASA_2025.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf" style="margin-right:6px;color:var(--alcasa-accent-light);"></i>Descargar Catálogo CVG Alcasa 2025 (PDF)</a></li>' +
                                     '</ul>' +
                                 '</li>' +
                                 '<li>' +
@@ -433,7 +461,7 @@
                                     '</ul>' +
                                 '</li>' +
                                 '<li class="nav-item-cta">' +
-                                    '<a href="#contacto">Contacto</a>' +
+                                    '<a href="/index.html#contacto-directo">Contacto</a>' +
                                 '</li>' +
                             '</ul>' +
                         '</nav>' +
@@ -479,40 +507,62 @@
             });
         }
 
-        var fadeEl = $('#headerScrollFade');
         var headerContainer = $('#site-header') || $('#header-container');
 
         if (headerContainer) {
             if (headerContainer.dataset.scrollBound !== '1') {
                 headerContainer.dataset.scrollBound = '1';
+                var lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+                var isHeaderHidden = false;
+                var DOWN_THRESHOLD = 6;
+                var UP_THRESHOLD = 4;
+                var HIDE_AFTER = 130;
+
+                var applyHeaderState = function (hidden, scrollY) {
+                    var liveFadeEl = $('#headerScrollFade');
+                    var isScrolled = scrollY > 90;
+                    headerContainer.classList.toggle('header-scrolled', isScrolled);
+                    headerContainer.classList.toggle('header-hidden-scroll', hidden);
+                    headerContainer.style.opacity = hidden ? '0' : '1';
+                    headerContainer.style.transform = hidden ? 'translateY(-105%)' : 'translateY(0)';
+                    headerContainer.style.pointerEvents = hidden ? 'none' : 'auto';
+
+                    if (liveFadeEl) {
+                        var fadeRatio = (!hidden && scrollY <= 90) ? Math.max(0, 1 - (scrollY / 90)) : 0;
+                        liveFadeEl.style.opacity = fadeRatio.toFixed(3);
+                        liveFadeEl.style.transform = 'translateY(' + (-Math.round((1 - fadeRatio) * 18)) + 'px)';
+                    }
+                };
+
                 var onScroll = function () {
+                    var scrollY = Math.max(0, window.pageYOffset || document.documentElement.scrollTop || 0);
                     var mainNavEl = $('#mainNav');
+
                     if (mainNavEl && mainNavEl.classList.contains('active')) {
-                        headerContainer.style.opacity = '1';
-                        headerContainer.style.transform = 'translateY(0)';
-                        headerContainer.style.pointerEvents = 'auto';
-                        headerContainer.classList.remove('header-hidden-scroll');
+                        isHeaderHidden = false;
+                        applyHeaderState(false, scrollY);
+                        lastScrollY = scrollY;
                         return;
                     }
 
-                    var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-                    var fadeDistance = 220;
-                    var ratio = Math.max(0, Math.min(1, 1 - (scrollY / fadeDistance)));
-                    var shiftY = -Math.round((1 - ratio) * 115);
-
-                    headerContainer.style.opacity = ratio.toFixed(3);
-                    headerContainer.style.transform = 'translateY(' + shiftY + 'px)';
-                    headerContainer.style.pointerEvents = ratio <= 0.08 ? 'none' : 'auto';
-                    headerContainer.classList.toggle('header-scrolled', scrollY > 40);
-                    headerContainer.classList.toggle('header-hidden-scroll', ratio <= 0.08);
-
-                    if (fadeEl) {
-                        fadeEl.style.opacity = ratio.toFixed(3);
-                        fadeEl.style.transform = 'translateY(' + (-Math.round((1 - ratio) * 18)) + 'px)';
+                    var delta = scrollY - lastScrollY;
+                    if (scrollY <= 40) {
+                        isHeaderHidden = false;
+                    } else if (delta > DOWN_THRESHOLD && scrollY > HIDE_AFTER) {
+                        var dropdownHovered = !!headerContainer.querySelector('.nav-item-has-dropdown:hover');
+                        if (!dropdownHovered) {
+                            isHeaderHidden = true;
+                        }
+                    } else if (delta < -UP_THRESHOLD) {
+                        isHeaderHidden = false;
                     }
+
+                    lastScrollY = scrollY;
+                    applyHeaderState(isHeaderHidden, scrollY);
                 };
+
                 window.addEventListener('scroll', onScroll, { passive: true });
-                onScroll();
+                applyHeaderState(false, lastScrollY);
             }
         }
 
@@ -840,7 +890,7 @@
             var lineaStr = (prod && prod.linea) || def.linea || 'Catálogo 2025';
             var nombreProd = (prod && prod.nombre) || def.nombre || def.titulo;
             var nombreEn = (prod && prod.nombre_en) || def.nombre_en || 'CVG Alcasa Official Product';
-            var imgProd = (prod && prod.img) || def.img || '/assets/img/productos/cilindros-tochos.jpg';
+            var imgProd = (prod && (prod.imagen || prod.img)) || def.img || '/assets/img/productos/cilindros-tochos.jpg';
             var descProd = (prod && prod.desc) || def.desc || '';
             var specProd = (prod && prod.spec) || def.spec || '';
             var codigosTabla = (prod && Array.isArray(prod.codigos_tabla) && prod.codigos_tabla.length)
@@ -887,6 +937,14 @@
                 if (imgEl) {
                     imgEl.src = data.img;
                     imgEl.alt = data.titulo + ' - CVG Alcasa';
+                    imgEl.title = 'Clic para abrir imagen en resolución completa';
+                    imgEl.style.cursor = 'zoom-in';
+                    if (imgEl.dataset.zoomBound !== '1') {
+                        imgEl.dataset.zoomBound = '1';
+                        imgEl.addEventListener('click', function () {
+                            if (this.src) window.open(this.src, '_blank', 'noopener');
+                        });
+                    }
                 }
                 if (descEl) descEl.textContent = data.desc;
                 if (specResumenEl) {
@@ -962,12 +1020,9 @@
                     : 'Hola, deseo cotizar y conocer disponibilidad del producto oficial: ' + producto + '.';
             }
 
-            var formSection = $('#contacto');
+            var formSection = $('#contacto-directo') || $('#contacto');
             if (formSection) {
-                var headerEl = $('#site-header') || $('#header-container');
-                var headerOffset = headerEl ? headerEl.offsetHeight + 12 : 105;
-                var offsetPosition = formSection.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - headerOffset;
-                smoothScrollTo(offsetPosition, 520);
+                scrollToAnchorElement(formSection, 520, false);
                 var nombreInput = $('#contacto-nombre') || $('input[name="nombre"]', formSection);
                 if (nombreInput) setTimeout(function () { nombreInput.focus(); }, 550);
             }
@@ -1072,32 +1127,18 @@
                         ? '<span class="catalog-item-featured-tag"><i class="fas fa-star"></i> Destacado en Inicio</span>'
                         : '';
 
-                    var tablaRows = '';
+                    var codigosChips = '';
                     if (Array.isArray(p.codigos_tabla) && p.codigos_tabla.length) {
-                        tablaRows = '' +
-                            '<div class="catalog-item-table-wrap">' +
-                                '<table class="catalog-item-table">' +
-                                    '<thead>' +
-                                        '<tr>' +
-                                            '<th>Código / Ref.</th>' +
-                                            '<th>Dimensiones / Especificación</th>' +
-                                            '<th>Bulto</th>' +
-                                            '<th>Peso / Acabado</th>' +
-                                        '</tr>' +
-                                    '</thead>' +
-                                    '<tbody>' +
-                                        p.codigos_tabla.map(function (r) {
-                                            return '<tr>' +
-                                                '<td><strong>' + esc(r.codigo) + '</strong></td>' +
-                                                '<td>' + esc(r.detalle) + '</td>' +
-                                                '<td>' + esc(r.bulto) + '</td>' +
-                                                '<td>' + esc(r.peso) + '</td>' +
-                                            '</tr>';
-                                        }).join('') +
-                                    '</tbody>' +
-                                '</table>' +
-                            '</div>';
+                        codigosChips = '<div class="catalog-codes-chips">' +
+                            p.codigos_tabla.slice(0, 5).map(function (r) {
+                                return '<span class="catalog-code-chip">' + esc(r.codigo) + '</span>';
+                            }).join('') +
+                            (p.codigos_tabla.length > 5 ? '<span class="catalog-code-chip is-more">+' + (p.codigos_tabla.length - 5) + '</span>' : '') +
+                        '</div>';
                     }
+
+                    var imgSrc = p.imagen || PH;
+                    var zoomBtn = '<a href="' + esc(imgSrc) + '" target="_blank" rel="noopener noreferrer" class="catalog-img-zoom-link" aria-label="Abrir imagen en resolución completa" title="Abrir imagen en resolución completa"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg></a>';
 
                     return '' +
                         '<article class="catalog-ordered-card" data-category="' + esc(p.linea) + '" id="prod-' + esc(p.id || p.orden) + '">' +
@@ -1107,7 +1148,8 @@
                                     '<span class="catalog-ordered-linea">' + esc(p.linea) + '</span>' +
                                 '</div>' +
                                 DestacadoTag +
-                                '<img loading="lazy" src="' + esc(p.imagen || PH) + '" alt="' + esc(p.nombre) + ' - Producto Final CVG Alcasa" class="catalog-ordered-img" onerror="this.onerror=null;this.src=\'' + PH + '\';">' +
+                                '<img loading="lazy" src="' + esc(imgSrc) + '" alt="' + esc(p.nombre) + ' - Producto Final CVG Alcasa" class="catalog-ordered-img" onerror="this.onerror=null;this.src=\'' + PH + '\';">' +
+                                zoomBtn +
                             '</div>' +
                             '<div class="catalog-ordered-body">' +
                                 '<div class="catalog-ordered-titles">' +
@@ -1118,7 +1160,7 @@
                                 '<div class="catalog-ordered-spec-pill">' +
                                     '<i class="fas fa-microchip"></i> ' + esc(p.spec) +
                                 '</div>' +
-                                tablaRows +
+                                codigosChips +
                                 '<div class="catalog-ordered-actions">' +
                                     '<button type="button" class="btn-catalog-cotizar" data-producto="' + esc(p.cotizar || p.nombre) + '">' +
                                         '<i class="fas fa-file-invoice"></i> Cotizar' +
@@ -1247,6 +1289,7 @@
         var fotosGrid = $('#galeriaFotosGrid');
         var coladaGrid = $('#galeriaColadaGrid');
         var homeColadaGrid = $('#homeColadaGrid');
+        var homeCoverflow = $('#homeGaleriaCoverflow');
         var videosSection = $('#galeriaVideosSection');
         var fotosSection = $('#galeriaFotosSection');
         var coladaSection = $('#galeriaColadaSection');
@@ -1258,7 +1301,7 @@
         var fotosBadge = $('#galeriaFotosCountBadge');
         var coladaBadge = $('#galeriaColadaCountBadge');
 
-        if (!fotosGrid && !videosList && !coladaGrid && !homeColadaGrid) return;
+        if (!fotosGrid && !videosList && !coladaGrid && !homeColadaGrid && !homeCoverflow) return;
 
         function getFotoFull(f) {
             return (f && (f.imagen || f.img)) || PH;
@@ -1339,7 +1382,50 @@
         var lbDesc = $('#lightboxDesc');
         var lbRawBtn = $('#lightboxOpenRawBtn');
         var lbThumbs = $('#lightboxThumbs');
+        var lbStage = $('#lightboxStage') || (lbModal ? $('.galeria-lightbox-stage', lbModal) : null);
+        var lbResBadge = $('#lightboxResBadge');
+        var lbZoomBtn = $('#lightboxNativeZoomBtn');
         var currentPhotoIndex = 0;
+        var isNativeZoom = false;
+
+        function setLightboxNativeZoom(enabled) {
+            isNativeZoom = !!enabled;
+            if (lbStage) {
+                lbStage.classList.toggle('is-native-res', isNativeZoom);
+                if (!isNativeZoom) {
+                    lbStage.scrollTop = 0;
+                    lbStage.scrollLeft = 0;
+                }
+            }
+            if (lbZoomBtn) {
+                lbZoomBtn.setAttribute('aria-pressed', isNativeZoom ? 'true' : 'false');
+                lbZoomBtn.innerHTML = isNativeZoom
+                    ? '<i class="fas fa-compress"></i> Ajustar a Pantalla'
+                    : '<i class="fas fa-magnifying-glass-plus"></i> Ver 1:1 (Resolución Original)';
+            }
+        }
+
+        function updateLightboxResolutionBadge() {
+            if (!lbResBadge || !lbImg) return;
+            if (lbImg.naturalWidth && lbImg.naturalHeight) {
+                lbResBadge.textContent = lbImg.naturalWidth + ' × ' + lbImg.naturalHeight + ' px · Original';
+                lbResBadge.style.display = 'inline-flex';
+            } else {
+                lbResBadge.style.display = 'none';
+            }
+        }
+
+        if (lbImg) {
+            lbImg.addEventListener('load', updateLightboxResolutionBadge);
+            lbImg.addEventListener('click', function () {
+                setLightboxNativeZoom(!isNativeZoom);
+            });
+        }
+        if (lbZoomBtn) {
+            lbZoomBtn.addEventListener('click', function () {
+                setLightboxNativeZoom(!isNativeZoom);
+            });
+        }
 
         function renderLightboxThumbs() {
             if (!lbThumbs) return;
@@ -1381,9 +1467,12 @@
             currentPhotoIndex = idx;
             var f = activeLightboxList[currentPhotoIndex];
             var fullSrc = getFotoFull(f);
+            setLightboxNativeZoom(false);
+            if (lbResBadge) lbResBadge.style.display = 'none';
             if (lbImg) {
                 lbImg.src = fullSrc;
                 lbImg.alt = f.titulo || 'Fotografía CVG Alcasa';
+                if (lbImg.complete && lbImg.naturalWidth) updateLightboxResolutionBadge();
             }
             if (lbTitle) lbTitle.textContent = f.titulo || 'Fotografía CVG Alcasa';
             if (lbCat) lbCat.textContent = f.etapa ? (f.categoria + ' · ' + f.etapa) : (f.categoria || 'Galería CVG Alcasa');
@@ -1395,10 +1484,13 @@
             document.body.style.overflow = 'hidden';
         }
 
+        var onLightboxToggle = null;
+
         function cerrarLightbox() {
             if (!lbModal) return;
             lbModal.style.display = 'none';
             document.body.style.overflow = '';
+            if (typeof onLightboxToggle === 'function') onLightboxToggle(false);
         }
 
         if (lbCloseBtn) lbCloseBtn.addEventListener('click', cerrarLightbox);
@@ -1451,7 +1543,184 @@
                 });
             }
 
-            // Renderizar vitrina destacada de 4 fotos en /index.html#galeria (abre el visor con las 9)
+            // Carrusel Coverflow 3D de todas las fotografías en /index.html#galeria (excluyendo videos)
+            if (homeCoverflow) {
+                var cfTrack = $('#homeGaleriaTrack');
+                var cfPrev = $('#homeGaleriaPrev');
+                var cfNext = $('#homeGaleriaNext');
+                var cfCat = $('#homeGaleriaCat');
+                var cfTitle = $('#homeGaleriaTitle');
+                var cfDesc = $('#homeGaleriaDesc');
+                var cfCounter = $('#homeGaleriaCounter');
+                var cfProgressBar = $('#homeGaleriaProgressBar');
+                var cfCountBadge = $('#homeGaleriaCountBadge');
+                var allHomeFotos = fotosList.concat(coladaList);
+
+                if (cfCountBadge) {
+                    cfCountBadge.textContent = allHomeFotos.length + ' Fotografías · Plantas y Talento';
+                }
+
+                if (cfTrack && allHomeFotos.length) {
+                    var AUTOPLAY_MS = 7000;
+                    var cfActive = 0;
+                    var cfTimer = null;
+                    var cfPausedByHover = false;
+                    var cfPausedByLightbox = false;
+                    var totalFotos = allHomeFotos.length;
+
+                    cfTrack.innerHTML = allHomeFotos.map(function (f, idx) {
+                        var isPortrait = f.orientacion === 'portrait';
+                        return '' +
+                            '<button type="button" class="galeria-coverflow-card' + (isPortrait ? ' is-portrait' : '') + '" data-cf-index="' + idx + '" aria-label="' + esc(f.titulo || ('Fotografía ' + (idx + 1))) + '">' +
+                                '<img src="' + esc(getFotoThumb(f)) + '" alt="' + esc(f.titulo || 'Fotografía CVG Alcasa') + '" class="galeria-coverflow-img" loading="' + (idx < 5 || idx >= totalFotos - 3 ? 'eager' : 'lazy') + '" decoding="async" onerror="this.onerror=null;this.src=\'' + PH + '\';">' +
+                                '<span class="galeria-coverflow-hover-hint" aria-hidden="true"><i class="fas fa-magnifying-glass-plus"></i></span>' +
+                            '</button>';
+                    }).join('');
+
+                    var cfCards = $$('.galeria-coverflow-card', cfTrack);
+
+                    function restartProgressBar() {
+                        if (!cfProgressBar) return;
+                        cfProgressBar.style.transition = 'none';
+                        cfProgressBar.style.width = '0%';
+                        if (cfPausedByHover || cfPausedByLightbox) return;
+                        void cfProgressBar.offsetWidth;
+                        cfProgressBar.style.transition = 'width ' + AUTOPLAY_MS + 'ms linear';
+                        cfProgressBar.style.width = '100%';
+                    }
+
+                    function renderCoverflowState(index) {
+                        cfActive = ((index % totalFotos) + totalFotos) % totalFotos;
+                        var half = Math.floor(totalFotos / 2);
+
+                        cfCards.forEach(function (card, i) {
+                            var diff = (i - cfActive) % totalFotos;
+                            if (diff < 0) diff += totalFotos;
+                            if (diff > half) diff -= totalFotos;
+
+                            var posAttr;
+                            if (Math.abs(diff) <= 3) {
+                                posAttr = String(diff);
+                            } else {
+                                posAttr = diff < 0 ? 'far-left' : 'far-right';
+                            }
+
+                            card.setAttribute('data-offset', posAttr);
+                            card.classList.toggle('is-active', diff === 0);
+                            card.setAttribute('aria-current', diff === 0 ? 'true' : 'false');
+                            card.tabIndex = Math.abs(diff) <= 3 ? 0 : -1;
+                        });
+
+                        var current = allHomeFotos[cfActive];
+                        if (cfCat) {
+                            cfCat.textContent = current.etapa
+                                ? (current.categoria + ' · ' + current.etapa)
+                                : (current.categoria || 'Galería CVG Alcasa');
+                        }
+                        if (cfTitle) cfTitle.textContent = current.titulo || 'Fotografía Institucional';
+                        if (cfDesc) cfDesc.textContent = current.desc || '';
+                        if (cfCounter) {
+                            cfCounter.textContent = String(cfActive + 1).padStart(2, '0') + ' / ' + String(totalFotos).padStart(2, '0');
+                        }
+                        restartProgressBar();
+                    }
+
+                    function stopAutoplay() {
+                        if (cfTimer) {
+                            clearInterval(cfTimer);
+                            cfTimer = null;
+                        }
+                        if (cfProgressBar) {
+                            cfProgressBar.style.transition = 'none';
+                            cfProgressBar.style.width = '0%';
+                        }
+                    }
+
+                    function startAutoplay() {
+                        stopAutoplay();
+                        if (cfPausedByHover || cfPausedByLightbox || totalFotos <= 1) return;
+                        restartProgressBar();
+                        cfTimer = setInterval(function () {
+                            renderCoverflowState(cfActive + 1);
+                        }, AUTOPLAY_MS);
+                    }
+
+                    function goToSlide(idx) {
+                        renderCoverflowState(idx);
+                        startAutoplay();
+                    }
+
+                    cfCards.forEach(function (card) {
+                        card.addEventListener('click', function () {
+                            var idx = parseInt(this.getAttribute('data-cf-index') || '0', 10);
+                            if (idx === cfActive) {
+                                cfPausedByLightbox = true;
+                                stopAutoplay();
+                                mostrarFotoLightbox(idx, allHomeFotos);
+                            } else {
+                                goToSlide(idx);
+                            }
+                        });
+                    });
+
+                    if (cfPrev) {
+                        cfPrev.addEventListener('click', function () { goToSlide(cfActive - 1); });
+                    }
+                    if (cfNext) {
+                        cfNext.addEventListener('click', function () { goToSlide(cfActive + 1); });
+                    }
+
+                    onLightboxToggle = function (isOpen) {
+                        cfPausedByLightbox = !!isOpen;
+                        if (cfPausedByLightbox) stopAutoplay();
+                        else startAutoplay();
+                    };
+
+                    homeCoverflow.addEventListener('mouseenter', function () {
+                        cfPausedByHover = true;
+                        stopAutoplay();
+                    });
+                    homeCoverflow.addEventListener('mouseleave', function () {
+                        cfPausedByHover = false;
+                        startAutoplay();
+                    });
+                    homeCoverflow.addEventListener('focusin', function () {
+                        cfPausedByHover = true;
+                        stopAutoplay();
+                    });
+                    homeCoverflow.addEventListener('focusout', function (e) {
+                        if (!homeCoverflow.contains(e.relatedTarget)) {
+                            cfPausedByHover = false;
+                            startAutoplay();
+                        }
+                    });
+                    homeCoverflow.addEventListener('keydown', function (e) {
+                        if (e.key === 'ArrowLeft') {
+                            e.preventDefault();
+                            goToSlide(cfActive - 1);
+                        } else if (e.key === 'ArrowRight') {
+                            e.preventDefault();
+                            goToSlide(cfActive + 1);
+                        }
+                    });
+
+                    var cfTouchStartX = 0;
+                    cfTrack.addEventListener('touchstart', function (e) {
+                        cfTouchStartX = e.changedTouches[0].screenX;
+                    }, { passive: true });
+                    cfTrack.addEventListener('touchend', function (e) {
+                        var diffX = cfTouchStartX - e.changedTouches[0].screenX;
+                        if (Math.abs(diffX) > 40) {
+                            goToSlide(diffX > 0 ? cfActive + 1 : cfActive - 1);
+                        }
+                    }, { passive: true });
+
+                    renderCoverflowState(0);
+                    startAutoplay();
+                }
+            }
+
+            // Respaldo legacy si existiera #homeColadaGrid en alguna vista anterior
             if (homeColadaGrid) {
                 var destacadas = [];
                 coladaList.forEach(function (f, origIdx) {
@@ -2453,6 +2722,26 @@
                 initFormularios();
                 initFoldReveal();
                 bindSmoothScrollLinks(document);
+
+                if (window.location.hash && window.location.hash.length > 1) {
+                    var initialHashId = decodeURIComponent(window.location.hash.slice(1));
+                    var initialTarget = document.getElementById(initialHashId);
+                    if (initialTarget) {
+                        var userInteracted = false;
+                        var markInteracted = function () { userInteracted = true; };
+                        window.addEventListener('wheel', markInteracted, { once: true, passive: true });
+                        window.addEventListener('touchstart', markInteracted, { once: true, passive: true });
+
+                        requestAnimationFrame(function () {
+                            scrollToAnchorElement(initialTarget, 420, true);
+                        });
+                        setTimeout(function () {
+                            if (!userInteracted) {
+                                scrollToAnchorElement(initialTarget, 300, true);
+                            }
+                        }, 450);
+                    }
+                }
 
                 var pl = $('#periodico');
                 if (pl && C.contacto && C.contacto.periodico) {

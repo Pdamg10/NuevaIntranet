@@ -8,8 +8,8 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 ## 2. Estructura Actual del Proyecto
 ```text
 /
-├── index.html                    # Portal principal institucional (incluye vitrina destacada de Colada Continua)
-├── productos.html                # Catálogo Oficial 2025 completo (32 productos con Ficha Técnica flotante)
+├── index.html                    # Portal principal institucional (mascota fija en Empresa, carrusel Coverflow de 24 fotos y bandas OAC/Contacto)
+├── productos.html                # Catálogo Oficial 2025 completo (33 productos con Ficha Técnica flotante)
 ├── galeria.html                  # Galería Multimedia dedicada (Videos + Serie Colada Continua + Fotografías clasificadas)
 ├── prensa.html                   # Sala de Prensa "Pulso Industrial CVG Alcasa" (Paginación :5001 + Modal de vista previa)
 ├── minimal.html                  # Periódico Digital CVG Alcasa (visualización pública de noticias con el diseño de la intranet)
@@ -40,7 +40,8 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 │   │   │   ├── colada-continua/  # 9 fotografías originales (1080×1350) + thumbs/ (miniaturas 600×750)
 │   │   │   └── ...               # Fotografías de plantas y previsualizaciones animadas de videos
 │   │   ├── cumpleaneros/         # Retratos reales del personal y siluetas por género
-│   │   └── ...                   # Logos institucionales, favicon.png, noticias y 32 productos
+│   │   ├── productos/            # 9 fotografías recortadas de producto terminado (*-ficha.jpg)
+│   │   └── ...                   # Logos institucionales, mascota institucional, favicon.png, noticias y 33 productos
 │   └── media/
 │       ├── videos/               # Videos institucionales completos en MP4 (Laminación, Fundición, Extrusión, Ayudas Técnicas)
 │       └── ...                   # Catálogos PDF oficiales (2023 y 2025)
@@ -48,7 +49,7 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 │   ├── contactos-semilla.csv     # Semilla versionada de la bandeja de contactos (8 registros del servidor vivo alcasa.com.ve)
 │   ├── postulaciones-semilla.csv # Semilla versionada de la bandeja de postulaciones de CV (encabezados)
 │   ├── cumpleaneros.json         # Cumpleañeros (3.543 trabajadores, generado desde DATA.csv)
-│   ├── contenido.json            # Datos institucionales, 32 productos, galería de videos, Colada Continua, fotos y FAQ
+│   ├── contenido.json            # Datos institucionales, 33 productos, galería de videos, Colada Continua, fotos y FAQ
 │   └── noticias.json             # Respaldo local con las noticias más recientes del servidor :5001
 └── storage/
     ├── .htaccess                 # Bloqueo de acceso web directo a archivos privados
@@ -133,3 +134,26 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
   - Los encabezados y descripciones de las secciones de galería tanto en `galeria.html` (Videos, Colada Continua y Fotografías Clasificadas) como en `index.html#galeria` (Galería de Procesos y Colada Continua) fueron unificados en tarjetas dashboard blancas (`.galeria-dashboard-header`) con franja superior azul corporativo, tipografía de alto contraste (`#334155` / `#0f2942`) y proporciones equilibradas.
   - Se estilizó `.industrial-stats-grid` en una fila de 4 columnas en el panel superior de `galeria.html` y se limpió todo el texto de galería para mantener un lenguaje 100 % institucional de CVG Alcasa.
   - Versiones de caché actualizadas a `main.css?v=2026w` y `app.js?v=2026y`.
+
+### 3.12. Mejoras en Página Principal, Mascota Fija en Empresa y Carrusel Coverflow (`index.html`, `assets/js/app.js`, `assets/css/main.css`)
+- **Menú superior y navegación directa a Contacto:**
+  - Se retiró la opción «Descargar Catálogo» únicamente del menú desplegable de **Productos** (conservando la descarga en el cuerpo de la página) y se renombraron las líneas del menú a **Productos de Fundición**, **Productos de Extrusión** y **Productos de Laminación**.
+  - El botón **Contacto** dirige directamente a la sección **Contáctanos Directamente** (`/index.html#contacto-directo`) desde cualquier página del portal, con ajuste de desplazamiento suave (`behavior: 'instant'` por frame RAF) y eliminación de la línea blanca inferior en el header al desplazarse (`scrollY > 90`).
+- **Diferenciación visual de OAC y Contáctanos Directamente:**
+  - Ambas bandas fueron separadas fuera de `<footer>`: **Sistema de Atención al Ciudadano (OAC)** (`#oac-ciudadano`) con identidad de banda azul institucional y **Contáctanos Directamente** (`#contacto-directo`) sobre fondo claro con tarjeta blanca elevada y panel lateral de canales con íconos corregidos.
+- **Mascota institucional siempre visible en «Más que una simple empresa»:**
+  - Se reubicó `.welcome-mascot` (`assets/img/mascota-alcasa.png`) fuera de la pestaña 1 (`#tab-quienes-somos`) hacia una columna lateral fija a la derecha (`.empresa-body-layout`, `minmax(0, 1fr) 235px`, centrado vertical), manteniéndola visible al alternar entre las 4 pestañas (*¿Quiénes somos?*, *Misión y Visión*, *Nuestros Valores* y *Pilares de Gestión*) sin comprimir los textos.
+  - Se ajustó `.empresa-body-layout .valores-grid` en grilla simétrica **2×2** (evitando filas desbalanceadas de 3 + 1) y apilado responsive limpio en `≤ 992px` y `≤ 600px`.
+- **Carrusel Coverflow 3D de 24 fotografías y limpieza de controles:**
+  - Se integró el carrusel Coverflow (`#homeGaleriaCoverflow`) con las 24 fotografías institucionales (15 clasificadas + 9 de Colada Continua, excluyendo videos), avance automático cada 7 s, pausa en hover, flechas SVG inline y barra de progreso centrada.
+  - Se eliminó la opción/botón **«Ampliar fotografía»** (`#homeGaleriaExpandBtn`) del pie del carrusel junto con su manejador en `assets/js/app.js` y sus estilos `.galeria-coverflow-expand-btn` en `assets/css/main.css` (manteniendo el clic directo sobre la foto central para abrir el visor Lightbox).
+
+### 3.13. Catálogo de 33 Productos, 9 Fotografías Recortadas y Tarjetas Compactas (`data/contenido.json`, `productos.html`, `index.html`, `assets/img/productos/*-ficha.jpg`, `assets/js/app.js`, `assets/css/main.css`)
+- **Ampliación del catálogo oficial a 33 productos:** Se incorporó el producto **#33 Rollo Cinta** dentro de **Productos de Laminación** (distribución actualizada: 2 de Fundición, 24 de Extrusión y 7 de Laminación) y se actualizaron los contadores y etiquetas de filtros en `productos.html`.
+- **Fotografías recortadas de producto terminado:** Se integraron 9 imágenes optimizadas (`assets/img/productos/*-ficha.jpg`, con `object-fit: contain`) recortadas para mostrar únicamente el producto terminado sin logos ni textos superpuestos.
+- **Tarjetas compactas:** Altura uniforme de imagen (`158 px`), resumen en 2 líneas, chips compactos de códigos y grilla `minmax(280px, 1fr)`, conservando la tabla técnica completa dentro del modal de Ficha Técnica.
+
+### 3.14. Galería Compacta y Visor Lightbox en Resolución Original 1:1 (`galeria.html`, `assets/js/app.js`, `assets/css/main.css`)
+- **Tarjetas horizontales compactas:** Ajuste de la cuadrícula fotográfica en `galeria.html` a tarjetas horizontales compactas (4 columnas en escritorio) para mejorar densidad visual y legibilidad.
+- **Visor Lightbox con zoom nativo 1:1:** Se añadieron flechas SVG inline, insignia de dimensiones (`#lightboxResBadge`), botón **Ver 1:1 (Resolución Original)** (`#lightboxNativeZoomBtn`) y enlace **Abrir Original**.
+- **Versiones de caché actuales:** `main.css?v=2026z5` y `app.js?v=2026z6` en `index.html` (`main.css?v=2026z3` y `app.js?v=2026z5` en `galeria.html` y `productos.html`).

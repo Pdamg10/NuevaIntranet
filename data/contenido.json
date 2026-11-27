@@ -96,7 +96,12 @@
         "usos": "Materia prima directa para prensas extrusoras de perfilería arquitectónica, estructural y tubular."
       },
       "codigos_tabla": [
-        { "codigo": "TOCHO-7", "detalle": "Diámetro 7\" (177,8 mm) · Homogenizado", "bulto": "A medida", "peso": "Según corte" }
+        {
+          "codigo": "TOCHO-7",
+          "detalle": "Diámetro 7\" (177,8 mm) · Homogenizado",
+          "bulto": "A medida",
+          "peso": "Según corte"
+        }
       ]
     },
     {
@@ -109,7 +114,7 @@
       "destacado_home": false,
       "desc": "Barras cilíndricas de colada vertical en aleación 6063/S6063 temple T5 con diámetro de 7\" y longitudes industriales de 120\" a 220\", completamente homogeneizadas.",
       "spec": "Aleación: 6063/S6063 | Temple: T5 | Diámetro: 7\" | Longitud: 120\" a 220\" | Homogenizado",
-      "imagen": "/assets/img/productos/cilindros.jpg",
+      "imagen": "/assets/img/productos/cilindros-ficha.jpg?v=2",
       "estilo": "card4",
       "cotizar": "Cilindros 120 a 220 pulgadas (Fundición)",
       "ficha": {
@@ -121,7 +126,12 @@
         "usos": "Suministro industrial para plantas extrusoras con sierra de corte en línea y transformación pesada."
       },
       "codigos_tabla": [
-        { "codigo": "CIL-7-120/220", "detalle": "Diámetro 7\" · Longitud 120\" a 220\" · Homogenizado", "bulto": "Estándar", "peso": "Según longitud" }
+        {
+          "codigo": "CIL-7-120/220",
+          "detalle": "Diámetro 7\" · Longitud 120\" a 220\" · Homogenizado",
+          "bulto": "Estándar",
+          "peso": "Según longitud"
+        }
       ]
     },
     {
@@ -146,9 +156,24 @@
         "usos": "Estructuras tubulares ligeras, antenas, mobiliario institucional, pasamanos y aplicaciones mecánicas."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 502", "detalle": "Dim.: A-12,70 | B-10,41 | C-1,14 mm", "bulto": "580 pz.", "peso": "389,2 kgs." },
-        { "codigo": "ALC 503", "detalle": "Dim.: A-19,05 | B-16,58 | C-1,24 mm", "bulto": "272 pz.", "peso": "248,9 kgs." },
-        { "codigo": "ALC 505", "detalle": "Dim.: A-25,40 | B-22,25 | C-1,57 mm", "bulto": "126 pz.", "peso": "238,3 kgs." }
+        {
+          "codigo": "ALC 502",
+          "detalle": "Dim.: A-12,70 | B-10,41 | C-1,14 mm",
+          "bulto": "580 pz.",
+          "peso": "389,2 kgs."
+        },
+        {
+          "codigo": "ALC 503",
+          "detalle": "Dim.: A-19,05 | B-16,58 | C-1,24 mm",
+          "bulto": "272 pz.",
+          "peso": "248,9 kgs."
+        },
+        {
+          "codigo": "ALC 505",
+          "detalle": "Dim.: A-25,40 | B-22,25 | C-1,57 mm",
+          "bulto": "126 pz.",
+          "peso": "238,3 kgs."
+        }
       ]
     },
     {
@@ -161,7 +186,7 @@
       "destacado_home": false,
       "desc": "Perfiles tubulares de sección rectangular extruidos en aleación 6063/S6063 temple T5 de acabado recto para marcos estructurales, portones, fachadas y cerramientos.",
       "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 103, ALC 106, ALC 111",
-      "imagen": "/assets/img/productos/tubos-rectangulares.jpg",
+      "imagen": "/assets/img/productos/perfil-alc-103-ficha.jpg?v=2",
       "estilo": "card2",
       "cotizar": "Tubos Rectangulares ALC 103 / 106 / 111 (Extrusión)",
       "ficha": {
@@ -173,9 +198,24 @@
         "usos": "Cerramientos arquitectónicos, bastidores industriales, tabiquería, carrocerías y estructuras civiles."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 103", "detalle": "Dim.: A-50,80 | B-25,40 | C-1,55 mm", "bulto": "80 pz.", "peso": "248,9 kgs." },
-        { "codigo": "ALC 106", "detalle": "Dim.: A-76,20 | B-25,40 | C-1,60 mm", "bulto": "64 pz.", "peso": "296,7 kgs." },
-        { "codigo": "ALC 111", "detalle": "Dim.: A-76,20 | B-31,75 | C-1,50 mm", "bulto": "64 pz.", "peso": "304,5 kgs." }
+        {
+          "codigo": "ALC 103",
+          "detalle": "Dim.: A-50,80 | B-25,40 | C-1,55 mm",
+          "bulto": "80 pz.",
+          "peso": "248,9 kgs."
+        },
+        {
+          "codigo": "ALC 106",
+          "detalle": "Dim.: A-76,20 | B-25,40 | C-1,60 mm",
+          "bulto": "64 pz.",
+          "peso": "296,7 kgs."
+        },
+        {
+          "codigo": "ALC 111",
+          "detalle": "Dim.: A-76,20 | B-31,75 | C-1,50 mm",
+          "bulto": "64 pz.",
+          "peso": "304,5 kgs."
+        }
       ]
     },
     {
@@ -200,9 +240,24 @@
         "usos": "Columnas ligeras, soportes modulares, mobiliario metálico, rejas arquitectónicas y estructuras."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 123", "detalle": "Dim.: A-25,40 | B-1,40 mm", "bulto": "160 pz.", "peso": "253,8 kgs." },
-        { "codigo": "ALC 126", "detalle": "Dim.: A-38,10 | B-1,60 mm", "bulto": "72 pz.", "peso": "267,9 kgs." },
-        { "codigo": "ALC 128", "detalle": "Dim.: A-50,80 | B-1,50 mm", "bulto": "54 pz.", "peso": "253,6 kgs." }
+        {
+          "codigo": "ALC 123",
+          "detalle": "Dim.: A-25,40 | B-1,40 mm",
+          "bulto": "160 pz.",
+          "peso": "253,8 kgs."
+        },
+        {
+          "codigo": "ALC 126",
+          "detalle": "Dim.: A-38,10 | B-1,60 mm",
+          "bulto": "72 pz.",
+          "peso": "267,9 kgs."
+        },
+        {
+          "codigo": "ALC 128",
+          "detalle": "Dim.: A-50,80 | B-1,50 mm",
+          "bulto": "54 pz.",
+          "peso": "253,6 kgs."
+        }
       ]
     },
     {
@@ -227,10 +282,30 @@
         "usos": "Esquineros de protección, bastidores, cerchas ligeras, rematería y carpintería metálica."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 224", "detalle": "Dim.: A-19,05 | B-2,38 mm", "bulto": "216 pz.", "peso": "289,9 kgs." },
-        { "codigo": "ALC 226", "detalle": "Dim.: A-25,40 | B-1,50 mm", "bulto": "288 pz.", "peso": "351,4 kgs." },
-        { "codigo": "ALC 227", "detalle": "Dim.: A-25,40 | B-3,17 mm", "bulto": "180 pz.", "peso": "439,2 kgs." },
-        { "codigo": "ALC 229", "detalle": "Dim.: A-38,10 | B-3,17 mm", "bulto": "95 pz.", "peso": "353,5 kgs." }
+        {
+          "codigo": "ALC 224",
+          "detalle": "Dim.: A-19,05 | B-2,38 mm",
+          "bulto": "216 pz.",
+          "peso": "289,9 kgs."
+        },
+        {
+          "codigo": "ALC 226",
+          "detalle": "Dim.: A-25,40 | B-1,50 mm",
+          "bulto": "288 pz.",
+          "peso": "351,4 kgs."
+        },
+        {
+          "codigo": "ALC 227",
+          "detalle": "Dim.: A-25,40 | B-3,17 mm",
+          "bulto": "180 pz.",
+          "peso": "439,2 kgs."
+        },
+        {
+          "codigo": "ALC 229",
+          "detalle": "Dim.: A-38,10 | B-3,17 mm",
+          "bulto": "95 pz.",
+          "peso": "353,5 kgs."
+        }
       ]
     },
     {
@@ -255,8 +330,18 @@
         "usos": "Pasamanos de escaleras, balcones residenciales, edificios comerciales y pasarelas peatonales."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 966", "detalle": "Sección: 37,8 x 20,2 mm (Interior 26,4 mm)", "bulto": "120 pz.", "peso": "300,1 kgs." },
-        { "codigo": "ALC 999", "detalle": "Sección: 40,0 x 21,0 mm (Interior 26,6 mm)", "bulto": "120 pz.", "peso": "307,4 kgs." }
+        {
+          "codigo": "ALC 966",
+          "detalle": "Sección: 37,8 x 20,2 mm (Interior 26,4 mm)",
+          "bulto": "120 pz.",
+          "peso": "300,1 kgs."
+        },
+        {
+          "codigo": "ALC 999",
+          "detalle": "Sección: 40,0 x 21,0 mm (Interior 26,6 mm)",
+          "bulto": "120 pz.",
+          "peso": "307,4 kgs."
+        }
       ]
     },
     {
@@ -281,8 +366,18 @@
         "usos": "Rieles de cortinería doméstica, hotelera, hospitalaria y sistemas colgantes ligeros."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 0002", "detalle": "Ø 3/4\" (19 x 18 mm · espesor 1,0 mm)", "bulto": "272 pz.", "peso": "232,3 kgs." },
-        { "codigo": "ALC 0003", "detalle": "Ø 1\" (25,4 x 22,8 mm · espesor 1,0 mm)", "bulto": "126 pz.", "peso": "153,7 kgs." }
+        {
+          "codigo": "ALC 0002",
+          "detalle": "Ø 3/4\" (19 x 18 mm · espesor 1,0 mm)",
+          "bulto": "272 pz.",
+          "peso": "232,3 kgs."
+        },
+        {
+          "codigo": "ALC 0003",
+          "detalle": "Ø 1\" (25,4 x 22,8 mm · espesor 1,0 mm)",
+          "bulto": "126 pz.",
+          "peso": "153,7 kgs."
+        }
       ]
     },
     {
@@ -307,8 +402,18 @@
         "usos": "Revestimientos acanalados, carrocerías, tableros modulares y desarrollos especiales."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 5006", "detalle": "Perfil tubular con aleta: 47 x 20 mm", "bulto": "80 pz.", "peso": "385,5 kgs." },
-        { "codigo": "ALC 5012", "detalle": "Tablilla acanalada ancho: 138,6 mm", "bulto": "36 pz.", "peso": "118,6 kgs." }
+        {
+          "codigo": "ALC 5006",
+          "detalle": "Perfil tubular con aleta: 47 x 20 mm",
+          "bulto": "80 pz.",
+          "peso": "385,5 kgs."
+        },
+        {
+          "codigo": "ALC 5012",
+          "detalle": "Tablilla acanalada ancho: 138,6 mm",
+          "bulto": "36 pz.",
+          "peso": "118,6 kgs."
+        }
       ]
     },
     {
@@ -333,13 +438,48 @@
         "usos": "Ventanas corredizas residenciales, edificios multifamiliares, oficinas y proyectos habitacionales."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 3700", "detalle": "Riel / Marco superior Serie 744 (49,5 x 19,9 mm)", "bulto": "120 pz.", "peso": "285,5 kgs." },
-        { "codigo": "ALC 3701", "detalle": "Riel inferior Serie 744 (48,6 x 19,9 mm)", "bulto": "120 pz.", "peso": "270,8 kgs." },
-        { "codigo": "ALC 3702 (3002)", "detalle": "Jamba lateral Serie 744 (49,5 x 22,2 mm)", "bulto": "120 pz.", "peso": "270,8 kgs." },
-        { "codigo": "ALC 3703", "detalle": "Zócalo / Cabezal hoja Serie 744 (45,1 x 22,5 mm)", "bulto": "108 pz.", "peso": "263,5 kgs." },
-        { "codigo": "ALC 3704", "detalle": "Engarzador lateral hoja Serie 744 (23,3 x 22,2 mm)", "bulto": "160 pz.", "peso": "283,0 kgs." },
-        { "codigo": "ALC 3705", "detalle": "Traslape central Serie 744 (24,2 x 22,5 mm)", "bulto": "160 pz.", "peso": "351,4 kgs." },
-        { "codigo": "ALC 3706", "detalle": "Adaptador / Guía Serie 744 (50,0 mm)", "bulto": "120 pz.", "peso": "278,2 kgs." }
+        {
+          "codigo": "ALC 3700",
+          "detalle": "Riel / Marco superior Serie 744 (49,5 x 19,9 mm)",
+          "bulto": "120 pz.",
+          "peso": "285,5 kgs."
+        },
+        {
+          "codigo": "ALC 3701",
+          "detalle": "Riel inferior Serie 744 (48,6 x 19,9 mm)",
+          "bulto": "120 pz.",
+          "peso": "270,8 kgs."
+        },
+        {
+          "codigo": "ALC 3702 (3002)",
+          "detalle": "Jamba lateral Serie 744 (49,5 x 22,2 mm)",
+          "bulto": "120 pz.",
+          "peso": "270,8 kgs."
+        },
+        {
+          "codigo": "ALC 3703",
+          "detalle": "Zócalo / Cabezal hoja Serie 744 (45,1 x 22,5 mm)",
+          "bulto": "108 pz.",
+          "peso": "263,5 kgs."
+        },
+        {
+          "codigo": "ALC 3704",
+          "detalle": "Engarzador lateral hoja Serie 744 (23,3 x 22,2 mm)",
+          "bulto": "160 pz.",
+          "peso": "283,0 kgs."
+        },
+        {
+          "codigo": "ALC 3705",
+          "detalle": "Traslape central Serie 744 (24,2 x 22,5 mm)",
+          "bulto": "160 pz.",
+          "peso": "351,4 kgs."
+        },
+        {
+          "codigo": "ALC 3706",
+          "detalle": "Adaptador / Guía Serie 744 (50,0 mm)",
+          "bulto": "120 pz.",
+          "peso": "278,2 kgs."
+        }
       ]
     },
     {
@@ -352,7 +492,7 @@
       "destacado_home": false,
       "desc": "Sistema corredizo de aluminio anodizable en aleación 6063/S6063 temple T5 para cerramiento de duchas y puertas de baño resistentes a la humedad continua.",
       "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: hasta 6,1 mts | Códigos: ALC 3713, ALC 3714, ALC 3715, ALC 3716",
-      "imagen": "/assets/img/productos/puerta-bano.jpg",
+      "imagen": "/assets/img/productos/perfil-alc-3713-ficha.jpg?v=2",
       "estilo": "card4",
       "cotizar": "Puerta de baño ALC 3713-3716 (Extrusión)",
       "ficha": {
@@ -364,10 +504,30 @@
         "usos": "Puertas corredizas para duchas, cabinas sanitarias, vestuarios y divisiones interiores."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 3715", "detalle": "Riel superior puerta de baño (42,1 x 27,3 mm)", "bulto": "Estándar", "peso": "1,07 kgs./m" },
-        { "codigo": "ALC 3716", "detalle": "Perfil lateral guía (28,6 x 19,1 mm)", "bulto": "Estándar", "peso": "0,29 kgs./m" },
-        { "codigo": "ALC 3713", "detalle": "Marco hoja puerta de baño (24,2 x 10,8 mm)", "bulto": "128 pz.", "peso": "132,7 kgs." },
-        { "codigo": "ALC 3714", "detalle": "Zócalo guía inferior (38,4 x 15,8 mm)", "bulto": "128 pz.", "peso": "132,7 kgs." }
+        {
+          "codigo": "ALC 3715",
+          "detalle": "Riel superior puerta de baño (42,1 x 27,3 mm)",
+          "bulto": "Estándar",
+          "peso": "1,07 kgs./m"
+        },
+        {
+          "codigo": "ALC 3716",
+          "detalle": "Perfil lateral guía (28,6 x 19,1 mm)",
+          "bulto": "Estándar",
+          "peso": "0,29 kgs./m"
+        },
+        {
+          "codigo": "ALC 3713",
+          "detalle": "Marco hoja puerta de baño (24,2 x 10,8 mm)",
+          "bulto": "128 pz.",
+          "peso": "132,7 kgs."
+        },
+        {
+          "codigo": "ALC 3714",
+          "detalle": "Zócalo guía inferior (38,4 x 15,8 mm)",
+          "bulto": "128 pz.",
+          "peso": "132,7 kgs."
+        }
       ]
     },
     {
@@ -392,7 +552,12 @@
         "usos": "Soportes asimétricos de fachada, anclajes industriales, rieles guía y bastidores."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 244", "detalle": "Dim.: A-38,10 mm | B-19,05 mm | C-3,17 mm", "bulto": "120 pz.", "peso": "329,4 kgs." }
+        {
+          "codigo": "ALC 244",
+          "detalle": "Dim.: A-38,10 mm | B-19,05 mm | C-3,17 mm",
+          "bulto": "120 pz.",
+          "peso": "329,4 kgs."
+        }
       ]
     },
     {
@@ -417,10 +582,30 @@
         "usos": "Ventanas corredizas residenciales y comerciales de excelente relación costo-resistencia."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 670", "detalle": "Perfil hoja / engarzador Ecobel (30,4 x 16,0 mm)", "bulto": "160 pz.", "peso": "409,9 kgs." },
-        { "codigo": "ALC 672", "detalle": "Traslape central Ecobel (30,0 x 21,9 mm)", "bulto": "144 pz.", "peso": "325,0 kgs." },
-        { "codigo": "ALC 673", "detalle": "Riel superior / cabezal Ecobel (54,0 x 23,0 mm)", "bulto": "120 pz.", "peso": "358,7 kgs." },
-        { "codigo": "ALC 674", "detalle": "Riel inferior Ecobel (54,0 x 19,3 mm)", "bulto": "120 pz.", "peso": "278,2 kgs." }
+        {
+          "codigo": "ALC 670",
+          "detalle": "Perfil hoja / engarzador Ecobel (30,4 x 16,0 mm)",
+          "bulto": "160 pz.",
+          "peso": "409,9 kgs."
+        },
+        {
+          "codigo": "ALC 672",
+          "detalle": "Traslape central Ecobel (30,0 x 21,9 mm)",
+          "bulto": "144 pz.",
+          "peso": "325,0 kgs."
+        },
+        {
+          "codigo": "ALC 673",
+          "detalle": "Riel superior / cabezal Ecobel (54,0 x 23,0 mm)",
+          "bulto": "120 pz.",
+          "peso": "358,7 kgs."
+        },
+        {
+          "codigo": "ALC 674",
+          "detalle": "Riel inferior Ecobel (54,0 x 19,3 mm)",
+          "bulto": "120 pz.",
+          "peso": "278,2 kgs."
+        }
       ]
     },
     {
@@ -445,10 +630,30 @@
         "usos": "Ventanales panorámicos de 2 vías para apartamentos, balcones, oficinas y residencias."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 780", "detalle": "Perfil hoja panorámica (32,8 x 25,4 mm)", "bulto": "180 pz.", "peso": "351,4 kgs." },
-        { "codigo": "ALC 790", "detalle": "Jamba marco 2 canales (35,1 x 30,5 mm)", "bulto": "180 pz.", "peso": "318,4 kgs." },
-        { "codigo": "ALC 791", "detalle": "Cabezal superior 2 canales (35,1 x 30,5 mm)", "bulto": "160 pz.", "peso": "351,4 kgs." },
-        { "codigo": "ALC 792", "detalle": "Riel inferior 2 canales (41,6 x 35,1 mm)", "bulto": "160 pz.", "peso": "429,4 kgs." }
+        {
+          "codigo": "ALC 780",
+          "detalle": "Perfil hoja panorámica (32,8 x 25,4 mm)",
+          "bulto": "180 pz.",
+          "peso": "351,4 kgs."
+        },
+        {
+          "codigo": "ALC 790",
+          "detalle": "Jamba marco 2 canales (35,1 x 30,5 mm)",
+          "bulto": "180 pz.",
+          "peso": "318,4 kgs."
+        },
+        {
+          "codigo": "ALC 791",
+          "detalle": "Cabezal superior 2 canales (35,1 x 30,5 mm)",
+          "bulto": "160 pz.",
+          "peso": "351,4 kgs."
+        },
+        {
+          "codigo": "ALC 792",
+          "detalle": "Riel inferior 2 canales (41,6 x 35,1 mm)",
+          "bulto": "160 pz.",
+          "peso": "429,4 kgs."
+        }
       ]
     },
     {
@@ -473,10 +678,30 @@
         "usos": "Terrazas, salones amplios, fachadas residenciales y locales con requerimiento de gran apertura."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 780", "detalle": "Perfil hoja panorámica (32,8 x 25,4 mm)", "bulto": "180 pz.", "peso": "351,4 kgs." },
-        { "codigo": "ALC 820", "detalle": "Riel inferior 3 canales (54,4 x 41,6 mm)", "bulto": "128 pz.", "peso": "452,9 kgs." },
-        { "codigo": "ALC 821", "detalle": "Jamba lateral 3 canales (54,4 x 30,5 mm)", "bulto": "144 pz.", "peso": "342,6 kgs." },
-        { "codigo": "ALC 822", "detalle": "Cabezal superior 3 canales (54,4 x 30,5 mm)", "bulto": "128 pz.", "peso": "390,4 kgs." }
+        {
+          "codigo": "ALC 780",
+          "detalle": "Perfil hoja panorámica (32,8 x 25,4 mm)",
+          "bulto": "180 pz.",
+          "peso": "351,4 kgs."
+        },
+        {
+          "codigo": "ALC 820",
+          "detalle": "Riel inferior 3 canales (54,4 x 41,6 mm)",
+          "bulto": "128 pz.",
+          "peso": "452,9 kgs."
+        },
+        {
+          "codigo": "ALC 821",
+          "detalle": "Jamba lateral 3 canales (54,4 x 30,5 mm)",
+          "bulto": "144 pz.",
+          "peso": "342,6 kgs."
+        },
+        {
+          "codigo": "ALC 822",
+          "detalle": "Cabezal superior 3 canales (54,4 x 30,5 mm)",
+          "bulto": "128 pz.",
+          "peso": "390,4 kgs."
+        }
       ]
     },
     {
@@ -501,10 +726,30 @@
         "usos": "Pent-houses, salones de eventos, lobbies hoteleros y grandes ventanales panorámicos."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 780", "detalle": "Perfil hoja panorámica (32,8 x 25,4 mm)", "bulto": "180 pz.", "peso": "351,4 kgs." },
-        { "codigo": "ALC 783", "detalle": "Jamba lateral 4 canales (73,7 x 30,5 mm)", "bulto": "90 pz.", "peso": "312,9 kgs." },
-        { "codigo": "ALC 830", "detalle": "Cabezal superior 4 canales (73,7 x 30,5 mm)", "bulto": "80 pz.", "peso": "341,6 kgs." },
-        { "codigo": "ALC 831", "detalle": "Riel inferior 4 canales (73,7 x 41,6 mm)", "bulto": "80 pz.", "peso": "390,4 kgs." }
+        {
+          "codigo": "ALC 780",
+          "detalle": "Perfil hoja panorámica (32,8 x 25,4 mm)",
+          "bulto": "180 pz.",
+          "peso": "351,4 kgs."
+        },
+        {
+          "codigo": "ALC 783",
+          "detalle": "Jamba lateral 4 canales (73,7 x 30,5 mm)",
+          "bulto": "90 pz.",
+          "peso": "312,9 kgs."
+        },
+        {
+          "codigo": "ALC 830",
+          "detalle": "Cabezal superior 4 canales (73,7 x 30,5 mm)",
+          "bulto": "80 pz.",
+          "peso": "341,6 kgs."
+        },
+        {
+          "codigo": "ALC 831",
+          "detalle": "Riel inferior 4 canales (73,7 x 41,6 mm)",
+          "bulto": "80 pz.",
+          "peso": "390,4 kgs."
+        }
       ]
     },
     {
@@ -529,8 +774,18 @@
         "usos": "Vidrieras de locales comerciales, tabiquería corporativa de vidrio y fachadas integrales."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 936", "detalle": "Perfil vidriera 63,5 x 31,8 mm (2 1/2\" x 1 1/4\")", "bulto": "50 pz.", "peso": "195,2 kgs." },
-        { "codigo": "ALC 937", "detalle": "Perfil vidriera 63,5 x 42,9 mm con alojamiento", "bulto": "50 pz.", "peso": "228,8 kgs." }
+        {
+          "codigo": "ALC 936",
+          "detalle": "Perfil vidriera 63,5 x 31,8 mm (2 1/2\" x 1 1/4\")",
+          "bulto": "50 pz.",
+          "peso": "195,2 kgs."
+        },
+        {
+          "codigo": "ALC 937",
+          "detalle": "Perfil vidriera 63,5 x 42,9 mm con alojamiento",
+          "bulto": "50 pz.",
+          "peso": "228,8 kgs."
+        }
       ]
     },
     {
@@ -555,8 +810,18 @@
         "usos": "Fachadas comerciales de doble altura, concesionarios, bancos y centros empresariales."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 1447", "detalle": "Montante vidriera 76,2 x 42,9 mm (3\" x 1 1/4\")", "bulto": "50 pz.", "peso": "231,8 kgs." },
-        { "codigo": "ALC 1448", "detalle": "Travesaño vidriera 76,2 x 31,8 mm (3\" x 1 1/4\")", "bulto": "50 pz.", "peso": "222,7 kgs." }
+        {
+          "codigo": "ALC 1447",
+          "detalle": "Montante vidriera 76,2 x 42,9 mm (3\" x 1 1/4\")",
+          "bulto": "50 pz.",
+          "peso": "231,8 kgs."
+        },
+        {
+          "codigo": "ALC 1448",
+          "detalle": "Travesaño vidriera 76,2 x 31,8 mm (3\" x 1 1/4\")",
+          "bulto": "50 pz.",
+          "peso": "222,7 kgs."
+        }
       ]
     },
     {
@@ -581,8 +846,18 @@
         "usos": "Sujeción de cristales, acabado perimetral de vidrieras serie 2 1/2\" y 3\"."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 927", "detalle": "Junquillo / Pisavidrio de fachada (29,7 x 12,5 mm)", "bulto": "256 pz.", "peso": "359,20 kgs." },
-        { "codigo": "ALC 929", "detalle": "Canal / Pisavidrio de fachada (31,8 x 13,5 mm)", "bulto": "256 pz.", "peso": "343,6 kgs." }
+        {
+          "codigo": "ALC 927",
+          "detalle": "Junquillo / Pisavidrio de fachada (29,7 x 12,5 mm)",
+          "bulto": "256 pz.",
+          "peso": "359,20 kgs."
+        },
+        {
+          "codigo": "ALC 929",
+          "detalle": "Canal / Pisavidrio de fachada (31,8 x 13,5 mm)",
+          "bulto": "256 pz.",
+          "peso": "343,6 kgs."
+        }
       ]
     },
     {
@@ -607,8 +882,18 @@
         "usos": "Cielos rasos suspendidos en hospitales, oficinas, plantas de alimentos y comercios."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 2001", "detalle": "Perfil T principal 25,4 x 19,1 mm · Long.: 3,74 mts.", "bulto": "120 pz.", "peso": "71,8 kgs." },
-        { "codigo": "ALC 2042", "detalle": "Perfil T secundario 19,8 x 13,5 mm · Long.: 3,60 mts.", "bulto": "600 pz.", "peso": "194,4 kgs." }
+        {
+          "codigo": "ALC 2001",
+          "detalle": "Perfil T principal 25,4 x 19,1 mm · Long.: 3,74 mts.",
+          "bulto": "120 pz.",
+          "peso": "71,8 kgs."
+        },
+        {
+          "codigo": "ALC 2042",
+          "detalle": "Perfil T secundario 19,8 x 13,5 mm · Long.: 3,60 mts.",
+          "bulto": "600 pz.",
+          "peso": "194,4 kgs."
+        }
       ]
     },
     {
@@ -633,8 +918,18 @@
         "usos": "Puertas principales de bancos, centros comerciales, edificios públicos y fachadas."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 965", "detalle": "Perfil puerta canto redondo doble aleta (99,3 x 44,5 mm)", "bulto": "24 pz.", "peso": "117,1 kgs." },
-        { "codigo": "ALC 966", "detalle": "Perfil puerta canto redondo simple (99,3 x 44,5 mm)", "bulto": "24 pz.", "peso": "114,2 kgs." }
+        {
+          "codigo": "ALC 965",
+          "detalle": "Perfil puerta canto redondo doble aleta (99,3 x 44,5 mm)",
+          "bulto": "24 pz.",
+          "peso": "117,1 kgs."
+        },
+        {
+          "codigo": "ALC 966",
+          "detalle": "Perfil puerta canto redondo simple (99,3 x 44,5 mm)",
+          "bulto": "24 pz.",
+          "peso": "114,2 kgs."
+        }
       ]
     },
     {
@@ -659,10 +954,30 @@
         "usos": "Ventanas corredizas de alta gama, desarrollos institucionales, hoteles y residencias."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 740", "detalle": "Riel inferior Caroní (75,0 x 38,0 mm)", "bulto": "60 pz.", "peso": "292,8 kgs." },
-        { "codigo": "ALC 747", "detalle": "Cabezal superior Caroní (75,0 x 25,2 mm)", "bulto": "80 pz.", "peso": "336,7 kgs." },
-        { "codigo": "ALC 745", "detalle": "Jamba lateral Caroní (75,1 x 25,2 mm)", "bulto": "60 pz.", "peso": "248,9 kgs." },
-        { "codigo": "ALC 748", "detalle": "Perfil hoja corredera Caroní (37,0 x 25,6 mm)", "bulto": "150 pz.", "peso": "247,1 kgs." }
+        {
+          "codigo": "ALC 740",
+          "detalle": "Riel inferior Caroní (75,0 x 38,0 mm)",
+          "bulto": "60 pz.",
+          "peso": "292,8 kgs."
+        },
+        {
+          "codigo": "ALC 747",
+          "detalle": "Cabezal superior Caroní (75,0 x 25,2 mm)",
+          "bulto": "80 pz.",
+          "peso": "336,7 kgs."
+        },
+        {
+          "codigo": "ALC 745",
+          "detalle": "Jamba lateral Caroní (75,1 x 25,2 mm)",
+          "bulto": "60 pz.",
+          "peso": "248,9 kgs."
+        },
+        {
+          "codigo": "ALC 748",
+          "detalle": "Perfil hoja corredera Caroní (37,0 x 25,6 mm)",
+          "bulto": "150 pz.",
+          "peso": "247,1 kgs."
+        }
       ]
     },
     {
@@ -687,10 +1002,30 @@
         "usos": "Puertas de acceso comercial, oficinas, clínicas y locales de alto tránsito peatonal."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 953", "detalle": "Parante puerta batiente (60,3 x 44,5 mm)", "bulto": "50 pz.", "peso": "262,3 kgs." },
-        { "codigo": "ALC 956", "detalle": "Cabezal / Zócalo medio (65,1 x 44,5 mm)", "bulto": "50 pz.", "peso": "244,0 kgs." },
-        { "codigo": "ALC 955", "detalle": "Zócalo inferior pesado (101,6 x 44,5 mm)", "bulto": "40 pz.", "peso": "195,2 kgs." },
-        { "codigo": "ALC 952", "detalle": "Pisavidrio puerta batiente (22,9 x 16,5 mm)", "bulto": "200 pz.", "peso": "219,6 kgs." }
+        {
+          "codigo": "ALC 953",
+          "detalle": "Parante puerta batiente (60,3 x 44,5 mm)",
+          "bulto": "50 pz.",
+          "peso": "262,3 kgs."
+        },
+        {
+          "codigo": "ALC 956",
+          "detalle": "Cabezal / Zócalo medio (65,1 x 44,5 mm)",
+          "bulto": "50 pz.",
+          "peso": "244,0 kgs."
+        },
+        {
+          "codigo": "ALC 955",
+          "detalle": "Zócalo inferior pesado (101,6 x 44,5 mm)",
+          "bulto": "40 pz.",
+          "peso": "195,2 kgs."
+        },
+        {
+          "codigo": "ALC 952",
+          "detalle": "Pisavidrio puerta batiente (22,9 x 16,5 mm)",
+          "bulto": "200 pz.",
+          "peso": "219,6 kgs."
+        }
       ]
     },
     {
@@ -703,7 +1038,7 @@
       "destacado_home": false,
       "desc": "Sistema de perfilería pesada línea Templex en aleación 6063/S6063 temple T5 para puertas de baño en vidrio templado de seguridad.",
       "spec": "Aleación: 6063/S6063 | Temple: T5 | Longitud: 5,4 m y 6,1 m | Códigos: ALC 907, ALC 908, ALC 909",
-      "imagen": "/assets/img/productos/puertas-bano-templex.jpg",
+      "imagen": "/assets/img/productos/perfil-alc-909-ficha.jpg?v=2",
       "estilo": "card4",
       "cotizar": "Puertas para baño Templex ALC 907 / 908 / 909 (Extrusión)",
       "ficha": {
@@ -715,9 +1050,24 @@
         "usos": "Cabinas de ducha en vidrio templado para hoteles, residencias y clubes deportivos."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 907", "detalle": "Guía inferior Templex (46,9 x 25,0 mm) · Long.: 5,4 mts.", "bulto": "120 pz.", "peso": "213,8 kgs." },
-        { "codigo": "ALC 908", "detalle": "Cabezal riel Templex (54,0 x 49,2 mm) · Long.: 6,1 mts.", "bulto": "120 pz.", "peso": "314,8 kgs." },
-        { "codigo": "ALC 909", "detalle": "Cabezal reforzado Templex (60,0 x 56,5 mm) · Long.: 6,1 mts.", "bulto": "48 pz.", "peso": "266,4 kgs." }
+        {
+          "codigo": "ALC 907",
+          "detalle": "Guía inferior Templex (46,9 x 25,0 mm) · Long.: 5,4 mts.",
+          "bulto": "120 pz.",
+          "peso": "213,8 kgs."
+        },
+        {
+          "codigo": "ALC 908",
+          "detalle": "Cabezal riel Templex (54,0 x 49,2 mm) · Long.: 6,1 mts.",
+          "bulto": "120 pz.",
+          "peso": "314,8 kgs."
+        },
+        {
+          "codigo": "ALC 909",
+          "detalle": "Cabezal reforzado Templex (60,0 x 56,5 mm) · Long.: 6,1 mts.",
+          "bulto": "48 pz.",
+          "peso": "266,4 kgs."
+        }
       ]
     },
     {
@@ -742,9 +1092,24 @@
         "usos": "Puertas interiores de oficinas, consultorios, tabiquería corporativa y comercios."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 958", "detalle": "Marco puerta Junior (58,7 x 31,8 mm)", "bulto": "50 pz.", "peso": "244,0 kgs." },
-        { "codigo": "ALC 959", "detalle": "Hoja puerta Junior (55,6 x 31,8 mm)", "bulto": "50 pz.", "peso": "216,6 kgs." },
-        { "codigo": "ALC 960", "detalle": "Pisavidrio serie Junior (19,1 x 16,5 mm)", "bulto": "200 pz.", "peso": "195,2 kgs." }
+        {
+          "codigo": "ALC 958",
+          "detalle": "Marco puerta Junior (58,7 x 31,8 mm)",
+          "bulto": "50 pz.",
+          "peso": "244,0 kgs."
+        },
+        {
+          "codigo": "ALC 959",
+          "detalle": "Hoja puerta Junior (55,6 x 31,8 mm)",
+          "bulto": "50 pz.",
+          "peso": "216,6 kgs."
+        },
+        {
+          "codigo": "ALC 960",
+          "detalle": "Pisavidrio serie Junior (19,1 x 16,5 mm)",
+          "bulto": "200 pz.",
+          "peso": "195,2 kgs."
+        }
       ]
     },
     {
@@ -769,37 +1134,72 @@
         "usos": "Edificios corporativos, fachadas muro cortina, clínicas, escuelas y torres residenciales."
       },
       "codigos_tabla": [
-        { "codigo": "ALC 3707", "detalle": "Marco exterior ventana proyectante (39,5 x 38,0 mm)", "bulto": "96 pz.", "peso": "310,4 kgs." },
-        { "codigo": "ALC 3708", "detalle": "Hoja proyectante perimetral (40,6 x 38,0 mm)", "bulto": "108 pz.", "peso": "276,7 kgs." },
-        { "codigo": "ALC 3709", "detalle": "Travesaño intermedio proyectante (59,0 x 38,0 mm)", "bulto": "108 pz.", "peso": "210,8 kgs." },
-        { "codigo": "ALC 3710", "detalle": "Bota-agua / Vierteaguas proyectante (37,9 mm)", "bulto": "108 pz.", "peso": "191,1 kgs." },
-        { "codigo": "ALC 3711", "detalle": "Adaptador inversor proyectante (40,6 x 38,0 mm)", "bulto": "96 pz.", "peso": "269,4 kgs." },
-        { "codigo": "ALC 3712", "detalle": "Pisavidrio ventana proyectante (21,2 x 15,6 mm)", "bulto": "128 pz.", "peso": "187,4 kgs." }
+        {
+          "codigo": "ALC 3707",
+          "detalle": "Marco exterior ventana proyectante (39,5 x 38,0 mm)",
+          "bulto": "96 pz.",
+          "peso": "310,4 kgs."
+        },
+        {
+          "codigo": "ALC 3708",
+          "detalle": "Hoja proyectante perimetral (40,6 x 38,0 mm)",
+          "bulto": "108 pz.",
+          "peso": "276,7 kgs."
+        },
+        {
+          "codigo": "ALC 3709",
+          "detalle": "Travesaño intermedio proyectante (59,0 x 38,0 mm)",
+          "bulto": "108 pz.",
+          "peso": "210,8 kgs."
+        },
+        {
+          "codigo": "ALC 3710",
+          "detalle": "Bota-agua / Vierteaguas proyectante (37,9 mm)",
+          "bulto": "108 pz.",
+          "peso": "191,1 kgs."
+        },
+        {
+          "codigo": "ALC 3711",
+          "detalle": "Adaptador inversor proyectante (40,6 x 38,0 mm)",
+          "bulto": "96 pz.",
+          "peso": "269,4 kgs."
+        },
+        {
+          "codigo": "ALC 3712",
+          "detalle": "Pisavidrio ventana proyectante (21,2 x 15,6 mm)",
+          "bulto": "128 pz.",
+          "peso": "187,4 kgs."
+        }
       ]
     },
     {
       "orden": 27,
       "id": "rollo-aluminio-liso",
-      "nombre": "Rollo de aluminio liso",
-      "nombre_en": "Smooth roll (Bobina de espesor alto)",
+      "nombre": "Rollo de aluminio liso o stucco (Espesor alto)",
+      "nombre_en": "Smooth or stucco roll (High thickness aluminum coil)",
       "linea": "Laminación",
       "badge": "Laminados de CVG Alcasa · #27",
       "destacado_home": false,
-      "desc": "Bobina de aluminio laminado de espesor alto (3 a 6 mm) en aleaciones 1050, 1100 y 3003 con acabado liso sin corte de borde para usos metalmecánicos pesados.",
-      "spec": "Aleación: 1050, 1100 y 3003 | Temple: F/H - O / H-14 / H-16 / H-18 | Espesor: 3 - 6 mm | Ancho: 1295 - 1300 mm",
-      "imagen": "/assets/img/productos/rollo-aluminio-liso.jpg",
+      "desc": "Bobina de aluminio laminado de espesor alto (3 a 6 mm) en aleaciones 1050, 1100 y 3003 con acabado liso o stucco sin corte de borde para usos metalmecánicos pesados.",
+      "spec": "Aleación: 1050, 1100 y 3003 | Temple: F/H - O / H-14 / H-16 / H-18 | Espesor: 3 - 6 mm | Ancho: 1295 - 1300 mm | Acabado: Liso / Stucco",
+      "imagen": "/assets/img/productos/rollo-aluminio-alto-stucco-ficha.jpg?v=2",
       "estilo": "card3",
-      "cotizar": "Rollo de aluminio liso 3-6mm (Laminación)",
+      "cotizar": "Rollo de aluminio liso o stucco 3-6mm (Laminación)",
       "ficha": {
         "aleacion": "Series AA 1050, AA 1100 y AA 3003 — Temples F/H - O / H-14 / H-16 / H-18",
-        "pureza": "Bobina de espesor alto laminada en caliente con acabado superficial liso (Sin corte de borde)",
-        "presentaciones": "Espesor: 3 a 6 mm | Ancho: 1295 a 1300 mm",
+        "pureza": "Bobina de espesor alto laminada en caliente con acabado superficial liso o gofrado stucco (Sin corte de borde)",
+        "presentaciones": "Espesor: 3 a 6 mm | Ancho: 1295 a 1300 mm | Acabado: Liso y Stucco",
         "propiedades": "Alta conformabilidad, excelente soldabilidad y resistencia a la corrosión industrial",
         "normas": "Catálogo Oficial CVG Alcasa 2025 — Laminados pág. 10 / ASTM B209",
         "usos": "Tanques de almacenamiento, calderería, pisos industriales, embarcaciones y re-laminación."
       },
       "codigos_tabla": [
-        { "codigo": "BOB-ALTO-LISO", "detalle": "Aleación 1050/1100/3003 · Espesor 3 - 6 mm · Ancho 1295 - 1300 mm", "bulto": "Bobina", "peso": "Acabado Liso (Sin corte de borde)" }
+        {
+          "codigo": "BOB-ALTO-LISO/STUCCO",
+          "detalle": "Aleación 1050/1100/3003 · Espesor 3 - 6 mm · Ancho 1295 - 1300 mm",
+          "bulto": "Bobina",
+          "peso": "Acabado Liso o Stucco (Sin corte de borde)"
+        }
       ]
     },
     {
@@ -812,7 +1212,7 @@
       "destacado_home": false,
       "desc": "Bobina de aluminio de espesor medio (1 a 2.99 mm) y ancho de 1220 mm en aleaciones 1050, 1100 y 3003, disponible en acabado liso (todos los espesores) o stucco (1 mm).",
       "spec": "Aleación: 1050, 1100 y 3003 | Temple: F/H - O / H-14 / H-16 / H-18 | Espesor: 1 - 2.99 mm | Ancho: 1220 mm",
-      "imagen": "/assets/img/productos/rollo-liso-stucco-medio.jpg",
+      "imagen": "/assets/img/productos/rollo-aluminio-liso-medio-ficha.jpg?v=2",
       "estilo": "card3",
       "cotizar": "Rollo liso o stucco espesor medio 1-2.99mm (Laminación)",
       "ficha": {
@@ -824,8 +1224,18 @@
         "usos": "Revestimientos industriales, carrocerías, señalización vial, ductos y paneles aislantes."
       },
       "codigos_tabla": [
-        { "codigo": "BOB-MED-LISO", "detalle": "Espesor 1 - 2.99 mm · Ancho 1220 mm · Acabado liso: Todas", "bulto": "Bobina", "peso": "Temple F/H - O / H14 / H16 / H18" },
-        { "codigo": "BOB-MED-STUCCO", "detalle": "Espesor 1.00 mm · Ancho 1220 mm · Acabado stucco: 1 mm", "bulto": "Bobina", "peso": "Temple F/H - O / H14 / H16 / H18" }
+        {
+          "codigo": "BOB-MED-LISO",
+          "detalle": "Espesor 1 - 2.99 mm · Ancho 1220 mm · Acabado liso: Todas",
+          "bulto": "Bobina",
+          "peso": "Temple F/H - O / H14 / H16 / H18"
+        },
+        {
+          "codigo": "BOB-MED-STUCCO",
+          "detalle": "Espesor 1.00 mm · Ancho 1220 mm · Acabado stucco: 1 mm",
+          "bulto": "Bobina",
+          "peso": "Temple F/H - O / H14 / H16 / H18"
+        }
       ]
     },
     {
@@ -850,7 +1260,12 @@
         "usos": "Fabricación de láminas acanaladas para techos, recubrimiento de tuberías térmicas, refrigeración y envases."
       },
       "codigos_tabla": [
-        { "codigo": "BOB-BAJO-03/09", "detalle": "Aleación 1050, 1100 y 3003 · Espesor de 0.3 hasta 0.9 mm · Ancho 1220 mm", "bulto": "Bobina", "peso": "Acabado Liso y Stucco" }
+        {
+          "codigo": "BOB-BAJO-03/09",
+          "detalle": "Aleación 1050, 1100 y 3003 · Espesor de 0.3 hasta 0.9 mm · Ancho 1220 mm",
+          "bulto": "Bobina",
+          "peso": "Acabado Liso y Stucco"
+        }
       ]
     },
     {
@@ -875,7 +1290,12 @@
         "usos": "Revestimiento arquitectónico, carpintería metálica, ductería de aire acondicionado, furgones y señalética."
       },
       "codigos_tabla": [
-        { "codigo": "LAM-PLANA", "detalle": "Espesor 0.33 - 2.00 mm · Ancho 1.220 mm · Longitud 1.00 a 3.66 mts", "bulto": "Paleta", "peso": "Acabado Lisa y Stucco" }
+        {
+          "codigo": "LAM-PLANA",
+          "detalle": "Espesor 0.33 - 2.00 mm · Ancho 1.220 mm · Longitud 1.00 a 3.66 mts",
+          "bulto": "Paleta",
+          "peso": "Acabado Lisa y Stucco"
+        }
       ]
     },
     {
@@ -888,7 +1308,7 @@
       "destacado_home": false,
       "desc": "Láminas acanaladas de perfil Noral Trapezoidal de hasta 12 metros de largo, ideales para cubiertas y revestimientos de paredes y techos de galpones industriales y fachadas.",
       "spec": "Longitud: 1.00 hasta 12.0 mts | Espesor: 0.3 mm / 1 mm | Perfil: Noral Trapezoidal",
-      "imagen": "/assets/img/productos/laminas-noral-trapezoidal.jpg",
+      "imagen": "/assets/img/productos/lamina-noral-trapezoidal-ficha.jpg?v=2",
       "estilo": "card3",
       "cotizar": "Láminas de aluminio Noral Trapezoidal (Laminación)",
       "ficha": {
@@ -900,7 +1320,12 @@
         "usos": "Ideal para cubiertas y revestimientos de paredes y techos de galpones industriales y fachadas."
       },
       "codigos_tabla": [
-        { "codigo": "NORAL-TRAP", "detalle": "Perfil Trapezoidal · Longitud 1.00 hasta 12.0 mts · Espesor 0.3 mm / 1 mm", "bulto": "A medida", "peso": "Cubiertas y fachadas industriales" }
+        {
+          "codigo": "NORAL-TRAP",
+          "detalle": "Perfil Trapezoidal · Longitud 1.00 hasta 12.0 mts · Espesor 0.3 mm / 1 mm",
+          "bulto": "A medida",
+          "peso": "Cubiertas y fachadas industriales"
+        }
       ]
     },
     {
@@ -913,7 +1338,7 @@
       "destacado_home": false,
       "desc": "Láminas acanaladas onduladas tipo Frescalum Sinusoidal de alta reflectividad térmica, ampliamente utilizadas en techos de fábricas, almacenes, estacionamientos y centros de exposiciones.",
       "spec": "Longitud: 1.00 hasta 3.66 mts | Espesor: 0.3 mm / 1 mm | Perfil: Frescalum Sinusoidal",
-      "imagen": "/assets/img/productos/laminas-frescalum-sinusoidal.jpg",
+      "imagen": "/assets/img/productos/lamina-frescalum-sinusoidal-ficha.jpg?v=2",
       "estilo": "card3",
       "cotizar": "Láminas de aluminio Frescalum Sinusoidal (Laminación)",
       "ficha": {
@@ -925,7 +1350,42 @@
         "usos": "Ampliamente utilizada en techos de fábricas, almacenes, estacionamientos, centros de exposiciones, viviendas y galpones."
       },
       "codigos_tabla": [
-        { "codigo": "FRESCALUM-SIN", "detalle": "Perfil Sinusoidal · Longitud 1.00 hasta 3.66 mts · Espesor 0.3 mm / 1 mm", "bulto": "Paquete", "peso": "Techos industriales y comerciales" }
+        {
+          "codigo": "FRESCALUM-SIN",
+          "detalle": "Perfil Sinusoidal · Longitud 1.00 hasta 3.66 mts · Espesor 0.3 mm / 1 mm",
+          "bulto": "Paquete",
+          "peso": "Techos industriales y comerciales"
+        }
+      ]
+    },
+    {
+      "orden": 33,
+      "id": "rollo-cinta",
+      "nombre": "Rollo Cinta",
+      "nombre_en": "Tape roll",
+      "linea": "Laminación",
+      "badge": "Laminados de CVG Alcasa · #33",
+      "destacado_home": false,
+      "desc": "Rollo cinta de aluminio laminado en aleación 3003 con espesor de 1.2 mm, tamaño 1200 y peso estándar de 934 kgs por rollo, ideal para líneas de transformación industrial.",
+      "spec": "Presentación: Rollos | Tamaño: 1200 | Peso: 934 Kgs. | Aleación: 3003 | Espesor: 1.2 mm",
+      "imagen": "/assets/img/productos/rollo-cinta-ficha.jpg?v=2",
+      "estilo": "card3",
+      "cotizar": "Rollo Cinta Aleación 3003 1.2mm (Laminación)",
+      "ficha": {
+        "aleacion": "Serie AA 3003",
+        "pureza": "Cinta de aluminio laminado en presentación de rollo flejado y protegido para despacho industrial",
+        "presentaciones": "Presentación: Rollos | Tamaño: 1200 | Espesor: 1.2 mm | Peso: 934 Kgs.",
+        "propiedades": "Excelente conformabilidad, resistencia a la corrosión y estabilidad dimensional en aleación 3003",
+        "normas": "Ficha Oficial de Producto CVG Alcasa — Planta de Laminación",
+        "usos": "Suministro industrial para líneas de perfilado, estampado, recubrimientos metálicos y transformación continua."
+      },
+      "codigos_tabla": [
+        {
+          "codigo": "ROL-CINTA-3003",
+          "detalle": "Aleación 3003 · Tamaño 1200 · Espesor 1.2 mm",
+          "bulto": "Rollos",
+          "peso": "934 Kgs."
+        }
       ]
     }
   ],

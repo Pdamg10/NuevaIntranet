@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/main.css?v=2026w">
+    <link rel="stylesheet" href="/assets/css/main.css?v=2026z3">
 </head>
 <body id="pagina-galeria">
 
@@ -299,6 +299,7 @@
                     <div class="ficha-kicker-row">
                         <span class="ficha-kicker-badge" id="lightboxCatBadge">Planta de Laminación</span>
                         <span class="ficha-kicker-en" id="lightboxCounter">Fotografía 1 de 15</span>
+                        <span class="galeria-lightbox-res" id="lightboxResBadge" style="display: none;"></span>
                     </div>
                     <h4><i class="fas fa-camera" style="color: var(--alcasa-accent-light);"></i> <span id="lightboxTitle">Bobinas de Aluminio Laminado</span></h4>
                 </div>
@@ -307,21 +308,24 @@
                 </button>
             </div>
             <div class="ficha-modal-body galeria-lightbox-body">
-                <div class="galeria-lightbox-stage">
+                <div class="galeria-lightbox-stage" id="lightboxStage">
                     <button type="button" class="galeria-lightbox-nav prev" id="lightboxPrevBtn" aria-label="Fotografía anterior">
-                        <i class="fas fa-chevron-left"></i>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
                     </button>
-                    <img src="/assets/img/galeria/laminacion-bobinas.jpg" alt="Fotografía CVG Alcasa" id="lightboxImage" class="galeria-lightbox-img">
+                    <img src="/assets/img/galeria/laminacion-bobinas.jpg" alt="Fotografía CVG Alcasa" id="lightboxImage" class="galeria-lightbox-img" title="Clic para alternar resolución original 1:1">
                     <button type="button" class="galeria-lightbox-nav next" id="lightboxNextBtn" aria-label="Fotografía siguiente">
-                        <i class="fas fa-chevron-right"></i>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </button>
                 </div>
                 <p class="galeria-lightbox-desc" id="lightboxDesc"></p>
                 <div class="galeria-lightbox-thumbs" id="lightboxThumbs" aria-label="Miniaturas de la serie"></div>
             </div>
             <div class="ficha-actions">
+                <button type="button" class="btn-modal-secondary" id="lightboxNativeZoomBtn" aria-pressed="false">
+                    <i class="fas fa-magnifying-glass-plus"></i> Ver 1:1 (Resolución Original)
+                </button>
                 <a href="/assets/img/galeria/laminacion-bobinas.jpg" target="_blank" rel="noopener noreferrer" class="btn-modal-secondary" id="lightboxOpenRawBtn">
-                    <i class="fas fa-up-right-from-square"></i> Ver Imagen Completa
+                    <i class="fas fa-up-right-from-square"></i> Abrir Original
                 </a>
                 <button type="button" class="btn-modal-close" id="lightboxCloseFooterBtn" style="margin-left: auto;">
                     <i class="fas fa-times"></i> Cerrar Vista
@@ -335,6 +339,6 @@
          ========================================= -->
     <div id="site-footer"></div>
 
-    <script src="/assets/js/app.js?v=2026y"></script>
+    <script src="/assets/js/app.js?v=2026z5"></script>
 </body>
 </html>
