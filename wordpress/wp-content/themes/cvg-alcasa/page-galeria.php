@@ -1,0 +1,325 @@
+<?php
+/**
+ * Template Name: Galería Multimedia
+ *
+ * Videos institucionales, Serie Colada Continua y Archivo Fotográfico con Lightbox 1:1.
+ *
+ * @package CVG_Alcasa
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+get_header();
+?>
+<main class="content-wrapper">
+
+        <!-- 1. HERO ENCABEZADO DE LA GALERÍA -->
+        <section class="productos-page-hero galeria-page-hero">
+            <div class="productos-page-hero-top">
+                <div class="productos-page-hero-text">
+                    <span class="productos-page-kicker"><i class="fas fa-photo-film"></i> Archivo Audiovisual y Fotográfico · CVG Alcasa</span>
+                    <h1>Galería de Procesos, Plantas y Compromiso Social</h1>
+                    <p>
+                        Recorre el registro audiovisual y fotográfico de las operaciones industriales de <strong>CVG Aluminio del Caroní, S.A. (CVG Alcasa)</strong>: <strong>Planta de Laminación y Colada Continua</strong>, <strong>Planta de Fundición</strong>, <strong>Planta Extrusora</strong> y el <strong>Compromiso Social</strong> de nuestra clase trabajadora en Ciudad Guayana.
+                    </p>
+                </div>
+                <div class="productos-page-hero-actions">
+                    <a href="#galeriaVideosSection" class="btn-ver-todos-productos">
+                        <i class="fas fa-circle-play"></i> Ver Videos
+                    </a>
+                    <a href="#galeriaColadaSection" class="btn-outline-corp">
+                        <i class="fas fa-layer-group"></i> Colada Continua
+                    </a>
+                    <a href="#galeriaFotosSection" class="btn-outline-corp">
+                        <i class="fas fa-camera-retro"></i> Ver Fotografías
+                    </a>
+                    <a href="<?php echo esc_url( cvg_alcasa_page_url( 'inicio', 'galeria' ) ); ?>" class="btn-outline-corp">
+                        <i class="fas fa-arrow-left"></i> Volver al Inicio
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tarjetas de resumen por área clasificada -->
+            <div class="industrial-stats-grid" style="margin-top: 22px;">
+                <div class="industrial-stat-card">
+                    <div class="industrial-stat-head">
+                        <i class="fas fa-film"></i>
+                        <h4>Videos de Procesos</h4>
+                    </div>
+                    <p>Recorridos audiovisuales por las áreas operativas de <strong>Laminación</strong>, <strong>Fundición</strong>, <strong>Extrusión</strong> y el <strong>Taller Soberano de Ayudas Técnicas</strong>.</p>
+                </div>
+                <div class="industrial-stat-card">
+                    <div class="industrial-stat-head">
+                        <i class="fas fa-layer-group"></i>
+                        <h4>Planta de Laminación</h4>
+                    </div>
+                    <p>Operaciones de Colada Continua, Laminador en Caliente Clecim-Cosim, Laminador en Frío y despacho de bobinas de aluminio.</p>
+                </div>
+                <div class="industrial-stat-card">
+                    <div class="industrial-stat-head">
+                        <i class="fas fa-fire-burner"></i>
+                        <h4>Fundición y Extrusión</h4>
+                    </div>
+                    <p>Hornos de fusión y retención, colada vertical de cilindros tochos 6063 homogeneizados y prensas extrusoras de perfilería arquitectónica y estructural.</p>
+                </div>
+                <div class="industrial-stat-card">
+                    <div class="industrial-stat-head">
+                        <i class="fas fa-hands-holding-circle"></i>
+                        <h4>Compromiso Social</h4>
+                    </div>
+                    <p>Taller Soberano de Ayudas Técnicas, jornadas de atención integral, talento humano alcasiano e instalaciones productivas en Matanzas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. CONTENIDO COMPLETO DE LA GALERÍA MULTIMEDIA -->
+        <section class="catalogo-full-section" id="galeria-explorar" style="padding-top: 10px;">
+
+            <!-- SECCIÓN DE VIDEOS INSTITUCIONALES -->
+            <div id="galeriaVideosSection" style="margin-top: 12px;">
+                <div class="galeria-dashboard-header">
+                    <div class="galeria-dashboard-top">
+                        <div class="galeria-dashboard-title-group">
+                            <span class="galeria-subblock-kicker"><i class="fas fa-circle-play"></i> Producción Audiovisual Institucional</span>
+                            <h3>Videos de Procesos Productivos y Compromiso Social</h3>
+                        </div>
+                        <span class="galeria-subblock-badge" id="galeriaVideosCountBadge">4 Videos Institucionales</span>
+                    </div>
+                    <p class="galeria-dashboard-desc">
+                        Recorridos audiovisuales por las áreas productivas de <strong>Planta de Laminación</strong>, <strong>Planta de Fundición</strong>, <strong>Planta de Extrusión</strong> y el <strong>Taller Soberano de Ayudas Técnicas</strong> de CVG Alcasa.
+                    </p>
+                </div>
+
+                <div class="prensa-list-horizontal" id="galeriaVideosList">
+                    <!-- Video 1: Laminación -->
+                    <article class="prensa-api-card prensa-card-horizontal is-top-news galeria-video-card" data-categoria="Planta de Laminación" data-video-index="0">
+                        <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="0" data-video-title="Planta de Laminación en Frío y Caliente" data-video-badge="Planta de Laminación" data-video-poster="<?php echo esc_url( cvg_alcasa_media_url( 'img/video-lami.jpg' ) ); ?>" data-video-src="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-laminacion.mp4' ) ); ?>" data-video-desc="Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación Clecim-Cosim y Laminador en Frío." title="Clic para reproducir el video">
+                            <img src="<?php echo esc_url( cvg_alcasa_media_url( 'img/galeria/gif-laminacion.gif' ) ); ?>" alt="Planta de Laminación en Frío y Caliente" class="prensa-api-thumb">
+                            <span class="galeria-gif-badge"><i class="fas fa-play"></i> 00:41</span>
+                        </div>
+                        <div class="prensa-api-card-body">
+                            <div class="prensa-row-meta">
+                                <span class="prensa-cat-badge"><i class="fas fa-layer-group"></i> Planta de Laminación</span>
+                                <span class="prensa-strip-item"><i class="fas fa-video"></i> Video Institucional · CVG Alcasa</span>
+                                <span class="prensa-strip-item"><i class="fas fa-clock"></i> Duración: 00:41 min</span>
+                            </div>
+                            <h3 class="prensa-api-title btn-ver-video" data-video-index="0" data-video-title="Planta de Laminación en Frío y Caliente" data-video-badge="Planta de Laminación" data-video-poster="<?php echo esc_url( cvg_alcasa_media_url( 'img/video-lami.jpg' ) ); ?>" data-video-src="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-laminacion.mp4' ) ); ?>" data-video-desc="Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación Clecim-Cosim y Laminador en Frío.">
+                                Planta de Laminación en Frío y Caliente
+                            </h3>
+                            <p class="prensa-api-excerpt">
+                                Proceso continuo de laminación de bobinas, cintas, rollos lisos o stucco y láminas de aluminio de alta precisión dimensional para la industria nacional del envase, techos y refrigeración.
+                            </p>
+                        </div>
+                        <div class="prensa-api-footer">
+                            <button type="button" class="btn-prensa-quickview-sm btn-ver-video" data-video-index="0" data-video-title="Planta de Laminación en Frío y Caliente" data-video-badge="Planta de Laminación" data-video-poster="<?php echo esc_url( cvg_alcasa_media_url( 'img/video-lami.jpg' ) ); ?>" data-video-src="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-laminacion.mp4' ) ); ?>" data-video-desc="Transformación continua del aluminio en láminas, bobinas y foil de alta precisión mediante trenes de laminación Clecim-Cosim y Laminador en Frío.">
+                                <i class="fas fa-play-circle"></i> Reproducir Video
+                            </button>
+                            <a href="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-laminacion.mp4' ) ); ?>" target="_blank" rel="noopener noreferrer" class="btn-prensa-card">
+                                Abrir Video <i class="fas fa-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Video 2: Fundición -->
+                    <article class="prensa-api-card prensa-card-horizontal galeria-video-card" data-categoria="Planta de Fundición" data-video-index="1">
+                        <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="1" data-video-title="Planta de Fundición y Hornos de Fusión" data-video-badge="Planta de Fundición" data-video-poster="<?php echo esc_url( cvg_alcasa_media_url( 'img/video-fund.jpg' ) ); ?>" data-video-src="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-fundicion.mp4' ) ); ?>" data-video-desc="Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de cilindros tochos 6063 de calidad metalúrgica internacional." title="Clic para reproducir el video">
+                            <img src="<?php echo esc_url( cvg_alcasa_media_url( 'img/galeria/gif-fundicion.gif' ) ); ?>" alt="Planta de Fundición y Hornos de Fusión" class="prensa-api-thumb">
+                            <span class="galeria-gif-badge"><i class="fas fa-play"></i> 01:12</span>
+                        </div>
+                        <div class="prensa-api-card-body">
+                            <div class="prensa-row-meta">
+                                <span class="prensa-cat-badge"><i class="fas fa-fire-burner"></i> Planta de Fundición</span>
+                                <span class="prensa-strip-item"><i class="fas fa-video"></i> Video Institucional · CVG Alcasa</span>
+                                <span class="prensa-strip-item"><i class="fas fa-clock"></i> Duración: 01:12 min</span>
+                            </div>
+                            <h3 class="prensa-api-title btn-ver-video" data-video-index="1" data-video-title="Planta de Fundición y Hornos de Fusión" data-video-badge="Planta de Fundición" data-video-poster="<?php echo esc_url( cvg_alcasa_media_url( 'img/video-fund.jpg' ) ); ?>" data-video-src="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-fundicion.mp4' ) ); ?>" data-video-desc="Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de cilindros tochos 6063 de calidad metalúrgica internacional.">
+                                Planta de Fundición y Hornos de Fusión
+                            </h3>
+                            <p class="prensa-api-excerpt">
+                                Operación de hornos de retención, colada vertical y homogenizado de cilindros tochos de aluminio primario en aleación 6063 bajo estrictos controles metalúrgicos y espectrométricos.
+                            </p>
+                        </div>
+                        <div class="prensa-api-footer">
+                            <button type="button" class="btn-prensa-quickview-sm btn-ver-video" data-video-index="1" data-video-title="Planta de Fundición y Hornos de Fusión" data-video-badge="Planta de Fundición" data-video-poster="<?php echo esc_url( cvg_alcasa_media_url( 'img/video-fund.jpg' ) ); ?>" data-video-src="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-fundicion.mp4' ) ); ?>" data-video-desc="Hornos de retención y colada vertical continua donde el aluminio primario se alea y purifica para la producción de cilindros tochos 6063 de calidad metalúrgica internacional.">
+                                <i class="fas fa-play-circle"></i> Reproducir Video
+                            </button>
+                            <a href="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-fundicion.mp4' ) ); ?>" target="_blank" rel="noopener noreferrer" class="btn-prensa-card">
+                                Abrir Video <i class="fas fa-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Video 3: Extrusión -->
+                    <article class="prensa-api-card prensa-card-horizontal galeria-video-card" data-categoria="Planta de Extrusión" data-video-index="2">
+                        <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="2" data-video-title="Planta de Extrusión y Prensas de Perfilería" data-video-badge="Planta de Extrusión" data-video-poster="<?php echo esc_url( cvg_alcasa_media_url( 'img/video-ext.jpg' ) ); ?>" data-video-src="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-extrusion.mp4' ) ); ?>" data-video-desc="Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida para la industria de la construcción y el transporte." title="Clic para reproducir el video">
+                            <img src="<?php echo esc_url( cvg_alcasa_media_url( 'img/galeria/gif-extrusion.gif' ) ); ?>" alt="Planta de Extrusión y Prensas de Perfilería" class="prensa-api-thumb">
+                            <span class="galeria-gif-badge"><i class="fas fa-play"></i> 01:00</span>
+                        </div>
+                        <div class="prensa-api-card-body">
+                            <div class="prensa-row-meta">
+                                <span class="prensa-cat-badge"><i class="fas fa-cubes"></i> Planta de Extrusión</span>
+                                <span class="prensa-strip-item"><i class="fas fa-video"></i> Video Institucional · CVG Alcasa</span>
+                                <span class="prensa-strip-item"><i class="fas fa-clock"></i> Duración: 01:00 min</span>
+                            </div>
+                            <h3 class="prensa-api-title btn-ver-video" data-video-index="2" data-video-title="Planta de Extrusión y Prensas de Perfilería" data-video-badge="Planta de Extrusión" data-video-poster="<?php echo esc_url( cvg_alcasa_media_url( 'img/video-ext.jpg' ) ); ?>" data-video-src="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-extrusion.mp4' ) ); ?>" data-video-desc="Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida para la industria de la construcción y el transporte.">
+                                Planta de Extrusión y Prensas de Perfilería
+                            </h3>
+                            <p class="prensa-api-excerpt">
+                                Transformación de cilindros 6063 en perfiles arquitectónicos Caroní, estructurales, tubulares, ángulos y platinas para los sectores construcción, transporte e infraestructura eléctrica.
+                            </p>
+                        </div>
+                        <div class="prensa-api-footer">
+                            <button type="button" class="btn-prensa-quickview-sm btn-ver-video" data-video-index="2" data-video-title="Planta de Extrusión y Prensas de Perfilería" data-video-badge="Planta de Extrusión" data-video-poster="<?php echo esc_url( cvg_alcasa_media_url( 'img/video-ext.jpg' ) ); ?>" data-video-src="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-extrusion.mp4' ) ); ?>" data-video-desc="Prensas de alta presión que moldean tochos en perfiles tubulares, angulares y arquitectónicos diseñados a medida para la industria de la construcción y el transporte.">
+                                <i class="fas fa-play-circle"></i> Reproducir Video
+                            </button>
+                            <a href="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-extrusion.mp4' ) ); ?>" target="_blank" rel="noopener noreferrer" class="btn-prensa-card">
+                                Abrir Video <i class="fas fa-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Video 4: Taller Soberano de Ayudas Técnicas -->
+                    <article class="prensa-api-card prensa-card-horizontal galeria-video-card" data-categoria="Compromiso Social" data-video-index="3">
+                        <div class="prensa-api-thumb-wrap galeria-gif-thumb-wrap btn-ver-video" data-video-index="3" data-video-title="Taller Soberano de Ayudas Técnicas" data-video-badge="Compromiso Social" data-video-poster="<?php echo esc_url( cvg_alcasa_media_url( 'img/video-at.jpg' ) ); ?>" data-video-src="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-ayudas-tecnicas.mp4' ) ); ?>" data-video-desc="Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables." title="Clic para reproducir el video">
+                            <img src="<?php echo esc_url( cvg_alcasa_media_url( 'img/galeria/gif-ayudas.gif' ) ); ?>" alt="Taller Soberano de Ayudas Técnicas" class="prensa-api-thumb">
+                            <span class="galeria-gif-badge"><i class="fas fa-play"></i> 00:25</span>
+                        </div>
+                        <div class="prensa-api-card-body">
+                            <div class="prensa-row-meta">
+                                <span class="prensa-cat-badge"><i class="fas fa-hands-helping"></i> Compromiso Social</span>
+                                <span class="prensa-strip-item"><i class="fas fa-video"></i> Video Institucional · CVG Alcasa</span>
+                                <span class="prensa-strip-item"><i class="fas fa-clock"></i> Duración: 00:25 min</span>
+                            </div>
+                            <h3 class="prensa-api-title btn-ver-video" data-video-index="3" data-video-title="Taller Soberano de Ayudas Técnicas" data-video-badge="Compromiso Social" data-video-poster="<?php echo esc_url( cvg_alcasa_media_url( 'img/video-at.jpg' ) ); ?>" data-video-src="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-ayudas-tecnicas.mp4' ) ); ?>" data-video-desc="Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables.">
+                                Taller Soberano de Ayudas Técnicas
+                            </h3>
+                            <p class="prensa-api-excerpt">
+                                Diseño y manufactura de sillas de ruedas, andaderas, muletas y dispositivos de movilidad fabricados con tubería de aluminio alcasiano por nuestra clase trabajadora para el bienestar social.
+                            </p>
+                        </div>
+                        <div class="prensa-api-footer">
+                            <button type="button" class="btn-prensa-quickview-sm btn-ver-video" data-video-index="3" data-video-title="Taller Soberano de Ayudas Técnicas" data-video-badge="Compromiso Social" data-video-poster="<?php echo esc_url( cvg_alcasa_media_url( 'img/video-at.jpg' ) ); ?>" data-video-src="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-ayudas-tecnicas.mp4' ) ); ?>" data-video-desc="Fabricación de sillas de ruedas, andaderas, bastones y camas clínicas utilizando aluminio transformado en Guayana, brindando bienestar a familias y comunidades vulnerables.">
+                                <i class="fas fa-play-circle"></i> Reproducir Video
+                            </button>
+                            <a href="<?php echo esc_url( cvg_alcasa_media_url( 'media/videos/video-ayudas-tecnicas.mp4' ) ); ?>" target="_blank" rel="noopener noreferrer" class="btn-prensa-card">
+                                Abrir Video <i class="fas fa-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- 3. SERIE FOTOGRÁFICA ESPECIAL: LÍNEA DE COLADA CONTINUA -->
+            <div id="galeriaColadaSection" class="galeria-colada-section">
+                <div class="galeria-dashboard-header">
+                    <div class="galeria-dashboard-top">
+                        <div class="galeria-dashboard-title-group">
+                            <span class="galeria-subblock-kicker"><i class="fas fa-industry"></i> Planta de Laminación · CVG Alcasa</span>
+                            <h3>Línea de Colada Continua en Operación</h3>
+                        </div>
+                        <span class="galeria-subblock-badge" id="galeriaColadaCountBadge">9 Fotografías · Planta de Laminación</span>
+                    </div>
+                    <p class="galeria-dashboard-desc">
+                        Registro operativo de nuestra línea de <strong>Colada Continua</strong> en la Planta de Laminación: desde la alimentación de aluminio líquido y la solidificación directa en rodillos hasta la inspección superficial, estación de cizalla, consola de mando, bobinado industrial y la labor diaria de nuestra clase trabajadora.
+                    </p>
+                </div>
+                <!-- Grilla 3x3 renderizada desde /data/contenido.json -> galeria_colada_continua -->
+                <div class="galeria-colada-grid" id="galeriaColadaGrid"></div>
+            </div>
+
+            <!-- 4. SECCIÓN DE FOTOGRAFÍAS CLASIFICADAS POR ÁREA -->
+            <div id="galeriaFotosSection" style="margin-top: 48px;">
+                <div class="galeria-dashboard-header">
+                    <div class="galeria-dashboard-top">
+                        <div class="galeria-dashboard-title-group">
+                            <span class="galeria-subblock-kicker"><i class="fas fa-camera-retro"></i> Archivo Fotográfico Institucional</span>
+                            <h3>Fotografías de Plantas, Procesos y Clase Trabajadora</h3>
+                        </div>
+                        <span class="galeria-subblock-badge" id="galeriaFotosCountBadge">15 Fotografías</span>
+                    </div>
+                    <p class="galeria-dashboard-desc">
+                        Registro fotográfico de nuestras plantas productivas, maquinaria industrial, instalaciones en la Zona Industrial Matanzas y jornadas de compromiso social junto al talento humano de <strong>CVG Alcasa</strong>.
+                    </p>
+                </div>
+
+                <!-- Grilla dinámica renderizada desde /data/contenido.json -> galeria_fotos -->
+                <div class="galeria-fotos-grid" id="galeriaFotosGrid"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =========================================
+         MODAL FLOTANTE DE REPRODUCCIÓN DE VIDEO COMPLETO
+         ========================================= -->
+    <div class="ficha-modal-backdrop" id="videoPlayerPanel" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="videoPanelTitle">
+        <div class="ficha-modal-dialog" style="max-width: 880px;">
+            <div class="ficha-header">
+                <div>
+                    <h4><i class="fas fa-circle-play" style="color: var(--alcasa-accent-light);"></i> <span id="videoPanelTitle">Proceso Productivo CVG Alcasa</span></h4>
+                    <div class="ficha-sub" id="videoPanelBadge">Galería Audiovisual CVG Alcasa</div>
+                </div>
+                <button type="button" class="ficha-close-btn" id="videoPanelCloseBtn" aria-label="Cerrar reproductor">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="ficha-modal-body">
+                <div id="videoPanelMedia" style="margin-bottom: 16px;"></div>
+                <p id="videoPanelDesc" style="color: #334155; font-size: 0.96rem; line-height: 1.65; margin: 0;"></p>
+            </div>
+            <div class="ficha-actions">
+                <button type="button" class="btn-modal-close" id="videoPanelCloseFooterBtn" style="margin-left: auto;">
+                    <i class="fas fa-times"></i> Cerrar Reproductor
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         MODAL FLOTANTE (LIGHTBOX) PARA VER FOTOGRAFÍAS EN PANTALLA COMPLETA
+         ========================================= -->
+    <div class="ficha-modal-backdrop" id="galeriaLightboxModal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+        <div class="ficha-modal-dialog galeria-lightbox-dialog">
+            <div class="ficha-header">
+                <div>
+                    <div class="ficha-kicker-row">
+                        <span class="ficha-kicker-badge" id="lightboxCatBadge">Planta de Laminación</span>
+                        <span class="ficha-kicker-en" id="lightboxCounter">Fotografía 1 de 15</span>
+                        <span class="galeria-lightbox-res" id="lightboxResBadge" style="display: none;"></span>
+                    </div>
+                    <h4><i class="fas fa-camera" style="color: var(--alcasa-accent-light);"></i> <span id="lightboxTitle">Bobinas de Aluminio Laminado</span></h4>
+                </div>
+                <button type="button" class="ficha-close-btn" id="lightboxCloseBtn" aria-label="Cerrar fotografía">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="ficha-modal-body galeria-lightbox-body">
+                <div class="galeria-lightbox-stage" id="lightboxStage">
+                    <button type="button" class="galeria-lightbox-nav prev" id="lightboxPrevBtn" aria-label="Fotografía anterior">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <img src="<?php echo esc_url( cvg_alcasa_media_url( 'img/galeria/laminacion-bobinas.jpg' ) ); ?>" alt="Fotografía CVG Alcasa" id="lightboxImage" class="galeria-lightbox-img" title="Clic para alternar resolución original 1:1">
+                    <button type="button" class="galeria-lightbox-nav next" id="lightboxNextBtn" aria-label="Fotografía siguiente">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+                <p class="galeria-lightbox-desc" id="lightboxDesc"></p>
+                <div class="galeria-lightbox-thumbs" id="lightboxThumbs" aria-label="Miniaturas de la serie"></div>
+            </div>
+            <div class="ficha-actions">
+                <button type="button" class="btn-modal-secondary" id="lightboxNativeZoomBtn" aria-pressed="false">
+                    <i class="fas fa-magnifying-glass-plus"></i> Ver 1:1 (Resolución Original)
+                </button>
+                <a href="<?php echo esc_url( cvg_alcasa_media_url( 'img/galeria/laminacion-bobinas.jpg' ) ); ?>" target="_blank" rel="noopener noreferrer" class="btn-modal-secondary" id="lightboxOpenRawBtn">
+                    <i class="fas fa-up-right-from-square"></i> Abrir Original
+                </a>
+                <button type="button" class="btn-modal-close" id="lightboxCloseFooterBtn" style="margin-left: auto;">
+                    <i class="fas fa-times"></i> Cerrar Vista
+                </button>
+            </div>
+        </div>
+    </div>
+<?php
+get_footer();

@@ -1,0 +1,13 @@
+/*
+Theme Name: CVG Alcasa v2
+Theme URI: https://github.com/Pdamg10/NuevaIntranet
+Author: CVG Aluminio del Caroní, S.A. (CVG Alcasa)
+Description: Tema institucional oficial a medida de CVG Alcasa v2, preparado para despliegue en Linux Ubuntu (:8080) y Microsoft Azure App Service + MySQL Flexible Server. La lógica de negocio, formularios y endpoints residen en el plugin cvg-alcasa-core.
+Version: 2.0.0
+Requires at least: 6.4
+Tested up to: 6.7
+Requires PHP: 8.1
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: cvg-alcasa
+*/

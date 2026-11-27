@@ -1,0 +1,266 @@
+<?php
+/**
+ * Template Name: Catálogo de Productos
+ *
+ * Catálogo Oficial CVG Alcasa 2025 (33 productos en orden + Ficha Técnica + Cotización).
+ *
+ * @package CVG_Alcasa
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+get_header();
+?>
+<main class="content-wrapper">
+
+        <!-- 1. ENCABEZADO Y ÁREA INDUSTRIAL DE CVG ALCASA (PÁG. 2 DEL CATÁLOGO) -->
+        <section class="productos-page-hero">
+            <div class="productos-page-hero-top">
+                <div class="productos-page-hero-text">
+                    <span class="productos-page-kicker"><i class="fas fa-certificate"></i> Catálogo Oficial CVG Alcasa 2025 · 33 Productos en Orden</span>
+                    <h1>Nuestros Productos e Instalaciones Industriales</h1>
+                    <p>
+                        Toda la gama oficial de <strong>Cilindros de Fundición</strong>, <strong>Perfilería de Extrusión</strong> y <strong>Laminados de Aluminio</strong> de <strong>CVG Aluminio del Caroní, S.A. (CVG Alcasa)</strong> verificada según el Catálogo Oficial 2025, presentada en orden correlativo con imagen del <strong>producto final terminado</strong> y sus especificaciones técnicas de fábrica.
+                    </p>
+                </div>
+                <div class="productos-page-hero-actions">
+                    <a href="<?php echo esc_url( cvg_alcasa_media_url( 'media/CATALOGO_CVG_ALCASA_2025.pdf' ) ); ?>" target="_blank" rel="noopener noreferrer" class="btn-ver-todos-productos">
+                        <i class="fas fa-file-pdf"></i> Descargar Catálogo CVG Alcasa 2025 (PDF)
+                    </a>
+                    <a href="<?php echo esc_url( cvg_alcasa_page_url( 'inicio', 'productos' ) ); ?>" class="btn-outline-corp">
+                        <i class="fas fa-arrow-left"></i> Volver al Inicio
+                    </a>
+                </div>
+            </div>
+
+            <!-- Capacidades Instaladas por Área Industrial (Verificado en Pág. 2 del Catálogo 2025) -->
+            <div class="areas-industriales-grid">
+                <div class="area-industrial-card">
+                    <div class="area-industrial-icon"><i class="fas fa-fire-burner"></i></div>
+                    <div class="area-industrial-body">
+                        <span class="area-industrial-cap">Capacidad: 120.000 Tm/año</span>
+                        <h3>Planta de Fundición</h3>
+                        <p>Dos (2) hornos de retención de 50 Tm c/u, un (1) horno de fusión y colada vertical de cilindros de 38 Tm, mesa de colada de 7", sierra de corte y dos (2) hornos de homogeneizado.</p>
+                    </div>
+                </div>
+                <div class="area-industrial-card">
+                    <div class="area-industrial-icon"><i class="fas fa-cubes"></i></div>
+                    <div class="area-industrial-body">
+                        <span class="area-industrial-cap">Capacidad: 10.500 Tm/año</span>
+                        <h3>Planta Extrusora</h3>
+                        <p>Prensa extrusora de 7 pulgadas para transformación de cilindros 6063/S6063 temple T5 en tubos, ángulos, barandas, cortineras, fachadas, puertas y sistemas de ventanas.</p>
+                    </div>
+                </div>
+                <div class="area-industrial-card">
+                    <div class="area-industrial-icon"><i class="fas fa-layer-group"></i></div>
+                    <div class="area-industrial-body">
+                        <span class="area-industrial-cap">170.000 Tm/año (Frío) · 120.000 Tm/año (Caliente)</span>
+                        <h3>Planta de Laminación</h3>
+                        <p>Colada Continua (12.000 Tm/año), Laminador en Caliente Clecim-Cosim (120.000 Tm/año) y Laminador en Frío "Hugo Chávez" (170.000 Tm/año) para rollos y láminas lisas/stucco.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. BARRA DE FILTROS Y BUSCADOR DE LOS 32 PRODUCTOS -->
+        <section class="catalogo-completo-section" id="catalogoCompleto">
+            <div class="catalogo-toolbar">
+                <div class="product-filter-bar" id="catalogoFilterBar" style="margin: 0;">
+                    <button type="button" class="product-filter-btn active" data-filter="all">
+                        <i class="fas fa-th-list"></i> Todos en Orden (33)
+                    </button>
+                    <button type="button" class="product-filter-btn" data-filter="Fundición">
+                        <i class="fas fa-fire"></i> Productos de Fundición (2)
+                    </button>
+                    <button type="button" class="product-filter-btn" data-filter="Extrusión">
+                        <i class="fas fa-cubes"></i> Productos de Extrusión (24)
+                    </button>
+                    <button type="button" class="product-filter-btn" data-filter="Laminación">
+                        <i class="fas fa-layer-group"></i> Productos de Laminación (7)
+                    </button>
+                </div>
+
+                <div class="catalogo-search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="search" id="catalogoSearchInput" placeholder="Buscar producto o código (ej. Tochos, Stucco, ALC 502, Caroní, Noral)...">
+                </div>
+            </div>
+
+            <div class="catalogo-count-bar" id="catalogoCountBar">
+                Mostrando los <strong>33 productos oficiales</strong> en orden correlativo del Catálogo CVG Alcasa 2025
+            </div>
+
+            <!-- VENTANA FLOTANTE (MODAL) DE FICHA TÉCNICA DETALLADA -->
+            <div class="ficha-modal-backdrop" id="productFichaPanel" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="fichaTituloTexto">
+                <div class="ficha-modal-dialog">
+                    <div class="ficha-header">
+                        <div>
+                            <div class="ficha-kicker-row">
+                                <span class="ficha-kicker-badge" id="fichaBadgeOrden">#01 · Fundición</span>
+                                <span class="ficha-kicker-en" id="fichaNombreIngles">Billet Cylinders</span>
+                            </div>
+                            <h4><i class="fas fa-certificate" style="color: var(--alcasa-accent-light);"></i> <span id="fichaTituloTexto">Cilindros Tochos</span></h4>
+                            <div class="ficha-sub" id="fichaAleacion">Serie AA 6063 / S6063 — Temple T5 (Homogenizado)</div>
+                        </div>
+                        <button type="button" class="ficha-close-btn" id="fichaCloseBtn" aria-label="Cerrar ficha técnica">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <div class="ficha-modal-body">
+                        <!-- Resumen superior con imagen del producto y descripción -->
+                        <div class="ficha-overview-box">
+                            <div class="ficha-overview-img-wrap">
+                                <img src="<?php echo esc_url( cvg_alcasa_media_url( 'img/productos/cilindros-tochos.jpg' ) ); ?>" alt="Producto CVG Alcasa" id="fichaImagenProducto">
+                            </div>
+                            <div class="ficha-overview-info">
+                                <div class="ficha-overview-label"><i class="fas fa-circle-info"></i> Descripción General del Producto</div>
+                                <p id="fichaDescTexto">Cilindros de aluminio primario homogeneizados en aleación 6063/S6063 temple T5 y diámetro 7", cortados a medida para alimentar prensas de extrusión con máxima precisión metalúrgica.</p>
+                                <div class="ficha-spec-summary-pill" id="fichaSpecResumen">
+                                    <i class="fas fa-microchip"></i> Aleación: 6063/S6063 | Temple: T5 | Diámetro: 7" | Longitud: Cortados a medida | Homogenizado
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cuadrícula ordenada de especificaciones técnicas -->
+                        <div class="ficha-section-subtitle">
+                            <i class="fas fa-sliders"></i> Especificaciones Metalúrgicas y Técnicas de Fábrica
+                        </div>
+                        <div class="ficha-grid">
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-layer-group"></i> Aleación y Temple Oficial</div>
+                                <div class="ficha-item-value" id="fichaAleacionBox">Serie AA 6063 / S6063 — Temple T5 (Homogenizado)</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-flask"></i> Composición Química &amp; Acabado</div>
+                                <div class="ficha-item-value" id="fichaPureza">Aluminio primario aleado con Silicio (Si) y Magnesio (Mg) homogeneizado en hornos de tratamiento térmico</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-ruler-combined"></i> Dimensiones &amp; Presentaciones</div>
+                                <div class="ficha-item-value" id="fichaPresentaciones">Diámetro 7" (177,8 mm) | Longitud: Cortados a medida según requerimiento de prensa</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-boxes-stacked"></i> Propiedades &amp; Empaque por Bulto</div>
+                                <div class="ficha-item-value" id="fichaPropiedades">Estructura cristalina uniforme, alta fluidez de extrusión y excelente respuesta al anodizado</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-shield-halved"></i> Normas Técnicas &amp; Catálogo</div>
+                                <div class="ficha-item-value" id="fichaNormas">Catálogo Oficial CVG Alcasa 2025 / COVENIN 284 / ASTM B221</div>
+                            </div>
+                            <div class="ficha-item">
+                                <div class="ficha-item-title"><i class="fas fa-industry"></i> Usos &amp; Aplicaciones Industriales</div>
+                                <div class="ficha-item-value" id="fichaUsos">Materia prima directa para prensas extrusoras de perfilería arquitectónica, estructural y tubular.</div>
+                            </div>
+                        </div>
+
+                        <!-- Tabla detallada de Códigos, Dimensiones, Piezas por Bulto y Peso -->
+                        <div id="fichaTablaCodigosWrap" style="margin-top: 18px;"></div>
+                    </div>
+
+                    <div class="ficha-actions">
+                        <button type="button" class="btn-catalog-cotizar" id="fichaBtnCotizar" data-producto="Cilindros Tochos (Fundición)" style="flex: 0 0 auto; padding: 11px 24px;">
+                            <i class="fas fa-file-invoice"></i> Cotizar esta Especificación
+                        </button>
+                        <a href="<?php echo esc_url( cvg_alcasa_media_url( 'media/CATALOGO_CVG_ALCASA_2025.pdf' ) ); ?>" target="_blank" rel="noopener noreferrer" class="btn-modal-secondary">
+                            <i class="fas fa-file-pdf"></i> Catálogo PDF 2025
+                        </a>
+                        <button type="button" class="btn-modal-close" id="fichaBtnCerrarFooter" style="margin-left: auto;">
+                            <i class="fas fa-times"></i> Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRILLA ORDENADA DE LOS 32 PRODUCTOS (Renderizada desde /data/contenido.json) -->
+            <div class="catalogo-ordered-grid" id="catalogoOrderedGrid"></div>
+        </section>
+
+    </main>
+
+<section class="contacto-band-section" id="cotizar-catalogo">
+	<div class="container">
+<div class="contacto-form-wrapper fold-reveal revealed">
+                <h4 class="contacto-titulo">
+                    <i class="fas fa-file-invoice"></i> Solicitar Cotización o Asesoría Comercial
+                </h4>
+                <p class="contacto-subtitulo">
+                    Selecciona el producto del Catálogo 2025 que deseas cotizar y nuestro equipo de Comercialización te responderá a la brevedad.
+                </p>
+
+                <form id="formContacto" class="contacto-form" autocomplete="off">
+                    <div class="contacto-row">
+                        <div class="contacto-field">
+                            <label for="contacto-nombre">Nombre completo *</label>
+                            <input type="text" id="contacto-nombre" name="nombre" required maxlength="120" placeholder="Tu nombre y apellido">
+                        </div>
+                        <div class="contacto-field">
+                            <label for="contacto-correo">Correo electrónico *</label>
+                            <input type="email" id="contacto-correo" name="correo" required maxlength="120" placeholder="tucorreo@ejemplo.com">
+                        </div>
+                    </div>
+
+                    <div class="contacto-row">
+                        <div class="contacto-field">
+                            <label for="contacto-empresa">Empresa u Organización</label>
+                            <input type="text" id="contacto-empresa" name="empresa" maxlength="120" placeholder="Nombre de tu empresa o RIF">
+                        </div>
+                        <div class="contacto-field">
+                            <label for="contacto-interes">Producto o Línea de interés</label>
+                            <select id="contacto-interes" name="interes">
+                                <option value="">-- Selecciona un producto del catálogo --</option>
+                                <option value="Cilindros Tochos (Fundición)">#01 · Cilindros Tochos (Fundición)</option>
+                                <option value="Cilindros 120 a 220 pulgadas (Fundición)">#02 · Cilindros 120" a 220" (Fundición)</option>
+                                <option value="Tubo Redondo ALC 502 / 503 / 505 (Extrusión)">#03 · Tubo Redondo ALC 502/503/505 (Extrusión)</option>
+                                <option value="Tubos Rectangulares ALC 103 / 106 / 111 (Extrusión)">#04 · Tubos Rectangulares ALC 103/106/111 (Extrusión)</option>
+                                <option value="Tubos Cuadrados ALC 123 / 126 / 128 (Extrusión)">#05 · Tubos Cuadrados ALC 123/126/128 (Extrusión)</option>
+                                <option value="Ángulo de lados iguales ALC 224 / 226 / 227 / 229 (Extrusión)">#06 · Ángulo de lados iguales (Extrusión)</option>
+                                <option value="Barandas ALC 966 / ALC 999 (Extrusión)">#07 · Barandas ALC 966/999 (Extrusión)</option>
+                                <option value="Cortineras ALC 0002 / ALC 0003 (Extrusión)">#08 · Cortineras ALC 0002/0003 (Extrusión)</option>
+                                <option value="Perfiles Varios ALC 5006 / ALC 5012 (Extrusión)">#09 · Varios ALC 5006/5012 (Extrusión)</option>
+                                <option value="Ventana serie 744 ALC 3700-3706 (Extrusión)">#10 · Ventana serie 744 (Extrusión)</option>
+                                <option value="Puerta de baño ALC 3713-3716 (Extrusión)">#11 · Puerta de baño (Extrusión)</option>
+                                <option value="Ángulo de lados desiguales ALC 244 (Extrusión)">#12 · Ángulo de lados desiguales ALC 244 (Extrusión)</option>
+                                <option value="Ventana corredera tipo Ecobel ALC 670-674 (Extrusión)">#13 · Ventana corredera tipo Ecobel (Extrusión)</option>
+                                <option value="Ventana panorámica 2 canales ALC 780-792 (Extrusión)">#14 · Ventana panorámica 2 canales (Extrusión)</option>
+                                <option value="Ventana panorámica 3 canales ALC 780 / 820-822 (Extrusión)">#15 · Ventana panorámica 3 canales (Extrusión)</option>
+                                <option value="Ventana panorámica 4 canales ALC 780 / 783 / 830 / 831 (Extrusión)">#16 · Ventana panorámica 4 canales (Extrusión)</option>
+                                <option value="Fachada y vidriera serie 2 1/2 x 1 1/4 ALC 936 / 937 (Extrusión)">#17 · Fachada y vidriera serie 2 1/2 x 1 1/4 (Extrusión)</option>
+                                <option value="Fachada y vidriera serie 3 x 1 1/4 ALC 1447 / 1448 (Extrusión)">#18 · Fachada y vidriera serie 3 x 1 1/4 (Extrusión)</option>
+                                <option value="Fachada y vidriera pisavidrios ALC 927 / 929 (Extrusión)">#19 · Fachada y vidriera ALC 927/929 (Extrusión)</option>
+                                <option value="Cielo raso ALC 2001 / ALC 2042 (Extrusión)">#20 · Cielo raso ALC 2001/2042 (Extrusión)</option>
+                                <option value="Puertas y fachadas canto redondo ALC 965 / 966 (Extrusión)">#21 · Puertas y fachadas canto redondo (Extrusión)</option>
+                                <option value="Ventana corredera Caroní ALC 740 / 745 / 747 / 748 (Extrusión)">#22 · Ventana corredera Caroní (Extrusión)</option>
+                                <option value="Puertas batientes y vaivén ALC 952 / 953 / 955 / 956 (Extrusión)">#23 · Puertas batientes y vaivén (Extrusión)</option>
+                                <option value="Puertas para baño Templex ALC 907 / 908 / 909 (Extrusión)">#24 · Puertas para baño Templex (Extrusión)</option>
+                                <option value="Puertas batientes Junior ALC 958 / 959 / 960 (Extrusión)">#25 · Puertas batientes Junior (Extrusión)</option>
+                                <option value="Ventana proyectante ALC 3707-3712 (Extrusión)">#26 · Ventana proyectante (Extrusión)</option>
+                                <option value="Rollo de aluminio liso 3-6mm (Laminación)">#27 · Rollo de aluminio liso 3-6 mm (Laminación)</option>
+                                <option value="Rollo liso o stucco espesor medio 1-2.99mm (Laminación)">#28 · Rollo liso o stucco espesor medio (Laminación)</option>
+                                <option value="Rollo de aluminio liso o stucco (Laminación)">#29 · Rollo de aluminio liso o stucco 0.3-0.9 mm (Laminación)</option>
+                                <option value="Láminas de aluminio a tamaño lisa o stucco (Laminación)">#30 · Láminas de aluminio a tamaño lisa o stucco (Laminación)</option>
+                                <option value="Láminas de aluminio Noral Trapezoidal (Laminación)">#31 · Láminas de aluminio Noral Trapezoidal (Laminación)</option>
+                                <option value="Láminas de aluminio Frescalum Sinusoidal (Laminación)">#32 · Láminas de aluminio Frescalum Sinusoidal (Laminación)</option>
+                                                            <option value="Rollo Cinta (Laminación)">#33 · Rollo Cinta (Laminación)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="contacto-field contacto-field-full">
+                        <label for="contacto-comentario">Especificación, Código ALC o Volumen Requerido</label>
+                        <textarea id="contacto-comentario" name="comentario" rows="4" maxlength="2000" placeholder="Indica el código ALC, espesor, dimensiones o cantidad de toneladas/bultos que deseas cotizar..."></textarea>
+                    </div>
+
+                    <div class="contacto-actions">
+                        <button type="submit" class="btn-contacto-enviar" id="btnContactoEnviar">
+                            <i class="fas fa-paper-plane"></i> Enviar Solicitud de Cotización
+                        </button>
+                        <div class="contacto-mensaje" id="contactoMensaje" role="status"></div>
+                    </div>
+                </form>
+            </div>
+	</div>
+</section>
+<?php
+get_footer();

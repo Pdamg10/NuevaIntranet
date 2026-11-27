@@ -18,7 +18,16 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 ├── tools/generar_cumpleaneros.py # Genera data/cumpleaneros.json y las fotos desde DATA.csv + BMP
 ├── favicon.ico                   # Favicon multirresolución con el logo metálico de CVG Alcasa
 ├── INFORME_DE_CAMBIOS.md         # Documentación técnica detallada de cambios
-├── README.md                     # Guía de inicio rápido y páginas del portal
+├── MANUAL_DE_ADMINISTRADOR.md    # Manual técnico y operativo para Sistemas / TI (PHP, WordPress, Ubuntu :8080 y Azure)
+├── MANUAL_DE_USUARIO.md          # Manual funcional completo para visitantes, clientes, postulantes y trabajadores
+├── README.md                     # Guía de inicio rápido (HTML/PHP, Ubuntu :8080 y Microsoft Azure)
+├── wordpress/                    # Paquete completo de migración a WordPress + Ubuntu :8080 + Microsoft Azure
+│   ├── docker-compose.yml        # Entorno reproducible WordPress PHP 8.2 + MySQL 8 en puerto 8080
+│   ├── scripts/                  # Scripts de 1 comando (install-ubuntu-8080, update-ubuntu-8080, deploy-azure, package-release, check-network)
+│   ├── deploy/                   # Provisión Azure CLI (azure-provision.sh), azure.env.example y runbooks operativos
+│   └── wp-content/
+│       ├── themes/cvg-alcasa/    # Tema WordPress a medida (presentación, 6 plantillas y encolado wp_enqueue_*)
+│       └── plugins/cvg-alcasa-core/ # Plugin funcional (MySQL $wpdb, REST /wp-json/alcasa/v1/*, CVs privados, proxy :5001, wp-admin)
 ├── web.config                    # Reglas de seguridad para IIS
 ├── .gitignore                    # Exclusión de datos personales generados (storage/*.csv, storage/cv/)
 ├── api/                          # Backend modular en PHP
@@ -157,3 +166,25 @@ Se consolidó el **Portal Institucional v2 de CVG Aluminio del Caroní, S.A. (CV
 - **Tarjetas horizontales compactas:** Ajuste de la cuadrícula fotográfica en `galeria.html` a tarjetas horizontales compactas (4 columnas en escritorio) para mejorar densidad visual y legibilidad.
 - **Visor Lightbox con zoom nativo 1:1:** Se añadieron flechas SVG inline, insignia de dimensiones (`#lightboxResBadge`), botón **Ver 1:1 (Resolución Original)** (`#lightboxNativeZoomBtn`) y enlace **Abrir Original**.
 - **Versiones de caché actuales:** `main.css?v=2026z5` y `app.js?v=2026z6` en `index.html` (`main.css?v=2026z3` y `app.js?v=2026z5` en `galeria.html` y `productos.html`).
+
+### 3.15. Paquete Completo de Migración a WordPress, Linux Ubuntu (`:8080`) y Microsoft Azure (`wordpress/`)
+Se implementó la arquitectura completa de migración en una carpeta dedicada `wordpress/` sin alterar la versión HTML/PHP operativa en la raíz:
+- **Fase A — Base WordPress (`:8080`) y Tema a Medida (`wordpress/wp-content/themes/cvg-alcasa/`):**
+  - Entorno reproducible en `wordpress/docker-compose.yml` (WordPress PHP 8.2 Apache + MySQL 8 + WP-CLI) montando `assets/img`, `assets/media` y `data` como volúmenes de solo lectura para no duplicar los 174 MB de media en Git, más `config/uploads.ini` (`12M`/`25M`) y `scripts/setup-local.sh`.
+  - Tema `cvg-alcasa` con `header.php` y `footer.php` únicos, `functions.php` (exclusivamente encolado `wp_enqueue_*` con `filemtime()`, `wp_localize_script` inyectando `window.ALCASA_WP` y helpers portables `cvg_alcasa_media_url()` / `cvg_alcasa_page_url()` compatibles con **Azure Blob Storage**) y las 6 plantillas (`front-page.php`, `page-productos.php`, `page-galeria.php`, `page-prensa.php`, `page-periodico.php`, `page-cumpleaneros.php`).
+  - Assets adaptados (`assets/css/{main,cumpleanos,periodico}.css` y `assets/js/{app,cumpleanos,periodico}.js`) sin rutas hardcodeadas a `/assets/`, `:8070` o `*.html`.
+- **Fase B — Plugin Funcional (`wordpress/wp-content/plugins/cvg-alcasa-core/`):**
+  - Persistencia en MySQL vía `$wpdb` + `dbDelta()` (`wp_alcasa_contactos` y `wp_alcasa_postulaciones`) con importación única automática de `contactos-semilla.csv` (`includes/class-db.php`).
+  - Almacenamiento privado de CVs fuera de la raíz web (`ALCASA_PRIVATE_STORAGE` o fallback `.htaccess Deny`), validación estricta de extensión/tamaño/MIME (`finfo`) y defensa anti path-traversal (`includes/class-cv-storage.php`).
+  - Proxy resiliente hacia `http://alcasa.com.ve:5001` usando `wp_remote_get()`, caché con **WordPress Transients** (`120 s`), sanitización `wp_kses_post()`, respaldo automático `data/noticias.json` y diagnóstico de conectividad (`includes/class-news-proxy.php`).
+  - API REST bajo `/wp-json/alcasa/v1/{contacto,cv,noticias,contenido,cumpleaneros,health}` con rate-limit por hash HMAC de IP (`includes/class-rest-api.php`).
+  - Panel unificado **«CVG Alcasa»** en `wp-admin` exclusivo para `manage_options` con descarga autenticada de CVs (`admin-post.php` + nonces), exportación CSV protegida contra inyección de fórmulas (`=+-@`) y pestaña de diagnóstico de red (`includes/class-admin-page.php`), eliminando sesiones manuales y contraseñas embebidas.
+- **Fase C — Automatización Ubuntu (`:8080`) y Microsoft Azure (`wordpress/scripts/`, `wordpress/deploy/`):**
+  - Instalación y actualización en **1 comando** en Ubuntu: `scripts/install-ubuntu-8080.sh` (genera `.env` con claves aleatorias y abre UFW con `--open-firewall`), `scripts/update-ubuntu-8080.sh` (`git pull --ff-only`, refresco de tema/plugin/caché sin tocar MySQL ni CVs) y `scripts/check-network.sh`.
+  - Provisión y despliegue en **Microsoft Azure** (App Service Linux + MySQL Flexible Server + Blob Storage): `deploy/azure.env.example`, `deploy/azure-provision.sh`, `scripts/package-release.sh` (genera ZIPs limpios excluyendo datos personales y secretos) y `scripts/deploy-azure.sh` (`--pull`, `--sync-media` filtrando PNG crudos de 25 MB, `--slot staging`, `--swap`).
+  - Guías operativas dedicadas: `wordpress/deploy/UBUNTU_8080_QUICKSTART.md`, `wordpress/deploy/AZURE_MIGRATION_RUNBOOK.md` y protección de secretos locales en `wordpress/.gitignore`.
+
+### 3.16. Documentación Integral del Proyecto (`README.md`, `MANUAL_DE_USUARIO.md`, `MANUAL_DE_ADMINISTRADOR.md`)
+- Se actualizó `README.md` reflejando la arquitectura completa (portal base de 33 productos + paquete WordPress para Ubuntu `:8080` y Microsoft Azure).
+- Se creó **`MANUAL_DE_USUARIO.md`** con guía detallada de uso de todas las secciones públicas e intranet del portal.
+- Se creó **`MANUAL_DE_ADMINISTRADOR.md`** con procedimientos de administración de bandejas, descarga segura de CVs, actualización de catálogo/cumpleañeros, operación en Ubuntu `:8080`, despliegue/rollback en Microsoft Azure, respaldos MySQL y seguridad.

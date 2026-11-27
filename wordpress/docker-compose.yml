@@ -1,0 +1,81 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: alcasa-wp-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-alcasa_wp}
+      MYSQL_USER: ${MYSQL_USER:-alcasa_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-AlcasaDev#2026_CambiaEstaClave}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-AlcasaRoot#2026_CambiaEstaClave}
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - wp_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u$$MYSQL_USER -p$$MYSQL_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  wordpress:
+    image: wordpress:php8.2-apache
+    container_name: alcasa-wp-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${WP_PORT:-8080}:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE:-alcasa_wp}
+      WORDPRESS_DB_USER: ${MYSQL_USER:-alcasa_user}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-AlcasaDev#2026_CambiaEstaClave}
+      ALCASA_MEDIA_BASE_URL: ${ALCASA_MEDIA_BASE_URL:-/alcasa-media}
+      ALCASA_DATA_BASE_URL: ${ALCASA_DATA_BASE_URL:-/alcasa-data}
+      ALCASA_NEWS_URL: ${ALCASA_NEWS_URL:-http://alcasa.com.ve:5001}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_HOME', getenv('WP_HOME') ?: '${WP_HOME:-http://localhost:8080}');
+        define('WP_SITEURL', getenv('WP_SITEURL') ?: '${WP_SITEURL:-http://localhost:8080}');
+        define('ALCASA_MEDIA_BASE_URL', getenv('ALCASA_MEDIA_BASE_URL') ?: '/alcasa-media');
+        define('ALCASA_DATA_BASE_URL', getenv('ALCASA_DATA_BASE_URL') ?: '/alcasa-data');
+        define('ALCASA_NEWS_URL', getenv('ALCASA_NEWS_URL') ?: 'http://alcasa.com.ve:5001');
+        define('ALCASA_PRIVATE_STORAGE', '/var/www/alcasa-private');
+    volumes:
+      - wp_core_data:/var/www/html
+      - ./config/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
+      - ./wp-content/themes/cvg-alcasa:/var/www/html/wp-content/themes/cvg-alcasa
+      - ./wp-content/plugins/cvg-alcasa-core:/var/www/html/wp-content/plugins/cvg-alcasa-core
+      # Media y datos compartidos en solo lectura para no duplicar 174 MB dentro de wordpress/
+      - ../assets/img:/var/www/html/alcasa-media/img:ro
+      - ../assets/media:/var/www/html/alcasa-media/media:ro
+      - ../data:/var/www/html/alcasa-data:ro
+      # Almacenamiento privado fuera de la raíz web (CVs subidos en Fase B)
+      - wp_private_storage:/var/www/alcasa-private
+
+  wpcli:
+    image: wordpress:cli-php8.2
+    container_name: alcasa-wp-cli
+    profiles: ["tools"]
+    depends_on:
+      db:
+        condition: service_healthy
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE:-alcasa_wp}
+      WORDPRESS_DB_USER: ${MYSQL_USER:-alcasa_user}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-AlcasaDev#2026_CambiaEstaClave}
+      ALCASA_MEDIA_BASE_URL: ${ALCASA_MEDIA_BASE_URL:-/alcasa-media}
+      ALCASA_DATA_BASE_URL: ${ALCASA_DATA_BASE_URL:-/alcasa-data}
+      ALCASA_NEWS_URL: ${ALCASA_NEWS_URL:-http://alcasa.com.ve:5001}
+    volumes:
+      - wp_core_data:/var/www/html
+      - ./wp-content/themes/cvg-alcasa:/var/www/html/wp-content/themes/cvg-alcasa
+      - ./wp-content/plugins/cvg-alcasa-core:/var/www/html/wp-content/plugins/cvg-alcasa-core
+      - ../data:/var/www/html/alcasa-data:ro
+
+volumes:
+  wp_db_data:
+  wp_core_data:
+  wp_private_storage:
